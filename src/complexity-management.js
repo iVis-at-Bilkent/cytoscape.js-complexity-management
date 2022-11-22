@@ -24,40 +24,37 @@ export function complexityManagement(cy) {
     return roots;
   };
 
-  // This function processes nodes to add them into input graph
-  let processChildrenList = function(parent, children, compMgr, isVisible) {
+  // This function processes nodes to add them into both visible and invisible graphs
+  let processChildrenList = function(children, compMgr) {
     let size = children.length;
     for (var i = 0; i < size; i++) {
       let theChild = children[i];
       let children_of_children = theChild.children();
-      let theNode;
 
-      theNode = parent.addNode(compMgr.newNode(theChild.id()));
+      compMgr.addNode(theChild.id(), theChild.parent().id());
 
       if (children_of_children != null && children_of_children.length > 0) {
-        let theNewGraph;
-        theNewGraph = parent.owner.add(compMgr.newGraph(isVisible), theNode);
-        this.processChildrenList(theNewGraph, children_of_children, compMgr, isVisible);
+        this.processChildrenList(children_of_children, compMgr);
       }
     }
   }
 
+  // This function processes edges to add them into both visible and invisible graphs
+  let processEdges = function(edges, compMgr) {
+    for (let i = 0; i < edges.length; i++) {
+      let edge = edges[i];
+      compMgr.addEdge(edge.id(), edge.source().id(), edge.target().id());
+    }
+  }
+
   let compMgrInstance = new ComplexityManager();
-  let visibleGM = compMgrInstance.visibleGraphManager;
-  let invisibleGM = compMgrInstance.invisibleGraphManager;
 
   let nodes = cy.nodes();
   let edges = cy.edges();
 
-  let rootGraphForVisible = visibleGM.addRoot();
-  let rootGraphForInvisible = invisibleGM.addRoot();
+  // Add nodes to both visible and invisible graphs
+  processChildrenList(getTopMostNodes(nodes), compMgrInstance);
 
-  // Add nodes to visible graph
-  processChildrenList(rootGraphForVisible, getTopMostNodes(nodes), compMgrInstance, true);
-
-  // Add nodes to invisible graph
-  processChildrenList(rootGraphForInvisible, getTopMostNodes(nodes), compMgrInstance, false);
-
-  console.log(visibleGM);
-  console.log(invisibleGM);
+  // Add edges to both visible and invisible graphs
+  processEdges(edges, compMgrInstance);
 }

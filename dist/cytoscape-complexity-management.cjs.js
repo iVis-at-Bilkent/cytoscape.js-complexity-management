@@ -24,36 +24,35 @@ function complexityManagement(cy) {
     return roots;
   };
 
-  // This function processes nodes to add them into input graph
-  var processChildrenList = function processChildrenList(parent, children, compMgr, isVisible) {
+  // This function processes nodes to add them into both visible and invisible graphs
+  var processChildrenList = function processChildrenList(children, compMgr) {
     var size = children.length;
     for (var i = 0; i < size; i++) {
       var theChild = children[i];
       var children_of_children = theChild.children();
-      var theNode = void 0;
-      theNode = parent.addNode(compMgr.newNode(theChild.id()));
+      compMgr.addNode(theChild.id(), theChild.parent().id());
       if (children_of_children != null && children_of_children.length > 0) {
-        var theNewGraph = void 0;
-        theNewGraph = parent.owner.add(compMgr.newGraph(isVisible), theNode);
-        this.processChildrenList(theNewGraph, children_of_children, compMgr, isVisible);
+        this.processChildrenList(children_of_children, compMgr);
       }
     }
   };
+
+  // This function processes edges to add them into both visible and invisible graphs
+  var processEdges = function processEdges(edges, compMgr) {
+    for (var i = 0; i < edges.length; i++) {
+      var edge = edges[i];
+      compMgr.addEdge(edge.id(), edge.source().id(), edge.target().id());
+    }
+  };
   var compMgrInstance = new cmgm.ComplexityManager();
-  var visibleGM = compMgrInstance.visibleGraphManager;
-  var invisibleGM = compMgrInstance.invisibleGraphManager;
   var nodes = cy.nodes();
-  cy.edges();
-  var rootGraphForVisible = visibleGM.addRoot();
-  var rootGraphForInvisible = invisibleGM.addRoot();
+  var edges = cy.edges();
 
-  // Add nodes to visible graph
-  processChildrenList(rootGraphForVisible, getTopMostNodes(nodes), compMgrInstance, true);
+  // Add nodes to both visible and invisible graphs
+  processChildrenList(getTopMostNodes(nodes), compMgrInstance);
 
-  // Add nodes to invisible graph
-  processChildrenList(rootGraphForInvisible, getTopMostNodes(nodes), compMgrInstance, false);
-  console.log(visibleGM);
-  console.log(invisibleGM);
+  // Add edges to both visible and invisible graphs
+  processEdges(edges, compMgrInstance);
 }
 
 function register(cytoscape) {
