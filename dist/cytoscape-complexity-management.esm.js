@@ -1,6 +1,9 @@
 import { ComplexityManager } from 'cmgm';
 
 function complexityManagement(cy) {
+  /** Transfer cytoscape graph to complexity management model */
+
+  // This function finds and returns the top-level nodes in the graph
   var getTopMostNodes = function getTopMostNodes(nodes) {
     var nodesMap = {};
     nodes.forEach(function (node) {
@@ -30,7 +33,7 @@ function complexityManagement(cy) {
       var children_of_children = theChild.children();
       compMgr.addNode(theChild.id(), theChild.parent().id());
       if (children_of_children != null && children_of_children.length > 0) {
-        this.processChildrenList(children_of_children, compMgr);
+        processChildrenList(children_of_children, compMgr);
       }
     }
   };
@@ -51,6 +54,29 @@ function complexityManagement(cy) {
 
   // Add edges to both visible and invisible graphs
   processEdges(edges, compMgrInstance);
+
+  /** Topology related event handling */
+
+  //  Action functions
+
+  var actOnAdd = function actOnAdd(evt) {};
+  var actOnRemove = function actOnRemove(evt) {};
+  var actOnReconnect = function actOnReconnect(evt) {};
+  var actOnParentChange = function actOnParentChange(evt) {};
+
+  //Events
+
+  // When new element(s) added
+  cy.on('add', actOnAdd);
+
+  // When some element(s) removed
+  cy.on('remove', actOnRemove);
+
+  // When source and/or target of an edge changed
+  cy.on('move', 'edge', actOnReconnect);
+
+  // When parent of a node changed
+  cy.on('move', 'node', actOnParentChange);
 }
 
 function register(cytoscape) {

@@ -2,6 +2,9 @@ import { ComplexityManager } from 'cmgm';
 
 export function complexityManagement(cy) {
 
+  /** Transfer cytoscape graph to complexity management model */
+
+  // This function finds and returns the top-level nodes in the graph
   let getTopMostNodes = function(nodes) {
     let nodesMap = {};
     nodes.forEach((node) => {
@@ -34,7 +37,7 @@ export function complexityManagement(cy) {
       compMgr.addNode(theChild.id(), theChild.parent().id());
 
       if (children_of_children != null && children_of_children.length > 0) {
-        this.processChildrenList(children_of_children, compMgr);
+        processChildrenList(children_of_children, compMgr);
       }
     }
   }
@@ -57,4 +60,38 @@ export function complexityManagement(cy) {
 
   // Add edges to both visible and invisible graphs
   processEdges(edges, compMgrInstance);
+
+  /** Topology related event handling */
+
+  //  Action functions
+
+  let actOnAdd = (evt) => {
+
+  }
+
+  let actOnRemove = (evt) => {
+
+  }
+  
+  let actOnReconnect = (evt) => {
+
+  }
+
+  let actOnParentChange = (evt) => {
+
+  }
+
+  //Events
+
+  // When new element(s) added
+  cy.on('add', actOnAdd);
+
+  // When some element(s) removed
+  cy.on('remove', actOnRemove);
+
+  // When source and/or target of an edge changed
+  cy.on('move', 'edge', actOnReconnect);
+
+  // When parent of a node changed
+  cy.on('move', 'node', actOnParentChange);
 }
