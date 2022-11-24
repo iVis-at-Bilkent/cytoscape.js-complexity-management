@@ -79,6 +79,13 @@ function complexityManagement(cy) {
 
   // When parent of a node changed
   cy.on('move', 'node', actOnParentChange);
+
+  // API to be returned
+  var api = {};
+  api.getCompMgrInstance = function () {
+    return compMgrInstance;
+  };
+  return api;
 }
 
 function register(cytoscape) {

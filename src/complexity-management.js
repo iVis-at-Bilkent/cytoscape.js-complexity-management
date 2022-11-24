@@ -94,4 +94,13 @@ export function complexityManagement(cy) {
 
   // When parent of a node changed
   cy.on('move', 'node', actOnParentChange);
+
+  // API to be returned
+  let api = {};
+  
+  api.getCompMgrInstance = () => {
+    return compMgrInstance;
+  }
+
+  return api;
 }
