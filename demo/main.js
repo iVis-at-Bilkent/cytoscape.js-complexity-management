@@ -20,7 +20,9 @@ function onLoaded() {
               return x.data('edgeType');
             }
             return '';
-          }
+          },
+          'curve-style': 'bezier',
+          'target-arrow-shape': 'triangle'
         }
       }
     ],
@@ -55,4 +57,49 @@ function onLoaded() {
   cy.layoutUtilities({ desiredAspectRatio: cy.width() / cy.height() });
 
   const instance = cy.complexityManagement();
+
+  let newNodeCount = 0;
+  let newEdgeCount = 0;
+
+  document.getElementById("addNodeToSelected").addEventListener("click", () => {
+    const selectedNode = cy.nodes(":selected")[0];
+    let parentID = null;
+    let position = { x: 0, y: 0 };
+    if (selectedNode) {
+      parentID = selectedNode.id();
+      position = { x: selectedNode.bb().x1 + selectedNode.bb().w / 2, y: selectedNode.bb().y1 + selectedNode.bb().h / 2}
+    }
+    cy.add({
+      group: 'nodes',
+      data: { id: 'newNode' + newNodeCount, parent: parentID},
+      position: position
+    });
+    newNodeCount++;
+
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout({name: "fcose", randomize: false}).run();
+    }
+  });
+
+  document.getElementById("addEdgeBetweenSelected").addEventListener("click", () => {
+    if(cy.nodes(":selected").length == 2) {
+      cy.add({ 
+        group: 'edges', 
+        data: { id: 'newEdge' + newEdgeCount, source: cy.nodes(":selected")[0].id(), target: cy.nodes(":selected")[1].id() }});
+    }
+
+    newEdgeCount++;
+
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout({name: "fcose", randomize: false}).run();
+    }
+  });
+
+  document.getElementById("removeSelected").addEventListener("click", () => {
+    cy.elements(":selected").remove();
+
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout({name: "fcose", randomize: false}).run();
+    }
+  });
 }
