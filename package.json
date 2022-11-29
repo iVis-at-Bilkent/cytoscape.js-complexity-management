@@ -26,7 +26,7 @@
     "dist"
   ],
   "dependencies": {
-    "cmgm": "C:/Users/Osama Zafar/Desktop/cmgm"
+    "cmgm": "github:iVis-at-Bilkent/cmgm#main"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
