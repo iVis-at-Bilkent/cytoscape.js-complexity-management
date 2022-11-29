@@ -108,12 +108,12 @@ function complexityManagement(cy) {
 
     // First remove edges
     edgesToBeRemoved.forEach(function (edge) {
-      compMgr.removeEdge(edge.id());
+      compMgrInstance.removeEdge(edge.id());
     });
 
     // Then remove nodes, giving only top-most nodes is enough, descendants are deleted automatically in cmgm
     getTopMostNodes(nodesToBeRemoved).forEach(function (node) {
-      compMgr.removeNode(node.id());
+      compMgrInstance.removeNode(node.id());
     });
 
     // Update filtered elements because removed eles may change the list
