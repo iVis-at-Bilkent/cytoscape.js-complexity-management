@@ -6,6 +6,8 @@
   <!-- graphml uses -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" 
+    integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
 
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -14,6 +16,7 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
 
   <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
   <script src="https://unpkg.com/cytoscape-graphml/cytoscape-graphml.js"></script>
@@ -140,6 +143,28 @@
           </div>
         </div>
 
+        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+            aria-controls="panelsStayOpen-collapseThree">
+            Complexity Management
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingThree">
+          <div class="accordion-body d-flex flex-wrap justify-content-left" style="padding: 1rem 1.25rem 0 1.25rem">
+            <h1>Filter Nodes:</h1>
+            <div id="slider-nodes"></div>
+            <div id="min-weight-node"></div>
+            <div id="max-weight-node"></div>
+          </div>
+          <div class="accordion-body d-flex flex-wrap justify-content-left" style="padding: 0 1.25rem 0 1.25rem">
+            <h1>Filter Edges:</h1>
+            <div id="slider-edges"></div>
+            <div id="min-weight-edge"></div>
+            <div id="max-weight-edge"></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="cy-canvas">
