@@ -102,4 +102,43 @@ function onLoaded() {
       cy.layout({name: "fcose", randomize: false}).run();
     }
   });
+  let visibleEdges = []
+  let visibleNodes = []
+  instance.getCompMgrInstance().visibleGraphManager.edgesMap.forEach((edgeItem,key) => {
+    visibleEdges.push({data:{id: edgeItem.ID,source:edgeItem.source.ID,target:edgeItem.target.ID}});
+  });
+  instance.getCompMgrInstance().visibleGraphManager.nodesMap.forEach((nodeItem,key) => {
+    visibleNodes.push({data:{id: nodeItem.ID,parent:instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID}});
+  });
+  const cyVisible = window.cyVisible = cytoscape({
+    container: document.getElementById('cyVisible'),
+    wheelSensitivity: 0.1,
+    style: [
+      {
+        selector: 'node',
+        style: {
+          'label': 'data(id)'
+        }
+      },
+      {
+        selector: 'edge',
+        style: {
+          'label': (x) => {
+            if (x.data('edgeType')) {
+              return x.data('edgeType');
+            }
+            return '';
+          },
+          'curve-style': 'bezier',
+          'target-arrow-shape': 'triangle'
+        }
+      }
+    ],
+    elements: {
+      nodes: visibleNodes,
+      edges: visibleEdges
+    },
+    layout: { name: 'fcose' }
+  });
+
 }

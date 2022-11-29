@@ -88,6 +88,9 @@
     // Whether this graph manager manages the visible graph or not
     #isVisible;
 
+    // NodeId to NodeObject map.
+    nodesMap;
+    edgesMap;
     /**
      * Constructor
      * @param {ComplexityManager} owner - owner complexity manager 
@@ -100,6 +103,8 @@
       this.#rootGraph = null;
       this.#siblingGraphManager = null;
       this.#isVisible = isVisible;
+      this.nodesMap = new Map();
+      this.edgesMap = new Map();
       this.addRoot(); // Add root graph
     }
 
@@ -308,6 +313,130 @@
   }
 
   /**
+   * This class represents a graph object which 
+   * can be either a  node or an edge.
+   */
+  class GraphObject {
+    // ID of the graph object; must be unique
+    #ID;
+
+    // Owner graph or graph manager of the graph object
+    #owner;
+
+    // Whether the graph object is visible or not
+    #isVisible;
+
+    // Whether the graph object is filtered or not
+    #isFiltered;
+
+    // Whether the graph object is hidden or not
+    #isHidden;
+
+    /**
+     * Constuctor
+     * @param {String} ID - ID of the graph object
+     */
+    constructor(ID) {
+      this.#ID = ID;
+      this.#owner = null;
+      this.#isVisible = true;
+      this.#isFiltered = false;
+      this.#isHidden = false;
+    }
+
+    // get methods
+    get ID() {
+      return this.#ID;
+    }
+    get owner() {
+      if (this.#owner == null) {
+        throw "Owner graph of a node cannot be null";
+      }
+      return this.#owner;
+    }
+    get isVisible() {
+      return this.#isVisible;
+    }
+    get isFiltered() {
+      return this.#isFiltered;
+    }
+    get isHidden() {
+      return this.#isHidden;
+    }
+
+    // set methods
+    set ID(newID) {
+      this.#ID = newID;
+    }
+    set owner(newOwner) {
+      this.#owner = newOwner;
+    }
+    set isVisible(isVisible) {
+      this.#isVisible = isVisible;
+    }
+    set isFiltered(isFiltered) {
+      this.#isFiltered = isFiltered;
+    }
+    set isHidden(isHidden) {
+      this.#isHidden = isHidden;
+    }
+  }
+
+  /* This class defines properties specific to an edge. */
+
+  /**
+   * This class represents an edge. An edge maintains
+   * its source, its target and the information of whether 
+   * it is inter-graph or not together with the properties 
+   * that are inherited from GraphObject class.
+   */
+  class Edge extends GraphObject {
+    // Source node of the edge
+    #source;
+
+    // Target node of the edge
+    #target;
+
+    // Whether the edge is inter-graph
+    #isInterGraph;
+
+    /**
+     * Constructor
+     * @param {String} ID - ID of the edge 
+     * @param {Node} source - source node of the edge 
+     * @param {Node} target - target node of the edge 
+     */
+    constructor(ID, source, target) {
+      super(ID);
+      this.#source = source;
+      this.#target = target;
+      this.#isInterGraph = false;
+    }
+
+    // get methods
+    get source() {
+      return this.#source;
+    }
+    get target() {
+      return this.#target;
+    }
+    get interGraph() {
+      return this.#isInterGraph;
+    }
+
+    // set methods
+    set source(source) {
+      this.#source = source;
+    }
+    set target(target) {
+      this.#target = target;
+    }
+    set isInterGraph(isInterGraph) {
+      this.#isInterGraph = isInterGraph;
+    }
+  }
+
+  /**
    * This class represents a graph. A graph maintains
    * its owner graph manager, its nodes, its intra-graph edges,
    * its parent node and its sibling graph. A graph is always
@@ -507,76 +636,6 @@
   }
 
   /**
-   * This class represents a graph object which 
-   * can be either a  node or an edge.
-   */
-  class GraphObject {
-    // ID of the graph object; must be unique
-    #ID;
-
-    // Owner graph or graph manager of the graph object
-    #owner;
-
-    // Whether the graph object is visible or not
-    #isVisible;
-
-    // Whether the graph object is filtered or not
-    #isFiltered;
-
-    // Whether the graph object is hidden or not
-    #isHidden;
-
-    /**
-     * Constuctor
-     * @param {String} ID - ID of the graph object
-     */
-    constructor(ID) {
-      this.#ID = ID;
-      this.#owner = null;
-      this.#isVisible = true;
-      this.#isFiltered = false;
-      this.#isHidden = false;
-    }
-
-    // get methods
-    get ID() {
-      return this.#ID;
-    }
-    get owner() {
-      if (this.#owner == null) {
-        throw "Owner graph of a node cannot be null";
-      }
-      return this.#owner;
-    }
-    get isVisible() {
-      return this.#isVisible;
-    }
-    get isFiltered() {
-      return this.#isFiltered;
-    }
-    get isHidden() {
-      return this.#isHidden;
-    }
-
-    // set methods
-    set ID(newID) {
-      this.#ID = newID;
-    }
-    set owner(newOwner) {
-      this.#owner = newOwner;
-    }
-    set isVisible(isVisible) {
-      this.#isVisible = isVisible;
-    }
-    set isFiltered(isFiltered) {
-      this.#isFiltered = isFiltered;
-    }
-    set isHidden(isHidden) {
-      this.#isHidden = isHidden;
-    }
-  }
-
-  /**
    * This class represents a node. A node maintains
    * its child graph if exists, a list of its incident 
    * edges and the information of whether it is collapsed
@@ -625,6 +684,74 @@
     set isCollapsed(isCollapsed) {
       this.#isCollapsed = isCollapsed;
     }
+  }
+  class Topology {
+    static addNode(nodeID, parentID, visibleGM, invisibleGM) {
+      let graphToAdd;
+      let graphToAddInvisible;
+      if (parentID) {
+        let parentNode = visibleGM.nodesMap.get(parentID);
+        if (parentNode.child) {
+          graphToAdd = parentNode.child;
+        } else {
+          graphToAdd = visibleGM.addGraph(new Graph(null, visibleGM), parentNode);
+        }
+      } else {
+        graphToAdd = visibleGM.rootGraph;
+      }
+      let node = new Node(nodeID);
+      graphToAdd.addNode(node);
+      visibleGM.nodesMap.set(nodeID, node);
+      let nodeForInvisible = new Node(nodeID);
+      if (graphToAdd.siblingGraph) {
+        graphToAdd.siblingGraph.addNode(nodeForInvisible);
+      } else {
+        if (parentID) {
+          let parentNodeInvisible = invisibleGM.nodesMap.get(parentID);
+          if (parentNodeInvisible.child) {
+            graphToAddInvisible = parentNodeInvisible.child;
+          } else {
+            graphToAddInvisible = invisibleGM.addGraph(new Graph(null, invisibleGM), parentNodeInvisible);
+          }
+        } else {
+          graphToAddInvisible = invisibleGM.rootGraph;
+        }
+        graphToAddInvisible.addNode(nodeForInvisible);
+        graphToAdd.siblingGraph = graphToAddInvisible;
+        graphToAddInvisible.siblingGraph = graphToAdd;
+      }
+      invisibleGM.nodesMap.set(nodeID, nodeForInvisible);
+    }
+    static addEdge(edgeID, sourceID, targetID, visibleGM, invisibleGM) {
+      let sourceNode = visibleGM.nodesMap.get(sourceID);
+      let targetNode = visibleGM.nodesMap.get(targetID);
+      let edge = new Edge(edgeID, sourceNode, targetNode);
+      let sourceNodeInvisible = invisibleGM.nodesMap.get(sourceID);
+      let targetNodeInvisible = invisibleGM.nodesMap.get(targetID);
+      let edgeInvisible = new Edge(edgeID, sourceNodeInvisible, targetNodeInvisible);
+      if (sourceNode.owner === targetNode.owner) {
+        sourceNode.owner.addEdge(edge, sourceNode, targetNode);
+        sourceNodeInvisible.owner.addEdge(edgeInvisible, sourceNodeInvisible, targetNodeInvisible);
+      } else {
+        visibleGM.addInterGraphEdge(edge, sourceNode, targetNode);
+        invisibleGM.addInterGraphEdge(edgeInvisible, sourceNodeInvisible, targetNodeInvisible);
+      }
+      visibleGM.edgesMap.set(edgeID, edge);
+      invisibleGM.edgesMap.set(edgeID, edgeInvisible);
+    }
+    static removeNode(nodeID, visibleGM, invisibleGM) {
+      let nodeToRemove = visibleGM.nodesMap.get(nodeID);
+      if (nodeToRemove) {
+        nodeToRemove.owner.removeNode(nodeToRemove);
+        let nodeToRemoveInvisible = invisibleGM.nodesMap.get(nodeID);
+        nodeToRemoveInvisible.owner.removeNode(nodeToRemoveInvisible);
+      }
+      visibleGM.nodesMap.delete(nodeID);
+      invisibleGM.nodesMap.delete(nodeID);
+    }
+    static removeEdge(edgeID, visibleGM, invisibleGM) {}
+    static reconnect(edgeID, newSourceID, newTargetID, visibleGM, invisibleGM) {}
+    static changeParent(nodeID, newParentID, visibleGM, invisibleGM) {}
   }
 
   /**
@@ -687,16 +814,19 @@
     // Topology related API methods
 
     addNode(nodeID, parentID) {
-      this.#visibleGraphManager;
-      this.#invisibleGraphManager;
+      let visibleGM = this.#visibleGraphManager;
+      let invisibleGM = this.#invisibleGraphManager;
+      Topology.addNode(nodeID, parentID, visibleGM, invisibleGM);
     }
     addEdge(edgeID, sourceID, targetID) {
-      this.#visibleGraphManager;
-      this.#invisibleGraphManager;
+      let visibleGM = this.#visibleGraphManager;
+      let invisibleGM = this.#invisibleGraphManager;
+      Topology.addEdge(edgeID, sourceID, targetID, visibleGM, invisibleGM);
     }
     removeNode(nodeID) {
-      this.#visibleGraphManager;
-      this.#invisibleGraphManager;
+      let visibleGM = this.#visibleGraphManager;
+      let invisibleGM = this.#invisibleGraphManager;
+      Topology.removeNode(nodeID, visibleGM, invisibleGM);
     }
     removeEdge(edgeID) {
       this.#visibleGraphManager;
