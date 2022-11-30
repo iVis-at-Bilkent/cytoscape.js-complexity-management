@@ -36,6 +36,11 @@ function jsonFileSelected() {
   readTxtFile(document.getElementById('json-file-inp').files[0], (s) => {
     cy.$().remove();
     cy.add(JSON.parse(s));
+    cy.elements().forEach((ele) => {
+      let randomWeight = Math.floor(Math.random() * 101);
+      ele.data('weight', randomWeight);
+      ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
+    });
     if (document.getElementById('cbk-run-layout').checked) {
       cy.layout({ name: 'fcose', animate: true }).run();
     } else {
@@ -55,6 +60,11 @@ function graphmlFileSelected() {
     cy.$().remove();
     cy.graphml({ layoutBy: 'preset' })
     cy.graphml(s);
+    cy.elements().forEach((ele) => {
+      let randomWeight = Math.floor(Math.random() * 101);
+      ele.data('weight', randomWeight);
+      ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
+    });    
     if (document.getElementById('cbk-run-layout').checked) {
       cy.layout({ name: 'fcose', animate: true }).run();
     } else {
@@ -73,6 +83,11 @@ function sifFileSelected() {
   readTxtFile(document.getElementById('sif-file-inp').files[0], (s) => {
     cy.$().remove();
     cy.add(sif2cy(s));
+    cy.elements().forEach((ele) => {
+      let randomWeight = Math.floor(Math.random() * 101);
+      ele.data('weight', randomWeight);
+      ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
+    });
     if (document.getElementById('cbk-run-layout').checked) {
       cy.layout({ name: 'fcose', animate: true }).run();
     } else {
@@ -166,6 +181,11 @@ function sif2cy(text) {
 function loadSample(globalVarName) {
   cy.$().remove();
   cy.add(window[globalVarName]);
+  cy.elements().forEach((ele) => {
+    let randomWeight = Math.floor(Math.random() * 101);
+    ele.data('weight', randomWeight);
+    ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
+  });
   if (document.getElementById('cbk-run-layout').checked) {
     cy.layout({ name: 'fcose', animate: true }).run();
   } else {

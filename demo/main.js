@@ -54,7 +54,12 @@ function onLoaded() {
   });
   const cy = window.cy = cytoscape({
     ready: function(){
-      instance = this.complexityManagement();
+      instance = window.instance = this.complexityManagement();
+      this.elements().forEach((ele)=>{
+        let randomWeight = Math.floor(Math.random() * 101);
+        ele.data('weight', randomWeight);
+        ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
+      });
     },
     container: document.getElementById('cy'),
     wheelSensitivity: 0.1,
@@ -62,20 +67,27 @@ function onLoaded() {
       {
         selector: 'node',
         style: {
-          'label': 'data(id)'
+          'label': (node) => {
+            return node.data('label') ? node.data('label') : node.id();
+          },
+          'font-size': '10px',
+          'compound-sizing-wrt-labels': 'include'
         }
       },
       {
         selector: 'edge',
         style: {
-          'label': (x) => {
-            if (x.data('edgeType')) {
-              return x.data('edgeType');
+          'label': (edge) => {
+            if (edge.data('weight') != null) {
+              return edge.data('weight');
             }
             return '';
           },
           'curve-style': 'bezier',
-          'target-arrow-shape': 'triangle'
+          'target-arrow-shape': 'triangle',
+          'text-rotation': 'autorotate',
+          'font-size': '10px',
+          'text-margin-y': '10px'
         }
       }
     ],
