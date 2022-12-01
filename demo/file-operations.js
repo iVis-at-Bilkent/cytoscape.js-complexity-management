@@ -187,8 +187,29 @@ function loadSample(globalVarName) {
     ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
   });
   if (document.getElementById('cbk-run-layout').checked) {
-    cy.layout({ name: 'fcose', animate: true }).run();
+    cy.layout({ name: 'fcose', animate: true, stop: () => {initailizer(cy);} }).run();
   } else {
-    cy.fit(30);
+    initailizer(cy);
   }
+}
+
+function initailizer(cy){
+  cyVisible.remove(cyVisible.elements());
+  cyInvisible.remove(cyInvisible.elements());
+
+  instance.getCompMgrInstance().visibleGraphManager.nodesMap.forEach((nodeItem,key) => {
+    cyVisible.add({data: {id: nodeItem.ID, parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID}, position: cy.getElementById(nodeItem.ID).position()});
+  });
+  instance.getCompMgrInstance().visibleGraphManager.edgesMap.forEach((edgeItem,key) => {
+    cyVisible.add({data: {id: edgeItem.ID, source: edgeItem.source.ID, target: edgeItem.target.ID}});
+  });
+  cyVisible.fit(cyVisible.elements(), 30);
+
+  instance.getCompMgrInstance().invisibleGraphManager.nodesMap.forEach((nodeItem,key) => {
+    cyInvisible.add({data: {id: nodeItem.ID, label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(c)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID}, position: cy.getElementById(nodeItem.ID).position()});
+  });
+  instance.getCompMgrInstance().invisibleGraphManager.edgesMap.forEach((edgeItem,key) => {
+    cyInvisible.add({data: {id: edgeItem.ID, label: edgeItem.ID + (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"),source: edgeItem.source.ID, target: edgeItem.target.ID}});
+  });
+  cyInvisible.fit(cyInvisible.elements(), 30);
 }

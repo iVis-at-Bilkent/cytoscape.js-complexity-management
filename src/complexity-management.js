@@ -66,34 +66,30 @@ export function complexityManagement(cy) {
   //  Action functions
 
   let actOnAdd = (evt) => {
-    let elementsToBeAdded = evt.target;
-    let nodesToBeAdded = elementsToBeAdded.nodes();
-    let edgesToBeAdded = elementsToBeAdded.edges();
+    let elementToBeAdded = evt.target;
 
-    // Add new nodes to both visible and invisible graphs
-    processChildrenList(getTopMostNodes(nodesToBeAdded), compMgrInstance);
-
-    // Add new edges to both visible and invisible graphs
-    processEdges(edgesToBeAdded, compMgrInstance);
+    // Add new node to both visible and invisible graphs
+    if (elementToBeAdded.isNode()) {
+      compMgrInstance.addNode(elementToBeAdded.id(), elementToBeAdded.parent().id());
+    }
+    else {  // Add new edge to both visible and invisible graphs
+      compMgrInstance.addEdge(elementToBeAdded.id(), elementToBeAdded.source().id(), elementToBeAdded.target().id());
+    }
 
     // Update filtered elements because new eles added may change the list
     updateFilteredElements();
   };
 
   let actOnRemove = (evt) => {
-    let elementsToBeRemoved = evt.target;
-    let nodesToBeRemoved = elementsToBeRemoved.nodes();
-    let edgesToBeRemoved = elementsToBeRemoved.edges();
+    let elementToBeRemoved = evt.target;
 
-    // First remove edges
-    edgesToBeRemoved.forEach((edge) => {
-      compMgrInstance.removeEdge(edge.id());
-    });
-
-    // Then remove nodes, giving only top-most nodes is enough, descendants are deleted automatically in cmgm
-    getTopMostNodes(nodesToBeRemoved).forEach((node) => {
-      compMgrInstance.removeNode(node.id());
-    });
+    // Remove node from both visible and invisible graphs
+    if (elementToBeRemoved.isNode()) {
+      compMgrInstance.removeNode(elementToBeRemoved.id());
+    }
+    else {  // Remove edge from both visible and invisible graphs
+      compMgrInstance.removeEdge(elementToBeRemoved.id());
+    }
 
     // Update filtered elements because removed eles may change the list
     updateFilteredElements();
