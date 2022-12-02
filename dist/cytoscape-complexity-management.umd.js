@@ -942,15 +942,15 @@
       }
       let edgeToRemoveInvisible = invisibleGM.edgesMap.get(edgeID);
       let edgeToAddForInvisible = new Edge(edgeID, newSourceID, newTargetID);
-      edgeToAddForInvisible.isVisible = edgeToRemoveInvisible.isVisible;
-      edgeToAddForInvisible.isHidden = edgeToRemoveInvisible.isHidden;
+      edgeToAddForInvisible.isVisible(edgeToRemoveInvisible.isVisible);
+      edgeToAddForInvisible.isHidden(edgeToRemoveInvisible.isHidden);
       if (edgeToAddForInvisible.isFiltered == false && edgeToAddForInvisible.isHidden == false && visibleGM.nodesMap.get(newSourceID).isVisible && visibleGM.nodesMap.get(newTargetID).isVisible) {
-        edgeToAddForInvisible.isVisible = true;
+        edgeToAddForInvisible.isVisible(true);
       } else {
-        edgeToAddForInvisible.isVisible = false;
+        edgeToAddForInvisible.isVisible(false);
       }
       if (edgeToAddForInvisible.isVisible == true) {
-        Topology.addEdge(edgeID, newSourceID, newSourceID, visibleGM, invisibleGM);
+        addEdge(edgeID, newSourceID, newSourceID, visibleGM, invisibleGM);
       } else {
         if (edgeToAddForInvisible.source.owner == edgeToAddForInvisible.target.owner) {
           edgeToAddForInvisible.source.owner.addEdge(edgeToAddForInvisible, edgeToAddForInvisible.source, edgeToAddForInvisible.target);
@@ -964,6 +964,9 @@
       if (nodeToRemove) {
         let newParent = visibleGM.nodesMap.get(newParentID);
         let removedNode = nodeToRemove.owner.removeNode(nodeToRemove);
+        if (newParent.child == undefined) {
+          newParent.child = new Graph(newParent, visibleGM);
+        }
         newParent.child.addNode(removedNode);
       }
       let nodeToRemoveInvisible = invisibleGM.nodesMap.get(nodeID);
