@@ -113,8 +113,24 @@ function complexityManagement(cy) {
     // Update filtered elements because removed eles may change the list
     updateFilteredElements();
   };
-  var actOnReconnect = function actOnReconnect(evt) {};
-  var actOnParentChange = function actOnParentChange(evt) {};
+  var actOnReconnect = function actOnReconnect(evt) {
+    var edgeToReconnect = evt.target;
+
+    // Change the source and/or target of the edge
+    compMgrInstance.reconnect(edgeToReconnect.id(), edgeToReconnect.source().id(), edgeToReconnect.target().id());
+
+    // Update filtered elements because changed eles may change the list
+    updateFilteredElements();
+  };
+  var actOnParentChange = function actOnParentChange(evt) {
+    var nodeToChangeParent = evt.target;
+
+    // Change the parent of the node
+    compMgrInstance.changeParent(nodeToChangeParent.id(), nodeToChangeParent.parent().id());
+
+    // Update filtered elements because changed eles may change the list
+    updateFilteredElements();
+  };
 
   // Events - register action functions to events
 

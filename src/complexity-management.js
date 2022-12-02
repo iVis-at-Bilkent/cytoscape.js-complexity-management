@@ -11,19 +11,19 @@ export function complexityManagement(cy) {
       nodesMap[node.id()] = true;
     })
     let roots = nodes.filter((ele, i) => {
-        if(typeof ele === "number") {
-          ele = i;
+      if (typeof ele === "number") {
+        ele = i;
+      }
+      var parent = ele.parent()[0];
+      while (parent != null) {
+        if (nodesMap[parent.id()]) {
+          return false;
         }
-        var parent = ele.parent()[0];
-        while(parent != null){
-          if(nodesMap[parent.id()]){
-            return false;
-          }
-          parent = parent.parent()[0];
-        }
-        return true;
+        parent = parent.parent()[0];
+      }
+      return true;
     });
-  
+
     return roots;
   };
 
@@ -94,13 +94,25 @@ export function complexityManagement(cy) {
     // Update filtered elements because removed eles may change the list
     updateFilteredElements();
   };
-  
-  let actOnReconnect = (evt) => {
 
+  let actOnReconnect = (evt) => {
+    let edgeToReconnect = evt.target;
+
+    // Change the source and/or target of the edge
+    compMgrInstance.reconnect(edgeToReconnect.id(), edgeToReconnect.source().id(), edgeToReconnect.target().id());
+
+    // Update filtered elements because changed eles may change the list
+    updateFilteredElements();
   };
 
   let actOnParentChange = (evt) => {
+    let nodeToChangeParent = evt.target;
 
+    // Change the parent of the node
+    compMgrInstance.changeParent(nodeToChangeParent.id(), nodeToChangeParent.parent().id());
+
+    // Update filtered elements because changed eles may change the list
+    updateFilteredElements();
   };
 
   // Events - register action functions to events
@@ -126,7 +138,7 @@ export function complexityManagement(cy) {
     return cy.scratch('cyComplexityManagement').options.filterRule;
   };
 
-  let getDifference = function(setA, setB) {
+  let getDifference = function (setA, setB) {
     return new Set([...setA].filter(element => !setB.has(element)));
   }
 
@@ -134,7 +146,7 @@ export function complexityManagement(cy) {
     let filterRuleFunc = getFilterRule();
     // Keeps IDs of the new filtered elements that should be filtered based on applying filter rule
     let newFilteredElements = new Set();
-    
+
     // Find elements that should be filtered, first trace currently visible elements in cy
     cy.elements().forEach((ele) => {
       if (filterRuleFunc(ele)) {
@@ -168,7 +180,7 @@ export function complexityManagement(cy) {
     let edgeIDListToBeFiltered = [];
 
     let nodeIDListToBeUnfiltered = [];
-    let edgeIDListToBeUnfiltered = [];    
+    let edgeIDListToBeUnfiltered = [];
 
     diffToBeFiltered.forEach((id) => {
       if (cy.getElementById(id).isNode()) {

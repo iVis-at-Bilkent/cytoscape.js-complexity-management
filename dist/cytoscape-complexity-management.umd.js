@@ -639,6 +639,7 @@
         throw "Node not in owner node list!";
       }
       this.nodes.splice(index, 1);
+      return node;
     }
 
     /**
@@ -675,6 +676,7 @@
         throw "Not in owner's edge list!";
       }
       edge.source.owner.edges.splice(index, 1);
+      return edge;
     }
   }
 
@@ -930,29 +932,30 @@
     static reconnect(edgeID, newSourceID, newTargetID, visibleGM, invisibleGM) {
       let edgeToRemove = visibleGM.edgesMap.get(edgeID);
       if (newSourceID == undefined) {
-        newSourceID = edgeToRemove.source().ID;
+        newSourceID = edgeToRemove.source.ID;
       } else if (newTargetID == undefined) {
-        newTargetID = edgeToRemove.taget().ID;
+        newTargetID = edgeToRemove.taget.ID;
       }
       if (edgeToRemove) {
-        this.removeEdge(edgeID, visibleGM, invisibleGM);
+        visibleGM.edgesMap.delete(edgeToRemove.ID);
+        Auxiliary.removeEdgeFromGraph(edgeToRemove);
       }
       let edgeToRemoveInvisible = invisibleGM.edgesMap.get(edgeID);
-      edgeToAddForInvisible = new Edge(edgeID, newSourceID, newTargetID);
-      edgeToAddForInvisible.isVisible(edgeToRemoveInvisible.isVisible());
-      edgeToAddForInvisible.isHidden(edgeToRemoveInvisible.isHidden());
-      if (edgeToAddForInvisible.isFiltered() == false && edgeToAddForInvisible.isHidden() == false && visibleGM.nodesMap.get(newSourceID).isVisible() && visibleGM.nodesMap.get(newTargetID).isVisible()) {
-        edgeToAddForInvisible.isVisible(true);
+      let edgeToAddForInvisible = new Edge(edgeID, newSourceID, newTargetID);
+      edgeToAddForInvisible.isVisible = edgeToRemoveInvisible.isVisible;
+      edgeToAddForInvisible.isHidden = edgeToRemoveInvisible.isHidden;
+      if (edgeToAddForInvisible.isFiltered == false && edgeToAddForInvisible.isHidden == false && visibleGM.nodesMap.get(newSourceID).isVisible && visibleGM.nodesMap.get(newTargetID).isVisible) {
+        edgeToAddForInvisible.isVisible = true;
       } else {
-        edgeToAddForInvisible.isVisible(false);
+        edgeToAddForInvisible.isVisible = false;
       }
-      if (edgeToAddForInvisible.isVisible() == true) {
-        addEdge(edgeID, newSourceID, newSourceID, visibleGM, invisibleGM);
+      if (edgeToAddForInvisible.isVisible == true) {
+        Topology.addEdge(edgeID, newSourceID, newSourceID, visibleGM, invisibleGM);
       } else {
-        if (edgeToAddForInvisible.source().owner == edgeToAddForInvisible.target().owner) {
-          edgeToAddForInvisible.source().owner.addEdge(edgeToAddForInvisible, edgeToAddForInvisible.source(), edgeToAddForInvisible.target());
+        if (edgeToAddForInvisible.source.owner == edgeToAddForInvisible.target.owner) {
+          edgeToAddForInvisible.source.owner.addEdge(edgeToAddForInvisible, edgeToAddForInvisible.source, edgeToAddForInvisible.target);
         } else {
-          invisibleGM.addInterGraphEdge(edgeToAddForInvisible, edgeToAddForInvisible.source(), edgeToAddForInvisible.target());
+          invisibleGM.addInterGraphEdge(edgeToAddForInvisible, edgeToAddForInvisible.source, edgeToAddForInvisible.target);
         }
       }
     }
@@ -961,12 +964,12 @@
       if (nodeToRemove) {
         let newParent = visibleGM.nodesMap.get(newParentID);
         let removedNode = nodeToRemove.owner.removeNode(nodeToRemove);
-        newParent.child().addNode(removedNode);
+        newParent.child.addNode(removedNode);
       }
       let nodeToRemoveInvisible = invisibleGM.nodesMap.get(nodeID);
       let newParentInInvisible = invisibleGM.nodesMap.get(newParentID);
       let removedNodeInvisible = nodeToRemoveInvisible.owner.removeNode(nodeToRemoveInvisible);
-      newParentInInvisible.child().addNode(removedNodeInvisible);
+      newParentInInvisible.child.addNode(removedNodeInvisible);
     }
   }
 
@@ -1229,8 +1232,24 @@
       // Update filtered elements because removed eles may change the list
       updateFilteredElements();
     };
-    var actOnReconnect = function actOnReconnect(evt) {};
-    var actOnParentChange = function actOnParentChange(evt) {};
+    var actOnReconnect = function actOnReconnect(evt) {
+      var edgeToReconnect = evt.target;
+
+      // Change the source and/or target of the edge
+      compMgrInstance.reconnect(edgeToReconnect.id(), edgeToReconnect.source().id(), edgeToReconnect.target().id());
+
+      // Update filtered elements because changed eles may change the list
+      updateFilteredElements();
+    };
+    var actOnParentChange = function actOnParentChange(evt) {
+      var nodeToChangeParent = evt.target;
+
+      // Change the parent of the node
+      compMgrInstance.changeParent(nodeToChangeParent.id(), nodeToChangeParent.parent().id());
+
+      // Update filtered elements because changed eles may change the list
+      updateFilteredElements();
+    };
 
     // Events - register action functions to events
 
