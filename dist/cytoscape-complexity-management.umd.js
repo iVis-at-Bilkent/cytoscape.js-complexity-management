@@ -942,15 +942,15 @@
       }
       let edgeToRemoveInvisible = invisibleGM.edgesMap.get(edgeID);
       let edgeToAddForInvisible = new Edge(edgeID, newSourceID, newTargetID);
-      edgeToAddForInvisible.isVisible(edgeToRemoveInvisible.isVisible);
-      edgeToAddForInvisible.isHidden(edgeToRemoveInvisible.isHidden);
+      edgeToAddForInvisible.isVisible = edgeToRemoveInvisible.isVisible;
+      edgeToAddForInvisible.isHidden = edgeToRemoveInvisible.isHidden;
       if (edgeToAddForInvisible.isFiltered == false && edgeToAddForInvisible.isHidden == false && visibleGM.nodesMap.get(newSourceID).isVisible && visibleGM.nodesMap.get(newTargetID).isVisible) {
-        edgeToAddForInvisible.isVisible(true);
+        edgeToAddForInvisible.isVisible = true;
       } else {
-        edgeToAddForInvisible.isVisible(false);
+        edgeToAddForInvisible.isVisible = false;
       }
       if (edgeToAddForInvisible.isVisible == true) {
-        addEdge(edgeID, newSourceID, newSourceID, visibleGM, invisibleGM);
+        Topology.addEdge(edgeID, newSourceID, newTargetID, visibleGM, invisibleGM);
       } else {
         if (edgeToAddForInvisible.source.owner == edgeToAddForInvisible.target.owner) {
           edgeToAddForInvisible.source.owner.addEdge(edgeToAddForInvisible, edgeToAddForInvisible.source, edgeToAddForInvisible.target);
@@ -965,13 +965,16 @@
         let newParent = visibleGM.nodesMap.get(newParentID);
         let removedNode = nodeToRemove.owner.removeNode(nodeToRemove);
         if (newParent.child == undefined) {
-          newParent.child = new Graph(newParent, visibleGM);
+          visibleGM.addGraph(new Graph(null, visibleGM), newParent);
         }
         newParent.child.addNode(removedNode);
       }
       let nodeToRemoveInvisible = invisibleGM.nodesMap.get(nodeID);
       let newParentInInvisible = invisibleGM.nodesMap.get(newParentID);
       let removedNodeInvisible = nodeToRemoveInvisible.owner.removeNode(nodeToRemoveInvisible);
+      if (newParentInInvisible.child == undefined) {
+        invisibleGM.addGraph(new Graph(null, invisibleGM), newParentInInvisible);
+      }
       newParentInInvisible.child.addNode(removedNodeInvisible);
     }
   }
