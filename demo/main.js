@@ -174,7 +174,11 @@ function onLoaded() {
   });
 
   document.getElementById("addEdgeBetweenSelected").addEventListener("click", () => {
-    if (cy.nodes(":selected").length == 2) {
+    let firstSelectedNode = cy.nodes(":selected")[0];
+    let secondSelectedNode = cy.nodes(":selected")[1];
+
+    if (cy.nodes(":selected").length == 2 && firstSelectedNode.intersection(secondSelectedNode.ancestors).length == 0 && 
+      secondSelectedNode.intersection(firstSelectedNode.ancestors).length == 0) {
       cy.add({
         group: 'edges',
         data: { id: 'newEdge' + newEdgeCount, source: cy.nodes(":selected")[0].id(), target: cy.nodes(":selected")[1].id() }
@@ -234,7 +238,12 @@ function onLoaded() {
     let firstSelectedNode = cy.nodes(':selected')[0];
     let newParent = cy.nodes(':selected')[1];
 
-    firstSelectedNode.move({ parent: newParent.id() });
+    if (newParent) {
+      firstSelectedNode.move({ parent: newParent.id() });
+    }
+    else {
+      firstSelectedNode.move({ parent: null });
+    }
 
     if (document.getElementById("cbk-run-layout2").checked) {
       cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
