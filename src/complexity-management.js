@@ -201,7 +201,7 @@ export function complexityManagement(cy) {
     });
 
     // Filter toBeFiltered elements
-    compMgrInstance.filter(nodeIDListToBeUnfiltered, edgeIDListToBeFiltered);
+    compMgrInstance.filter(nodeIDListToBeFiltered, edgeIDListToBeFiltered);
 
     // Unfilter toBeUnfiltered elements
     compMgrInstance.unfilter(nodeIDListToBeUnfiltered, edgeIDListToBeUnfiltered);

@@ -1319,11 +1319,16 @@
       diffToBeFiltered.forEach(function (id) {
         filteredElements.add(id);
       });
+
+      // Adjust toBeFiltered and toBeUnfiltered elements
+      var nodeIDListToBeFiltered = [];
       var edgeIDListToBeFiltered = [];
       var nodeIDListToBeUnfiltered = [];
       var edgeIDListToBeUnfiltered = [];
       diffToBeFiltered.forEach(function (id) {
-        if (cy.getElementById(id).isNode()) ; else {
+        if (cy.getElementById(id).isNode()) {
+          nodeIDListToBeFiltered.push(id);
+        } else {
           edgeIDListToBeFiltered.push(id);
         }
       });
@@ -1336,7 +1341,7 @@
       });
 
       // Filter toBeFiltered elements
-      compMgrInstance.filter(nodeIDListToBeUnfiltered, edgeIDListToBeFiltered);
+      compMgrInstance.filter(nodeIDListToBeFiltered, edgeIDListToBeFiltered);
 
       // Unfilter toBeUnfiltered elements
       compMgrInstance.unfilter(nodeIDListToBeUnfiltered, edgeIDListToBeUnfiltered);

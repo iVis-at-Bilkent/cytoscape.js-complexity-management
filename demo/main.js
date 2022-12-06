@@ -68,7 +68,7 @@ function onLoaded() {
         selector: 'node',
         style: {
           'label': (node) => {
-            return node.data('id') ? node.data('id') : node.id();
+            return node.data('label') ? node.data('label') : node.id();
           },
           'font-size': '10px',
           'compound-sizing-wrt-labels': 'include'
@@ -77,12 +77,12 @@ function onLoaded() {
       {
         selector: 'edge',
         style: {
-          // 'label': (edge) => {
-          //   if (edge.data('weight') != null) {
-          //     return edge.data('weight');
-          //   }
-          //   return '';
-          // },
+          'label': (edge) => {
+            if (edge.data('weight') != null) {
+              return edge.data('weight');
+            }
+            return '';
+          },
           'curve-style': 'bezier',
           'target-arrow-shape': 'triangle',
           'text-rotation': 'autorotate',
@@ -288,6 +288,19 @@ function onLoaded() {
       };
       // wait for the ui.handle to set its position
       setTimeout(delay, 5);
+    },
+    change: function () {
+      instance.updateFilterRule((ele) => {
+        if (ele.isNode() && (ele.data('weight') < parseInt($('#min-weight-node').html()) || ele.data('weight') > parseInt($('#max-weight-node').html()))) {
+          return true;
+        }
+        else if (ele.isEdge() && (ele.data('weight') < parseInt($('#min-weight-edge').html()) || ele.data('weight') > parseInt($('#max-weight-edge').html()))) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      });
     }
   });
 
@@ -324,6 +337,19 @@ function onLoaded() {
       };
       // wait for the ui.handle to set its position
       setTimeout(delay, 5);
+    },
+    change: function () {
+      instance.updateFilterRule((ele) => {
+        if (ele.isNode() && (ele.data('weight') < parseInt($('#min-weight-node').html()) || ele.data('weight') > parseInt($('#max-weight-node').html()))) {
+          return true;
+        }
+        else if (ele.isEdge() && (ele.data('weight') < parseInt($('#min-weight-edge').html()) || ele.data('weight') > parseInt($('#max-weight-edge').html()))) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      });
     }
   });
 
