@@ -177,8 +177,8 @@ function onLoaded() {
     let firstSelectedNode = cy.nodes(":selected")[0];
     let secondSelectedNode = cy.nodes(":selected")[1];
 
-    if (cy.nodes(":selected").length == 2 && firstSelectedNode.intersection(secondSelectedNode.ancestors).length == 0 && 
-      secondSelectedNode.intersection(firstSelectedNode.ancestors).length == 0) {
+    if (cy.nodes(":selected").length == 2 && firstSelectedNode.intersection(secondSelectedNode.ancestors()).length == 0 && 
+      secondSelectedNode.intersection(firstSelectedNode.ancestors()).length == 0) {
       cy.add({
         group: 'edges',
         data: { id: 'newEdge' + newEdgeCount, source: cy.nodes(":selected")[0].id(), target: cy.nodes(":selected")[1].id() }
@@ -366,7 +366,7 @@ function onLoaded() {
     of: $('#slider-edges span:eq(1)'),
     offset: "0, 10"
   });
-  }
+}
 
   function getRandomNodes() {
     const nodeCount = 2;
