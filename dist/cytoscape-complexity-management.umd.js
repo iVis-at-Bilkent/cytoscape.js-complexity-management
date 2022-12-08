@@ -1495,42 +1495,42 @@
       });
 
       // diff between filteredElements and newFilteredElements should be removed from filteredElements
-      var diffToBeUnfiltered = getDifference(filteredElements, newFilteredElements);
-      diffToBeUnfiltered.forEach(function (id) {
+      var diffToUnfilter = getDifference(filteredElements, newFilteredElements);
+      diffToUnfilter.forEach(function (id) {
         filteredElements.delete(id);
       });
 
       // diff between newFilteredElements and filteredElements should be added to filteredElements
-      var diffToBeFiltered = getDifference(newFilteredElements, filteredElements);
-      diffToBeFiltered.forEach(function (id) {
+      var diffToFilter = getDifference(newFilteredElements, filteredElements);
+      diffToFilter.forEach(function (id) {
         filteredElements.add(id);
       });
 
-      // Adjust toBeFiltered and toBeUnfiltered elements
-      var nodeIDListToBeFiltered = [];
-      var edgeIDListToBeFiltered = [];
-      var nodeIDListToBeUnfiltered = [];
-      var edgeIDListToBeUnfiltered = [];
-      diffToBeFiltered.forEach(function (id) {
+      // Adjust to-be-filtered and to-be-unfiltered elements
+      var nodeIDListToFilter = [];
+      var edgeIDListToFilter = [];
+      var nodeIDListToUnfilter = [];
+      var edgeIDListToUnfilter = [];
+      diffToFilter.forEach(function (id) {
         if (cy.getElementById(id).isNode()) {
-          nodeIDListToBeFiltered.push(id);
+          nodeIDListToFilter.push(id);
         } else {
-          edgeIDListToBeFiltered.push(id);
+          edgeIDListToFilter.push(id);
         }
       });
-      diffToBeUnfiltered.forEach(function (id) {
+      diffToUnfilter.forEach(function (id) {
         if (cy.getElementById(id).isNode()) {
-          nodeIDListToBeUnfiltered.push(id);
+          nodeIDListToUnfilter.push(id);
         } else {
-          edgeIDListToBeUnfiltered.push(id);
+          edgeIDListToUnfilter.push(id);
         }
       });
 
       // Filter toBeFiltered elements
-      compMgrInstance.filter(nodeIDListToBeFiltered, edgeIDListToBeFiltered);
+      compMgrInstance.filter(nodeIDListToFilter, edgeIDListToFilter);
 
       // Unfilter toBeUnfiltered elements
-      compMgrInstance.unfilter(nodeIDListToBeUnfiltered, edgeIDListToBeUnfiltered);
+      compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter);
     }
 
     // API to be returned
@@ -1545,6 +1545,31 @@
       updateFilteredElements();
     };
     api.hide = function (eles) {
+      var nodeIDListToHide = [];
+      var edgeIDListToHide = [];
+      eles.forEach(function (ele) {
+        if (ele.isNode()) {
+          nodeIDListToHide.push(ele.id());
+        } else {
+          edgeIDListToHide.push(ele.id());
+        }
+      });
+      compMgrInstance.hide(nodeIDListToHide, edgeIDListToHide);
+    };
+    api.show = function (eles) {
+      var nodeIDListToShow = [];
+      var edgeIDListToShow = [];
+      eles.forEach(function (ele) {
+        if (ele.isNode()) {
+          nodeIDListToShow.push(ele.id());
+        } else {
+          edgeIDListToShow.push(ele.id());
+        }
+      });
+      compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+    };
+    api.showAll = function () {
+      compMgrInstance.showAll();
     };
     return api;
   }
