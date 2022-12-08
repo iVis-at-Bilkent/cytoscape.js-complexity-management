@@ -162,49 +162,49 @@ export function complexityManagement(cy) {
     });
 
     // diff between filteredElements and newFilteredElements should be removed from filteredElements
-    let diffToBeUnfiltered = getDifference(filteredElements, newFilteredElements);
+    let diffToUnfilter = getDifference(filteredElements, newFilteredElements);
 
-    diffToBeUnfiltered.forEach((id) => {
+    diffToUnfilter.forEach((id) => {
       filteredElements.delete(id);
     });
 
     // diff between newFilteredElements and filteredElements should be added to filteredElements
-    let diffToBeFiltered = getDifference(newFilteredElements, filteredElements);
+    let diffToFilter = getDifference(newFilteredElements, filteredElements);
 
-    diffToBeFiltered.forEach((id) => {
+    diffToFilter.forEach((id) => {
       filteredElements.add(id);
     });
 
-    // Adjust toBeFiltered and toBeUnfiltered elements
-    let nodeIDListToBeFiltered = [];
-    let edgeIDListToBeFiltered = [];
+    // Adjust to-be-filtered and to-be-unfiltered elements
+    let nodeIDListToFilter = [];
+    let edgeIDListToFilter = [];
 
-    let nodeIDListToBeUnfiltered = [];
-    let edgeIDListToBeUnfiltered = [];
+    let nodeIDListToUnfilter = [];
+    let edgeIDListToUnfilter = [];
 
-    diffToBeFiltered.forEach((id) => {
+    diffToFilter.forEach((id) => {
       if (cy.getElementById(id).isNode()) {
-        nodeIDListToBeFiltered.push(id);
+        nodeIDListToFilter.push(id);
       }
       else {
-        edgeIDListToBeFiltered.push(id);
+        edgeIDListToFilter.push(id);
       }
     });
 
-    diffToBeUnfiltered.forEach((id) => {
+    diffToUnfilter.forEach((id) => {
       if (cy.getElementById(id).isNode()) {
-        nodeIDListToBeUnfiltered.push(id);
+        nodeIDListToUnfilter.push(id);
       }
       else {
-        edgeIDListToBeUnfiltered.push(id);
+        edgeIDListToUnfilter.push(id);
       }
     });
 
     // Filter toBeFiltered elements
-    compMgrInstance.filter(nodeIDListToBeFiltered, edgeIDListToBeFiltered);
+    compMgrInstance.filter(nodeIDListToFilter, edgeIDListToFilter);
 
     // Unfilter toBeUnfiltered elements
-    compMgrInstance.unfilter(nodeIDListToBeUnfiltered, edgeIDListToBeUnfiltered);
+    compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter);
   }
 
   // API to be returned
@@ -222,9 +222,40 @@ export function complexityManagement(cy) {
   };
 
   api.hide = (eles) => {
-    let nodesIDsToHide = [];
-    let edgeIDsToHide = [];
+    let nodeIDListToHide = [];
+    let edgeIDListToHide = [];
+
+    eles.forEach((ele) => {
+      if (ele.isNode()) {
+        nodeIDListToHide.push(ele.id());
+      }
+      else {
+        edgeIDListToHide.push(ele.id());
+      }
+    });
+
+    compMgrInstance.hide(nodeIDListToHide, edgeIDListToHide);
   };
+
+  api.show = (eles) => {
+    let nodeIDListToShow = [];
+    let edgeIDListToShow = [];
+
+    eles.forEach((ele) => {
+      if (ele.isNode()) {
+        nodeIDListToShow.push(ele.id());
+      }
+      else {
+        edgeIDListToShow.push(ele.id());
+      }
+    });
+
+    compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+  };
+
+  api.showAll = () => {
+    compMgrInstance.showAll();
+  }
 
   return api;
 }

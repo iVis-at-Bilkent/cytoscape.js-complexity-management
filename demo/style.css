@@ -7,10 +7,10 @@ body {
 .root {
   height: 100%;
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: 3.2fr 9fr;
   grid-template-rows: min-content auto min-content;
   grid-template-areas: "h h" "ui cy" "f f";
-  gap: 5px 10px;
+  gap: 5px 5px;
 }
 
 .ext-header {
@@ -99,7 +99,7 @@ h1 {
 
 #slider-nodes, #slider-edges
 {
-  width: 77%;
+  width: 75%;
   margin-left: 1em;
   margin-top: 0.5em;
 }

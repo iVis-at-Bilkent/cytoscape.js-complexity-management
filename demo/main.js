@@ -378,6 +378,29 @@ function onLoaded() {
     else {
       initailizer(cy);
     }
+  });
+
+  document.getElementById("showHiddenNeighbors").addEventListener("click", () => {
+    let selectedNodes = cy.nodes('selected');
+    instance.show(selectedNodes.union(selectedNodes.descendants().closedNeighborhood()));
+
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+    }
+    else {
+      initailizer(cy);
+    }
+  });
+
+  document.getElementById("showAll").addEventListener("click", () => {
+    instance.showAll();
+
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+    }
+    else {
+      initailizer(cy);
+    }
   });  
 }
 

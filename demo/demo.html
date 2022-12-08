@@ -135,7 +135,7 @@
             Add random elements
             </button>
             <button type="button" id="removeSelected" class="btn btn-secondary m-1" type="button" 
-            title="Removes selected elements from graph" aria-expanded="false">
+            title="Removes selected elements from the graph" aria-expanded="false">
             Remove selected
             </button>
             <button type="button" id="changeSource" class="btn btn-secondary m-1" type="button" 
@@ -169,21 +169,29 @@
         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
           aria-labelledby="panelsStayOpen-headingThree">
           <div class="accordion-body d-flex flex-wrap justify-content-left" style="padding: 1rem 1.25rem 0 1.25rem">
-            <h1>Filter Nodes:</h1>
+            <h1>Filter nodes:</h1>
             <div id="slider-nodes"></div>
             <div id="min-weight-node"></div>
             <div id="max-weight-node"></div>
           </div>
-          <div class="accordion-body d-flex flex-wrap justify-content-left" style="padding: 0 1.25rem 0 1.25rem">
-            <h1>Filter Edges:</h1>
+          <div class="accordion-body d-flex flex-wrap justify-content-left" style="padding: 0.75rem 1.25rem 0 1.25rem">
+            <h1>Filter edges:</h1>
             <div id="slider-edges"></div>
             <div id="min-weight-edge"></div>
             <div id="max-weight-edge"></div>
           </div>
           <div class="accordion-body d-flex flex-wrap justify-content-center">
             <button type="button" id="hideSelected" class="btn btn-secondary m-1" type="button" 
-            title="If no node is selected, then adds to the root graph" aria-expanded="false">
+            title="Hides selected elements from the graph" aria-expanded="false">
             Hide selected
+            </button>
+            <button type="button" id="showHiddenNeighbors" class="btn btn-secondary m-1" type="button" 
+            title="Shows hidden neighbors of the selected node, if any" aria-expanded="false">
+            Show hidden neighbors of selected
+            </button>
+            <button type="button" id="showAll" class="btn btn-secondary m-1" type="button" 
+            title="Shows all elements in the graph" aria-expanded="false">
+            Show all
             </button>
             <div class="form-check m-1">
               <input class="form-check-input" type="checkbox" value="" id="cbk-run-layout3" checked>
