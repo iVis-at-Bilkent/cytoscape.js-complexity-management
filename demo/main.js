@@ -158,11 +158,14 @@ function onLoaded() {
       parentID = selectedNode.id();
       position = { x: selectedNode.bb().x1 + selectedNode.bb().w / 2, y: selectedNode.bb().y1 + selectedNode.bb().h / 2 }
     }
-    cy.add({
+    let newNode = cy.add({
       group: 'nodes',
-      data: { id: 'nn' + newNodeCount, parent: parentID },
+      data: { id: 'nn' + newNodeCount, 
+              parent: parentID,
+              weight: Math.floor(Math.random() * 101)},
       position: position
     });
+    newNode.data('label', newNode.data('id') + '(' + newNode.data('weight') + ')')
     newNodeCount++;
 
     if (document.getElementById("cbk-run-layout2").checked) {
@@ -181,7 +184,10 @@ function onLoaded() {
       secondSelectedNode.intersection(firstSelectedNode.ancestors()).length == 0) {
       cy.add({
         group: 'edges',
-        data: { id: 'newEdge' + newEdgeCount, source: cy.nodes(":selected")[0].id(), target: cy.nodes(":selected")[1].id() }
+        data: { id: 'ne' + newEdgeCount, 
+                source: cy.nodes(":selected")[0].id(), 
+                target: cy.nodes(":selected")[1].id(),
+                weight: Math.floor(Math.random() * 101)}
       });
     }
 
@@ -381,7 +387,7 @@ function onLoaded() {
   });
 
   document.getElementById("showHiddenNeighbors").addEventListener("click", () => {
-    let selectedNodes = cy.nodes('selected');
+    let selectedNodes = cy.nodes(':selected');
     instance.show(selectedNodes.union(selectedNodes.descendants().closedNeighborhood()));
 
     if (document.getElementById("cbk-run-layout3").checked) {
@@ -418,7 +424,9 @@ function onLoaded() {
       switch (Math.ceil(Math.random() * 3)) {
         case 1: // New parent
           if (newNodes.length === 0) {
-            newNodes.merge(cy.add({group: 'nodes', data: {id: `${id}a`, name: `${id}a`}}));
+            let node = cy.add({group: 'nodes', data: {id: `${id}a`, name: `${id}a`, weight: Math.floor(Math.random() * 101)}});
+            node.data('label', node.data('id') + '(' + node.data('weight') + ')');
+            newNodes.merge(node);
           }
           if (!newCompound) {
             const randomNewCompound = newNodes[Math.floor(Math.random() * newNodes.length)];
@@ -433,7 +441,8 @@ function onLoaded() {
         default:
           break;
       }
-      const newNode = cy.add({ group: 'nodes', data: { id, name: id, parent: parentID }});
+      const newNode = cy.add({ group: 'nodes', data: { id, name: id, parent: parentID, weight: Math.floor(Math.random() * 101) }});
+      newNode.data('label', newNode.data('id') + '(' + newNode.data('weight') + ')');
       newNodes.merge(newNode);
 
       let neighborCount;
@@ -459,7 +468,7 @@ function onLoaded() {
                 // Add necessary dummy nodes
                 const dummyID = `${id}-d${i}`;
                 const dummyNode = cy.add({ group: 'nodes', data: { id: dummyID, name: dummyID}});
-                cy.add({ group: 'edges', data: { id: `${dummyID}-e`, source: nodeToConnect.id(), target: dummyID }})
+                cy.add({ group: 'edges', data: { id: `${dummyID}-e`, source: nodeToConnect.id(), target: dummyID, weight: Math.floor(Math.random() * 101)}})
                 nodeToConnect = dummyNode;
                 newNodes.merge(dummyNode)
                 availableNewNodes.merge(dummyNode)
@@ -488,7 +497,7 @@ function onLoaded() {
               } while (selectedNeighbors.includes(randomNeighbor.id()));
             }
             selectedNeighbors.push(randomNeighbor.id());
-            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id()}})
+            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
           }
         } else if (randomValue < 8) {
           const availableCount = Math.min(neighborCount, availableCurrentNodes.length);
@@ -498,7 +507,7 @@ function onLoaded() {
               randomNeighbor = availableCurrentNodes[Math.floor(Math.random() * availableCurrentNodes.length)];
             } while (selectedNeighbors.includes(randomNeighbor.id()));
             selectedNeighbors.push(randomNeighbor.id());
-            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id()}})
+            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
           }
         } else {
           const dummyNodeCount = neighborCount - Math.min(neighborCount / 2, availableCurrentNodes.length) - availableNewNodes.length;
@@ -520,7 +529,7 @@ function onLoaded() {
               } while (selectedNeighbors.includes(randomNeighbor.id()));
             }
             selectedNeighbors.push(randomNeighbor.id());
-            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id()}})
+            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
           }
         }
       }
