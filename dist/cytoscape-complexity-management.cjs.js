@@ -229,6 +229,8 @@ function complexityManagement(cy) {
     // Update filtered elements based on the new filter rule
     updateFilteredElements();
   };
+  api.hide = function (eles) {
+  };
   return api;
 }
 

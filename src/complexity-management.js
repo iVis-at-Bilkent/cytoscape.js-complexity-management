@@ -212,14 +212,19 @@ export function complexityManagement(cy) {
 
   api.getCompMgrInstance = () => {
     return compMgrInstance;
-  }
+  };
 
   api.updateFilterRule = (newFilterRuleFunc) => {
     cy.scratch('cyComplexityManagement').options.filterRule = newFilterRuleFunc;
 
     // Update filtered elements based on the new filter rule
     updateFilteredElements();
-  }
+  };
+
+  api.hide = (eles) => {
+    let nodesIDsToHide = [];
+    let edgeIDsToHide = [];
+  };
 
   return api;
 }

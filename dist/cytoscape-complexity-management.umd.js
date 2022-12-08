@@ -317,6 +317,9 @@
           nodeEdges.forEach(item => descendants['edges'].add(item));
         });
       }
+      node.edges.forEach(edge => {
+        descendants.edges.add(edge);
+      });
       return descendants;
     }
   }
@@ -473,6 +476,103 @@
     set isInterGraph(isInterGraph) {
       this.#isInterGraph = isInterGraph;
     }
+  }
+
+  /**
+   * This class represents a meta edge. A meta edge maintains 
+   * the original edges it represents together with the properties 
+   * that are inherited from Edge class.
+   */
+  class MetaEdge extends Edge {
+    // The original edges this meta edge represents
+    #originalEdges;
+
+    /**
+     * Constructor
+     * @param {Stirng} ID - ID of the meta edge 
+     * @param {Node} source - source node of the meta edge 
+     * @param {*} target - target node of the meta edge
+     */
+    constructor(source, target) {
+      let ID = Auxiliary.createUniqueID();
+      super(ID, source, target);
+      this.#originalEdges = [];
+    }
+
+    // get methods
+    get originalEdges() {
+      return this.#originalEdges;
+    }
+
+    // set methods
+    set originalEdges(originalEdges) {
+      this.#originalEdges = originalEdges;
+    }
+  }
+  class FilterUnfilter {
+    static filter(nodeIDList, edgeIDList, visibleGM, invisibleGM) {
+      let nodeIDsListPostProcess = [];
+      let edgeIDsListPostProcess = [...edgeIDList];
+      edgeIDList.forEach(edgeID => {
+        let edgeToFilter = visibleGM.edgesMap.get(edgeID);
+        let found = false;
+        visibleGM.edgesMap.forEach(visibleEdge => {
+          if (visibleEdge instanceof MetaEdge) {
+            // updateMetaEdge function returns updated version of originalEdges without key of edgeTo Remove
+            updatedOrignalEdges = updateMetaEdge(visibleEdge.originalEdges(), edgeToFilter);
+            // updatedOrignalEdges will be same as originalEdges if edge to remove is not part of the meta edge
+            if (updatedOrignalEdges != visibleEdge.originalEdges()) {
+              visibleEdge.originalEdges(updatedOrignalEdges);
+              found = true;
+            }
+          }
+        });
+        if (!found) {
+          visibleGM.edgesMap.delete(edgeToFilter.ID);
+          Auxiliary.removeEdgeFromGraph(edgeToFilter);
+        }
+        let edgeToFilterInvisible = invisibleGM.edgesMap.get(edgeID);
+        edgeToFilterInvisible.isFiltered = true;
+        edgeToFilterInvisible.isVisible = false;
+      });
+      nodeIDList.forEach(nodeID => {
+        let nodeToFilter = visibleGM.nodesMap.get(nodeID);
+        if (nodeToFilter) {
+          let nodeToFilterDescendants = visibleGM.getDescendantsInorder(nodeToFilter);
+          nodeToFilterDescendants.edges.forEach(nodeToFilterEdge => {
+            edgeIDsListPostProcess.push(nodeToFilterEdge.ID);
+            let nodeToFilterEdgeInvisible = invisibleGM.edgesMap.get(nodeToFilterEdge.ID);
+            nodeToFilterEdgeInvisible.isVisible = false;
+            visibleGM.edgesMap.delete(nodeToFilterEdge.ID);
+            Auxiliary.removeEdgeFromGraph(nodeToFilterEdge);
+          });
+          nodeToFilterDescendants.simpleNodes.forEach(nodeToFilterSimpleNode => {
+            let nodeToFilterSimpleNodeInvisible = invisibleGM.nodesMap.get(nodeToFilterSimpleNode.ID);
+            nodeToFilterSimpleNodeInvisible.isVisible = false;
+            nodeIDsListPostProcess.push(nodeToFilterSimpleNode.ID);
+            nodeToFilterSimpleNode.owner.removeNode(nodeToFilterSimpleNode);
+            visibleGM.nodesMap.delete(nodeToFilterSimpleNode.ID);
+          });
+          nodeToFilterDescendants.compoundNodes.forEach(nodeToFilterCompoundNode => {
+            let nodeToFilterCompoundNodeInvisible = invisibleGM.nodesMap.get(nodeToFilterCompoundNode.ID);
+            nodeToFilterCompoundNodeInvisible.isVisible = false;
+            nodeIDsListPostProcess.push(nodeToFilterCompoundNode.ID);
+            nodeToFilterCompoundNode.owner.removeNode(nodeToFilterCompoundNode);
+            visibleGM.nodesMap.delete(nodeToFilterCompoundNode.ID);
+          });
+          nodeToFilter.owner.removeNode(nodeToFilter);
+          visibleGM.nodesMap.delete(nodeID);
+          let nodeToFilterInvisible = invisibleGM.nodesMap.get(nodeID);
+          nodeToFilterInvisible.isFiltered = true;
+          nodeToFilterInvisible.isVisible = false;
+        } else {
+          let nodeToFilterInvisible = invisibleGM.nodesMap.get(nodeID);
+          nodeToFilterInvisible.isFiltered = true;
+          nodeToFilterInvisible.isVisible = false;
+        }
+      });
+    }
+    static unfilter(nodeIDList, edgeIDList, visibleGM, invisibleGM) {}
   }
 
   /**
@@ -677,38 +777,6 @@
       }
       edge.source.owner.edges.splice(index, 1);
       return edge;
-    }
-  }
-
-  /**
-   * This class represents a meta edge. A meta edge maintains 
-   * the original edges it represents together with the properties 
-   * that are inherited from Edge class.
-   */
-  class MetaEdge extends Edge {
-    // The original edges this meta edge represents
-    #originalEdges;
-
-    /**
-     * Constructor
-     * @param {Stirng} ID - ID of the meta edge 
-     * @param {Node} source - source node of the meta edge 
-     * @param {*} target - target node of the meta edge
-     */
-    constructor(source, target) {
-      let ID = Auxiliary.createUniqueID();
-      super(ID, source, target);
-      this.#originalEdges = [];
-    }
-
-    // get methods
-    get originalEdges() {
-      return this.#originalEdges;
-    }
-
-    // set methods
-    set originalEdges(originalEdges) {
-      this.#originalEdges = originalEdges;
     }
   }
 
@@ -1080,8 +1148,9 @@
     // filter/unfilter methods
 
     filter(nodeIDList, edgeIDList) {
-      this.#visibleGraphManager;
-      this.#invisibleGraphManager;
+      let visibleGM = this.#visibleGraphManager;
+      let invisibleGM = this.#invisibleGraphManager;
+      FilterUnfilter.filter(nodeIDList, edgeIDList, visibleGM, invisibleGM);
     }
     unfilter(nodeIDList, edgeIDList) {
       this.#visibleGraphManager;
@@ -1357,6 +1426,8 @@
 
       // Update filtered elements based on the new filter rule
       updateFilteredElements();
+    };
+    api.hide = function (eles) {
     };
     return api;
   }
