@@ -42,9 +42,9 @@ function jsonFileSelected() {
       ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
     });
     if (document.getElementById('cbk-run-layout').checked) {
-      cy.layout({ name: 'fcose', animate: true, stop: () => {initailizer(cy);} }).run();
+      cy.layout({ name: 'fcose', animate: true, stop: () => {initializer(cy);} }).run();
     } else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 }
@@ -66,9 +66,9 @@ function graphmlFileSelected() {
       ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
     });    
     if (document.getElementById('cbk-run-layout').checked) {
-      cy.layout({ name: 'fcose', animate: true, stop: () => {initailizer(cy);} }).run();
+      cy.layout({ name: 'fcose', animate: true, stop: () => {initializer(cy);} }).run();
     } else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 }
@@ -89,9 +89,9 @@ function sifFileSelected() {
       ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
     });
     if (document.getElementById('cbk-run-layout').checked) {
-      cy.layout({ name: 'fcose', animate: true, stop: () => {initailizer(cy);} }).run();
+      cy.layout({ name: 'fcose', animate: true, stop: () => {initializer(cy);} }).run();
     } else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 }
@@ -187,13 +187,13 @@ function loadSample(globalVarName) {
     ele.data('label', ele.data('id') + '(' + ele.data('weight') + ')');
   });
   if (document.getElementById('cbk-run-layout').checked) {
-    cy.layout({ name: 'fcose', animate: true, stop: () => {initailizer(cy);} }).run();
+    cy.layout({ name: 'fcose', animate: true, stop: () => {initializer(cy);} }).run();
   } else {
-    initailizer(cy);
+    initializer(cy);
   }
 }
 
-function initailizer(cy){
+function initializer(cy){
   cyVisible.remove(cyVisible.elements());
   cyInvisible.remove(cyInvisible.elements());
 

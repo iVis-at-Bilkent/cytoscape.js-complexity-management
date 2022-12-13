@@ -158,6 +158,44 @@ function complexityManagement(cy) {
       return !setB.has(element);
     }));
   };
+  function actOnInvisible(eleIDList, cy) {
+    // Collect cy elements to be removed
+    var elesToRemove = cy.collection();
+    eleIDList.forEach(function (id) {
+      elesToRemove.merge(cy.getElementById(id));
+    });
+
+    // Close remove event temporarily because this is not an actual topology change, but a change because of cmgm
+    cy.off('remove', actOnRemove);
+
+    // Remove elements from cy graph and add them to the scratchpad
+    var removedEles = cy.remove(elesToRemove);
+    removedEles.forEach(function (ele) {
+      cy.scratch('cyComplexityManagement').removedEles.set(ele.id(), ele);
+    });
+
+    // Activate remove event again
+    cy.on('remove', actOnRemove);
+  }
+  function actOnVisible(eleIDList, cy) {
+    // Collect cy elements to be added
+    var elesToAdd = cy.collection();
+    eleIDList.forEach(function (id) {
+      elesToAdd.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+    });
+
+    // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
+    cy.off('add', actOnAdd);
+
+    // Add elements from cy graph and remove them from the scratchpad
+    var addedEles = cy.add(elesToAdd);
+    addedEles.forEach(function (ele) {
+      cy.scratch('cyComplexityManagement').removedEles.delete(ele.id());
+    });
+
+    // Activate remove event again
+    cy.on('add', actOnAdd);
+  }
   function updateFilteredElements() {
     var filterRuleFunc = getFilterRule();
     // Keeps IDs of the new filtered elements that should be filtered based on applying filter rule
@@ -202,7 +240,7 @@ function complexityManagement(cy) {
       }
     });
     diffToUnfilter.forEach(function (id) {
-      if (cy.getElementById(id).isNode()) {
+      if (cy.scratch('cyComplexityManagement').removedEles.get(id).isNode()) {
         nodeIDListToUnfilter.push(id);
       } else {
         edgeIDListToUnfilter.push(id);
@@ -210,10 +248,12 @@ function complexityManagement(cy) {
     });
 
     // Filter toBeFiltered elements
-    compMgrInstance.filter(nodeIDListToFilter, edgeIDListToFilter);
+    var IDsToRemove = compMgrInstance.filter(nodeIDListToFilter, edgeIDListToFilter);
 
     // Unfilter toBeUnfiltered elements
-    compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter);
+    var IDsToAdd = compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter);
+    actOnInvisible(IDsToRemove, cy);
+    actOnVisible(IDsToAdd, cy);
   }
 
   // API to be returned
@@ -237,7 +277,8 @@ function complexityManagement(cy) {
         edgeIDListToHide.push(ele.id());
       }
     });
-    compMgrInstance.hide(nodeIDListToHide, edgeIDListToHide);
+    var IDsToRemove = compMgrInstance.hide(nodeIDListToHide, edgeIDListToHide);
+    actOnInvisible(IDsToRemove, cy);
   };
   api.show = function (eles) {
     var nodeIDListToShow = [];
@@ -273,7 +314,7 @@ function register(cytoscape) {
       var api = complexityManagement(cy);
 
       // Keeps the temporarily removed elements (because of the complexity management operations)
-      var tempRemovedEles = new Set();
+      var tempRemovedEles = new Map();
       setScratch(cy, 'options', options);
       setScratch(cy, 'api', api);
       setScratch(cy, 'removedEles', tempRemovedEles);

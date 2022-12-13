@@ -116,7 +116,7 @@ function onLoaded() {
         { data: { id: 'f-g', source: 'f', target: 'g' } }
       ]
     },
-    layout: { name: 'fcose', animate: true, stop: function () { initailizer(cy); } }
+    layout: { name: 'fcose', animate: true, stop: function () { initializer(cy); } }
   });
 
   let layoutUtilities = cy.layoutUtilities({ desiredAspectRatio: cy.width() / cy.height() });
@@ -124,7 +124,7 @@ function onLoaded() {
   let newNodeCount = 0;
   let newEdgeCount = 0;
 
-  function initailizer(cy) {
+  function initializer(cy) {
     cyVisible.remove(cyVisible.elements());
     cyInvisible.remove(cyInvisible.elements());
 
@@ -169,10 +169,10 @@ function onLoaded() {
     newNodeCount++;
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
@@ -194,10 +194,10 @@ function onLoaded() {
     newEdgeCount++;
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
@@ -205,10 +205,10 @@ function onLoaded() {
     cy.elements(":selected").remove();
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
@@ -219,10 +219,10 @@ function onLoaded() {
     selectedEdge.move({ source: newSource.id() });
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
@@ -233,10 +233,10 @@ function onLoaded() {
     selectedEdge.move({ target: newTarget.id() });
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
@@ -252,10 +252,10 @@ function onLoaded() {
     }
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
@@ -267,10 +267,10 @@ function onLoaded() {
     layoutUtilities.placeNewNodes(nodes);
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
@@ -307,7 +307,12 @@ function onLoaded() {
           return false;
         }
       });
-      initailizer(cy);
+      if (document.getElementById("cbk-run-layout3").checked) {
+        cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      }
+      else {
+        initializer(cy);
+      }
     }
   });
 
@@ -357,7 +362,12 @@ function onLoaded() {
           return false;
         }
       });
-      initailizer(cy);
+      if (document.getElementById("cbk-run-layout3").checked) {
+        cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      }
+      else {
+        initializer(cy);
+      }
     }
   });
 
@@ -379,22 +389,22 @@ function onLoaded() {
     instance.hide(cy.elements(":selected"));
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
   document.getElementById("showHiddenNeighbors").addEventListener("click", () => {
     let selectedNodes = cy.nodes(':selected');
-    instance.show(selectedNodes.union(selectedNodes.descendants().closedNeighborhood()));
+    instance.show(selectedNodes.union(selectedNodes.descendants()).closedNeighborhood());
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });
 
@@ -402,10 +412,10 @@ function onLoaded() {
     instance.showAll();
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initailizer(cy) } }).run();
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
     else {
-      initailizer(cy);
+      initializer(cy);
     }
   });  
 }

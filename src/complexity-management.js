@@ -142,6 +142,46 @@ export function complexityManagement(cy) {
     return new Set([...setA].filter(element => !setB.has(element)));
   }
 
+  function actOnInvisible(eleIDList, cy) {
+    // Collect cy elements to be removed
+    let elesToRemove = cy.collection();
+    eleIDList.forEach((id) => {
+      elesToRemove.merge(cy.getElementById(id));
+    });
+
+    // Close remove event temporarily because this is not an actual topology change, but a change because of cmgm
+    cy.off('remove', actOnRemove);
+
+    // Remove elements from cy graph and add them to the scratchpad
+    let removedEles = cy.remove(elesToRemove);
+    removedEles.forEach((ele) => {
+      cy.scratch('cyComplexityManagement').removedEles.set(ele.id(), ele);
+    });
+
+    // Activate remove event again
+    cy.on('remove', actOnRemove);
+  }
+
+  function actOnVisible(eleIDList, cy) {
+    // Collect cy elements to be added
+    let elesToAdd = cy.collection();
+    eleIDList.forEach((id) => {
+      elesToAdd.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+    });
+
+    // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
+    cy.off('add', actOnAdd);
+
+    // Add elements from cy graph and remove them from the scratchpad
+    let addedEles = cy.add(elesToAdd);
+    addedEles.forEach((ele) => {
+      cy.scratch('cyComplexityManagement').removedEles.delete(ele.id());
+    });
+
+    // Activate remove event again
+    cy.on('add', actOnAdd);
+  }  
+
   function updateFilteredElements() {
     let filterRuleFunc = getFilterRule();
     // Keeps IDs of the new filtered elements that should be filtered based on applying filter rule
@@ -192,7 +232,7 @@ export function complexityManagement(cy) {
     });
 
     diffToUnfilter.forEach((id) => {
-      if (cy.getElementById(id).isNode()) {
+      if (cy.scratch('cyComplexityManagement').removedEles.get(id).isNode()) {
         nodeIDListToUnfilter.push(id);
       }
       else {
@@ -201,10 +241,14 @@ export function complexityManagement(cy) {
     });
 
     // Filter toBeFiltered elements
-    compMgrInstance.filter(nodeIDListToFilter, edgeIDListToFilter);
+    let IDsToRemove = compMgrInstance.filter(nodeIDListToFilter, edgeIDListToFilter);
 
     // Unfilter toBeUnfiltered elements
-    compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter);
+    let IDsToAdd = compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter);
+
+    actOnInvisible(IDsToRemove, cy);
+
+    actOnVisible(IDsToAdd, cy);
   }
 
   // API to be returned
@@ -234,7 +278,9 @@ export function complexityManagement(cy) {
       }
     });
 
-    compMgrInstance.hide(nodeIDListToHide, edgeIDListToHide);
+    let IDsToRemove = compMgrInstance.hide(nodeIDListToHide, edgeIDListToHide);
+
+    actOnInvisible(IDsToRemove, cy);
   };
 
   api.show = (eles) => {

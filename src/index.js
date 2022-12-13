@@ -17,7 +17,7 @@ export default function register(cytoscape) {	// register with cytoscape.js
       let api = complexityManagement(cy);
 
       // Keeps the temporarily removed elements (because of the complexity management operations)
-      let tempRemovedEles = new Set();
+      let tempRemovedEles = new Map();
 
       setScratch(cy, 'options', options);
       setScratch(cy, 'api', api);
