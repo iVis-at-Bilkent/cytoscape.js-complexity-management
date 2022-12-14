@@ -164,16 +164,23 @@ export function complexityManagement(cy) {
 
   function actOnVisible(eleIDList, cy) {
     // Collect cy elements to be added
-    let elesToAdd = cy.collection();
+    let nodesToAdd = cy.collection();
+    let edgesToAdd = cy.collection();
     eleIDList.forEach((id) => {
-      elesToAdd.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+      let element = cy.scratch('cyComplexityManagement').removedEles.get(id);
+      if (element.isNode()) {
+        nodesToAdd.merge(element);
+      }
+      else {
+        edgesToAdd.merge(element);
+      }
     });
 
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
     cy.off('add', actOnAdd);
 
     // Add elements from cy graph and remove them from the scratchpad
-    let addedEles = cy.add(elesToAdd);
+    let addedEles = cy.add(nodesToAdd.merge(edgesToAdd));
     addedEles.forEach((ele) => {
       cy.scratch('cyComplexityManagement').removedEles.delete(ele.id());
     });
@@ -223,7 +230,8 @@ export function complexityManagement(cy) {
     let edgeIDListToUnfilter = [];
 
     diffToFilter.forEach((id) => {
-      if (cy.getElementById(id).isNode()) {
+      if ((cy.getElementById(id).length > 0 && cy.getElementById(id).isNode()) || 
+          (cy.scratch('cyComplexityManagement').removedEles.has(id) && cy.scratch('cyComplexityManagement').removedEles.get(id).isNode())) {
         nodeIDListToFilter.push(id);
       }
       else {
@@ -296,7 +304,9 @@ export function complexityManagement(cy) {
       }
     });
 
-    compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+    let IDsToAdd = compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+
+    actOnVisible(IDsToAdd, cy);
   };
 
   api.showAll = () => {

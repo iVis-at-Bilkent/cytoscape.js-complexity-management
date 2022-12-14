@@ -140,14 +140,23 @@ function onLoaded() {
     cyVisible.fit(cyVisible.elements(), 30);
 
     let nodesToAddInvisible = [];
+    let nodePosInBothCyAndInvisible = [];
     instance.getCompMgrInstance().invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
-      nodesToAddInvisible.push({ data: { id: nodeItem.ID, label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(c)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }, position: !cy.getElementById(nodeItem.ID).isParent() ? cy.getElementById(nodeItem.ID).position() : null });
+      nodesToAddInvisible.push({ data: { id: nodeItem.ID, label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(c)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
     });
     cyInvisible.add(nodesToAddInvisible);
     instance.getCompMgrInstance().invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
       cyInvisible.add({ data: { id: edgeItem.ID, label: (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
     });
-    cyInvisible.fit(cyInvisible.elements(), 30);
+    cyInvisible.nodes().forEach((node) => {
+      let cyNode = cy.getElementById(node.id());
+      if(cyNode.length > 0 && !node.isParent()) {
+        nodePosInBothCyAndInvisible.push({nodeId: cyNode.id(), position: cyNode.position()});
+      }
+    });
+    cyInvisible.layout({name: 'fcose', animate: false, fixedNodeConstraint: nodePosInBothCyAndInvisible}).run();
+
+    //cyInvisible.fit(cyInvisible.elements(), 30);
   }
 
   document.getElementById("addNodeToSelected").addEventListener("click", () => {

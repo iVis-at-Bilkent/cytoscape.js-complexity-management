@@ -878,6 +878,8 @@
           nodeToFilterInvisible.isVisible = false;
         }
       });
+      edgeIDListPostProcess = new Set(edgeIDListPostProcess);
+      edgeIDListPostProcess = [...edgeIDListPostProcess];
       return edgeIDListPostProcess.concat(nodeIDListPostProcess);
     }
     static unfilter(nodeIDList, edgeIDList, visibleGM, invisibleGM) {
@@ -932,6 +934,8 @@
           edgeIDListPostProcess.push(edgeToUnfilter.ID);
         }
       });
+      edgeIDListPostProcess = new Set(edgeIDListPostProcess);
+      edgeIDListPostProcess = [...edgeIDListPostProcess];
       return nodeIDListPostProcess.concat(edgeIDListPostProcess);
     }
     static makeDescendantNodesVisible(nodeToUnfilter, visibleGM, invisibleGM) {
@@ -963,7 +967,9 @@
         });
       }
       nodeToUnfilter.edges.forEach(edge => {
-        descendants.edges.add(edge.ID);
+        if (edge.isFiltered == false && edge.isHidden == false && edge.source.isVisible && edge.target.isVisible) {
+          descendants.edges.add(edge.ID);
+        }
       });
       return descendants;
     }
@@ -1057,9 +1063,13 @@
           nodeToHideInvisible.isVisible = false;
         }
       });
+      edgeIDListPostProcess = new Set(edgeIDListPostProcess);
+      edgeIDListPostProcess = [...edgeIDListPostProcess];
       return edgeIDListPostProcess.concat(nodeIDListPostProcess);
     }
     static show(nodeIDList, edgeIDList, visibleGM, invisibleGM) {
+      let nodeIDListPostProcess = [];
+      let edgeIDListPostProcess = [];
       nodeIDList.forEach(nodeID => {
         if (!visibleGM.nodesMap.get(nodeID)) {
           let nodeToShow = invisibleGM.nodesMap.get(nodeID);
@@ -1084,7 +1094,9 @@
           }
           if (canNodeToShowBeVisible) {
             Auxiliary.moveNodeToVisible(nodeToShow, visibleGM, invisibleGM);
-            FilterUnfilter.makeDescendantNodesVisible(nodeToShow, visibleGM, invisibleGM);
+            let descendants = FilterUnfilter.makeDescendantNodesVisible(nodeToShow, visibleGM, invisibleGM);
+            nodeIDListPostProcess = [...nodeIDListPostProcess, ...descendants.simpleNodes, ...descendants.compoundNodes];
+            edgeIDListPostProcess = [...edgeIDListPostProcess, ...descendants.edges];
           }
         }
       });
@@ -1106,9 +1118,13 @@
           });
           if (!found && edgeToShow.isFiltered == false && edgeToShow.source.isVisible && edgeToShow.target.isVisible) {
             Auxiliary.moveEdgeToVisible(edgeToShow, visibleGM, invisibleGM);
+            edgeIDListPostProcess.push(edgeToShow.ID);
           }
         }
       });
+      edgeIDListPostProcess = new Set(edgeIDListPostProcess);
+      edgeIDListPostProcess = [...edgeIDListPostProcess];
+      return nodeIDListPostProcess.concat(edgeIDListPostProcess);
     }
     static showAll(visibleGM, invisibleGM) {
       let hiddenNodeIDList = [];
@@ -1123,7 +1139,7 @@
           hiddenEdgeIDList.push(edge.ID);
         }
       });
-      this.show(hiddenNodeIDList, hiddenEdgeIDList, visibleGM, invisibleGM);
+      return this.show(hiddenNodeIDList, hiddenEdgeIDList, visibleGM, invisibleGM);
     }
   }
   class Topology {
@@ -1464,12 +1480,12 @@
     show(nodeIDList, edgeIDList) {
       let visibleGM = this.#visibleGraphManager;
       let invisibleGM = this.#invisibleGraphManager;
-      HideShow.show(nodeIDList, edgeIDList, visibleGM, invisibleGM);
+      return HideShow.show(nodeIDList, edgeIDList, visibleGM, invisibleGM);
     }
     showAll() {
       let visibleGM = this.#visibleGraphManager;
       let invisibleGM = this.#invisibleGraphManager;
-      HideShow.showAll(visibleGM, invisibleGM);
+      return HideShow.showAll(visibleGM, invisibleGM);
     }
 
     // expand/collapse methods
@@ -1679,16 +1695,22 @@
     }
     function actOnVisible(eleIDList, cy) {
       // Collect cy elements to be added
-      var elesToAdd = cy.collection();
+      var nodesToAdd = cy.collection();
+      var edgesToAdd = cy.collection();
       eleIDList.forEach(function (id) {
-        elesToAdd.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+        var element = cy.scratch('cyComplexityManagement').removedEles.get(id);
+        if (element.isNode()) {
+          nodesToAdd.merge(element);
+        } else {
+          edgesToAdd.merge(element);
+        }
       });
 
       // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
       cy.off('add', actOnAdd);
 
       // Add elements from cy graph and remove them from the scratchpad
-      var addedEles = cy.add(elesToAdd);
+      var addedEles = cy.add(nodesToAdd.merge(edgesToAdd));
       addedEles.forEach(function (ele) {
         cy.scratch('cyComplexityManagement').removedEles.delete(ele.id());
       });
@@ -1733,7 +1755,7 @@
       var nodeIDListToUnfilter = [];
       var edgeIDListToUnfilter = [];
       diffToFilter.forEach(function (id) {
-        if (cy.getElementById(id).isNode()) {
+        if (cy.getElementById(id).length > 0 && cy.getElementById(id).isNode() || cy.scratch('cyComplexityManagement').removedEles.has(id) && cy.scratch('cyComplexityManagement').removedEles.get(id).isNode()) {
           nodeIDListToFilter.push(id);
         } else {
           edgeIDListToFilter.push(id);
@@ -1790,7 +1812,8 @@
           edgeIDListToShow.push(ele.id());
         }
       });
-      compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+      var IDsToAdd = compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+      actOnVisible(IDsToAdd, cy);
     };
     api.showAll = function () {
       compMgrInstance.showAll();
