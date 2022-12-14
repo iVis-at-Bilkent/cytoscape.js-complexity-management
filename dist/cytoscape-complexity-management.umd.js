@@ -961,7 +961,11 @@
                 descendants.simpleNodes.push(descendantNode.ID);
               }
               let nodeEdges = descendantNode.edges;
-              nodeEdges.forEach(item => descendants['edges'].add(item.ID));
+              nodeEdges.forEach(item => {
+                if (item.isFiltered == false && item.isHidden == false && item.source.isVisible && item.target.isVisible) {
+                  descendants['edges'].add(item.ID);
+                }
+              });
             }
           }
         });
@@ -1097,6 +1101,7 @@
             let descendants = FilterUnfilter.makeDescendantNodesVisible(nodeToShow, visibleGM, invisibleGM);
             nodeIDListPostProcess = [...nodeIDListPostProcess, ...descendants.simpleNodes, ...descendants.compoundNodes];
             edgeIDListPostProcess = [...edgeIDListPostProcess, ...descendants.edges];
+            nodeIDListPostProcess.push(nodeToShow.ID);
           }
         }
       });
@@ -1816,7 +1821,8 @@
       actOnVisible(IDsToAdd, cy);
     };
     api.showAll = function () {
-      compMgrInstance.showAll();
+      var IDsToAdd = compMgrInstance.showAll();
+      actOnVisible(IDsToAdd, cy);
     };
     return api;
   }

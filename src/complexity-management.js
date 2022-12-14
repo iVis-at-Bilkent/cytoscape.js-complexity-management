@@ -310,7 +310,9 @@ export function complexityManagement(cy) {
   };
 
   api.showAll = () => {
-    compMgrInstance.showAll();
+    let IDsToAdd = compMgrInstance.showAll();
+
+    actOnVisible(IDsToAdd, cy);
   }
 
   return api;

@@ -300,7 +300,8 @@ function complexityManagement(cy) {
     actOnVisible(IDsToAdd, cy);
   };
   api.showAll = function () {
-    compMgrInstance.showAll();
+    var IDsToAdd = compMgrInstance.showAll();
+    actOnVisible(IDsToAdd, cy);
   };
   return api;
 }
