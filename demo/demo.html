@@ -180,7 +180,8 @@
             <div id="min-weight-edge"></div>
             <div id="max-weight-edge"></div>
           </div>
-          <div class="accordion-body d-flex flex-wrap justify-content-center">
+          <hr>
+          <div class="accordion-body d-flex flex-wrap justify-content-center">            
             <button type="button" id="hideSelected" class="btn btn-secondary m-1" type="button" 
             title="Hides selected elements from the graph" aria-expanded="false">
             Hide selected
@@ -193,6 +194,49 @@
             title="Shows all elements in the graph" aria-expanded="false">
             Show all
             </button>
+          </div>
+          <hr>
+          <div class="accordion-body d-flex flex-wrap justify-content-center">            
+            <button type="button" id="collapseSelectedNodes" class="btn btn-secondary m-1" type="button" 
+            title="Collapses selected compound nodes recursively" aria-expanded="false">
+            Collapse selected nodes
+            </button>
+            <button type="button" id="expandSelectedNodes" class="btn btn-secondary m-1" type="button" 
+            title="Expands selected nodes recursively" aria-expanded="false">
+            Expand selected nodes
+            </button>
+            <button type="button" id="collapseAllNodes" class="btn btn-secondary m-1" type="button" 
+            title="Collapses all compound nodes recursively" aria-expanded="false">
+            Collapse all nodes
+            </button>
+            <button type="button" id="expandAllNodes" class="btn btn-secondary m-1" type="button" 
+            title="Expands all nodes recursively" aria-expanded="false">
+            Expand all nodes
+            </button>
+            <button type="button" id="collapseSelectedEdges" class="btn btn-secondary m-1" type="button" 
+            title="Collapses selected edges" aria-expanded="false">
+            Collapse selected edges
+            </button>
+            <button type="button" id="expandSelectedEdges" class="btn btn-secondary m-1" type="button" 
+            title="Expands selected edges" aria-expanded="false">
+            Expand selected edges
+            </button>
+            <button type="button" id="collapseEdgesBetweenNodes" class="btn btn-secondary m-1" type="button" 
+            title="Collapses edges between selected nodes" aria-expanded="false">
+            Collapse edges btw selected nodes
+            </button>
+            <button type="button" id="expandEdgesBetweenNodes" class="btn btn-secondary m-1" type="button" 
+            title="Expands edges between selected nodes" aria-expanded="false">
+            Expand edges btw selected nodes
+            </button>
+            <button type="button" id="collapseAllEdges" class="btn btn-secondary m-1" type="button" 
+            title="Collapses all edges" aria-expanded="false">
+            Collapse all edges
+            </button>
+            <button type="button" id="expandAllEdges" class="btn btn-secondary m-1" type="button" 
+            title="Expands all edges recursively" aria-expanded="false">
+            Expand all edges
+            </button>
             <div class="form-check m-1">
               <input class="form-check-input" type="checkbox" value="" id="cbk-run-layout3" checked>
               <label class="form-check-label" for="cbk-run-layout">
@@ -200,6 +244,7 @@
               </label>
             </div>
           </div>
+          <hr>
         </div>
       </div>
     </div>
