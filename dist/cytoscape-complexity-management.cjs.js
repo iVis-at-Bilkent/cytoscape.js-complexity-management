@@ -275,6 +275,21 @@ function complexityManagement(cy) {
     // Update filtered elements based on the new filter rule
     updateFilteredElements();
   };
+  api.getNeighbors = function (nodes) {
+    var neighbors = cy.collection();
+    nodes.forEach(function (node) {
+      var neighborhood = compMgrInstance.getNeighborhoodElements(node.id());
+      neighborhood.nodes.forEach(function (id) {
+        var ele = cy.getElementById(id);
+        if (ele.length > 0) {
+          neighbors.merge(ele);
+        } else {
+          neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+        }
+      });
+    });
+    return neighbors;
+  };
   api.hide = function (eles) {
     var nodeIDListToHide = [];
     var edgeIDListToHide = [];
@@ -286,6 +301,8 @@ function complexityManagement(cy) {
       }
     });
     var IDsToRemove = compMgrInstance.hide(nodeIDListToHide, edgeIDListToHide);
+
+    // Remove required elements from cy instance
     actOnInvisible(IDsToRemove, cy);
   };
   api.show = function (eles) {
@@ -299,10 +316,14 @@ function complexityManagement(cy) {
       }
     });
     var IDsToAdd = compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+
+    // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
   };
   api.showAll = function () {
     var IDsToAdd = compMgrInstance.showAll();
+
+    // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
   };
   return api;

@@ -187,7 +187,7 @@ export function complexityManagement(cy) {
 
     // Activate remove event again
     cy.on('add', actOnAdd);
-  }  
+  }
 
   function updateFilteredElements() {
     let filterRuleFunc = getFilterRule();
@@ -273,6 +273,24 @@ export function complexityManagement(cy) {
     updateFilteredElements();
   };
 
+  api.getNeighbors = (nodes) => {
+    let neighbors = cy.collection();
+    nodes.forEach((node) => {
+      let neighborhood = compMgrInstance.getNeighborhoodElements(node.id());
+      neighborhood.nodes.forEach((id) => {
+        let ele = cy.getElementById(id);
+        if(ele.length > 0) {
+          neighbors.merge(ele);
+        }
+        else {
+          neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+        }
+      });
+    });
+
+    return neighbors;
+  }
+
   api.hide = (eles) => {
     let nodeIDListToHide = [];
     let edgeIDListToHide = [];
@@ -288,6 +306,7 @@ export function complexityManagement(cy) {
 
     let IDsToRemove = compMgrInstance.hide(nodeIDListToHide, edgeIDListToHide);
 
+    // Remove required elements from cy instance
     actOnInvisible(IDsToRemove, cy);
   };
 
@@ -306,12 +325,14 @@ export function complexityManagement(cy) {
 
     let IDsToAdd = compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
 
+    // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
   };
 
   api.showAll = () => {
     let IDsToAdd = compMgrInstance.showAll();
 
+    // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
   }
 

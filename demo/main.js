@@ -407,7 +407,8 @@ function onLoaded() {
 
   document.getElementById("showHiddenNeighbors").addEventListener("click", () => {
     let selectedNodes = cy.nodes(':selected');
-    instance.show(selectedNodes.union(selectedNodes.descendants()).closedNeighborhood());
+    let neighbors = instance.getNeighbors(selectedNodes);
+    instance.show(neighbors);
 
     if (document.getElementById("cbk-run-layout3").checked) {
       cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
