@@ -334,7 +334,27 @@ export function complexityManagement(cy) {
 
     // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
-  }
+  };
+
+  api.collapseNodes = (nodes, isRecursive = true) => {
+    let nodeIDList = [];
+
+    nodes.forEach((node) => {
+      nodeIDList.push(node.id());
+    });
+
+    compMgrInstance.collapseNodes(nodeIDList, false);
+  };
+
+  api.expandNodes = (nodes, isRecursive = true) => {
+    let nodeIDList = [];
+
+    nodes.forEach((node) => {
+      nodeIDList.push(node.id());
+    });
+
+    compMgrInstance.expandNodes(nodeIDList, isRecursive);
+  };
 
   return api;
 }

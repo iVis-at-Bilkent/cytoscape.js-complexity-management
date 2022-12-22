@@ -324,6 +324,21 @@ function complexityManagement(cy) {
     // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
   };
+  api.collapseNodes = function (nodes) {
+    var nodeIDList = [];
+    nodes.forEach(function (node) {
+      nodeIDList.push(node.id());
+    });
+    compMgrInstance.collapseNodes(nodeIDList, false);
+  };
+  api.expandNodes = function (nodes) {
+    var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    var nodeIDList = [];
+    nodes.forEach(function (node) {
+      nodeIDList.push(node.id());
+    });
+    compMgrInstance.expandNodes(nodeIDList, isRecursive);
+  };
   return api;
 }
 

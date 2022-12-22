@@ -142,7 +142,7 @@ function onLoaded() {
     let nodesToAddInvisible = [];
     let nodePosInBothCyAndInvisible = [];
     instance.getCompMgrInstance().invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
-      nodesToAddInvisible.push({ data: { id: nodeItem.ID, label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(c)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
+      nodesToAddInvisible.push({ data: { id: nodeItem.ID, label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
     });
     cyInvisible.add(nodesToAddInvisible);
     instance.getCompMgrInstance().invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
@@ -427,7 +427,29 @@ function onLoaded() {
     else {
       initializer(cy);
     }
-  });  
+  });
+
+  document.getElementById("collapseSelectedNodes").addEventListener("click", () => {
+    instance.collapseNodes(cy.nodes(':selected'));
+
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
+
+  document.getElementById("expandSelectedNodes").addEventListener("click", () => {
+    instance.expandNodes(cy.nodes(':selected'));
+
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 }
 
   function getRandomNodes() {
