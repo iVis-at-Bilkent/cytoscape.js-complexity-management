@@ -343,7 +343,7 @@ export function complexityManagement(cy) {
       nodeIDList.push(node.id());
     });
 
-    compMgrInstance.collapseNodes(nodeIDList, false);
+    compMgrInstance.collapseNodes(nodeIDList, isRecursive);
   };
 
   api.expandNodes = (nodes, isRecursive = true) => {
@@ -355,6 +355,14 @@ export function complexityManagement(cy) {
 
     compMgrInstance.expandNodes(nodeIDList, isRecursive);
   };
+
+  api.collapseAllNodes = () => {
+    compMgrInstance.collapseAllNodes();
+  };
+
+  api.expandAllNodes = () => {
+    compMgrInstance.expandAllNodes();
+  };  
 
   return api;
 }

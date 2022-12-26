@@ -450,6 +450,28 @@ function onLoaded() {
       initializer(cy);
     }
   });
+
+  document.getElementById("collapseAllNodes").addEventListener("click", () => {
+    instance.collapseAllNodes();
+
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
+
+  document.getElementById("expandAllNodes").addEventListener("click", () => {
+    instance.expandAllNodes();
+
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });  
 }
 
   function getRandomNodes() {

@@ -325,11 +325,12 @@ function complexityManagement(cy) {
     actOnVisible(IDsToAdd, cy);
   };
   api.collapseNodes = function (nodes) {
+    var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
     var nodeIDList = [];
     nodes.forEach(function (node) {
       nodeIDList.push(node.id());
     });
-    compMgrInstance.collapseNodes(nodeIDList, false);
+    compMgrInstance.collapseNodes(nodeIDList, isRecursive);
   };
   api.expandNodes = function (nodes) {
     var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -338,6 +339,12 @@ function complexityManagement(cy) {
       nodeIDList.push(node.id());
     });
     compMgrInstance.expandNodes(nodeIDList, isRecursive);
+  };
+  api.collapseAllNodes = function () {
+    compMgrInstance.collapseAllNodes();
+  };
+  api.expandAllNodes = function () {
+    compMgrInstance.expandAllNodes();
   };
   return api;
 }
