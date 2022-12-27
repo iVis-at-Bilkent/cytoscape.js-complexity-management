@@ -273,18 +273,16 @@ export function complexityManagement(cy) {
     updateFilteredElements();
   };
 
-  api.getNeighbors = (nodes) => {
+  api.getHiddenNeighbors = (nodes) => {
     let neighbors = cy.collection();
     nodes.forEach((node) => {
-      let neighborhood = compMgrInstance.getNeighborhoodElements(node.id());
+      let neighborhood = compMgrInstance.getHiddenNeighbors(node.id());
       neighborhood.nodes.forEach((id) => {
-        let ele = cy.getElementById(id);
-        if(ele.length > 0) {
-          neighbors.merge(ele);
-        }
-        else {
-          neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
-        }
+        neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+      });
+
+      neighborhood.edges.forEach((id) => {
+        neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
       });
     });
 

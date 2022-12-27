@@ -982,21 +982,103 @@
       }
       visibleGM.edgesMap.set(newEdge.ID, newEdge);
     }
-    static getNeighborhoodElements(nodeID, invisibleGM) {
+    static getTargetNeighborhoodElements(nodeID, invisibleGM) {
       let node = invisibleGM.nodesMap.get(nodeID);
+      //get zero distance Neighborhood
+      let neighborhood = this.getZeroDistanceNeighbors(node, invisibleGM);
       let neighborElements = {
         nodes: [],
         edges: []
       };
-      node.edges.forEach(edge => {
-        if (edge.source.ID == nodeID) {
-          neighborElements['nodes'].push(edge.target.ID);
-        } else {
-          neighborElements['nodes'].push(edge.source.ID);
-        }
-        neighborElements['edges'].push(edge.ID);
+      //for each 0 distance neighborhood node get 1 distance nodes and edges
+      neighborhood['nodes'].forEach(neighborNodeID => {
+        let neighborNode = invisibleGM.nodesMap.get(neighborNodeID);
+        neighborNode.edges.forEach(edge => {
+          if (edge.source.ID == neighborNode.ID) {
+            neighborElements['nodes'].push(edge.target.ID);
+          } else {
+            neighborElements['nodes'].push(edge.source.ID);
+          }
+          neighborElements['edges'].push(edge.ID);
+        });
       });
-      return neighborElements;
+      // append elements from 1 distance to orignal dictionary
+      neighborElements['nodes'] = [...new Set([...neighborElements['nodes']])];
+      neighborElements['edges'] = [...new Set([...neighborElements['edges']])];
+
+      //for each 1 distance node, calculate individual zero distance neighborhood and append it to the orignal dictionary
+      neighborElements['nodes'].forEach(neighborElementID => {
+        let targetNeighborNode = invisibleGM.nodesMap.get(neighborElementID);
+        let targetNeighborhood = this.getZeroDistanceNeighbors(targetNeighborNode, invisibleGM);
+        neighborhood['nodes'] = [...new Set([...neighborhood['nodes'], ...targetNeighborhood['nodes']])];
+        neighborhood['edges'] = [...new Set([...neighborhood['edges'], ...targetNeighborhood['edges']])];
+      });
+
+      //remove duplications
+      neighborhood['nodes'] = [...new Set([...neighborhood['nodes'], ...neighborElements['nodes']])];
+      neighborhood['edges'] = [...new Set([...neighborhood['edges'], ...neighborElements['edges']])];
+
+      //remove all visible nodes
+      neighborhood['nodes'] = neighborhood['nodes'].filter(itemID => {
+        let itemNode = invisibleGM.nodesMap.get(itemID);
+        return !itemNode.isVisible;
+      });
+
+      //remove all visible nodes
+      neighborhood['edges'] = neighborhood['edges'].filter(itemID => {
+        let itemEdge = invisibleGM.edgesMap.get(itemID);
+        return !itemEdge.isVisible;
+      });
+      return neighborhood;
+    }
+    static getZeroDistanceNeighbors(node, invisibleGM) {
+      let neighbors = {
+        nodes: [],
+        edges: []
+      };
+      let descendantNeighborhood = this.getDescendantNeighbors(node);
+      let predecessorsNeighborhood = this.getPredecessorNeighbors(node, invisibleGM);
+      neighbors['nodes'] = [...new Set([...descendantNeighborhood['nodes'], ...predecessorsNeighborhood['nodes']])];
+      neighbors['edges'] = [...new Set([...descendantNeighborhood['edges'], ...predecessorsNeighborhood['edges']])];
+      return neighbors;
+    }
+    static getDescendantNeighbors(node) {
+      let neighbors = {
+        nodes: [],
+        edges: []
+      };
+      if (node.child) {
+        let children = node.child.nodes;
+        children.forEach(childNode => {
+          neighbors.nodes.push(childNode.ID);
+          childNode.edges.forEach(element => {
+            neighbors.edges.push(element.ID);
+          });
+          let nodesReturned = this.getDescendantNeighbors(childNode);
+          neighbors['nodes'] = [...neighbors['nodes'], ...nodesReturned['nodes']];
+          neighbors['edges'] = [...neighbors['edges'], ...nodesReturned['edges']];
+        });
+      }
+      return neighbors;
+    }
+    static getPredecessorNeighbors(node, invisibleGM) {
+      let neighbors = {
+        nodes: [],
+        edges: []
+      };
+      if (node.owner != invisibleGM.rootGraph) {
+        let predecessors = node.owner.nodes;
+        predecessors.forEach(pNode => {
+          neighbors['nodes'].push(pNode.ID);
+          pNode.edges.forEach(element => {
+            neighbors.edges.push(element.ID);
+          });
+        });
+        let nodesReturned = this.getPredecessorNeighbors(node.owner.parent, invisibleGM);
+        neighbors['nodes'] = [...neighbors['nodes'], ...nodesReturned['nodes']];
+        neighbors['edges'] = [...neighbors['edges'], ...nodesReturned['edges']];
+      }
+      return neighbors;
     }
   }
   class Topology {
@@ -1496,7 +1578,10 @@
     static expandNodes(nodeIDList, isRecursive, visibleGM, invisibleGM) {
       nodeIDList.forEach(nodeID => {
         let nodeInVisible = visibleGM.nodesMap.get(nodeID);
-        this.#expandNode(nodeInVisible, isRecursive, visibleGM, invisibleGM);
+        let nodeInInvisible = invisibleGM.nodesMap.get(nodeID);
+        if (nodeInInvisible.child && nodeInInvisible.isCollapsed) {
+          this.#expandNode(nodeInVisible, isRecursive, visibleGM, invisibleGM);
+        }
       });
     }
     static collapseAllNodes(visibleGM, invisibleGM) {
@@ -1894,9 +1979,9 @@
       let invisibleGM = this.#invisibleGraphManager;
       ExpandCollapse.expandAllEdges(visibleGM, invisibleGM);
     }
-    getNeighborhoodElements(nodeID) {
+    getHiddenNeighbors(nodeID) {
       let invisibleGM = this.#invisibleGraphManager;
-      return Auxiliary.getNeighborhoodElements(nodeID, invisibleGM);
+      return Auxiliary.getTargetNeighborhoodElements(nodeID, invisibleGM);
     }
   }
 
@@ -2147,17 +2232,15 @@
       // Update filtered elements based on the new filter rule
       updateFilteredElements();
     };
-    api.getNeighbors = function (nodes) {
+    api.getHiddenNeighbors = function (nodes) {
       var neighbors = cy.collection();
       nodes.forEach(function (node) {
-        var neighborhood = compMgrInstance.getNeighborhoodElements(node.id());
+        var neighborhood = compMgrInstance.getHiddenNeighbors(node.id());
         neighborhood.nodes.forEach(function (id) {
-          var ele = cy.getElementById(id);
-          if (ele.length > 0) {
-            neighbors.merge(ele);
-          } else {
-            neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
-          }
+          neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+        });
+        neighborhood.edges.forEach(function (id) {
+          neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
         });
       });
       return neighbors;

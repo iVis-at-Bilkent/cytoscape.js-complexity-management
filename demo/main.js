@@ -407,7 +407,7 @@ function onLoaded() {
 
   document.getElementById("showHiddenNeighbors").addEventListener("click", () => {
     let selectedNodes = cy.nodes(':selected');
-    let neighbors = instance.getNeighbors(selectedNodes);
+    let neighbors = instance.getHiddenNeighbors(selectedNodes);
     instance.show(neighbors);
 
     if (document.getElementById("cbk-run-layout3").checked) {

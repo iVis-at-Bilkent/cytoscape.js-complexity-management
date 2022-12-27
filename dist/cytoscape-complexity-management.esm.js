@@ -273,17 +273,15 @@ function complexityManagement(cy) {
     // Update filtered elements based on the new filter rule
     updateFilteredElements();
   };
-  api.getNeighbors = function (nodes) {
+  api.getHiddenNeighbors = function (nodes) {
     var neighbors = cy.collection();
     nodes.forEach(function (node) {
-      var neighborhood = compMgrInstance.getNeighborhoodElements(node.id());
+      var neighborhood = compMgrInstance.getHiddenNeighbors(node.id());
       neighborhood.nodes.forEach(function (id) {
-        var ele = cy.getElementById(id);
-        if (ele.length > 0) {
-          neighbors.merge(ele);
-        } else {
-          neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
-        }
+        neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+      });
+      neighborhood.edges.forEach(function (id) {
+        neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
       });
     });
     return neighbors;
