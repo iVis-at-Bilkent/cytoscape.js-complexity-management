@@ -330,7 +330,20 @@ function complexityManagement(cy) {
     nodes.forEach(function (node) {
       nodeIDList.push(node.id());
     });
-    compMgrInstance.collapseNodes(nodeIDList, isRecursive);
+    var IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
+    var IDsToRemove = [];
+    IDsToRemoveTemp.nodeIDListForInvisible.forEach(function (id) {
+      IDsToRemove.push(id);
+    });
+    IDsToRemoveTemp.edgeIDListForInvisible.forEach(function (id) {
+      IDsToRemove.push(id);
+    });
+    IDsToRemoveTemp.metaEdgeIDListForVisible.forEach(function (id) {
+      IDsToRemove.push(id);
+    });
+
+    // Remove required elements from cy instance
+    actOnInvisible(IDsToRemove, cy);
   };
   api.expandNodes = function (nodes) {
     var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;

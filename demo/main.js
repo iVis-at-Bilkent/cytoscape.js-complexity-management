@@ -130,22 +130,22 @@ function onLoaded() {
 
     let nodesToAddVisible = [];
 
-    instance.getCompMgrInstance().visibleGraphManager.nodesMap.forEach((nodeItem, key) => {
+    instance.getCompMgrInstance('get').visibleGraphManager.nodesMap.forEach((nodeItem, key) => {
       nodesToAddVisible.push({ data: { id: nodeItem.ID, parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }, position: !cy.getElementById(nodeItem.ID).isParent() ? cy.getElementById(nodeItem.ID).position() : null });
     });
     cyVisible.add(nodesToAddVisible);
-    instance.getCompMgrInstance().visibleGraphManager.edgesMap.forEach((edgeItem, key) => {
+    instance.getCompMgrInstance('get').visibleGraphManager.edgesMap.forEach((edgeItem, key) => {
       cyVisible.add({ data: { id: edgeItem.ID, source: edgeItem.source.ID, target: edgeItem.target.ID } });
     });
     cyVisible.fit(cyVisible.elements(), 30);
 
     let nodesToAddInvisible = [];
     let nodePosInBothCyAndInvisible = [];
-    instance.getCompMgrInstance().invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
+    instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
       nodesToAddInvisible.push({ data: { id: nodeItem.ID, label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
     });
     cyInvisible.add(nodesToAddInvisible);
-    instance.getCompMgrInstance().invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
+    instance.getCompMgrInstance('get').invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
       cyInvisible.add({ data: { id: edgeItem.ID, label: (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
     });
     cyInvisible.nodes().forEach((node) => {

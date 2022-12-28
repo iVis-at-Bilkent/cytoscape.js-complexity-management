@@ -341,7 +341,24 @@ export function complexityManagement(cy) {
       nodeIDList.push(node.id());
     });
 
-    compMgrInstance.collapseNodes(nodeIDList, isRecursive);
+    let IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
+
+    let IDsToRemove = [];
+
+    IDsToRemoveTemp.nodeIDListForInvisible.forEach((id) => {
+      IDsToRemove.push(id);
+    });
+
+    IDsToRemoveTemp.edgeIDListForInvisible.forEach((id) => {
+      IDsToRemove.push(id);
+    });
+
+    IDsToRemoveTemp.metaEdgeIDListForVisible.forEach((id) => {
+      IDsToRemove.push(id);
+    });
+
+    // Remove required elements from cy instance
+    actOnInvisible(IDsToRemove, cy);
   };
 
   api.expandNodes = (nodes, isRecursive = true) => {
