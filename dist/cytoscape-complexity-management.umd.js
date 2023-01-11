@@ -1751,7 +1751,7 @@
               sourceNode = visibleGM.nodesMap.get(edgeInInvisible.source.ID);
               targetNode = visibleGM.nodesMap.get(edgeInInvisible.target.ID);
               let newEdge = new Edge(edgeInInvisible.ID, sourceNode, targetNode);
-              if (sourceNode.owner = targetNode.owner) {
+              if (sourceNode.owner == targetNode.owner) {
                 sourceNode.owner.addEdge(newEdge, sourceNode, targetNode);
               } else {
                 visibleGM.addInterGraphEdge(newEdge, sourceNode, targetNode);
