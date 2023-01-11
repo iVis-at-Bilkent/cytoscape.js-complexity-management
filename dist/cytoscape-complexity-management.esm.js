@@ -202,6 +202,23 @@ function complexityManagement(cy) {
     // Activate remove event again
     cy.on('add', actOnAdd);
   }
+  function actOnVisibleForMetaEdge(metaEdgeList, cy) {
+    // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
+    cy.off('add', actOnAdd);
+    metaEdgeList.forEach(function (metaEdgeData) {
+      cy.add({
+        group: 'edges',
+        data: {
+          id: metaEdgeData["ID"],
+          source: metaEdgeData["sourceID"],
+          target: metaEdgeData["targetID"]
+        }
+      });
+    });
+
+    // Activate remove event again
+    cy.on('add', actOnAdd);
+  }
   function updateFilteredElements() {
     var filterRuleFunc = getFilterRule();
     // Keeps IDs of the new filtered elements that should be filtered based on applying filter rule
@@ -359,9 +376,16 @@ function complexityManagement(cy) {
   };
   api.collapseEdges = function (edges) {
     var edgeIDList = [];
-    nodes.forEach(function (edge) {
+    edges.forEach(function (edge) {
       edgeIDList.push(edge.id());
     });
+    var metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
+
+    // Remove required elements from cy instance
+    actOnInvisible(edgeIDList, cy);
+
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(metaEdgeID, cy);
   };
   return api;
 }

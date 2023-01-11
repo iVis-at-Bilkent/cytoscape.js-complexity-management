@@ -723,7 +723,7 @@
      * Constructor
      * @param {Stirng} ID - ID of the meta edge 
      * @param {Node} source - source node of the meta edge 
-     * @param {*} target - target node of the meta edge
+     * @param {Node} target - target node of the meta edge
      */
     constructor(source, target, originalEdges) {
       let ID = Auxiliary.createUniqueID();
@@ -1531,17 +1531,17 @@
          visibleGM.edgesMap.delete(childEdge.ID);
        });
      });
-       visibleGM.removeGraph(node.child);
+      visibleGM.removeGraph(node.child);
      descendantNodes.forEach(node => {
        visibleGM.nodesMap.delete(node.ID)
      });
      let nodeInInvisible = invisibleGM.nodesMap.get(node.ID);
      nodeInInvisible.isCollapsed = true;
-       nodeIDListForInvisible.forEach(nodeIDInvisible => {
+      nodeIDListForInvisible.forEach(nodeIDInvisible => {
        nodeInInvisible = invisibleGM.nodesMap.get(nodeIDInvisible);
        nodeInInvisible.isVisible = false;
      });
-       edgeIDListForInvisible.forEach(edgeIDInvisible => {
+      edgeIDListForInvisible.forEach(edgeIDInvisible => {
        let edgeInInvisible = invisibleGM.edgesMap.get(edgeIDInvisible);
        edgeInInvisible.isVisible = false;
      });
@@ -1704,7 +1704,7 @@
       let firstEdge = visibleGM.edgesMap.get(edgeIDList[0]);
       let sourceNode = firstEdge.source;
       let targetNode = firstEdge.target;
-      Topology.addMetaEdge(sourceNode.ID, targetNode.ID, edgeIDList, visibleGM, invisibleGM);
+      let newMetaEdge = Topology.addMetaEdge(sourceNode.ID, targetNode.ID, edgeIDList, visibleGM, invisibleGM);
       let edgeIDListForInvisible = [];
       edgeIDList.forEach(edgeID => {
         let edge = visibleGM.edgesMap.get(edgeID);
@@ -1712,15 +1712,18 @@
           edgeIDListForInvisible.push(edgeID);
         }
         Auxiliary.removeEdgeFromGraph(edge);
+        visibleGM.edgesMap.delete(edge.ID);
       });
       edgeIDListForInvisible.forEach(edgeForInvisibleID => {
         let edgeInInvisible = invisibleGM.edgesMap.get(edgeForInvisibleID);
-        edgeInInvisible.isVisible(false);
+        edgeInInvisible.isVisible = false;
       });
-      // may be return the new meta edge.
-      // require consultation
+      return [{
+        ID: newMetaEdge.ID,
+        sourceID: newMetaEdge.source.ID,
+        targetID: newMetaEdge.target.ID
+      }];
     }
-
     static expandEdges(edgeIDList, isRecursive, visibleGM, invisibleGM) {
       edgeIDList.forEach(edgeID => {
         let metaEdge = visibleGM.metaEdgeMap.get(edgeID);
@@ -2092,7 +2095,7 @@
     collapseEdges(edgeIDList) {
       let visibleGM = this.#visibleGraphManager;
       let invisibleGM = this.#invisibleGraphManager;
-      ExpandCollapse.collapseEdges(edgeIDList, visibleGM, invisibleGM);
+      return ExpandCollapse.collapseEdges(edgeIDList, visibleGM, invisibleGM);
     }
     expandEdges(edgeIDList, isRecursive) {
       let visibleGM = this.#visibleGraphManager;
@@ -2301,6 +2304,23 @@
       // Activate remove event again
       cy.on('add', actOnAdd);
     }
+    function actOnVisibleForMetaEdge(metaEdgeList, cy) {
+      // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
+      cy.off('add', actOnAdd);
+      metaEdgeList.forEach(function (metaEdgeData) {
+        cy.add({
+          group: 'edges',
+          data: {
+            id: metaEdgeData["ID"],
+            source: metaEdgeData["sourceID"],
+            target: metaEdgeData["targetID"]
+          }
+        });
+      });
+
+      // Activate remove event again
+      cy.on('add', actOnAdd);
+    }
     function updateFilteredElements() {
       var filterRuleFunc = getFilterRule();
       // Keeps IDs of the new filtered elements that should be filtered based on applying filter rule
@@ -2458,9 +2478,16 @@
     };
     api.collapseEdges = function (edges) {
       var edgeIDList = [];
-      nodes.forEach(function (edge) {
+      edges.forEach(function (edge) {
         edgeIDList.push(edge.id());
       });
+      var metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
+
+      // Remove required elements from cy instance
+      actOnInvisible(edgeIDList, cy);
+
+      // Add required meta edges to cy instance
+      actOnVisibleForMetaEdge(metaEdgeID, cy);
     };
     return api;
   }
