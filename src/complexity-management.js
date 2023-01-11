@@ -413,7 +413,13 @@ export function complexityManagement(cy) {
       edgeIDList.push(edge.id());
     });
 
-    compMgrInstance.expandEdges(edgeIDList, isRecursive);
+    let edgesListReturned = compMgrInstance.expandEdges(edgeIDList, isRecursive);
+
+    // Remove required elements from cy instance
+    actOnInvisible(edgeIDList, cy);
+
+    // Add required meta edges to cy instance
+    actOnVisible(edgesListReturned, cy);
   };
 
   return api;

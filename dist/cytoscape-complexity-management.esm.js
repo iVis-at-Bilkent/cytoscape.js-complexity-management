@@ -393,7 +393,13 @@ function complexityManagement(cy) {
     edges.forEach(function (edge) {
       edgeIDList.push(edge.id());
     });
-    compMgrInstance.expandEdges(edgeIDList, isRecursive);
+    var edgesListReturned = compMgrInstance.expandEdges(edgeIDList, isRecursive);
+
+    // Remove required elements from cy instance
+    actOnInvisible(edgeIDList, cy);
+
+    // Add required meta edges to cy instance
+    actOnVisible(edgesListReturned, cy);
   };
   return api;
 }

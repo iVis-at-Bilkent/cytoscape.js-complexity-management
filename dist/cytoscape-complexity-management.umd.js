@@ -1743,6 +1743,7 @@
                 visibleGM.addInterGraphEdge(originalEdge, originalEdge.source, originalEdge.target);
               }
               visibleGM.edgesMap.set(originalEdge.ID, originalEdge);
+              originalEdgeIDList.push(originalEdgeID);
             }
           } else {
             let edgeInInvisible = invisibleGM.edgesMap.get(originalEdgeID);
@@ -1759,10 +1760,10 @@
               visibleGM.edgesMap.set(newEdge.ID, newEdge);
               // creating recursion to expand recursively
             }
-          }
 
+            originalEdgeIDList.push(originalEdgeID);
+          }
           visibleGM.edgeToMetaEdgeMap.delete(originalEdgeID);
-          originalEdgeIDList.push(originalEdgeID);
         });
         visibleGM.metaEdgesMap.delete(edgeID);
         visibleGM.edgesMap.delete(edgeID);
@@ -2108,7 +2109,7 @@
     expandEdges(edgeIDList, isRecursive) {
       let visibleGM = this.#visibleGraphManager;
       let invisibleGM = this.#invisibleGraphManager;
-      ExpandCollapse.expandEdges(edgeIDList, isRecursive, visibleGM, invisibleGM);
+      return ExpandCollapse.expandEdges(edgeIDList, isRecursive, visibleGM, invisibleGM);
     }
     collapseEdgesBetweenNodes(nodeIDList) {
       let visibleGM = this.#visibleGraphManager;
@@ -2503,7 +2504,13 @@
       edges.forEach(function (edge) {
         edgeIDList.push(edge.id());
       });
-      compMgrInstance.expandEdges(edgeIDList, isRecursive);
+      var edgesListReturned = compMgrInstance.expandEdges(edgeIDList, isRecursive);
+
+      // Remove required elements from cy instance
+      actOnInvisible(edgeIDList, cy);
+
+      // Add required meta edges to cy instance
+      actOnVisible(edgesListReturned, cy);
     };
     return api;
   }
