@@ -66,7 +66,8 @@
     // NodeId to NodeObject map.
     nodesMap;
     edgesMap;
-    metaEdgesList;
+    metaEdgesMap;
+    edgeToMetaEdgeMap;
     /**
      * Constructor
      * @param {ComplexityManager} owner - owner complexity manager 
@@ -82,6 +83,7 @@
       this.nodesMap = new Map();
       this.edgesMap = new Map();
       this.metaEdgesMap = new Map();
+      this.edgeToMetaEdgeMap = new Map();
       this.addRoot(); // Add root graph
     }
 
@@ -1175,6 +1177,9 @@
       if (sourceNode != undefined && targetNode != undefined) {
         metaEdge = new MetaEdge(sourceNode, targetNode, orignalEnds);
         visibleGM.metaEdgesMap.set(metaEdge.ID, metaEdge);
+        orignalEnds.forEach(edgeID => {
+          visibleGM.edgeToMetaEdgeMap.set(edgeID, metaEdge);
+        });
       }
       //if source and target owner graph is same (its an intra graph edge), then add the viible and invisible edges to the source owner
       if (sourceNode.owner === targetNode.owner) {
@@ -1678,8 +1683,7 @@
           if (childNode.child && childNode.isCollapsed) {
             descendantNodes.push(childNode.ID);
           } else if (childNode.child && !childNode.isCollapsed) {
-            descendantNodes.push(childNode.ID);
-            let nodesReturned = this.getDescendantNodes(childNode);
+            let nodesReturned = this.getTopCollapsedCompoundNodes(childNode);
             descendantNodes = [...descendantNodes, ...nodesReturned];
           }
         });
@@ -1704,14 +1708,14 @@
       let edgeIDListForInvisible = [];
       edgeIDList.forEach(edgeID => {
         let edge = visibleGM.edgesMap.get(edgeID);
-        if (edge instanceof MetaEdge) {
+        if (!(edge instanceof MetaEdge)) {
           edgeIDListForInvisible.push(edgeID);
         }
         Auxiliary.removeEdgeFromGraph(edge);
       });
       edgeIDListForInvisible.forEach(edgeForInvisibleID => {
-        invisibleGM.edgesMap(edgeForInvisibleID);
-        edgeIDListForInvisible.isVisible(false);
+        let edgeInInvisible = invisibleGM.edgesMap.get(edgeForInvisibleID);
+        edgeInInvisible.isVisible(false);
       });
       // may be return the new meta edge.
       // require consultation
@@ -2451,6 +2455,12 @@
     };
     api.expandAllNodes = function () {
       compMgrInstance.expandAllNodes();
+    };
+    api.collapseEdges = function (edges) {
+      var edgeIDList = [];
+      nodes.forEach(function (edge) {
+        edgeIDList.push(edge.id());
+      });
     };
     return api;
   }

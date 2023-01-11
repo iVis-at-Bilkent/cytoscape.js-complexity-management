@@ -379,5 +379,14 @@ export function complexityManagement(cy) {
     compMgrInstance.expandAllNodes();
   };  
 
+  api.collapseEdges = (edges) => {
+    let edgeIDList = [];
+
+    nodes.forEach((edge) => {
+      edgeIDList.push(edge.id());
+    });
+
+  }
+
   return api;
 }

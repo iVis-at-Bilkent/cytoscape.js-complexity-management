@@ -472,131 +472,159 @@ function onLoaded() {
       initializer(cy);
     }
   });  
+
+  document.getElementById("collapseSelectedEdges").addEventListener("click", () => {
+    instance.collapseEdges(cy.edges(':selected'));
+
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
+
 }
 
-  function getRandomNodes() {
-    const nodeCount = 2;
-    const averageDegree = 2;
-    const newNodes = cy.collection();
-    const currentNodes = cy.nodes();
-    const compoundNodes = cy.nodes().filter(e => e.isParent());
-    let newCompound;
-    for (let nodeId = 0; nodeId < nodeCount; nodeId++) {
-      const id = `n${window.iteration}-${nodeId}`;
-      const edgeId = `e${window.iteration}-${nodeId}`;
-      let parentID;
-      switch (Math.ceil(Math.random() * 3)) {
-        case 1: // New parent
-          if (newNodes.length === 0) {
-            let node = cy.add({group: 'nodes', data: {id: `${id}a`, name: `${id}a`, weight: Math.floor(Math.random() * 101)}});
-            node.data('label', node.data('id') + '(' + node.data('weight') + ')');
-            newNodes.merge(node);
-          }
-          if (!newCompound) {
-            const randomNewCompound = newNodes[Math.floor(Math.random() * newNodes.length)];
-            newCompound = randomNewCompound;
-          }
-          parentID = newCompound.id();
-          break;
-        case 2: // Existing parent
-          parentID = compoundNodes[Math.floor(Math.random() * compoundNodes.length)].id()
-          break;
-        case 3: // No parent
-        default:
-          break;
-      }
-      const newNode = cy.add({ group: 'nodes', data: { id, name: id, parent: parentID, weight: Math.floor(Math.random() * 101) }});
-      newNode.data('label', newNode.data('id') + '(' + newNode.data('weight') + ')');
-      newNodes.merge(newNode);
-
-      let neighborCount;
-      let selectedNodes = cy.nodes(":selected");
-      switch (Math.ceil(Math.random() * 6)) {
-        case 1:
-          if (selectedNodes.length === 0) {
-            neighborCount = 0;
-            break;
-          }
-        case 2:
-          neighborCount = 1;
-          break;
-        default:
-          neighborCount = averageDegree;
-          break;
-      }
-
-      if (neighborCount) {
-        const addDummyNodes = function(dummyNodeCount, currentNodes) {
-          let nodeToConnect = currentNodes[Math.floor(Math.random() * currentNodes.length)];
-          for (let i = 0; i < dummyNodeCount; i++) {
-                // Add necessary dummy nodes
-                const dummyID = `${id}-d${i}`;
-                const dummyNode = cy.add({ group: 'nodes', data: { id: dummyID, name: dummyID}});
-                cy.add({ group: 'edges', data: { id: `${dummyID}-e`, source: nodeToConnect.id(), target: dummyID, weight: Math.floor(Math.random() * 101)}})
-                nodeToConnect = dummyNode;
-                newNodes.merge(dummyNode)
-                availableNewNodes.merge(dummyNode)
-              }
+function getRandomNodes() {
+  const nodeCount = 2;
+  const averageDegree = 2;
+  const newNodes = cy.collection();
+  const currentNodes = cy.nodes();
+  const compoundNodes = cy.nodes().filter(e => e.isParent());
+  let newCompound;
+  for (let nodeId = 0; nodeId < nodeCount; nodeId++) {
+    const id = `n${window.iteration}-${nodeId}`;
+    const edgeId = `e${window.iteration}-${nodeId}`;
+    let parentID;
+    switch (Math.ceil(Math.random() * 3)) {
+      case 1: // New parent
+        if (newNodes.length === 0) {
+          let node = cy.add({group: 'nodes', data: {id: `${id}a`, name: `${id}a`, weight: Math.floor(Math.random() * 101)}});
+          node.data('label', node.data('id') + '(' + node.data('weight') + ')');
+          newNodes.merge(node);
         }
-        const forbiddenNodes = cy.collection();
-        forbiddenNodes.merge(newNode);
-        forbiddenNodes.merge(newNode.ancestors());
-        forbiddenNodes.merge(newNode.descendants());
-        const availableNewNodes = newNodes.difference(forbiddenNodes)
-        const availableCurrentNodes = selectedNodes.length > 0 ? selectedNodes : currentNodes.difference(forbiddenNodes)
-        const selectedNeighbors = [];
+        if (!newCompound) {
+          const randomNewCompound = newNodes[Math.floor(Math.random() * newNodes.length)];
+          newCompound = randomNewCompound;
+        }
+        parentID = newCompound.id();
+        break;
+      case 2: // Existing parent
+        parentID = compoundNodes[Math.floor(Math.random() * compoundNodes.length)].id()
+        break;
+      case 3: // No parent
+      default:
+        break;
+    }
+    const newNode = cy.add({ group: 'nodes', data: { id, name: id, parent: parentID, weight: Math.floor(Math.random() * 101) }});
+    newNode.data('label', newNode.data('id') + '(' + newNode.data('weight') + ')');
+    newNodes.merge(newNode);
 
-        const randomValue = Math.ceil(Math.random() * 10);
-        if (randomValue < 6 && selectedNodes.length === 0) {
-          const dummyNodeCount = neighborCount - availableNewNodes.length;
-          addDummyNodes(dummyNodeCount, availableCurrentNodes);
-          for (let i = 0; i < neighborCount; i++) {
-            let randomNeighbor;
-            if (i === 0) {
+    let neighborCount;
+    let selectedNodes = cy.nodes(":selected");
+    switch (Math.ceil(Math.random() * 6)) {
+      case 1:
+        if (selectedNodes.length === 0) {
+          neighborCount = 0;
+          break;
+        }
+      case 2:
+        neighborCount = 1;
+        break;
+      default:
+        neighborCount = averageDegree;
+        break;
+    }
+
+    if (neighborCount) {
+      const addDummyNodes = function(dummyNodeCount, currentNodes) {
+        let nodeToConnect = currentNodes[Math.floor(Math.random() * currentNodes.length)];
+        for (let i = 0; i < dummyNodeCount; i++) {
+              // Add necessary dummy nodes
+              const dummyID = `${id}-d${i}`;
+              const dummyNode = cy.add({ group: 'nodes', data: { id: dummyID, name: dummyID}});
+              try{
+              cy.add({ group: 'edges', data: { id: `${dummyID}-e`, source: nodeToConnect.id(), target: dummyID, weight: Math.floor(Math.random() * 101)}})
+              }catch(exp){
+
+              }
+              nodeToConnect = dummyNode;
+              newNodes.merge(dummyNode)
+              availableNewNodes.merge(dummyNode)
+            }
+      }
+      const forbiddenNodes = cy.collection();
+      forbiddenNodes.merge(newNode);
+      forbiddenNodes.merge(newNode.ancestors());
+      forbiddenNodes.merge(newNode.descendants());
+      const availableNewNodes = newNodes.difference(forbiddenNodes)
+      const availableCurrentNodes = selectedNodes.length > 0 ? selectedNodes : currentNodes.difference(forbiddenNodes)
+      const selectedNeighbors = [];
+
+      const randomValue = Math.ceil(Math.random() * 10);
+      if (randomValue < 6 && selectedNodes.length === 0) {
+        const dummyNodeCount = neighborCount - availableNewNodes.length;
+        addDummyNodes(dummyNodeCount, availableCurrentNodes);
+        for (let i = 0; i < neighborCount; i++) {
+          let randomNeighbor;
+          if (i === 0) {
+            // Select the last new node in any case, in order to increase the probability of higher rank nodes
+            randomNeighbor = availableNewNodes[availableNewNodes.length - 1];
+          } else {
+            do {
+              randomNeighbor = availableNewNodes[Math.floor(Math.random() * availableNewNodes.length)];
+            } while (selectedNeighbors.includes(randomNeighbor.id()));
+          }
+          selectedNeighbors.push(randomNeighbor.id());
+          try{
+          cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
+          }catch(exp){
+                  
+          }
+        }
+      } else if (randomValue < 8) {
+        const availableCount = Math.min(neighborCount, availableCurrentNodes.length);
+        for (let i = 0; i < availableCount; i++) {
+          let randomNeighbor;
+          do {
+            randomNeighbor = availableCurrentNodes[Math.floor(Math.random() * availableCurrentNodes.length)];
+          } while (selectedNeighbors.includes(randomNeighbor.id()));
+          selectedNeighbors.push(randomNeighbor.id());
+          try{
+          cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
+          }catch(exp){
+                  
+          }
+        }
+      } else {
+        const dummyNodeCount = neighborCount - Math.min(neighborCount / 2, availableCurrentNodes.length) - availableNewNodes.length;
+        addDummyNodes(dummyNodeCount, availableCurrentNodes);
+        for (let i = 0; i < neighborCount; i++) {
+          let randomNeighbor;
+          if (i === 0) {
               // Select the last new node in any case, in order to increase the probability of higher rank nodes
               randomNeighbor = availableNewNodes[availableNewNodes.length - 1];
-            } else {
-              do {
-                randomNeighbor = availableNewNodes[Math.floor(Math.random() * availableNewNodes.length)];
-              } while (selectedNeighbors.includes(randomNeighbor.id()));
-            }
-            selectedNeighbors.push(randomNeighbor.id());
-            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
-          }
-        } else if (randomValue < 8) {
-          const availableCount = Math.min(neighborCount, availableCurrentNodes.length);
-          for (let i = 0; i < availableCount; i++) {
-            let randomNeighbor;
+          } else {
             do {
-              randomNeighbor = availableCurrentNodes[Math.floor(Math.random() * availableCurrentNodes.length)];
+              let tempNodes;
+              if (i < neighborCount - Math.min(neighborCount / 2, availableCurrentNodes.length)) {
+                tempNodes = availableNewNodes;
+              } else {
+                tempNodes = availableCurrentNodes;
+              }
+              randomNeighbor = tempNodes[Math.floor(Math.random() * tempNodes.length)];
             } while (selectedNeighbors.includes(randomNeighbor.id()));
-            selectedNeighbors.push(randomNeighbor.id());
-            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
           }
-        } else {
-          const dummyNodeCount = neighborCount - Math.min(neighborCount / 2, availableCurrentNodes.length) - availableNewNodes.length;
-          addDummyNodes(dummyNodeCount, availableCurrentNodes);
-          for (let i = 0; i < neighborCount; i++) {
-            let randomNeighbor;
-            if (i === 0) {
-                // Select the last new node in any case, in order to increase the probability of higher rank nodes
-                randomNeighbor = availableNewNodes[availableNewNodes.length - 1];
-            } else {
-              do {
-                let tempNodes;
-                if (i < neighborCount - Math.min(neighborCount / 2, availableCurrentNodes.length)) {
-                  tempNodes = availableNewNodes;
-                } else {
-                  tempNodes = availableCurrentNodes;
-                }
-                randomNeighbor = tempNodes[Math.floor(Math.random() * tempNodes.length)];
-              } while (selectedNeighbors.includes(randomNeighbor.id()));
-            }
-            selectedNeighbors.push(randomNeighbor.id());
-            cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
+          selectedNeighbors.push(randomNeighbor.id());
+          try{
+          cy.add({ group: 'edges', data: { id: `${edgeId}-${i}`, source: id, target: randomNeighbor.id(), weight: Math.floor(Math.random() * 101)}})
+          }catch(exp){
+                  
           }
         }
       }
     }
-    return newNodes;
-  };
+  }
+  return newNodes;
+};

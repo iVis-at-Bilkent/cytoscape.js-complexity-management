@@ -357,6 +357,12 @@ function complexityManagement(cy) {
   api.expandAllNodes = function () {
     compMgrInstance.expandAllNodes();
   };
+  api.collapseEdges = function (edges) {
+    var edgeIDList = [];
+    nodes.forEach(function (edge) {
+      edgeIDList.push(edge.id());
+    });
+  };
   return api;
 }
 
