@@ -484,8 +484,18 @@ function onLoaded() {
     }
   });
 
-}
+document.getElementById("expandSelectedEdges").addEventListener("click", () => {
+  instance.expandEdges(cy.edges(':selected'));
 
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
+
+}
 function getRandomNodes() {
   const nodeCount = 2;
   const averageDegree = 2;

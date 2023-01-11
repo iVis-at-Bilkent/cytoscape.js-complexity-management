@@ -406,5 +406,15 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(metaEdgeID, cy);
   }
 
+  api.expandEdges = (edges, isRecursive = true) => {
+    let edgeIDList = [];
+
+    edges.forEach((edge) => {
+      edgeIDList.push(edge.id());
+    });
+
+    compMgrInstance.expandEdges(edgeIDList, isRecursive);
+  };
+
   return api;
 }

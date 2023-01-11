@@ -389,6 +389,14 @@ function complexityManagement(cy) {
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(metaEdgeID, cy);
   };
+  api.expandEdges = function (edges) {
+    var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    var edgeIDList = [];
+    edges.forEach(function (edge) {
+      edgeIDList.push(edge.id());
+    });
+    compMgrInstance.expandEdges(edgeIDList, isRecursive);
+  };
   return api;
 }
 
