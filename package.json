@@ -26,7 +26,7 @@
     "dist"
   ],
   "dependencies": {
-    "cmgm": "C:/Users/Osama Zafar/Desktop/cytoscape.js-complexity-management"
+    "cmgm": "github:iVis-at-Bilkent/cmgm#main"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
