@@ -7,7 +7,7 @@ body {
 .root {
   height: 100%;
   display: grid;
-  grid-template-columns: 3.2fr 9fr;
+  grid-template-columns: 2.8fr 9fr;
   grid-template-rows: min-content auto min-content;
   grid-template-areas: "h h" "ui cy" "f f";
   gap: 5px 5px;
@@ -20,6 +20,7 @@ body {
 .ext-intro {
   grid-area: ui;
   overflow-y: auto;
+  font-size: .875rem;
 }
 .cy-canvas {
   width: 100%;
@@ -86,7 +87,7 @@ body {
 
 h1 {
   opacity: 0.5;
-  font-size: 1em;
+  font-size: 14px;
   font-weight: bold;
   margin: 1%;
   background-color: transparent;
@@ -107,4 +108,11 @@ h1 {
 #min-weight-node, #min-weight-edge, #max-weight-node, #max-weight-edge {
   width: 50px;
   text-align: center;
+}
+
+.accordion-body{
+  padding: 0.5rem 1.0rem;
+}
+hr{
+  margin: 0.2rem 0rem;
 }

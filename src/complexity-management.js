@@ -355,6 +355,7 @@ export function complexityManagement(cy) {
     let IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
 
     let IDsToRemove = [];
+    let IDsToAdd = [];
 
     IDsToRemoveTemp.nodeIDListForInvisible.forEach((id) => {
       IDsToRemove.push(id);
@@ -365,11 +366,13 @@ export function complexityManagement(cy) {
     });
 
     IDsToRemoveTemp.metaEdgeIDListForVisible.forEach((id) => {
-      IDsToRemove.push(id);
+      IDsToAdd.push(id);
     });
 
     // Remove required elements from cy instance
     actOnInvisible(IDsToRemove, cy);
+    // Add required elements to cy instance
+    actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
 
   api.expandNodes = (nodes, isRecursive = true) => {
@@ -379,15 +382,50 @@ export function complexityManagement(cy) {
       nodeIDList.push(node.id());
     });
 
-    compMgrInstance.expandNodes(nodeIDList, isRecursive);
+    let returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
+    // Add required elements to cy instance
+    actOnVisible([...returnedElements.nodeIDListForVisible], cy);
+    // Add required elements to cy instance
+    actOnVisible([...returnedElements.edgeIDListForVisible], cy);
+
+    // Remove required elements from cy instance
+    actOnInvisible([...returnedElements.edgeIDListToRemove], cy);
+    
   };
 
   api.collapseAllNodes = () => {
-    compMgrInstance.collapseAllNodes();
+    let IDsToRemoveTemp = compMgrInstance.collapseAllNodes();
+    
+    let IDsToRemove = [];
+    let IDsToAdd = [];
+
+    IDsToRemoveTemp.nodeIDListForInvisible.forEach((id) => {
+      IDsToRemove.push(id);
+    });
+
+    IDsToRemoveTemp.edgeIDListForInvisible.forEach((id) => {
+      IDsToRemove.push(id);
+    });
+
+    IDsToRemoveTemp.metaEdgeIDListForVisible.forEach((id) => {
+      IDsToAdd.push(id);
+    });
+
+    // Remove required elements from cy instance
+    actOnInvisible(IDsToRemove, cy);
+    // Add required elements to cy instance
+    actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
 
   api.expandAllNodes = () => {
-    compMgrInstance.expandAllNodes();
+    let returnedElements = compMgrInstance.expandAllNodes();
+    // Add required elements to cy instance
+    actOnVisible([...returnedElements.nodeIDListForVisible], cy);
+    // Add required elements to cy instance
+    actOnVisible([...returnedElements.edgeIDListForVisible], cy);
+
+    // Remove required elements from cy instance
+    actOnInvisible([...returnedElements.edgeIDListToRemove], cy);
   };  
 
   api.collapseEdges = (edges) => {

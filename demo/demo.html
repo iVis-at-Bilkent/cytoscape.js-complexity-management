@@ -47,7 +47,7 @@
       <h2>cytoscape-complexity-management demo</h2>
     </div>
     <div class="ext-intro m-2">
-      <h3>Description</h3>
+      <h4>Description</h4>
       <p>A Cytoscape.js extension to provide various complexity management operations such as: 
         filter/unfilter, hide/show and expand/collapse.
       </p>
@@ -67,7 +67,7 @@
             aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body d-flex flex-wrap justify-content-center">
               <div class="dropdown m-1">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   Open
                 </button>
@@ -78,7 +78,7 @@
                 </ul>
               </div>
               <div class="dropdown m-1">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   Save
                 </button>
@@ -89,7 +89,7 @@
                 </ul>
               </div>
               <div class="dropdown m-1">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   Open Sample
                 </button>
@@ -102,7 +102,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="form-check m-1">
+              <div class="form-check form-control-sm m-1">
                 <input class="form-check-input" type="checkbox" value="" id="cbk-run-layout" checked>
                 <label class="form-check-label" for="cbk-run-layout">
                   Layout on Open
@@ -122,35 +122,35 @@
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
           aria-labelledby="panelsStayOpen-headingTwo">
           <div class="accordion-body d-flex flex-wrap justify-content-center">
-            <button type="button" id="addNodeToSelected" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="addNodeToSelected" class="btn btn-secondary btn-sm m-1" type="button" 
             title="If no node is selected, then adds to the root graph" aria-expanded="false">
             Add node to selected
             </button>
-            <button type="button" id="addEdgeBetweenSelected" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="addEdgeBetweenSelected" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Adds an edge between two selected nodes" aria-expanded="false">
             Add edge between selected
             </button>
-            <button type="button" id="addRandomElements" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="addRandomElements" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Adds random elements to the graph" aria-expanded="false">
             Add random elements
             </button>
-            <button type="button" id="removeSelected" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="removeSelected" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Removes selected elements from the graph" aria-expanded="false">
             Remove selected
             </button>
-            <button type="button" id="changeSource" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="changeSource" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Select an edge and a new source for that edge" aria-expanded="false">
             Change source
             </button>
-            <button type="button" id="changeTarget" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="changeTarget" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Select an edge and a new target for that edge" aria-expanded="false">
             Change target
             </button>
-            <button type="button" id="changeParent" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="changeParent" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Select two nodes, the second selected node will be the new parent of the first one" aria-expanded="false">
             Change parent
             </button>
-            <div class="form-check m-1">
+            <div class="form-check form-control-sm m-1">
               <input class="form-check-input" type="checkbox" value="" id="cbk-run-layout2" checked>
               <label class="form-check-label" for="cbk-run-layout">
                 Layout after operation
@@ -182,62 +182,62 @@
           </div>
           <hr>
           <div class="accordion-body d-flex flex-wrap justify-content-center">            
-            <button type="button" id="hideSelected" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="hideSelected" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Hides selected elements from the graph" aria-expanded="false">
             Hide selected
             </button>
-            <button type="button" id="showHiddenNeighbors" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="showHiddenNeighbors" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Shows hidden neighbors of the selected node, if any" aria-expanded="false">
             Show hidden neighbors of selected
             </button>
-            <button type="button" id="showAll" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="showAll" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Shows all elements in the graph" aria-expanded="false">
             Show all
             </button>
           </div>
           <hr>
           <div class="accordion-body d-flex flex-wrap justify-content-center">            
-            <button type="button" id="collapseSelectedNodes" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="collapseSelectedNodes" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Collapses selected compound nodes recursively" aria-expanded="false">
             Collapse selected nodes
             </button>
-            <button type="button" id="expandSelectedNodes" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="expandSelectedNodes" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Expands selected nodes recursively" aria-expanded="false">
             Expand selected nodes
             </button>
-            <button type="button" id="collapseAllNodes" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="collapseAllNodes" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Collapses all compound nodes recursively" aria-expanded="false">
             Collapse all nodes
             </button>
-            <button type="button" id="expandAllNodes" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="expandAllNodes" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Expands all nodes recursively" aria-expanded="false">
             Expand all nodes
             </button>
-            <button type="button" id="collapseSelectedEdges" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="collapseSelectedEdges" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Collapses selected edges" aria-expanded="false">
             Collapse selected edges
             </button>
-            <button type="button" id="expandSelectedEdges" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="expandSelectedEdges" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Expands selected edges" aria-expanded="false">
             Expand selected edges
             </button>
-            <button type="button" id="collapseEdgesBetweenNodes" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="collapseEdgesBetweenNodes" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Collapses edges between selected nodes" aria-expanded="false">
             Collapse edges btw selected nodes
             </button>
-            <button type="button" id="expandEdgesBetweenNodes" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="expandEdgesBetweenNodes" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Expands edges between selected nodes" aria-expanded="false">
             Expand edges btw selected nodes
             </button>
-            <button type="button" id="collapseAllEdges" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="collapseAllEdges" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Collapses all edges" aria-expanded="false">
             Collapse all edges
             </button>
-            <button type="button" id="expandAllEdges" class="btn btn-secondary m-1" type="button" 
+            <button type="button" id="expandAllEdges" class="btn btn-secondary btn-sm m-1" type="button" 
             title="Expands all edges recursively" aria-expanded="false">
             Expand all edges
             </button>
-            <div class="form-check m-1">
+            <div class="form-check form-control-sm m-1">
               <input class="form-check-input" type="checkbox" value="" id="cbk-run-layout3" checked>
               <label class="form-check-label" for="cbk-run-layout">
                 Layout after operation

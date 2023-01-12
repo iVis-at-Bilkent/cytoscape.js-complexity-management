@@ -347,6 +347,7 @@ function complexityManagement(cy) {
     });
     var IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
     var IDsToRemove = [];
+    var IDsToAdd = [];
     IDsToRemoveTemp.nodeIDListForInvisible.forEach(function (id) {
       IDsToRemove.push(id);
     });
@@ -354,11 +355,13 @@ function complexityManagement(cy) {
       IDsToRemove.push(id);
     });
     IDsToRemoveTemp.metaEdgeIDListForVisible.forEach(function (id) {
-      IDsToRemove.push(id);
+      IDsToAdd.push(id);
     });
 
     // Remove required elements from cy instance
     actOnInvisible(IDsToRemove, cy);
+    // Add required elements to cy instance
+    actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
   api.expandNodes = function (nodes) {
     var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -366,13 +369,43 @@ function complexityManagement(cy) {
     nodes.forEach(function (node) {
       nodeIDList.push(node.id());
     });
-    compMgrInstance.expandNodes(nodeIDList, isRecursive);
+    var returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
+    // Add required elements to cy instance
+    actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
+    // Add required elements to cy instance
+    actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
+
+    // Remove required elements from cy instance
+    actOnInvisible(_toConsumableArray(returnedElements.edgeIDListToRemove), cy);
   };
   api.collapseAllNodes = function () {
-    compMgrInstance.collapseAllNodes();
+    var IDsToRemoveTemp = compMgrInstance.collapseAllNodes();
+    var IDsToRemove = [];
+    var IDsToAdd = [];
+    IDsToRemoveTemp.nodeIDListForInvisible.forEach(function (id) {
+      IDsToRemove.push(id);
+    });
+    IDsToRemoveTemp.edgeIDListForInvisible.forEach(function (id) {
+      IDsToRemove.push(id);
+    });
+    IDsToRemoveTemp.metaEdgeIDListForVisible.forEach(function (id) {
+      IDsToAdd.push(id);
+    });
+
+    // Remove required elements from cy instance
+    actOnInvisible(IDsToRemove, cy);
+    // Add required elements to cy instance
+    actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
   api.expandAllNodes = function () {
-    compMgrInstance.expandAllNodes();
+    var returnedElements = compMgrInstance.expandAllNodes();
+    // Add required elements to cy instance
+    actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
+    // Add required elements to cy instance
+    actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
+
+    // Remove required elements from cy instance
+    actOnInvisible(_toConsumableArray(returnedElements.edgeIDListToRemove), cy);
   };
   api.collapseEdges = function (edges) {
     var edgeIDList = [];

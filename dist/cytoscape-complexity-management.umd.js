@@ -1426,7 +1426,8 @@
     };
     static addedElements = {
       nodeIDListForVisible: new Set(),
-      edgeIDListForVisible: new Set()
+      edgeIDListForVisible: new Set(),
+      edgeIDListToRemove: new Set()
     };
     //Double Recursive Solution 
     static #collapseNode(node, visibleGM, invisibleGM) {
@@ -1464,6 +1465,8 @@
           child.edges.forEach(childEdge => {
             if (!(childEdge instanceof MetaEdge)) {
               edgeIDListForInvisible.push(childEdge.ID);
+            } else {
+              visibleGM.edgesMap.delete(childEdge.ID);
             }
             if (childEdge.isInterGraph) {
               let metaEdgeToBeCreated;
@@ -1471,13 +1474,21 @@
                 metaEdgeToBeCreated = this.incidentEdgeIsOutOfScope(childEdge.target, nodeToBeCollapsed, visibleGM);
                 if (metaEdgeToBeCreated) {
                   let newMetaEdge = Topology.addMetaEdge(nodeToBeCollapsed.ID, childEdge.target.ID, [childEdge.ID], visibleGM, invisibleGM);
-                  metaEdgeIDListForVisible.push(newMetaEdge.ID);
+                  metaEdgeIDListForVisible.push({
+                    ID: newMetaEdge.ID,
+                    sourceID: newMetaEdge.source.ID,
+                    targetID: newMetaEdge.target.ID
+                  });
                 }
               } else {
                 metaEdgeToBeCreated = this.incidentEdgeIsOutOfScope(childEdge.source, nodeToBeCollapsed, visibleGM);
                 if (metaEdgeToBeCreated) {
-                  let newMetaEdge = Topology.addMetaEdge(nodeToBeCollapsed.ID, childEdge.target.ID, [childEdge.ID], visibleGM, invisibleGM);
-                  metaEdgeIDListForVisible.push(newMetaEdge.ID);
+                  let newMetaEdge = Topology.addMetaEdge(nodeToBeCollapsed.ID, childEdge.source.ID, [childEdge.ID], visibleGM, invisibleGM);
+                  metaEdgeIDListForVisible.push({
+                    ID: newMetaEdge.ID,
+                    sourceID: newMetaEdge.source.ID,
+                    targetID: newMetaEdge.target.ID
+                  });
                 }
               }
             }
@@ -1558,7 +1569,14 @@
         if (child.isCollapsed && isRecursive && !child.isFiltered && !child.isHidden || !child.isCollapsed && !child.isFiltered && !child.isHidden) {
           //return list of edges brought back to visible graph
           let tempList = Auxiliary.moveNodeToVisible(child, visibleGM, invisibleGM);
-          tempList.forEach(item => this.addedElements.edgeIDListForVisible.add(item));
+          tempList.forEach(item => {
+            this.addedElements.edgeIDListForVisible.add(item);
+            let metaEdge = visibleGM.edgeToMetaEdgeMap.get(item);
+            if (metaEdge) {
+              this.addedElements.edgeIDListToRemove.add(metaEdge.ID);
+              visibleGM.edgesMap.delete(metaEdge.ID);
+            }
+          });
           this.addedElements.nodeIDListForVisible.add(child.ID);
           if (child.child) {
             let newNode = visibleGM.nodesMap.get(child.ID);
@@ -1567,7 +1585,14 @@
         } else if (child.isCollapsed && !isRecursive && !child.isFiltered && !child.isHidden) {
           this.addedElements.nodeIDListForVisible.add(child.ID);
           let tempList = Auxiliary.moveNodeToVisible(child, visibleGM, invisibleGM);
-          tempList.forEach(item => this.addedElements.edgeIDListForVisible.add(item));
+          tempList.forEach(item => {
+            this.addedElements.edgeIDListForVisible.add(item);
+            let metaEdge = visibleGM.edgeToMetaEdgeMap.get(item);
+            if (metaEdge) {
+              this.addedElements.edgeIDListToRemove.add(metaEdge.ID);
+              visibleGM.edgesMap.delete(metaEdge.ID);
+            }
+          });
         }
       });
     }
@@ -1588,41 +1613,61 @@
         edgeIDListForInvisible: new Set(),
         metaEdgeIDListForVisible: new Set()
       };
+      let metaEdgeIDListToKeep = new Set();
       if (isRecursive) {
         nodeIDList.forEach(nodeID => {
+          this.removedElements.metaEdgeIDListForVisible = new Set();
           let nodeInVisible = visibleGM.nodesMap.get(nodeID);
           if (nodeInVisible.child) {
             this.collapseCompoundDescendantNodes(nodeInVisible, visibleGM, invisibleGM);
             this.#collapseNode(nodeInVisible, visibleGM, invisibleGM);
-            this.removedElements.metaEdgeIDListForVisible.forEach((edgeIDList, index) => {
+            let index = 0;
+            this.removedElements.metaEdgeIDListForVisible.forEach(edgeIDList => {
               if (index != this.removedElements.metaEdgeIDListForVisible.size - 1) {
                 edgeIDList.forEach(edgeID => {
-                  visibleGM.edgesMap.delete(edgeID);
+                  visibleGM.edgesMap.delete(edgeID.ID);
                 });
               }
+              index = index + 1;
             });
             let temp1 = [...this.removedElements.metaEdgeIDListForVisible];
             let temp = [...temp1[temp1.length - 1]];
-            this.removedElements.metaEdgeIDListForVisible = new Set();
-            temp.forEach(item => this.removedElements.edgeIDListForInvisible.add(item));
+            temp.forEach(item => {
+              let metaEdge = visibleGM.metaEdgesMap.get(item.ID);
+              metaEdgeIDListToKeep.add({
+                ID: metaEdge.ID,
+                sourceID: metaEdge.source.ID,
+                targetID: metaEdge.target.ID
+              });
+            });
           }
         });
+        this.removedElements.metaEdgeIDListForVisible = metaEdgeIDListToKeep;
       } else {
         nodeIDList.forEach(nodeID => {
           let nodeInVisible = visibleGM.nodesMap.get(nodeID);
           if (nodeInVisible.child) {
             this.#collapseNode(nodeInVisible, visibleGM, invisibleGM);
-            this.removedElements.metaEdgeIDListForVisible.forEach((edgeIDList, index) => {
+            let index = 0;
+            this.removedElements.metaEdgeIDListForVisible.forEach(edgeIDList => {
               if (index != this.removedElements.metaEdgeIDListForVisible.length - 1) {
                 edgeIDList.forEach(edgeID => {
-                  visibleGM.edgesMap.delete(edgeID);
+                  visibleGM.edgesMap.delete(edgeID.ID);
                 });
               }
+              index = index + 1;
             });
             let temp1 = [...this.removedElements.metaEdgeIDListForVisible];
             let temp = [...temp1[temp1.length - 1]];
             this.removedElements.metaEdgeIDListForVisible = new Set();
-            temp.forEach(item => this.removedElements.edgeIDListForInvisible.add(item));
+            temp.forEach(item => {
+              let metaEdge = visibleGM.metaEdgesMap.get(item.ID);
+              this.removedElements.metaEdgeIDListForVisible.add({
+                ID: metaEdge.ID,
+                sourceID: metaEdge.source.ID,
+                targetID: metaEdge.target.ID
+              });
+            });
           }
         });
       }
@@ -1634,17 +1679,28 @@
           if (childNode.child) {
             this.collapseCompoundDescendantNodes(childNode);
             this.#collapseNode(childNode, visibleGM, invisibleGM);
-            this.removedElements.metaEdgeIDListForVisible.forEach((edgeIDList, index) => {
+            let index = 0;
+            this.removedElements.metaEdgeIDListForVisible.forEach(edgeIDList => {
               if (index != this.removedElements.metaEdgeIDListForVisible.size - 1) {
                 edgeIDList.forEach(edgeID => {
-                  visibleGM.edgesMap.delete(edgeID);
+                  visibleGM.edgesMap.delete(edgeID.ID);
                 });
               }
+              index = index + 1;
             });
             let temp1 = [...this.removedElements.metaEdgeIDListForVisible];
             let temp = [...temp1[temp1.length - 1]];
             this.removedElements.metaEdgeIDListForVisible = new Set();
-            temp.forEach(item => this.removedElements.edgeIDListForInvisible.add(item));
+            let tempArr = [];
+            temp.forEach(item => {
+              let metaEdge = visibleGM.metaEdgesMap.get(item.ID);
+              tempArr.push({
+                ID: metaEdge.ID,
+                sourceID: metaEdge.source.ID,
+                targetID: metaEdge.target.ID
+              });
+            });
+            this.removedElements.metaEdgeIDListForVisible.add(tempArr);
           }
         });
       }
@@ -1652,7 +1708,8 @@
     static expandNodes(nodeIDList, isRecursive, visibleGM, invisibleGM) {
       this.addedElements = {
         nodeIDListForVisible: new Set(),
-        edgeIDListForVisible: new Set()
+        edgeIDListForVisible: new Set(),
+        edgeIDListToRemove: new Set()
       };
       nodeIDList.forEach(nodeID => {
         let nodeInVisible = visibleGM.nodesMap.get(nodeID);
@@ -2089,7 +2146,7 @@
     expandNodes(nodeIDList, isRecursive) {
       let visibleGM = this.#visibleGraphManager;
       let invisibleGM = this.#invisibleGraphManager;
-      ExpandCollapse.expandNodes(nodeIDList, isRecursive, visibleGM, invisibleGM);
+      return ExpandCollapse.expandNodes(nodeIDList, isRecursive, visibleGM, invisibleGM);
     }
     collapseAllNodes() {
       let visibleGM = this.#visibleGraphManager;
@@ -2099,7 +2156,7 @@
     expandAllNodes() {
       let visibleGM = this.#visibleGraphManager;
       let invisibleGM = this.#invisibleGraphManager;
-      ExpandCollapse.expandAllNodes(visibleGM, invisibleGM);
+      return ExpandCollapse.expandAllNodes(visibleGM, invisibleGM);
     }
     collapseEdges(edgeIDList) {
       let visibleGM = this.#visibleGraphManager;
@@ -2458,6 +2515,7 @@
       });
       var IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
       var IDsToRemove = [];
+      var IDsToAdd = [];
       IDsToRemoveTemp.nodeIDListForInvisible.forEach(function (id) {
         IDsToRemove.push(id);
       });
@@ -2465,11 +2523,13 @@
         IDsToRemove.push(id);
       });
       IDsToRemoveTemp.metaEdgeIDListForVisible.forEach(function (id) {
-        IDsToRemove.push(id);
+        IDsToAdd.push(id);
       });
 
       // Remove required elements from cy instance
       actOnInvisible(IDsToRemove, cy);
+      // Add required elements to cy instance
+      actOnVisibleForMetaEdge(IDsToAdd, cy);
     };
     api.expandNodes = function (nodes) {
       var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -2477,13 +2537,43 @@
       nodes.forEach(function (node) {
         nodeIDList.push(node.id());
       });
-      compMgrInstance.expandNodes(nodeIDList, isRecursive);
+      var returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
+      // Add required elements to cy instance
+      actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
+      // Add required elements to cy instance
+      actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
+
+      // Remove required elements from cy instance
+      actOnInvisible(_toConsumableArray(returnedElements.edgeIDListToRemove), cy);
     };
     api.collapseAllNodes = function () {
-      compMgrInstance.collapseAllNodes();
+      var IDsToRemoveTemp = compMgrInstance.collapseAllNodes();
+      var IDsToRemove = [];
+      var IDsToAdd = [];
+      IDsToRemoveTemp.nodeIDListForInvisible.forEach(function (id) {
+        IDsToRemove.push(id);
+      });
+      IDsToRemoveTemp.edgeIDListForInvisible.forEach(function (id) {
+        IDsToRemove.push(id);
+      });
+      IDsToRemoveTemp.metaEdgeIDListForVisible.forEach(function (id) {
+        IDsToAdd.push(id);
+      });
+
+      // Remove required elements from cy instance
+      actOnInvisible(IDsToRemove, cy);
+      // Add required elements to cy instance
+      actOnVisibleForMetaEdge(IDsToAdd, cy);
     };
     api.expandAllNodes = function () {
-      compMgrInstance.expandAllNodes();
+      var returnedElements = compMgrInstance.expandAllNodes();
+      // Add required elements to cy instance
+      actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
+      // Add required elements to cy instance
+      actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
+
+      // Remove required elements from cy instance
+      actOnInvisible(_toConsumableArray(returnedElements.edgeIDListToRemove), cy);
     };
     api.collapseEdges = function (edges) {
       var edgeIDList = [];
