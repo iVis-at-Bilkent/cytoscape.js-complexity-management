@@ -432,7 +432,10 @@ function complexityManagement(cy) {
     actOnInvisible(edgeIDList, cy);
 
     // Add required meta edges to cy instance
-    actOnVisible(edgesListReturned, cy);
+    actOnVisible(edgesListReturned[0], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(edgesListReturned[1], cy);
   };
   return api;
 }
