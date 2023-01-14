@@ -185,10 +185,12 @@ function complexityManagement(cy) {
     var edgesToAdd = cy.collection();
     eleIDList.forEach(function (id) {
       var element = cy.scratch('cyComplexityManagement').removedEles.get(id);
-      if (element.isNode()) {
-        nodesToAdd.merge(element);
-      } else {
-        edgesToAdd.merge(element);
+      if (element) {
+        if (element.isNode()) {
+          nodesToAdd.merge(element);
+        } else {
+          edgesToAdd.merge(element);
+        }
       }
     });
 

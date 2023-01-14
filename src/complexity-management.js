@@ -168,11 +168,13 @@ export function complexityManagement(cy) {
     let edgesToAdd = cy.collection();
     eleIDList.forEach((id) => {
       let element = cy.scratch('cyComplexityManagement').removedEles.get(id);
-      if (element.isNode()) {
-        nodesToAdd.merge(element);
-      }
-      else {
-        edgesToAdd.merge(element);
+      if(element){
+        if (element.isNode()) {
+          nodesToAdd.merge(element);
+        }
+        else {
+          edgesToAdd.merge(element);
+        }
       }
     });
 
