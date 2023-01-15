@@ -860,14 +860,16 @@
           if (visibleGM.edgesMap.has(visibleMetaEdge.ID)) ;else {
             let sourceInVisible = visibleGM.nodesMap.get(visibleMetaEdge.source.ID);
             let targetInVisible = visibleGM.nodesMap.get(visibleMetaEdge.target.ID);
-            let invisibleEdge = invisibleGM.edgesMap.get(edgeID);
-            if (invisibleEdge.source.owner == invisibleEdge.target.owner) {
-              invisibleEdge.source.owner.siblingGraph.addEdge(visibleMetaEdge, sourceInVisible, targetInVisible);
-            } else {
-              visibleGM.addInterGraphEdge(visibleMetaEdge, sourceInVisible, targetInVisible);
+            if (sourceInVisible != undefined && targetInVisible != undefined) {
+              let invisibleEdge = invisibleGM.edgesMap.get(edgeID);
+              if (invisibleEdge.source.owner == invisibleEdge.target.owner) {
+                invisibleEdge.source.owner.siblingGraph.addEdge(visibleMetaEdge, sourceInVisible, targetInVisible);
+              } else {
+                visibleGM.addInterGraphEdge(visibleMetaEdge, sourceInVisible, targetInVisible);
+              }
+              visibleGM.edgesMap.set(visibleMetaEdge.ID, visibleMetaEdge);
+              edgeIDListPostProcess.push(visibleMetaEdge.ID);
             }
-            visibleGM.edgesMap.set(visibleMetaEdge.ID, visibleMetaEdge);
-            edgeIDListPostProcess.push(visibleMetaEdge.ID);
           }
         } else {
           if (edgeToUnfilter.isHidden == false && edgeToUnfilter.source.isVisible && edgeToUnfilter.target.isVisible) {
