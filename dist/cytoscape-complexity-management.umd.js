@@ -811,7 +811,7 @@
               let nodeToFilterEdgeInvisible = invisibleGM.edgesMap.get(nodeToFilterEdge.ID);
               nodeToFilterEdgeInvisible.isVisible = false;
             }
-            if (visibleGM.edgesMap.has(edgeID)) {
+            if (visibleGM.edgesMap.has(nodeToFilterEdge.ID)) {
               // delete edge from visible side
               visibleGM.edgesMap.delete(nodeToFilterEdge.ID);
               // delete edge from grpah
@@ -1200,8 +1200,11 @@
           let visibleMetaEdge = visibleGM.edgeToMetaEdgeMap.get(incidentEdge.ID);
           // check if meta edge is visible and meta edge's orignal edges length is 1 (meaning meta edge is created by node collapse and is visible) 
           if (visibleGM.edgesMap.has(visibleMetaEdge.ID) && visibleMetaEdge.originalEdges.length == 1) {
-            // delete meta edge from edges map
+            // delete meta edge from edges map and meta edge map
             visibleGM.edgesMap.delete(visibleMetaEdge.ID);
+            visibleGM.metaEdgesMap.delete(visibleMetaEdge.ID);
+            // dlete incident edge from edgeToMetaEdgemap
+            visibleGM.edgeToMetaEdgeMap.delete(incidentEdge.ID);
             // report meta edge as processed (to be removed)
             // Structure  = {ID,sourceID,targetID}
             edgeIDList[1].push({
@@ -1243,6 +1246,9 @@
               if (visibleMetaEdge.originalEdges.length == 1) {
                 // if yes deleted top meta edge
                 visibleGM.edgesMap.delete(visibleMetaEdge.ID);
+                visibleGM.metaEdgesMap.delete(visibleMetaEdge.ID);
+                // dlete incident edge from edgeToMetaEdgemap
+                visibleGM.edgeToMetaEdgeMap.delete(incidentEdge.ID);
                 // report top meta edge as processed (to be removed)
                 // Structure = {ID,sourceID,targetID}
                 edgeIDList[1].push({
@@ -2350,6 +2356,8 @@
             if (isRecursive && originalEdge.originalEdges.length != 1) {
               // expand the orignal meta edge (returns edges brought back to visible graph  and meta edges to be removed)
               let returnedList = this.expandEdges([originalEdge.ID], isRecursive, visibleGM, invisibleGM);
+              // remove this meta edge from meta edge map
+              visibleGM.metaEdgesMap.delete(originalEdge.ID);
               // combine returned list to the cureent edge list
               originalEdgeIDList[0] = [...originalEdgeIDList[0], ...returnedList[0]];
               originalEdgeIDList[1] = [...originalEdgeIDList[1], ...returnedList[1]];
