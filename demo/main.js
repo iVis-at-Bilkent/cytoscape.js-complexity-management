@@ -9,7 +9,17 @@ function onLoaded() {
       {
         selector: 'node',
         style: {
-          'label': 'data(id)'
+          'label': 'data(id)',
+          "color" : "black",
+          'font-size': '18px',
+          'compound-sizing-wrt-labels': 'include',
+          height: 40,
+          width: 40,
+          padding: "5px",
+          "background-fit": "cover",
+          "border-color": "black",
+          "border-width": 1,
+          "border-opacity": 1,
         }
       },
       {
@@ -22,7 +32,13 @@ function onLoaded() {
             return '';
           },
           'curve-style': 'bezier',
-          'target-arrow-shape': 'triangle'
+          'target-arrow-shape': 'triangle',
+          'text-rotation': 'autorotate',
+          'font-size': '14px',
+          width: "1.5px",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier",
+          "text-rotation": "autorotate",
         }
       }
     ]
@@ -34,7 +50,35 @@ function onLoaded() {
       {
         selector: 'node',
         style: {
-          'label': 'data(label)'
+          'label': 'data(label)',
+          "color" : "black",
+          'font-size': '18px',
+          'compound-sizing-wrt-labels': 'include',
+          height: 40,
+          width: 40,
+          padding: "5px",
+          "background-fit": "cover",
+          "border-color": "black",
+          "border-width": 1,
+          "border-opacity": 1,
+        }
+      },
+      {
+        selector: 'node[visible="F"]',
+        style: {
+          'label': 'data(label)',
+          "color" : "gray",
+          "background-color" : "gray",          
+          "background-opacity": 0.3,
+          'font-size': '18px',
+          'compound-sizing-wrt-labels': 'include',
+          height: 40,
+          width: 40,
+          padding: "5px",
+          "background-fit": "cover",
+          "border-color": "gray",
+          "border-width": 1,
+          "border-opacity": 0.5,
         }
       },
       {
@@ -47,7 +91,35 @@ function onLoaded() {
             return '';
           },
           'curve-style': 'bezier',
-          'target-arrow-shape': 'triangle'
+          'target-arrow-shape': 'triangle',
+          'text-rotation': 'autorotate',
+          'font-size': '14px',
+          width: "1.5px",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier",
+          "text-rotation": "autorotate",
+        }
+      },
+      {
+        selector: 'edge[visible="F"]',
+        style: {
+          'label': (edge) => {
+            if (edge.data('label')) {
+              return edge.data('label');
+            }
+            return '';
+          },
+          color : 'gray',
+          "line-color": 'gray',
+          'target-arrow-color': 'gray', 
+          'curve-style': 'bezier',
+          'target-arrow-shape': 'triangle',
+          'text-rotation': 'autorotate',
+          'font-size': '14px',
+          width: "1.5px",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier",
+          "text-rotation": "autorotate",
         }
       }
     ]
@@ -70,8 +142,16 @@ function onLoaded() {
           'label': (node) => {
             return node.data('label') ? node.data('label') : node.id();
           },
-          'font-size': '10px',
-          'compound-sizing-wrt-labels': 'include'
+          "color" : "black",
+          'font-size': '14px',
+          'compound-sizing-wrt-labels': 'include',
+          height: 40,
+          width: 40,
+          padding: "5px",
+          "background-fit": "cover",
+          "border-color": "black",
+          "border-width": 1,
+          "border-opacity": 1,
         }
       },
       {
@@ -86,8 +166,12 @@ function onLoaded() {
           'curve-style': 'bezier',
           'target-arrow-shape': 'triangle',
           'text-rotation': 'autorotate',
-          'font-size': '10px',
-          'text-margin-y': '10px'
+          width: "1.5px",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier",
+          "text-rotation": "autorotate",
+
+
         }
       }
     ],
@@ -119,7 +203,7 @@ function onLoaded() {
     layout: { name: 'fcose', animate: true, stop: function () { initializer(cy); } }
   });
 
-  let layoutUtilities = cy.layoutUtilities({ desiredAspectRatio: cy.width() / cy.height() });
+  let layoutUtilities = cy.layoutUtilities({ desigrayAspectRatio: cy.width() / cy.height() });
 
   let newNodeCount = 0;
   let newEdgeCount = 0;
@@ -142,11 +226,11 @@ function onLoaded() {
     let nodesToAddInvisible = [];
     let nodePosInBothCyAndInvisible = [];
     instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
-      nodesToAddInvisible.push({ data: { id: nodeItem.ID, label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
+      nodesToAddInvisible.push({ data: { id: nodeItem.ID , visible : nodeItem.isVisible?'T':"F" , label: nodeItem.ID + (nodeItem.isFiltegray ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
     });
     cyInvisible.add(nodesToAddInvisible);
     instance.getCompMgrInstance('get').invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
-      cyInvisible.add({ data: { id: edgeItem.ID, label: (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
+      cyInvisible.add({ data: { id: edgeItem.ID, visible : edgeItem.isVisible?'T':"F" ,label: (edgeItem.isFiltegray ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
     });
     cyInvisible.nodes().forEach((node) => {
       let cyNode = cy.getElementById(node.id());
