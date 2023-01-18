@@ -446,6 +446,33 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(metaEdgeID, cy);
   }
 
+  api.collapseEdgesBetweenNodes = (nodes) => {
+      let nodeIDList = [];
+  
+      nodes.forEach((node) => {
+        nodeIDList.push(node.id());
+      });
+  
+      let EdgeIDList = compMgrInstance.collapseEdgesBetweenNodes(nodeIDList);
+
+    // Remove required elements from cy instance
+    actOnInvisible(EdgeIDList[0], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+  };
+
+  api.collapseAllEdges = () => {
+
+    let EdgeIDList = compMgrInstance.collapseAllEdges();
+
+    // Remove required elements from cy instance
+    actOnInvisible(EdgeIDList[0], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+  };
+
   api.expandEdges = (edges, isRecursive = true) => {
     let edgeIDList = [];
 
@@ -463,6 +490,39 @@ export function complexityManagement(cy) {
     
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(edgesListReturned[1], cy);
+  };
+
+  api.expandEdgesBetweenNodes = (nodes, isRecursive = true) => {
+    let nodeIDList = [];
+
+    nodes.forEach((node) => {
+      nodeIDList.push(node.id());
+    });
+
+    let EdgeIDList = compMgrInstance.expandEdgesBetweenNodes(nodeIDList, isRecursive);
+
+    // Remove required elements from cy instance
+    actOnInvisible(EdgeIDList[2], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisible(EdgeIDList[0], cy);
+    
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+  };
+
+
+  api.expandAllEdges = () => {
+    let EdgeIDList = compMgrInstance.expandAllEdges();
+
+    // Remove required elements from cy instance
+    actOnInvisible(EdgeIDList[2], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisible(EdgeIDList[0], cy);
+    
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(EdgeIDList[1], cy);
   };
 
   return api;

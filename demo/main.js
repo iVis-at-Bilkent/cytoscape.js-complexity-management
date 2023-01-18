@@ -579,6 +579,50 @@ document.getElementById("expandSelectedEdges").addEventListener("click", () => {
   }
 });
 
+document.getElementById("collapseEdgesBetweenNodes").addEventListener("click", () => {
+  instance.collapseEdgesBetweenNodes(cy.nodes(':selected'));
+
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
+
+document.getElementById("expandEdgesBetweenNodes").addEventListener("click", () => {
+  instance.expandEdgesBetweenNodes(cy.nodes(':selected'));
+
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
+
+document.getElementById("collapseAllEdges").addEventListener("click", () => {
+  instance.collapseAllEdges();
+
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
+
+document.getElementById("expandAllEdges").addEventListener("click", () => {
+  instance.expandAllEdges();
+
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
+
 }
 function getRandomNodes() {
   const nodeCount = 2;

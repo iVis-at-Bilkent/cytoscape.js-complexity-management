@@ -422,6 +422,28 @@ function complexityManagement(cy) {
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(metaEdgeID, cy);
   };
+  api.collapseEdgesBetweenNodes = function (nodes) {
+    var nodeIDList = [];
+    nodes.forEach(function (node) {
+      nodeIDList.push(node.id());
+    });
+    var EdgeIDList = compMgrInstance.collapseEdgesBetweenNodes(nodeIDList);
+
+    // Remove required elements from cy instance
+    actOnInvisible(EdgeIDList[0], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+  };
+  api.collapseAllEdges = function () {
+    var EdgeIDList = compMgrInstance.collapseAllEdges();
+
+    // Remove required elements from cy instance
+    actOnInvisible(EdgeIDList[0], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+  };
   api.expandEdges = function (edges) {
     var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
     var edgeIDList = [];
@@ -438,6 +460,35 @@ function complexityManagement(cy) {
 
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(edgesListReturned[1], cy);
+  };
+  api.expandEdgesBetweenNodes = function (nodes) {
+    var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    var nodeIDList = [];
+    nodes.forEach(function (node) {
+      nodeIDList.push(node.id());
+    });
+    var EdgeIDList = compMgrInstance.expandEdgesBetweenNodes(nodeIDList, isRecursive);
+
+    // Remove required elements from cy instance
+    actOnInvisible(EdgeIDList[2], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisible(EdgeIDList[0], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+  };
+  api.expandAllEdges = function () {
+    var EdgeIDList = compMgrInstance.expandAllEdges();
+
+    // Remove required elements from cy instance
+    actOnInvisible(EdgeIDList[2], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisible(EdgeIDList[0], cy);
+
+    // Add required meta edges to cy instance
+    actOnVisibleForMetaEdge(EdgeIDList[1], cy);
   };
   return api;
 }
