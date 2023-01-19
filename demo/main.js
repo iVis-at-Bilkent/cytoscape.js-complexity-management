@@ -13,9 +13,9 @@ function onLoaded() {
           "color" : "black",
           'font-size': '18px',
           'compound-sizing-wrt-labels': 'include',
-          height: 40,
-          width: 40,
-          padding: "5px",
+          'height': 40,
+          'width': 40,
+          'padding': "5px",
           "background-fit": "cover",
           "border-color": "black",
           "border-width": 1,
@@ -35,10 +35,8 @@ function onLoaded() {
           'target-arrow-shape': 'triangle',
           'text-rotation': 'autorotate',
           'font-size': '14px',
-          width: "1.5px",
-          "target-arrow-shape": "triangle",
-          "curve-style": "bezier",
-          "text-rotation": "autorotate",
+          'width': "1.5px",
+          'text-margin-y': '10px'
         }
       }
     ]
@@ -54,9 +52,9 @@ function onLoaded() {
           "color" : "black",
           'font-size': '18px',
           'compound-sizing-wrt-labels': 'include',
-          height: 40,
-          width: 40,
-          padding: "5px",
+          'height': 40,
+          'width': 40,
+          'padding': "5px",
           "background-fit": "cover",
           "border-color": "black",
           "border-width": 1,
@@ -72,9 +70,9 @@ function onLoaded() {
           "background-opacity": 0.3,
           'font-size': '18px',
           'compound-sizing-wrt-labels': 'include',
-          height: 40,
-          width: 40,
-          padding: "5px",
+          'height': 40,
+          'width': 40,
+          'padding': "5px",
           "background-fit": "cover",
           "border-color": "gray",
           "border-width": 1,
@@ -94,10 +92,8 @@ function onLoaded() {
           'target-arrow-shape': 'triangle',
           'text-rotation': 'autorotate',
           'font-size': '14px',
-          width: "1.5px",
-          "target-arrow-shape": "triangle",
-          "curve-style": "bezier",
-          "text-rotation": "autorotate",
+          'width': '1.5px',
+          'text-margin-y': '10px'
         }
       },
       {
@@ -116,10 +112,8 @@ function onLoaded() {
           'target-arrow-shape': 'triangle',
           'text-rotation': 'autorotate',
           'font-size': '14px',
-          width: "1.5px",
-          "target-arrow-shape": "triangle",
-          "curve-style": "bezier",
-          "text-rotation": "autorotate",
+          'width': '1.5px',
+          'text-margin-y': '10px'
         }
       }
     ]
@@ -145,9 +139,9 @@ function onLoaded() {
           "color" : "black",
           'font-size': '14px',
           'compound-sizing-wrt-labels': 'include',
-          height: 40,
-          width: 40,
-          padding: "5px",
+          'height': 40,
+          'width': 40,
+          'padding': "5px",
           "background-fit": "cover",
           "border-color": "black",
           "border-width": 1,
@@ -166,12 +160,8 @@ function onLoaded() {
           'curve-style': 'bezier',
           'target-arrow-shape': 'triangle',
           'text-rotation': 'autorotate',
-          width: "1.5px",
-          "target-arrow-shape": "triangle",
-          "curve-style": "bezier",
-          "text-rotation": "autorotate",
-
-
+          'width': '1.5px',
+          'text-margin-y': '10px'
         }
       }
     ],
@@ -226,11 +216,11 @@ function onLoaded() {
     let nodesToAddInvisible = [];
     let nodePosInBothCyAndInvisible = [];
     instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
-      nodesToAddInvisible.push({ data: { id: nodeItem.ID , visible : nodeItem.isVisible?'T':"F" , label: nodeItem.ID + (nodeItem.isFiltegray ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
+      nodesToAddInvisible.push({ data: { id: nodeItem.ID , visible : nodeItem.isVisible?'T':"F" , label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
     });
     cyInvisible.add(nodesToAddInvisible);
     instance.getCompMgrInstance('get').invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
-      cyInvisible.add({ data: { id: edgeItem.ID, visible : edgeItem.isVisible?'T':"F" ,label: (edgeItem.isFiltegray ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
+      cyInvisible.add({ data: { id: edgeItem.ID, visible : edgeItem.isVisible?'T':"F" ,label: (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
     });
     cyInvisible.nodes().forEach((node) => {
       let cyNode = cy.getElementById(node.id());
