@@ -931,8 +931,8 @@
           tempList[0].forEach(item => {
             // report edge as processed (to be added)
             if (visibleGM.edgeToMetaEdgeMap.has(item)) {
-              Auxiliary.getTopMetaEdge(visibleGM.edgeToMetaEdgeMap.get(item), visibleGM);
-              edgeIDListPostProcess.push(item);
+              let topMetaEdge = Auxiliary.getTopMetaEdge(visibleGM.edgeToMetaEdgeMap.get(item), visibleGM);
+              edgeIDListPostProcess.push(topMetaEdge.ID);
             } else {
               edgeIDListPostProcess.push(item);
             }
@@ -944,6 +944,17 @@
             nodeIDListPostProcess = [...nodeIDListPostProcess, ...descendants.simpleNodes, ...descendants.compoundNodes];
             edgeIDListPostProcess = [...edgeIDListPostProcess, ...descendants.edges];
           }
+          let nodeToFilterDescendants = visibleGM.getDescendantsInorder(nodeToUnfilter);
+          // loop through descendant edges
+          nodeToFilterDescendants.edges.forEach(nodeTounFilterEdge => {
+            if (visibleGM.edgeToMetaEdgeMap.has(nodeTounFilterEdge.ID)) {
+              let topMetaEdge = Auxiliary.getTopMetaEdge(visibleGM.edgeToMetaEdgeMap.get(nodeTounFilterEdge.ID), visibleGM);
+              if (topMetaEdge.source.ID == nodeToUnfilter.ID || topMetaEdge.target.ID == nodeToUnfilter.ID) {
+                edgeIDList.push(nodeTounFilterEdge.ID);
+              }
+            }
+          });
+
           // report node its self as processed.
           nodeIDListPostProcess.push(nodeToUnfilter.ID);
         }
@@ -1149,7 +1160,8 @@
         // if meta edge is visible
         if (visibleGM.edgesMap.has(metaEdge.ID)) {
           // delete meta edge from visible edge map
-          visibleGM.edgesMap.delete(metaEdge.ID);
+          Auxiliary.removeEdgeFromGraph(metaEdge);
+          visibleGM.edgesMap.delete(metaEdge);
           // report meta edge as processed (to be removed)
           // structure {ID,sourceID,TargetID}
           deletedMetaEdges.push({
