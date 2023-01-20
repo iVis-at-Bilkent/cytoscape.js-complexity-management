@@ -18,7 +18,7 @@ function onLoaded() {
           'padding': "5px",
           "background-fit": "cover",
           "border-color": "black",
-          "border-width": 1,
+          "border-width": 1.5,
           "border-opacity": 1,
         }
       },
@@ -36,7 +36,10 @@ function onLoaded() {
           'text-rotation': 'autorotate',
           'font-size': '14px',
           'width': "1.5px",
-          'text-margin-y': '10px'
+          'text-margin-y': '10px',
+          'line-color' : 'black',
+          'target-arrow-color': 'black',
+          
         }
       }
     ]
@@ -57,7 +60,7 @@ function onLoaded() {
           'padding': "5px",
           "background-fit": "cover",
           "border-color": "black",
-          "border-width": 1,
+          "border-width": 1.5,
           "border-opacity": 1,
         }
       },
@@ -75,8 +78,14 @@ function onLoaded() {
           'padding': "5px",
           "background-fit": "cover",
           "border-color": "gray",
-          "border-width": 1,
+          "border-width": 1.5,
           "border-opacity": 0.5,
+        }
+      },
+      {
+        selector: 'node[filtered="T"]',
+        style: {
+          "border-style ": 'dashed',
         }
       },
       {
@@ -93,7 +102,9 @@ function onLoaded() {
           'text-rotation': 'autorotate',
           'font-size': '14px',
           'width': '1.5px',
-          'text-margin-y': '10px'
+          'text-margin-y': '10px',
+          'line-color' : 'black',
+          'target-arrow-color': 'black',
         }
       },
       {
@@ -113,7 +124,14 @@ function onLoaded() {
           'text-rotation': 'autorotate',
           'font-size': '14px',
           'width': '1.5px',
-          'text-margin-y': '10px'
+          'text-margin-y': '10px',
+          
+        }
+      },
+      {
+        selector: 'edge[filtered="T"]',
+        style: {
+          'line-style' : 'dashed',
         }
       }
     ]
@@ -161,7 +179,9 @@ function onLoaded() {
           'target-arrow-shape': 'triangle',
           'text-rotation': 'autorotate',
           'width': '1.5px',
-          'text-margin-y': '10px'
+          'text-margin-y': '10px',
+          'line-color' : 'black',
+          'target-arrow-color': 'black',
         }
       }
     ],
@@ -216,11 +236,11 @@ function onLoaded() {
     let nodesToAddInvisible = [];
     let nodePosInBothCyAndInvisible = [];
     instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
-      nodesToAddInvisible.push({ data: { id: nodeItem.ID , visible : nodeItem.isVisible?'T':"F" , label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
+      nodesToAddInvisible.push({ data: { id: nodeItem.ID , visible : nodeItem.isVisible?'T':"F", filtered : nodeItem.isFiltered?'T':"F", hidden : nodeItem.isHidden?'T':"F", label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
     });
     cyInvisible.add(nodesToAddInvisible);
     instance.getCompMgrInstance('get').invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
-      cyInvisible.add({ data: { id: edgeItem.ID, visible : edgeItem.isVisible?'T':"F" ,label: (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
+      cyInvisible.add({ data: { id: edgeItem.ID, visible : edgeItem.isVisible?'T':"F", filtered : edgeItem.isFiltered?'T':"F", hidden : edgeItem.isHidden?'T':"F", label: (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
     });
     cyInvisible.nodes().forEach((node) => {
       let cyNode = cy.getElementById(node.id());
