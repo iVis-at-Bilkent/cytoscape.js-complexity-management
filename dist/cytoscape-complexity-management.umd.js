@@ -2121,17 +2121,17 @@
          visibleGM.edgesMap.delete(childEdge.ID);
        });
      });
-       visibleGM.removeGraph(node.child);
+      visibleGM.removeGraph(node.child);
      descendantNodes.forEach(node => {
        visibleGM.nodesMap.delete(node.ID)
      });
      let nodeInInvisible = invisibleGM.nodesMap.get(node.ID);
      nodeInInvisible.isCollapsed = true;
-       nodeIDListForInvisible.forEach(nodeIDInvisible => {
+      nodeIDListForInvisible.forEach(nodeIDInvisible => {
        nodeInInvisible = invisibleGM.nodesMap.get(nodeIDInvisible);
        nodeInInvisible.isVisible = false;
      });
-       edgeIDListForInvisible.forEach(edgeIDInvisible => {
+      edgeIDListForInvisible.forEach(edgeIDInvisible => {
        let edgeInInvisible = invisibleGM.edgesMap.get(edgeIDInvisible);
        edgeInInvisible.isVisible = false;
      });
