@@ -183,7 +183,25 @@ function onLoaded() {
           'line-color' : 'black',
           'target-arrow-color': 'black',
         }
-      }
+      },
+      {
+        selector: 'edge:selected',
+        style: {
+          'label': (edge) => {
+            if (edge.data('weight') != null) {
+              return edge.data('weight');
+            }
+            return '';
+          },
+          'curve-style': 'bezier',
+          'target-arrow-shape': 'triangle',
+          'text-rotation': 'autorotate',
+          'width': '1.5px',
+          'text-margin-y': '10px',
+          'line-color' : '#0169d9',
+          'target-arrow-color': '#0169d9',
+        }
+      }      
     ],
     elements: {
       nodes: [
