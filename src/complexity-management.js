@@ -392,6 +392,8 @@ export function complexityManagement(cy) {
 
     // Remove required elements from cy instance
     actOnInvisible([...returnedElements.edgeIDListToRemove], cy);
+
+    actOnVisibleForMetaEdge([...returnedElements.metaEdgeIDListForVisible], cy);
     
   };
 

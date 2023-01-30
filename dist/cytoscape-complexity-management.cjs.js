@@ -381,6 +381,7 @@ function complexityManagement(cy) {
 
     // Remove required elements from cy instance
     actOnInvisible(_toConsumableArray(returnedElements.edgeIDListToRemove), cy);
+    actOnVisibleForMetaEdge(_toConsumableArray(returnedElements.metaEdgeIDListForVisible), cy);
   };
   api.collapseAllNodes = function () {
     var IDsToRemoveTemp = compMgrInstance.collapseAllNodes();
