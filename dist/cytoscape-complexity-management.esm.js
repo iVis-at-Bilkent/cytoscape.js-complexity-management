@@ -454,7 +454,7 @@ function complexityManagement(cy) {
     var edgesListReturned = compMgrInstance.expandEdges(edgeIDList, isRecursive);
 
     // Remove required elements from cy instance
-    actOnInvisible(edgeIDList, cy);
+    actOnInvisible(edgesListReturned[2], cy);
 
     // Add required meta edges to cy instance
     actOnVisible(edgesListReturned[0], cy);
