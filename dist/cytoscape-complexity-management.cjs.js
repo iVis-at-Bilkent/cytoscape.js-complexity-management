@@ -353,7 +353,7 @@ function complexityManagement(cy) {
     actOnVisible(IDsToAdd, cy);
   };
   api.collapseNodes = function (nodes) {
-    var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var nodeIDList = [];
     nodes.forEach(function (node) {
       if (compMgrInstance.isCollapsible(node.id())) {
@@ -388,7 +388,7 @@ function complexityManagement(cy) {
     actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
   api.expandNodes = function (nodes) {
-    var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var nodeIDList = [];
     nodes.forEach(function (node) {
       if (compMgrInstance.isExpandable(node.id())) {

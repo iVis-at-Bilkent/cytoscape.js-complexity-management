@@ -347,7 +347,7 @@ export function complexityManagement(cy) {
     actOnVisible(IDsToAdd, cy);
   };
 
-  api.collapseNodes = (nodes, isRecursive = true) => {
+  api.collapseNodes = (nodes, isRecursive = false) => {
     let nodeIDList = [];
 
     nodes.forEach((node) => {
@@ -390,7 +390,7 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
 
-  api.expandNodes = (nodes, isRecursive = true) => {
+  api.expandNodes = (nodes, isRecursive = false) => {
     let nodeIDList = [];
 
     nodes.forEach((node) => {
