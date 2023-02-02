@@ -1,4 +1,5 @@
 import { complexityManagement } from "./complexity-management";
+import { cueUtilities } from "./cue-utilities";
 
 export default function register(cytoscape) {	// register with cytoscape.js
   cytoscape("core", "complexityManagement", function(opts) {
@@ -7,7 +8,15 @@ export default function register(cytoscape) {	// register with cytoscape.js
     let options = {
       filterRule: (ele) => {
         return false;
-      }
+      },
+      cueEnabled: true, // Whether cues are enabled
+      expandCollapseCuePosition: 'top-left', // default cue position is top left you can specify a function per node too
+      expandCollapseCueSize: 12, // size of expand-collapse cue
+      expandCollapseCueLineSize: 8, // size of lines used for drawing plus-minus icons
+      expandCueImage: undefined, // image of expand icon if undefined draw regular expand cue
+      collapseCueImage: undefined, // image of collapse icon if undefined draw regular collapse cue
+      expandCollapseCueSensitivity: 1,
+      zIndex: 999
     };
 
     // If opts is not 'get' that is it is a real options object then initilize the extension
@@ -22,6 +31,8 @@ export default function register(cytoscape) {	// register with cytoscape.js
       setScratch(cy, 'options', options);
       setScratch(cy, 'api', api);
       setScratch(cy, 'removedEles', tempRemovedEles);
+
+      cueUtilities(options, cy, api);
     }
 
     // Expose the API to the users
