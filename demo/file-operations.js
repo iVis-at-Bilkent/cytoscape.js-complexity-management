@@ -193,23 +193,37 @@ function loadSample(globalVarName) {
   }
 }
 
-function initializer(cy){
+function initializer(cy) {
   cyVisible.remove(cyVisible.elements());
   cyInvisible.remove(cyInvisible.elements());
 
-  instance.getCompMgrInstance().visibleGraphManager.nodesMap.forEach((nodeItem,key) => {
-    cyVisible.add({data: {id: nodeItem.ID, parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID}, position: cy.getElementById(nodeItem.ID).position()});
+  let nodesToAddVisible = [];
+
+  instance.getCompMgrInstance('get').visibleGraphManager.nodesMap.forEach((nodeItem, key) => {
+    nodesToAddVisible.push({ data: { id: nodeItem.ID, parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }, position: !cy.getElementById(nodeItem.ID).isParent() ? cy.getElementById(nodeItem.ID).position() : null });
   });
-  instance.getCompMgrInstance().visibleGraphManager.edgesMap.forEach((edgeItem,key) => {
-    cyVisible.add({data: {id: edgeItem.ID, source: edgeItem.source.ID, target: edgeItem.target.ID}});
+  cyVisible.add(nodesToAddVisible);
+  instance.getCompMgrInstance('get').visibleGraphManager.edgesMap.forEach((edgeItem, key) => {
+    cyVisible.add({ data: { id: edgeItem.ID, source: edgeItem.source.ID, target: edgeItem.target.ID } });
   });
   cyVisible.fit(cyVisible.elements(), 30);
 
-  instance.getCompMgrInstance().invisibleGraphManager.nodesMap.forEach((nodeItem,key) => {
-    cyInvisible.add({data: {id: nodeItem.ID, label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(c)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID}, position: cy.getElementById(nodeItem.ID).position()});
+  let nodesToAddInvisible = [];
+  let nodePosInBothCyAndInvisible = [];
+  instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
+    nodesToAddInvisible.push({ data: { id: nodeItem.ID , visible : nodeItem.isVisible?'T':"F", filtered : nodeItem.isFiltered?'T':"F", hidden : nodeItem.isHidden?'T':"F", label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
   });
-  instance.getCompMgrInstance().invisibleGraphManager.edgesMap.forEach((edgeItem,key) => {
-    cyInvisible.add({data: {id: edgeItem.ID, label: edgeItem.ID + (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"),source: edgeItem.source.ID, target: edgeItem.target.ID}});
+  cyInvisible.add(nodesToAddInvisible);
+  instance.getCompMgrInstance('get').invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
+    cyInvisible.add({ data: { id: edgeItem.ID, visible : edgeItem.isVisible?'T':"F", filtered : edgeItem.isFiltered?'T':"F", hidden : edgeItem.isHidden?'T':"F", label: (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
   });
-  cyInvisible.fit(cyInvisible.elements(), 30);
+  cyInvisible.nodes().forEach((node) => {
+    let cyNode = cy.getElementById(node.id());
+    if(cyNode.length > 0 && !node.isParent()) {
+      nodePosInBothCyAndInvisible.push({nodeId: cyNode.id(), position: cyNode.position()});
+    }
+  });
+  cyInvisible.layout({name: 'fcose', animate: false, fixedNodeConstraint: nodePosInBothCyAndInvisible}).run();
+
+  //cyInvisible.fit(cyInvisible.elements(), 30);
 }

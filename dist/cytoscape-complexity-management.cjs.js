@@ -356,7 +356,18 @@ function complexityManagement(cy) {
     var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
     var nodeIDList = [];
     nodes.forEach(function (node) {
-      nodeIDList.push(node.id());
+      if (compMgrInstance.isCollapsible(node.id())) {
+        nodeIDList.push(node.id());
+        node.data('position-before-collapse', {
+          x: node.position().x,
+          y: node.position().y
+        });
+        node.data('size-before-collapse', {
+          w: node.outerWidth(),
+          h: node.outerHeight()
+        });
+        node.addClass('cy-expand-collapse-collapsed-node');
+      }
     });
     var IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
     var IDsToRemove = [];
@@ -380,11 +391,25 @@ function complexityManagement(cy) {
     var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
     var nodeIDList = [];
     nodes.forEach(function (node) {
-      nodeIDList.push(node.id());
+      if (compMgrInstance.isExpandable(node.id())) {
+        nodeIDList.push(node.id());
+        node.removeClass('cy-expand-collapse-collapsed-node');
+        node.removeData('position-before-collapse');
+        node.removeData('size-before-collapse');
+      }
     });
     var returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
     // Add required elements to cy instance
     actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
+    returnedElements.nodeIDListForVisible.forEach(function (nodeID) {
+      var node = cy.getElementById(nodeID);
+      if (compMgrInstance.isCollapsible(node.id())) {
+        node.removeClass('cy-expand-collapse-collapsed-node');
+        node.removeData('position-before-collapse');
+        node.removeData('size-before-collapse');
+      }
+    });
+
     // Add required elements to cy instance
     actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
 
@@ -398,6 +423,18 @@ function complexityManagement(cy) {
     var IDsToAdd = [];
     IDsToRemoveTemp.nodeIDListForInvisible.forEach(function (id) {
       IDsToRemove.push(id);
+    });
+    IDsToRemoveTemp.collapsedNodes.forEach(function (nodeID) {
+      var node = cy.getElementById(nodeID);
+      node.data('position-before-collapse', {
+        x: node.position().x,
+        y: node.position().y
+      });
+      node.data('size-before-collapse', {
+        w: node.outerWidth(),
+        h: node.outerHeight()
+      });
+      node.addClass('cy-expand-collapse-collapsed-node');
     });
     IDsToRemoveTemp.edgeIDListForInvisible.forEach(function (id) {
       IDsToRemove.push(id);
@@ -415,6 +452,13 @@ function complexityManagement(cy) {
     var returnedElements = compMgrInstance.expandAllNodes();
     // Add required elements to cy instance
     actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
+    returnedElements.expandedNodes.forEach(function (nodeID) {
+      var node = cy.getElementById(nodeID);
+      node.removeClass('cy-expand-collapse-collapsed-node');
+      node.removeData('position-before-collapse');
+      node.removeData('size-before-collapse');
+    });
+
     // Add required elements to cy instance
     actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
 
@@ -501,6 +545,12 @@ function complexityManagement(cy) {
 
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+  };
+  api.isCollapsible = function (node) {
+    return compMgrInstance.isCollapsible(node.id());
+  };
+  api.isExpandable = function (node) {
+    return compMgrInstance.isExpandable(node.id());
   };
   return api;
 }
@@ -781,9 +831,9 @@ function cueUtilities(params, cy, api) {
     init: function init() {
       var canvas = document.createElement('canvas');
       canvas.classList.add("expand-collapse-canvas");
-      var container = cy.container();
+      var container = document.getElementById('cy');
       var ctx = canvas.getContext('2d');
-      container.append(canvas);
+      container.appendChild(canvas);
       var offset = function offset(elt) {
         var rect = elt.getBoundingClientRect();
         return {
@@ -791,6 +841,21 @@ function cueUtilities(params, cy, api) {
           left: rect.left + document.documentElement.scrollLeft
         };
       };
+      function resize() {
+        var width = container.offsetWidth;
+        var height = container.offsetHeight;
+        var canvasWidth = width * options.pixelRatio;
+        var canvasHeight = height * options.pixelRatio;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        canvas.style.width = "".concat(width, "px");
+        canvas.style.height = "".concat(height, "px");
+        cy.trigger("cyCanvas.resize");
+      }
+      cy.on("resize", function () {
+        resize();
+      });
+      canvas.setAttribute("style", "position:absolute; top:0; left:0; z-index:".concat(options().zIndex, ";"));
       var _sizeCanvas = debounce(function () {
         canvas.height = cy.container().offsetHeight;
         canvas.width = cy.container().offsetWidth;
@@ -813,9 +878,7 @@ function cueUtilities(params, cy, api) {
       function sizeCanvas() {
         _sizeCanvas();
       }
-
-      //sizeCanvas();
-
+      resize();
       var data = {};
 
       // if there are events field in data unbind them here
@@ -834,13 +897,6 @@ function cueUtilities(params, cy, api) {
         nodeWithRenderedCue = null;
       }
       function drawExpandCollapseCue(node) {
-        var children = node.children();
-        var collapsedChildren = node.data('collapsedChildren');
-        var hasChildren = children != null && children != undefined && children.length > 0;
-        // If this is a simple node with no collapsed children return directly
-        if (!hasChildren && !collapsedChildren) {
-          return;
-        }
         var isCollapsed = node.hasClass('cy-expand-collapse-collapsed-node');
 
         //Draw expand-collapse rectangles
@@ -935,7 +991,6 @@ function cueUtilities(params, cy, api) {
           clearDraws();
         }
       });
-      var ur;
       cy.on('select unselect', data.eSelect = function () {
         if (nodeWithRenderedCue) {
           clearDraws();
@@ -945,7 +1000,7 @@ function cueUtilities(params, cy, api) {
           return;
         }
         var selectedNode = selectedNodes[0];
-        if (selectedNode.isParent() || selectedNode.hasClass('cy-expand-collapse-collapsed-node')) {
+        if (api.isExpandable(selectedNode) || api.isCollapsible(selectedNode)) {
           drawExpandCollapseCue(selectedNode);
         }
       });
@@ -965,35 +1020,38 @@ function cueUtilities(params, cy, api) {
         var opts = options();
         var factor = (opts.expandCollapseCueSensitivity - 1) / 2;
         if (Math.abs(oldMousePos.x - currMousePos.x) < 5 && Math.abs(oldMousePos.y - currMousePos.y) < 5 && cyRenderedPosX >= expandcollapseRenderedStartX - expandcollapseRenderedRectSize * factor && cyRenderedPosX <= expandcollapseRenderedEndX + expandcollapseRenderedRectSize * factor && cyRenderedPosY >= expandcollapseRenderedStartY - expandcollapseRenderedRectSize * factor && cyRenderedPosY <= expandcollapseRenderedEndY + expandcollapseRenderedRectSize * factor) {
-          if (opts.undoable && !ur) {
-            ur = cy.undoRedo({
-              defaultActions: false
-            });
-          }
           if (api.isCollapsible(node)) {
             clearDraws();
-            if (opts.undoable) {
-              ur.do("collapse", {
-                nodes: node,
-                options: opts
-              });
+            node.unselect();
+            api.collapseNodes([node]);
+            if (document.getElementById("cbk-run-layout2").checked) {
+              cy.layout({
+                name: "fcose",
+                animate: true,
+                randomize: false,
+                stop: function stop() {
+                  initializer(cy);
+                }
+              }).run();
             } else {
-              api.collapse(node, opts);
+              initializer(cy);
             }
           } else if (api.isExpandable(node)) {
             clearDraws();
-            if (opts.undoable) {
-              ur.do("expand", {
-                nodes: node,
-                options: opts
-              });
+            node.unselect();
+            api.expandNodes([node]);
+            if (document.getElementById("cbk-run-layout2").checked) {
+              cy.layout({
+                name: "fcose",
+                animate: true,
+                randomize: false,
+                stop: function stop() {
+                  initializer(cy);
+                }
+              }).run();
             } else {
-              api.expand(node, opts);
+              initializer(cy);
             }
-          }
-          if (node.selectable()) {
-            node.unselectify();
-            cy.scratch('_cyExpandCollapse').selectableChanged = true;
           }
         }
       });

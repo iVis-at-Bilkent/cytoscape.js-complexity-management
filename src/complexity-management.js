@@ -351,7 +351,20 @@ export function complexityManagement(cy) {
     let nodeIDList = [];
 
     nodes.forEach((node) => {
-      nodeIDList.push(node.id());
+      if(compMgrInstance.isCollapsible(node.id())){
+        nodeIDList.push(node.id());
+        node.data('position-before-collapse', {
+          x: node.position().x,
+          y: node.position().y
+        });
+  
+        node.data('size-before-collapse', {
+          w: node.outerWidth(),
+          h: node.outerHeight()
+        });
+        node.addClass('cy-expand-collapse-collapsed-node');
+      }
+      
     });
 
     let IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
@@ -381,12 +394,27 @@ export function complexityManagement(cy) {
     let nodeIDList = [];
 
     nodes.forEach((node) => {
-      nodeIDList.push(node.id());
+      if(compMgrInstance.isExpandable(node.id())){
+        nodeIDList.push(node.id());
+        node.removeClass('cy-expand-collapse-collapsed-node');
+        node.removeData('position-before-collapse');
+        node.removeData('size-before-collapse');
+      }
     });
 
     let returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
     // Add required elements to cy instance
     actOnVisible([...returnedElements.nodeIDListForVisible], cy);
+
+    returnedElements.nodeIDListForVisible.forEach((nodeID) => {
+      let node = cy.getElementById(nodeID);
+      if(compMgrInstance.isCollapsible(node.id())){
+        node.removeClass('cy-expand-collapse-collapsed-node');
+        node.removeData('position-before-collapse');
+        node.removeData('size-before-collapse');
+      }
+    })
+
     // Add required elements to cy instance
     actOnVisible([...returnedElements.edgeIDListForVisible], cy);
 
@@ -407,6 +435,23 @@ export function complexityManagement(cy) {
       IDsToRemove.push(id);
     });
 
+    IDsToRemoveTemp.collapsedNodes.forEach((nodeID) => {
+
+      let node = cy.getElementById(nodeID);
+
+      node.data('position-before-collapse', {
+        x: node.position().x,
+        y: node.position().y
+      });
+
+      node.data('size-before-collapse', {
+        w: node.outerWidth(),
+        h: node.outerHeight()
+      });
+      node.addClass('cy-expand-collapse-collapsed-node');
+    
+    });
+
     IDsToRemoveTemp.edgeIDListForInvisible.forEach((id) => {
       IDsToRemove.push(id);
     });
@@ -419,17 +464,33 @@ export function complexityManagement(cy) {
     actOnInvisible(IDsToRemove, cy);
     // Add required elements to cy instance
     actOnVisibleForMetaEdge(IDsToAdd, cy);
+
+
   };
 
   api.expandAllNodes = () => {
     let returnedElements = compMgrInstance.expandAllNodes();
     // Add required elements to cy instance
     actOnVisible([...returnedElements.nodeIDListForVisible], cy);
+
+    
+    returnedElements.expandedNodes.forEach((nodeID) => {
+
+      let node = cy.getElementById(nodeID);
+
+      node.removeClass('cy-expand-collapse-collapsed-node');
+      node.removeData('position-before-collapse');
+      node.removeData('size-before-collapse');
+
+    });
+
     // Add required elements to cy instance
     actOnVisible([...returnedElements.edgeIDListForVisible], cy);
 
     // Remove required elements from cy instance
     actOnInvisible([...returnedElements.edgeIDListToRemove], cy);
+
+
   };  
 
   api.collapseEdges = (edges) => {
@@ -525,6 +586,14 @@ export function complexityManagement(cy) {
     
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+  };
+
+  api.isCollapsible = (node) => {
+    return compMgrInstance.isCollapsible(node.id());
+  };
+
+  api.isExpandable = (node) => {
+    return compMgrInstance.isExpandable(node.id());
   };
 
   return api;

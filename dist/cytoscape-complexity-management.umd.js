@@ -796,8 +796,10 @@
         // get corresponding edge in invisible side
         let edgeToFilterInvisible = invisibleGM.edgesMap.get(edgeID);
         // set filtered status to tru and visible status to false.
-        edgeToFilterInvisible.isFiltered = true;
-        edgeToFilterInvisible.isVisible = false;
+        if (edgeToFilterInvisible) {
+          edgeToFilterInvisible.isFiltered = true;
+          edgeToFilterInvisible.isVisible = false;
+        }
       });
       // loop through list of nodes to filter
       nodeIDList.forEach(nodeID => {
@@ -1649,17 +1651,17 @@
          visibleGM.edgesMap.delete(childEdge.ID);
        });
      });
-      visibleGM.removeGraph(node.child);
+       visibleGM.removeGraph(node.child);
      descendantNodes.forEach(node => {
        visibleGM.nodesMap.delete(node.ID)
      });
      let nodeInInvisible = invisibleGM.nodesMap.get(node.ID);
      nodeInInvisible.isCollapsed = true;
-      nodeIDListForInvisible.forEach(nodeIDInvisible => {
+       nodeIDListForInvisible.forEach(nodeIDInvisible => {
        nodeInInvisible = invisibleGM.nodesMap.get(nodeIDInvisible);
        nodeInInvisible.isVisible = false;
      });
-      edgeIDListForInvisible.forEach(edgeIDInvisible => {
+       edgeIDListForInvisible.forEach(edgeIDInvisible => {
        let edgeInInvisible = invisibleGM.edgesMap.get(edgeIDInvisible);
        edgeInInvisible.isVisible = false;
      });
@@ -1971,7 +1973,10 @@
         }
       });
       // call the collapsedNodes function and pass list of nodes to be collapsed
-      return this.collapseNodes(nodeIDList, true, visibleGM, invisibleGM);
+      return {
+        collapsedNodes: nodeIDList,
+        ...this.collapseNodes(nodeIDList, true, visibleGM, invisibleGM)
+      };
     }
 
     //expand all nodes function
@@ -1979,7 +1984,10 @@
       //  get list of all the top level collapsed compound nodes  (takes invisible root node root node)
       let topCollapsedCompoundNodes = this.getTopCollapsedCompoundNodes(invisibleGM.rootGraph.parent);
       // all the expandNodes function will the list of all top level collapsed compound nodes
-      return this.expandNodes(topCollapsedCompoundNodes, true, visibleGM, invisibleGM);
+      return {
+        expandedNodes: topCollapsedCompoundNodes,
+        ...this.expandNodes(topCollapsedCompoundNodes, true, visibleGM, invisibleGM)
+      };
     }
 
     // function to get thae list of all the top level collapsed compound nodes, (takes invisible root node root node) 
@@ -3242,6 +3250,24 @@
       let invisibleGM = this.#invisibleGraphManager;
       return Auxiliary.getTargetNeighborhoodElements(nodeID, invisibleGM);
     }
+    isCollapsible(nodeID) {
+      let invisibleGM = this.#invisibleGraphManager;
+      let node = invisibleGM.nodesMap.get(nodeID);
+      if (node.child && node.isCollapsed == false) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    isExpandable(nodeID) {
+      let invisibleGM = this.#invisibleGraphManager;
+      let node = invisibleGM.nodesMap.get(nodeID);
+      if (node.child && node.isCollapsed) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
   function complexityManagement(cy) {
@@ -3563,7 +3589,18 @@
       var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var nodeIDList = [];
       nodes.forEach(function (node) {
-        nodeIDList.push(node.id());
+        if (compMgrInstance.isCollapsible(node.id())) {
+          nodeIDList.push(node.id());
+          node.data('position-before-collapse', {
+            x: node.position().x,
+            y: node.position().y
+          });
+          node.data('size-before-collapse', {
+            w: node.outerWidth(),
+            h: node.outerHeight()
+          });
+          node.addClass('cy-expand-collapse-collapsed-node');
+        }
       });
       var IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
       var IDsToRemove = [];
@@ -3587,11 +3624,25 @@
       var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var nodeIDList = [];
       nodes.forEach(function (node) {
-        nodeIDList.push(node.id());
+        if (compMgrInstance.isExpandable(node.id())) {
+          nodeIDList.push(node.id());
+          node.removeClass('cy-expand-collapse-collapsed-node');
+          node.removeData('position-before-collapse');
+          node.removeData('size-before-collapse');
+        }
       });
       var returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
       // Add required elements to cy instance
       actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
+      returnedElements.nodeIDListForVisible.forEach(function (nodeID) {
+        var node = cy.getElementById(nodeID);
+        if (compMgrInstance.isCollapsible(node.id())) {
+          node.removeClass('cy-expand-collapse-collapsed-node');
+          node.removeData('position-before-collapse');
+          node.removeData('size-before-collapse');
+        }
+      });
+
       // Add required elements to cy instance
       actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
 
@@ -3605,6 +3656,18 @@
       var IDsToAdd = [];
       IDsToRemoveTemp.nodeIDListForInvisible.forEach(function (id) {
         IDsToRemove.push(id);
+      });
+      IDsToRemoveTemp.collapsedNodes.forEach(function (nodeID) {
+        var node = cy.getElementById(nodeID);
+        node.data('position-before-collapse', {
+          x: node.position().x,
+          y: node.position().y
+        });
+        node.data('size-before-collapse', {
+          w: node.outerWidth(),
+          h: node.outerHeight()
+        });
+        node.addClass('cy-expand-collapse-collapsed-node');
       });
       IDsToRemoveTemp.edgeIDListForInvisible.forEach(function (id) {
         IDsToRemove.push(id);
@@ -3622,6 +3685,13 @@
       var returnedElements = compMgrInstance.expandAllNodes();
       // Add required elements to cy instance
       actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
+      returnedElements.expandedNodes.forEach(function (nodeID) {
+        var node = cy.getElementById(nodeID);
+        node.removeClass('cy-expand-collapse-collapsed-node');
+        node.removeData('position-before-collapse');
+        node.removeData('size-before-collapse');
+      });
+
       // Add required elements to cy instance
       actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
 
@@ -3708,6 +3778,12 @@
 
       // Add required meta edges to cy instance
       actOnVisibleForMetaEdge(EdgeIDList[1], cy);
+    };
+    api.isCollapsible = function (node) {
+      return compMgrInstance.isCollapsible(node.id());
+    };
+    api.isExpandable = function (node) {
+      return compMgrInstance.isExpandable(node.id());
     };
     return api;
   }
@@ -3988,9 +4064,9 @@
       init: function init() {
         var canvas = document.createElement('canvas');
         canvas.classList.add("expand-collapse-canvas");
-        var container = cy.container();
+        var container = document.getElementById('cy');
         var ctx = canvas.getContext('2d');
-        container.append(canvas);
+        container.appendChild(canvas);
         var offset = function offset(elt) {
           var rect = elt.getBoundingClientRect();
           return {
@@ -3998,6 +4074,21 @@
             left: rect.left + document.documentElement.scrollLeft
           };
         };
+        function resize() {
+          var width = container.offsetWidth;
+          var height = container.offsetHeight;
+          var canvasWidth = width * options.pixelRatio;
+          var canvasHeight = height * options.pixelRatio;
+          canvas.width = canvasWidth;
+          canvas.height = canvasHeight;
+          canvas.style.width = "".concat(width, "px");
+          canvas.style.height = "".concat(height, "px");
+          cy.trigger("cyCanvas.resize");
+        }
+        cy.on("resize", function () {
+          resize();
+        });
+        canvas.setAttribute("style", "position:absolute; top:0; left:0; z-index:".concat(options().zIndex, ";"));
         var _sizeCanvas = debounce(function () {
           canvas.height = cy.container().offsetHeight;
           canvas.width = cy.container().offsetWidth;
@@ -4020,9 +4111,7 @@
         function sizeCanvas() {
           _sizeCanvas();
         }
-
-        //sizeCanvas();
-
+        resize();
         var data = {};
 
         // if there are events field in data unbind them here
@@ -4041,13 +4130,6 @@
           nodeWithRenderedCue = null;
         }
         function drawExpandCollapseCue(node) {
-          var children = node.children();
-          var collapsedChildren = node.data('collapsedChildren');
-          var hasChildren = children != null && children != undefined && children.length > 0;
-          // If this is a simple node with no collapsed children return directly
-          if (!hasChildren && !collapsedChildren) {
-            return;
-          }
           var isCollapsed = node.hasClass('cy-expand-collapse-collapsed-node');
 
           //Draw expand-collapse rectangles
@@ -4142,7 +4224,6 @@
             clearDraws();
           }
         });
-        var ur;
         cy.on('select unselect', data.eSelect = function () {
           if (nodeWithRenderedCue) {
             clearDraws();
@@ -4152,7 +4233,7 @@
             return;
           }
           var selectedNode = selectedNodes[0];
-          if (selectedNode.isParent() || selectedNode.hasClass('cy-expand-collapse-collapsed-node')) {
+          if (api.isExpandable(selectedNode) || api.isCollapsible(selectedNode)) {
             drawExpandCollapseCue(selectedNode);
           }
         });
@@ -4172,35 +4253,38 @@
           var opts = options();
           var factor = (opts.expandCollapseCueSensitivity - 1) / 2;
           if (Math.abs(oldMousePos.x - currMousePos.x) < 5 && Math.abs(oldMousePos.y - currMousePos.y) < 5 && cyRenderedPosX >= expandcollapseRenderedStartX - expandcollapseRenderedRectSize * factor && cyRenderedPosX <= expandcollapseRenderedEndX + expandcollapseRenderedRectSize * factor && cyRenderedPosY >= expandcollapseRenderedStartY - expandcollapseRenderedRectSize * factor && cyRenderedPosY <= expandcollapseRenderedEndY + expandcollapseRenderedRectSize * factor) {
-            if (opts.undoable && !ur) {
-              ur = cy.undoRedo({
-                defaultActions: false
-              });
-            }
             if (api.isCollapsible(node)) {
               clearDraws();
-              if (opts.undoable) {
-                ur.do("collapse", {
-                  nodes: node,
-                  options: opts
-                });
+              node.unselect();
+              api.collapseNodes([node]);
+              if (document.getElementById("cbk-run-layout2").checked) {
+                cy.layout({
+                  name: "fcose",
+                  animate: true,
+                  randomize: false,
+                  stop: function stop() {
+                    initializer(cy);
+                  }
+                }).run();
               } else {
-                api.collapse(node, opts);
+                initializer(cy);
               }
             } else if (api.isExpandable(node)) {
               clearDraws();
-              if (opts.undoable) {
-                ur.do("expand", {
-                  nodes: node,
-                  options: opts
-                });
+              node.unselect();
+              api.expandNodes([node]);
+              if (document.getElementById("cbk-run-layout2").checked) {
+                cy.layout({
+                  name: "fcose",
+                  animate: true,
+                  randomize: false,
+                  stop: function stop() {
+                    initializer(cy);
+                  }
+                }).run();
               } else {
-                api.expand(node, opts);
+                initializer(cy);
               }
-            }
-            if (node.selectable()) {
-              node.unselectify();
-              cy.scratch('_cyExpandCollapse').selectableChanged = true;
             }
           }
         });

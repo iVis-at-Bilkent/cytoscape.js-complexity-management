@@ -33,7 +33,6 @@ body {
   padding: 8px;
   grid-area: cy;
 }
-
 .ext-footer {
   padding-bottom: 5px;
   grid-area: f;
@@ -59,8 +58,6 @@ body {
   margin-left: 10px;
 }
 #cy {
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: #ffffff;

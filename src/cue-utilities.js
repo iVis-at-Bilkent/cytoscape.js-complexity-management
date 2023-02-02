@@ -26,9 +26,9 @@ export function cueUtilities(params, cy, api) {
     init: function () {
       let canvas = document.createElement('canvas');
       canvas.classList.add("expand-collapse-canvas");
-      let container = cy.container();
+      let container = document.getElementById('cy');
       let ctx = canvas.getContext('2d');
-      container.append(canvas);
+      container.appendChild(canvas);
 
       let offset = function (elt) {
         let rect = elt.getBoundingClientRect();
@@ -38,7 +38,31 @@ export function cueUtilities(params, cy, api) {
           left: rect.left + document.documentElement.scrollLeft
         }
       }
+      function resize() {
+				const width = container.offsetWidth;
+				const height = container.offsetHeight;
+
+				const canvasWidth = width * options.pixelRatio;
+				const canvasHeight = height * options.pixelRatio;
+
+				canvas.width = canvasWidth;
+				canvas.height = canvasHeight;
+
+				canvas.style.width = `${width}px`;
+				canvas.style.height = `${height}px`;
+
+				cy.trigger("cyCanvas.resize");
+			}
+
+			cy.on("resize", () => {
+				resize();
+			});
       
+			canvas.setAttribute(
+				"style",
+				`position:absolute; top:0; left:0; z-index:${options().zIndex};`,
+			);
+
       let _sizeCanvas = debounce(function () {
         canvas.height = cy.container().offsetHeight;
         canvas.width = cy.container().offsetWidth;
@@ -65,8 +89,8 @@ export function cueUtilities(params, cy, api) {
         _sizeCanvas();
       }
 
-      sizeCanvas();
-
+      resize();
+      
       let data = {};
 
       // if there are events field in data unbind them here
@@ -88,14 +112,7 @@ export function cueUtilities(params, cy, api) {
       }
 
       function drawExpandCollapseCue(node) {
-        let children = node.children();
-        let collapsedChildren = node.data('collapsedChildren');
-        let hasChildren = children != null && children != undefined && children.length > 0;
-        // If this is a simple node with no collapsed children return directly
-        if (!hasChildren && !collapsedChildren) {
-          return;
-        }
-
+        
         let isCollapsed = node.hasClass('cy-expand-collapse-collapsed-node');
 
         //Draw expand-collapse rectangles
@@ -223,8 +240,8 @@ export function cueUtilities(params, cy, api) {
           return;
         }
         let selectedNode = selectedNodes[0];
-
-        if (selectedNode.isParent() || selectedNode.hasClass('cy-expand-collapse-collapsed-node')) {
+        
+        if (api.isExpandable(selectedNode) || api.isCollapsible(selectedNode)) {
           drawExpandCollapseCue(selectedNode);
         }
       });
@@ -251,34 +268,28 @@ export function cueUtilities(params, cy, api) {
           && cyRenderedPosX <= expandcollapseRenderedEndX + expandcollapseRenderedRectSize * factor
           && cyRenderedPosY >= expandcollapseRenderedStartY - expandcollapseRenderedRectSize * factor
           && cyRenderedPosY <= expandcollapseRenderedEndY + expandcollapseRenderedRectSize * factor) {
-          if (opts.undoable && !ur) {
-            ur = cy.undoRedo({ defaultActions: false });
-          }
-
+         
           if (api.isCollapsible(node)) {
             clearDraws();
-            if (opts.undoable) {
-              ur.do("collapse", {
-                nodes: node,
-                options: opts
-              });
+            node.unselect();
+            api.collapseNodes([node]);
+            if (document.getElementById("cbk-run-layout2").checked) {
+              cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
             }
             else {
-              api.collapse(node, opts);
+              initializer(cy);
             }
           }
           else if (api.isExpandable(node)) {
             clearDraws();
-            if (opts.undoable) {
-              ur.do("expand", { nodes: node, options: opts });
+            node.unselect();
+            api.expandNodes([node]);
+            if (document.getElementById("cbk-run-layout2").checked) {
+              cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
             }
             else {
-              api.expand(node, opts);
+              initializer(cy);
             }
-          }
-          if (node.selectable()) {
-            node.unselectify();
-            cy.scratch('_cyExpandCollapse').selectableChanged = true;
           }
         }
       });
