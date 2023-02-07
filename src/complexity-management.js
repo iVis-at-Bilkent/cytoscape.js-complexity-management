@@ -499,14 +499,17 @@ export function complexityManagement(cy) {
     edges.forEach((edge) => {
       edgeIDList.push(edge.id());
     });
+    if(edgeIDList.length>1){
 
-    let metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
+      let metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
 
-    // Remove required elements from cy instance
-    actOnInvisible(edgeIDList, cy);
+      // Remove required elements from cy instance
+      actOnInvisible(edgeIDList, cy);
 
-    // Add required meta edges to cy instance
-    actOnVisibleForMetaEdge(metaEdgeID, cy);
+      // Add required meta edges to cy instance
+      actOnVisibleForMetaEdge(metaEdgeID, cy);
+
+    }
   }
 
   api.collapseEdgesBetweenNodes = (nodes) => {

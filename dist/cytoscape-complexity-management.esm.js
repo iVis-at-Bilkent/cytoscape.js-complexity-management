@@ -468,13 +468,15 @@ function complexityManagement(cy) {
     edges.forEach(function (edge) {
       edgeIDList.push(edge.id());
     });
-    var metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
+    if (edgeIDList.length > 1) {
+      var metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
 
-    // Remove required elements from cy instance
-    actOnInvisible(edgeIDList, cy);
+      // Remove required elements from cy instance
+      actOnInvisible(edgeIDList, cy);
 
-    // Add required meta edges to cy instance
-    actOnVisibleForMetaEdge(metaEdgeID, cy);
+      // Add required meta edges to cy instance
+      actOnVisibleForMetaEdge(metaEdgeID, cy);
+    }
   };
   api.collapseEdgesBetweenNodes = function (nodes) {
     var nodeIDList = [];
