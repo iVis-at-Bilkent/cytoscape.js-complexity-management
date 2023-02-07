@@ -35,7 +35,28 @@ function loadJson() {
 function jsonFileSelected() {
   readTxtFile(document.getElementById('json-file-inp').files[0], (s) => {
     cy.$().remove();
-    cy.add(JSON.parse(s));
+    let tempIDs = [];
+    let tempNodes = [];
+    let nodesToBeAdded = [];
+    let data = JSON.parse(s);
+    data.nodes.forEach((node) => {
+      if(node.data.parent){
+        if(tempIDs.includes(node.data.parent)){
+          nodesToBeAdded.push(node)
+        }else{
+          tempNodes.push(node);
+        }
+      }else{
+        nodesToBeAdded.push(node);
+        tempIDs.push(node.data.id);
+      }
+    })
+    tempNodes.forEach((node) => {
+      nodesToBeAdded.push(node);
+    })
+    data.nodes = [...nodesToBeAdded]
+    console.log(data)
+    cy.add(data);
     cy.elements().forEach((ele) => {
       let randomWeight = Math.floor(Math.random() * 101);
       ele.data('weight', randomWeight);
