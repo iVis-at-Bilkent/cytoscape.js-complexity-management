@@ -303,13 +303,23 @@ function onLoaded() {
 
     if (cy.nodes(":selected").length == 2 && firstSelectedNode.intersection(secondSelectedNode.ancestors()).length == 0 && 
       secondSelectedNode.intersection(firstSelectedNode.ancestors()).length == 0) {
-      cy.add({
-        group: 'edges',
-        data: { id: 'ne' + newEdgeCount, 
-                source: cy.nodes(":selected")[0].id(), 
-                target: cy.nodes(":selected")[1].id(),
-                weight: Math.floor(Math.random() * 101)}
-      });
+      while(true){
+        try{
+          cy.add({
+            group: 'edges',
+            data: { id: 'ne' + newEdgeCount, 
+                    source: cy.nodes(":selected")[0].id(), 
+                    target: cy.nodes(":selected")[1].id(),
+                    weight: Math.floor(Math.random() * 101)}
+          });
+          console.log('ne' + newEdgeCount)
+          break;
+        }catch(e){
+          console.log(e);
+          newEdgeCount++;
+        }
+    }
+    
     }
 
     newEdgeCount++;
