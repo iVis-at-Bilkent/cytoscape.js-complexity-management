@@ -552,7 +552,12 @@ function onLoaded() {
   });
 
   document.getElementById("collapseSelectedNodes").addEventListener("click", () => {
-    instance.collapseNodes(cy.nodes(':selected'));
+
+    if (document.getElementById("cbk-flag-recursive").checked) {
+      instance.collapseNodes(cy.nodes(':selected'), true);
+    }else{
+      instance.collapseNodes(cy.nodes(':selected'));
+    }
 
     if (document.getElementById("cbk-run-layout3").checked) {
       cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
@@ -563,8 +568,11 @@ function onLoaded() {
   });
 
   document.getElementById("expandSelectedNodes").addEventListener("click", () => {
-    instance.expandNodes(cy.nodes(':selected'));
-
+    if (document.getElementById("cbk-flag-recursive").checked) {
+      instance.expandNodes(cy.nodes(':selected'), true);
+    }else{
+      instance.expandNodes(cy.nodes(':selected'));
+    }
     if (document.getElementById("cbk-run-layout3").checked) {
       cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
     }
@@ -607,8 +615,11 @@ function onLoaded() {
   });
 
 document.getElementById("expandSelectedEdges").addEventListener("click", () => {
-  instance.expandEdges(cy.edges(':selected'));
-
+  if (document.getElementById("cbk-flag-recursive").checked) {
+    instance.expandEdges(cy.edges(':selected'), true);
+  }else{
+    instance.expandEdges(cy.edges(':selected'));
+  }
   if (document.getElementById("cbk-run-layout3").checked) {
     cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
   }
@@ -629,7 +640,14 @@ document.getElementById("collapseEdgesBetweenNodes").addEventListener("click", (
 });
 
 document.getElementById("expandEdgesBetweenNodes").addEventListener("click", () => {
-  instance.expandEdgesBetweenNodes(cy.nodes(':selected'));
+
+  if (document.getElementById("cbk-flag-recursive").checked) {
+    instance.expandEdgesBetweenNodes(cy.nodes(':selected') , true);
+  }else{
+    instance.expandEdgesBetweenNodes(cy.nodes(':selected'));
+  }
+
+  
 
   if (document.getElementById("cbk-run-layout3").checked) {
     cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();

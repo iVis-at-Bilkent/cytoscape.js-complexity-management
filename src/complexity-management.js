@@ -541,7 +541,7 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(EdgeIDList[1], cy);
   };
 
-  api.expandEdges = (edges, isRecursive = true) => {
+  api.expandEdges = (edges, isRecursive = false) => {
     let edgeIDList = [];
 
     edges.forEach((edge) => {
@@ -560,7 +560,7 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(edgesListReturned[1], cy);
   };
 
-  api.expandEdgesBetweenNodes = (nodes, isRecursive = true) => {
+  api.expandEdgesBetweenNodes = (nodes, isRecursive = false) => {
     let nodeIDList = [];
 
     nodes.forEach((node) => {

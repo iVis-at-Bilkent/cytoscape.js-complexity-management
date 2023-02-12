@@ -272,7 +272,11 @@ export function cueUtilities(params, cy, api) {
           if (api.isCollapsible(node)) {
             clearDraws();
             node.unselect();
-            api.collapseNodes([node]);
+            if (document.getElementById("cbk-flag-recursive").checked) {
+              api.collapseNodes([node], true);
+            }else{
+              api.collapseNodes([node]);
+            }
             if (document.getElementById("cbk-run-layout2").checked) {
               cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
             }
@@ -283,7 +287,11 @@ export function cueUtilities(params, cy, api) {
           else if (api.isExpandable(node)) {
             clearDraws();
             node.unselect();
-            api.expandNodes([node]);
+            if (document.getElementById("cbk-flag-recursive").checked) {
+              api.expandNodes([node], true);
+            }else{
+              api.expandNodes([node]);
+            }
             if (document.getElementById("cbk-run-layout2").checked) {
               cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
             }

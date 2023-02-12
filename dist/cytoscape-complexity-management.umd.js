@@ -3847,7 +3847,7 @@
       actOnVisibleForMetaEdge(EdgeIDList[1], cy);
     };
     api.expandEdges = function (edges) {
-      var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var edgeIDList = [];
       edges.forEach(function (edge) {
         edgeIDList.push(edge.id());
@@ -3864,7 +3864,7 @@
       actOnVisibleForMetaEdge(edgesListReturned[1], cy);
     };
     api.expandEdgesBetweenNodes = function (nodes) {
-      var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var nodeIDList = [];
       nodes.forEach(function (node) {
         nodeIDList.push(node.id());
@@ -4369,7 +4369,11 @@
             if (api.isCollapsible(node)) {
               clearDraws();
               node.unselect();
-              api.collapseNodes([node]);
+              if (document.getElementById("cbk-flag-recursive").checked) {
+                api.collapseNodes([node], true);
+              } else {
+                api.collapseNodes([node]);
+              }
               if (document.getElementById("cbk-run-layout2").checked) {
                 cy.layout({
                   name: "fcose",
@@ -4385,7 +4389,11 @@
             } else if (api.isExpandable(node)) {
               clearDraws();
               node.unselect();
-              api.expandNodes([node]);
+              if (document.getElementById("cbk-flag-recursive").checked) {
+                api.expandNodes([node], true);
+              } else {
+                api.expandNodes([node]);
+              }
               if (document.getElementById("cbk-run-layout2").checked) {
                 cy.layout({
                   name: "fcose",
