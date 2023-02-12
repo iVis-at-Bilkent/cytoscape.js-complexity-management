@@ -217,14 +217,18 @@ function complexityManagement(cy) {
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
     cy.off('add', actOnAdd);
     metaEdgeList.forEach(function (metaEdgeData) {
-      cy.add({
-        group: 'edges',
-        data: {
-          id: metaEdgeData["ID"],
-          source: metaEdgeData["sourceID"],
-          target: metaEdgeData["targetID"]
-        }
-      });
+      try {
+        cy.add({
+          group: 'edges',
+          data: {
+            id: metaEdgeData["ID"],
+            source: metaEdgeData["sourceID"],
+            target: metaEdgeData["targetID"]
+          }
+        });
+      } catch (e) {
+        console.log(e);
+      }
     });
 
     // Activate remove event again
