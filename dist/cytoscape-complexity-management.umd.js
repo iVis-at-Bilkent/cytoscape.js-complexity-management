@@ -1803,10 +1803,20 @@
             // report edge as processed (to be added)
             this.addedElements.edgeIDListForVisible.add(item);
           });
+          let tempArr = [...this.addedElements.edgeIDListForVisible].filter(edgeID => visibleGM.edgesMap.has(edgeID));
+          this.addedElements.edgeIDListForVisible = new Set(tempArr);
           // loop through meta edges
           tempList[1].forEach(item => {
             // report meta edge as parocessed (to be removed)
             this.addedElements.edgeIDListToRemove.add(item.ID);
+            let tempArr = [...this.addedElements.metaEdgeIDListForVisible].filter(mEdge => {
+              if (mEdge.ID == item.ID) {
+                return false;
+              } else {
+                return true;
+              }
+            });
+            this.addedElements.metaEdgeIDListForVisible = new Set(tempArr);
           });
           // loop through meta edges to be added
           tempList[2].forEach(item => {
