@@ -415,6 +415,19 @@ export function complexityManagement(cy) {
         node.removeData('position-before-collapse');
         node.removeData('size-before-collapse');
       }
+      else if(compMgrInstance.isExpandable(node.id())){
+        node.data('position-before-collapse', {
+          x: node.position().x,
+          y: node.position().y
+        });
+  
+        node.data('size-before-collapse', {
+          w: node.outerWidth(),
+          h: node.outerHeight()
+        });
+        node.addClass('cy-expand-collapse-collapsed-node');
+      }
+      
     })
 
     // Add required elements to cy instance
