@@ -225,7 +225,8 @@ function complexityManagement(cy) {
           data: {
             id: metaEdgeData["ID"],
             source: metaEdgeData["sourceID"],
-            target: metaEdgeData["targetID"]
+            target: metaEdgeData["targetID"],
+            size: metaEdgeData['size']
           }
         });
       } catch (e) {

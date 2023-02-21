@@ -196,7 +196,7 @@ export function complexityManagement(cy) {
     cy.off('add', actOnAdd);
     metaEdgeList.forEach((metaEdgeData) => {
       try{
-      cy.add({ group: 'edges', data: { id: metaEdgeData["ID"], source: metaEdgeData["sourceID"], target: metaEdgeData["targetID"]}})
+      cy.add({ group: 'edges', data: { id: metaEdgeData["ID"], source: metaEdgeData["sourceID"], target: metaEdgeData["targetID"], size: metaEdgeData['size']}})
       }catch(e){console.log(e)}
     });
 

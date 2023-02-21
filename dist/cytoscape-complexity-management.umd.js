@@ -1592,7 +1592,8 @@
                     metaEdgeIDListForVisible.push({
                       ID: newMetaEdge.ID,
                       sourceID: newMetaEdge.source.ID,
-                      targetID: newMetaEdge.target.ID
+                      targetID: newMetaEdge.target.ID,
+                      size: newMetaEdge.originalEdges.length
                     });
                   }
                 }
@@ -1607,7 +1608,8 @@
                   metaEdgeIDListForVisible.push({
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
-                    targetID: newMetaEdge.target.ID
+                    targetID: newMetaEdge.target.ID,
+                    size: newMetaEdge.originalEdges.length
                   });
                 }
               } else {
@@ -1635,7 +1637,8 @@
                     metaEdgeIDListForVisible.push({
                       ID: newMetaEdge.ID,
                       sourceID: newMetaEdge.source.ID,
-                      targetID: newMetaEdge.target.ID
+                      targetID: newMetaEdge.target.ID,
+                      size: newMetaEdge.originalEdges.length
                     });
                   }
                 }
@@ -1650,7 +1653,8 @@
                   metaEdgeIDListForVisible.push({
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
-                    targetID: newMetaEdge.target.ID
+                    targetID: newMetaEdge.target.ID,
+                    size: newMetaEdge.originalEdges.length
                   });
                 }
               }
@@ -1872,7 +1876,8 @@
                 this.addedElements.metaEdgeIDListForVisible.add({
                   ID: topMetaEdge.ID,
                   sourceID: topMetaEdge.source.ID,
-                  targetID: topMetaEdge.target.ID
+                  targetID: topMetaEdge.target.ID,
+                  size: topMetaEdge.originalEdges.length
                 });
               }
             }
@@ -1954,7 +1959,8 @@
               metaEdgeIDListToKeep.add({
                 ID: metaEdge.ID,
                 sourceID: metaEdge.source.ID,
-                targetID: metaEdge.target.ID
+                targetID: metaEdge.target.ID,
+                size: metaEdge.originalEdges.length
               });
             });
           }
@@ -2013,7 +2019,8 @@
               this.removedElements.metaEdgeIDListForVisible.add({
                 ID: metaEdge.ID,
                 sourceID: metaEdge.source.ID,
-                targetID: metaEdge.target.ID
+                targetID: metaEdge.target.ID,
+                size: metaEdge.originalEdges.length
               });
             });
           }
@@ -2068,7 +2075,8 @@
               tempArr.push({
                 ID: metaEdge.ID,
                 sourceID: metaEdge.source.ID,
-                targetID: metaEdge.target.ID
+                targetID: metaEdge.target.ID,
+                size: metaEdge.originalEdges.length
               });
             });
             // add tempArr to the metaEdgeIDListForVisible
@@ -2198,7 +2206,8 @@
       return [{
         ID: newMetaEdge.ID,
         sourceID: newMetaEdge.source.ID,
-        targetID: newMetaEdge.target.ID
+        targetID: newMetaEdge.target.ID,
+        size: newMetaEdge.originalEdges.length
       }];
     }
 
@@ -2259,7 +2268,8 @@
               originalEdgeIDList[1].push({
                 ID: originalEdge.ID,
                 sourceID: sourceNode.ID,
-                targetID: targetNode.ID
+                targetID: targetNode.ID,
+                size: originalEdge.originalEdges.length
               });
             }
           } else {
@@ -2624,7 +2634,6 @@
       // Structure [[edges],[metaedges (to be deleted)],[meta edges to be added]]
       let markedMetaEdges = [[], [], []];
       let addedMetaEdges = [];
-      console.log(edgesToBeProcessed);
       node.edges.forEach(nodeDescendantEdge => {
         if (invisibleGM.nodesMap.get(nodeDescendantEdge.source.ID).isVisible && invisibleGM.nodesMap.get(nodeDescendantEdge.target.ID).isVisible) {
           edgesToBeProcessed.push(nodeDescendantEdge);
@@ -2676,7 +2685,8 @@
                   edgeIDList[2].push({
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
-                    targetID: newMetaEdge.target.ID
+                    targetID: newMetaEdge.target.ID,
+                    size: newMetaEdge.originalEdges.length
                   });
                 } else if (incidentEdge.target.isVisible) {
                   let sourceID = this.getVisibleParent(incidentEdge.source.ID, invisibleGM);
@@ -2686,7 +2696,8 @@
                   edgeIDList[2].push({
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
-                    targetID: newMetaEdge.target.ID
+                    targetID: newMetaEdge.target.ID,
+                    size: newMetaEdge.originalEdges.length
                   });
                 } else {
                   let sourceID = this.getVisibleParent(incidentEdge.source.ID, invisibleGM);
@@ -2698,7 +2709,8 @@
                   edgeIDList[2].push({
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
-                    targetID: newMetaEdge.target.ID
+                    targetID: newMetaEdge.target.ID,
+                    size: newMetaEdge.originalEdges.length
                   });
                 }
               }
@@ -2738,7 +2750,8 @@
                       edgeIDList[2].push({
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
-                        targetID: newMetaEdge.target.ID
+                        targetID: newMetaEdge.target.ID,
+                        size: newMetaEdge.originalEdges.length
                       });
                     }
                   } else if (incidentEdge.target.isVisible) {
@@ -2755,7 +2768,8 @@
                       edgeIDList[2].push({
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
-                        targetID: newMetaEdge.target.ID
+                        targetID: newMetaEdge.target.ID,
+                        size: newMetaEdge.originalEdges.length
                       });
                     }
                   } else {
@@ -2774,7 +2788,8 @@
                       edgeIDList[2].push({
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
-                        targetID: newMetaEdge.target.ID
+                        targetID: newMetaEdge.target.ID,
+                        size: newMetaEdge.originalEdges.length
                       });
                     }
                   }
@@ -2863,7 +2878,8 @@
                       edgeIDList[2].push({
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
-                        targetID: newMetaEdge.target.ID
+                        targetID: newMetaEdge.target.ID,
+                        size: newMetaEdge.originalEdges.length
                       });
                     }
                   } else {
@@ -2875,7 +2891,8 @@
                       edgeIDList[2].push({
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
-                        targetID: newMetaEdge.target.ID
+                        targetID: newMetaEdge.target.ID,
+                        size: newMetaEdge.originalEdges.length
                       });
                     }
                   }
@@ -2923,7 +2940,8 @@
               edgeIDList[2].push({
                 ID: newMetaEdge.ID,
                 sourceID: newMetaEdge.source.ID,
-                targetID: newMetaEdge.target.ID
+                targetID: newMetaEdge.target.ID,
+                size: newMetaEdge.originalEdges.length
               });
             }
           } else if (edge.target.isVisible) {
@@ -2935,7 +2953,8 @@
               edgeIDList[2].push({
                 ID: newMetaEdge.ID,
                 sourceID: newMetaEdge.source.ID,
-                targetID: newMetaEdge.target.ID
+                targetID: newMetaEdge.target.ID,
+                size: newMetaEdge.originalEdges.length
               });
             }
           } else {
@@ -2949,7 +2968,8 @@
               edgeIDList[2].push({
                 ID: newMetaEdge.ID,
                 sourceID: newMetaEdge.source.ID,
-                targetID: newMetaEdge.target.ID
+                targetID: newMetaEdge.target.ID,
+                size: newMetaEdge.originalEdges.length
               });
             }
           }
@@ -3710,7 +3730,8 @@
             data: {
               id: metaEdgeData["ID"],
               source: metaEdgeData["sourceID"],
-              target: metaEdgeData["targetID"]
+              target: metaEdgeData["targetID"],
+              size: metaEdgeData['size']
             }
           });
         } catch (e) {
