@@ -214,22 +214,13 @@ function loadSample(globalVarName) {
   }
 }
 
-function colorizeEdges(cy) {
-  cy.$("edge").forEach((ele) => {
-    if (ele.data().size) {
-      ele.style("line-color", "#964B00");
-      ele.style("target-arrow-color", "#964B00");
-      ele.style('width',ele.data().size)
-    } 
-  });
-}
 
 function initializer(cy) {
   cyVisible.remove(cyVisible.elements());
   cyInvisible.remove(cyInvisible.elements());
 
   let nodesToAddVisible = [];
-  colorizeEdges(cy)
+  (cy)
   instance.getCompMgrInstance('get').visibleGraphManager.nodesMap.forEach((nodeItem, key) => {
     nodesToAddVisible.push({ data: { id: nodeItem.ID, parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }, position: !cy.getElementById(nodeItem.ID).isParent() ? cy.getElementById(nodeItem.ID).position() : null });
   });

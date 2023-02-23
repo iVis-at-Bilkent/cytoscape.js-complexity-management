@@ -201,7 +201,27 @@ function onLoaded() {
           'line-color' : '#0169d9',
           'target-arrow-color': '#0169d9',
         }
-      },     
+      },
+      {
+        selector: 'edge[compound="T"]',
+        style: {
+          'width': (edge) => {
+              return edge.data('size');
+          },
+          'line-color' : '#964B00',
+          'target-arrow-color': '#964B00',
+      }
+      },
+      {
+        selector: 'edge[compound="T"]:selected',
+        style: {
+          'width': (edge) => {
+              return edge.data('size');
+          },
+          'line-color' : '#0169d9',
+          'target-arrow-color': '#0169d9',
+      }
+      }      
     ],
     elements: {
       nodes: [
@@ -237,7 +257,7 @@ function onLoaded() {
   let newEdgeCount = 0;
 
   function initializer(cy) {
-    colorizeEdges(cy)
+    
     cyVisible.remove(cyVisible.elements());
     cyInvisible.remove(cyInvisible.elements());
 
@@ -824,12 +844,3 @@ function getRandomNodes() {
   return newNodes;
 };
 
-function colorizeEdges(cy) {
-  cy.$("edge").forEach((ele) => {
-    if (ele.data().size) {
-      ele.style("line-color", "#964B00");
-      ele.style("target-arrow-color", "#964B00");
-      ele.style('width',ele.data().size)
-    } 
-  });
-}

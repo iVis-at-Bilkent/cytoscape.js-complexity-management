@@ -1593,7 +1593,8 @@
                       ID: newMetaEdge.ID,
                       sourceID: newMetaEdge.source.ID,
                       targetID: newMetaEdge.target.ID,
-                      size: newMetaEdge.originalEdges.length
+                      size: newMetaEdge.originalEdges.length,
+                      compound: 'T'
                     });
                   }
                 }
@@ -1609,7 +1610,8 @@
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
                     targetID: newMetaEdge.target.ID,
-                    size: newMetaEdge.originalEdges.length
+                    size: newMetaEdge.originalEdges.length,
+                    compound: 'T'
                   });
                 }
               } else {
@@ -1638,7 +1640,8 @@
                       ID: newMetaEdge.ID,
                       sourceID: newMetaEdge.source.ID,
                       targetID: newMetaEdge.target.ID,
-                      size: newMetaEdge.originalEdges.length
+                      size: newMetaEdge.originalEdges.length,
+                      compound: 'T'
                     });
                   }
                 }
@@ -1654,7 +1657,8 @@
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
                     targetID: newMetaEdge.target.ID,
-                    size: newMetaEdge.originalEdges.length
+                    size: newMetaEdge.originalEdges.length,
+                    compound: 'T'
                   });
                 }
               }
@@ -1877,7 +1881,8 @@
                   ID: topMetaEdge.ID,
                   sourceID: topMetaEdge.source.ID,
                   targetID: topMetaEdge.target.ID,
-                  size: topMetaEdge.originalEdges.length
+                  size: topMetaEdge.originalEdges.length,
+                  compound: 'T'
                 });
               }
             }
@@ -1960,7 +1965,8 @@
                 ID: metaEdge.ID,
                 sourceID: metaEdge.source.ID,
                 targetID: metaEdge.target.ID,
-                size: metaEdge.originalEdges.length
+                size: metaEdge.originalEdges.length,
+                compound: 'T'
               });
             });
           }
@@ -2020,7 +2026,8 @@
                 ID: metaEdge.ID,
                 sourceID: metaEdge.source.ID,
                 targetID: metaEdge.target.ID,
-                size: metaEdge.originalEdges.length
+                size: metaEdge.originalEdges.length,
+                compound: 'T'
               });
             });
           }
@@ -2076,7 +2083,8 @@
                 ID: metaEdge.ID,
                 sourceID: metaEdge.source.ID,
                 targetID: metaEdge.target.ID,
-                size: metaEdge.originalEdges.length
+                size: metaEdge.originalEdges.length,
+                compound: 'T'
               });
             });
             // add tempArr to the metaEdgeIDListForVisible
@@ -2207,7 +2215,8 @@
         ID: newMetaEdge.ID,
         sourceID: newMetaEdge.source.ID,
         targetID: newMetaEdge.target.ID,
-        size: newMetaEdge.originalEdges.length
+        size: newMetaEdge.originalEdges.length,
+        compound: 'T'
       }];
     }
 
@@ -2269,7 +2278,8 @@
                 ID: originalEdge.ID,
                 sourceID: sourceNode.ID,
                 targetID: targetNode.ID,
-                size: originalEdge.originalEdges.length
+                size: originalEdge.originalEdges.length,
+                compound: 'T'
               });
             }
           } else {
@@ -2686,7 +2696,8 @@
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
                     targetID: newMetaEdge.target.ID,
-                    size: newMetaEdge.originalEdges.length
+                    size: newMetaEdge.originalEdges.length,
+                    compound: 'T'
                   });
                 } else if (incidentEdge.target.isVisible) {
                   let sourceID = this.getVisibleParent(incidentEdge.source.ID, invisibleGM);
@@ -2697,7 +2708,8 @@
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
                     targetID: newMetaEdge.target.ID,
-                    size: newMetaEdge.originalEdges.length
+                    size: newMetaEdge.originalEdges.length,
+                    compound: 'T'
                   });
                 } else {
                   let sourceID = this.getVisibleParent(incidentEdge.source.ID, invisibleGM);
@@ -2710,7 +2722,8 @@
                     ID: newMetaEdge.ID,
                     sourceID: newMetaEdge.source.ID,
                     targetID: newMetaEdge.target.ID,
-                    size: newMetaEdge.originalEdges.length
+                    size: newMetaEdge.originalEdges.length,
+                    compound: 'T'
                   });
                 }
               }
@@ -2751,7 +2764,8 @@
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
                         targetID: newMetaEdge.target.ID,
-                        size: newMetaEdge.originalEdges.length
+                        size: newMetaEdge.originalEdges.length,
+                        compound: 'T'
                       });
                     }
                   } else if (incidentEdge.target.isVisible) {
@@ -2769,7 +2783,8 @@
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
                         targetID: newMetaEdge.target.ID,
-                        size: newMetaEdge.originalEdges.length
+                        size: newMetaEdge.originalEdges.length,
+                        compound: 'T'
                       });
                     }
                   } else {
@@ -2789,7 +2804,8 @@
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
                         targetID: newMetaEdge.target.ID,
-                        size: newMetaEdge.originalEdges.length
+                        size: newMetaEdge.originalEdges.length,
+                        compound: 'T'
                       });
                     }
                   }
@@ -2879,7 +2895,8 @@
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
                         targetID: newMetaEdge.target.ID,
-                        size: newMetaEdge.originalEdges.length
+                        size: newMetaEdge.originalEdges.length,
+                        compound: 'T'
                       });
                     }
                   } else {
@@ -2892,7 +2909,8 @@
                         ID: newMetaEdge.ID,
                         sourceID: newMetaEdge.source.ID,
                         targetID: newMetaEdge.target.ID,
-                        size: newMetaEdge.originalEdges.length
+                        size: newMetaEdge.originalEdges.length,
+                        compound: 'T'
                       });
                     }
                   }
@@ -2941,7 +2959,8 @@
                 ID: newMetaEdge.ID,
                 sourceID: newMetaEdge.source.ID,
                 targetID: newMetaEdge.target.ID,
-                size: newMetaEdge.originalEdges.length
+                size: newMetaEdge.originalEdges.length,
+                compound: 'T'
               });
             }
           } else if (edge.target.isVisible) {
@@ -2954,7 +2973,8 @@
                 ID: newMetaEdge.ID,
                 sourceID: newMetaEdge.source.ID,
                 targetID: newMetaEdge.target.ID,
-                size: newMetaEdge.originalEdges.length
+                size: newMetaEdge.originalEdges.length,
+                compound: 'T'
               });
             }
           } else {
@@ -2969,7 +2989,8 @@
                 ID: newMetaEdge.ID,
                 sourceID: newMetaEdge.source.ID,
                 targetID: newMetaEdge.target.ID,
-                size: newMetaEdge.originalEdges.length
+                size: newMetaEdge.originalEdges.length,
+                compound: 'T'
               });
             }
           }
@@ -3731,7 +3752,8 @@
               id: metaEdgeData["ID"],
               source: metaEdgeData["sourceID"],
               target: metaEdgeData["targetID"],
-              size: metaEdgeData['size']
+              size: metaEdgeData['size'],
+              compound: metaEdgeData['compound']
             }
           });
         } catch (e) {
