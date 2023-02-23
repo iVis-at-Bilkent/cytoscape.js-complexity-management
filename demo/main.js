@@ -85,7 +85,8 @@ function onLoaded() {
       {
         selector: 'node[filtered="T"]',
         style: {
-          "border-style ": 'dashed',
+            "border-width": "2",
+            "border-style": "dashed"
         }
       },
       {
