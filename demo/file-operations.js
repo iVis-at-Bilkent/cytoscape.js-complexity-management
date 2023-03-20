@@ -55,7 +55,6 @@ function jsonFileSelected() {
       nodesToBeAdded.push(node);
     })
     data.nodes = [...nodesToBeAdded]
-    console.log(data)
     cy.add(data);
     cy.elements().forEach((ele) => {
       let randomWeight = Math.floor(Math.random() * 101);

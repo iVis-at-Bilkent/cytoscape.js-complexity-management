@@ -9,14 +9,44 @@ function _typeof(obj) {
     return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   }, _typeof(obj);
 }
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _s, _e;
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
 }
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
@@ -33,6 +63,9 @@ function _arrayLikeToArray(arr, len) {
 }
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function complexityManagement(cy) {
@@ -144,23 +177,23 @@ function complexityManagement(cy) {
   // Events - register action functions to events
 
   // When new element(s) added
-  cy.on('add', actOnAdd);
+  cy.on("add", actOnAdd);
 
   // When some element(s) removed
-  cy.on('remove', actOnRemove);
+  cy.on("remove", actOnRemove);
 
   // When source and/or target of an edge changed
-  cy.on('move', 'edge', actOnReconnect);
+  cy.on("move", "edge", actOnReconnect);
 
   // When parent of a node changed
-  cy.on('move', 'node', actOnParentChange);
+  cy.on("move", "node", actOnParentChange);
 
   /** Filter related operations */
 
   // Keeps the IDs of the currently filtered elements
   var filteredElements = new Set();
   var getFilterRule = function getFilterRule() {
-    return cy.scratch('cyComplexityManagement').options.filterRule;
+    return cy.scratch("cyComplexityManagement").options.filterRule;
   };
   var getDifference = function getDifference(setA, setB) {
     return new Set(_toConsumableArray(setA).filter(function (element) {
@@ -175,23 +208,23 @@ function complexityManagement(cy) {
     });
 
     // Close remove event temporarily because this is not an actual topology change, but a change because of cmgm
-    cy.off('remove', actOnRemove);
+    cy.off("remove", actOnRemove);
 
     // Remove elements from cy graph and add them to the scratchpad
     var removedEles = cy.remove(elesToRemove);
     removedEles.forEach(function (ele) {
-      cy.scratch('cyComplexityManagement').removedEles.set(ele.id(), ele);
+      cy.scratch("cyComplexityManagement").removedEles.set(ele.id(), ele);
     });
 
     // Activate remove event again
-    cy.on('remove', actOnRemove);
+    cy.on("remove", actOnRemove);
   }
   function actOnVisible(eleIDList, cy) {
     // Collect cy elements to be added
     var nodesToAdd = cy.collection();
     var edgesToAdd = cy.collection();
     eleIDList.forEach(function (id) {
-      var element = cy.scratch('cyComplexityManagement').removedEles.get(id);
+      var element = cy.scratch("cyComplexityManagement").removedEles.get(id);
       if (element) {
         if (element.isNode()) {
           nodesToAdd.merge(element);
@@ -202,39 +235,39 @@ function complexityManagement(cy) {
     });
 
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
-    cy.off('add', actOnAdd);
-
+    cy.off("add", actOnAdd);
+    nodesToAdd.forEach(function (x) {
+      x.position(cy.getElementById(x.data().parent).position());
+    });
     // Add elements from cy graph and remove them from the scratchpad
     var addedEles = cy.add(nodesToAdd.merge(edgesToAdd));
     addedEles.forEach(function (ele) {
-      cy.scratch('cyComplexityManagement').removedEles.delete(ele.id());
+      cy.scratch("cyComplexityManagement").removedEles.delete(ele.id());
     });
 
     // Activate remove event again
-    cy.on('add', actOnAdd);
+    cy.on("add", actOnAdd);
   }
   function actOnVisibleForMetaEdge(metaEdgeList, cy) {
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
-    cy.off('add', actOnAdd);
+    cy.off("add", actOnAdd);
     metaEdgeList.forEach(function (metaEdgeData) {
       try {
         cy.add({
-          group: 'edges',
+          group: "edges",
           data: {
             id: metaEdgeData["ID"],
             source: metaEdgeData["sourceID"],
             target: metaEdgeData["targetID"],
-            size: metaEdgeData['size'],
-            compound: metaEdgeData['compound']
+            size: metaEdgeData["size"],
+            compound: metaEdgeData["compound"]
           }
         });
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     });
 
     // Activate remove event again
-    cy.on('add', actOnAdd);
+    cy.on("add", actOnAdd);
   }
   function updateFilteredElements() {
     var filterRuleFunc = getFilterRule();
@@ -249,7 +282,7 @@ function complexityManagement(cy) {
     });
 
     // Then trace the temporarily removed elements
-    cy.scratch('cyComplexityManagement').removedEles.forEach(function (ele) {
+    cy.scratch("cyComplexityManagement").removedEles.forEach(function (ele) {
       if (filterRuleFunc(ele)) {
         newFilteredElements.add(ele.id());
       }
@@ -273,14 +306,15 @@ function complexityManagement(cy) {
     var nodeIDListToUnfilter = [];
     var edgeIDListToUnfilter = [];
     diffToFilter.forEach(function (id) {
-      if (cy.getElementById(id).length > 0 && cy.getElementById(id).isNode() || cy.scratch('cyComplexityManagement').removedEles.has(id) && cy.scratch('cyComplexityManagement').removedEles.get(id).isNode()) {
+      if (cy.getElementById(id).length > 0 && cy.getElementById(id).isNode() || cy.scratch("cyComplexityManagement").removedEles.has(id) && cy.scratch("cyComplexityManagement").removedEles.get(id).isNode()) {
         nodeIDListToFilter.push(id);
       } else {
         edgeIDListToFilter.push(id);
       }
     });
     diffToUnfilter.forEach(function (id) {
-      if (cy.scratch('cyComplexityManagement').removedEles.get(id).isNode()) {
+      var _cy$scratch$removedEl;
+      if ((_cy$scratch$removedEl = cy.scratch("cyComplexityManagement").removedEles.get(id)) !== null && _cy$scratch$removedEl !== void 0 && _cy$scratch$removedEl.isNode()) {
         nodeIDListToUnfilter.push(id);
       } else {
         edgeIDListToUnfilter.push(id);
@@ -291,9 +325,13 @@ function complexityManagement(cy) {
     var IDsToRemove = compMgrInstance.filter(nodeIDListToFilter, edgeIDListToFilter);
 
     // Unfilter toBeUnfiltered elements
-    var IDsToAdd = compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter);
+    var _compMgrInstance$unfi = compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter),
+      _compMgrInstance$unfi2 = _slicedToArray(_compMgrInstance$unfi, 2),
+      IDsToAdd = _compMgrInstance$unfi2[0],
+      metaEdgeIDs = _compMgrInstance$unfi2[1];
     actOnInvisible(IDsToRemove, cy);
     actOnVisible(IDsToAdd, cy);
+    actOnVisibleForMetaEdge(metaEdgeIDs, cy);
   }
 
   // API to be returned
@@ -302,7 +340,7 @@ function complexityManagement(cy) {
     return compMgrInstance;
   };
   api.updateFilterRule = function (newFilterRuleFunc) {
-    cy.scratch('cyComplexityManagement').options.filterRule = newFilterRuleFunc;
+    cy.scratch("cyComplexityManagement").options.filterRule = newFilterRuleFunc;
 
     // Update filtered elements based on the new filter rule
     updateFilteredElements();
@@ -312,10 +350,10 @@ function complexityManagement(cy) {
     nodes.forEach(function (node) {
       var neighborhood = compMgrInstance.getHiddenNeighbors(node.id());
       neighborhood.nodes.forEach(function (id) {
-        neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+        neighbors.merge(cy.scratch("cyComplexityManagement").removedEles.get(id));
       });
       neighborhood.edges.forEach(function (id) {
-        neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+        neighbors.merge(cy.scratch("cyComplexityManagement").removedEles.get(id));
       });
     });
     return neighbors;
@@ -362,15 +400,15 @@ function complexityManagement(cy) {
     nodes.forEach(function (node) {
       if (compMgrInstance.isCollapsible(node.id())) {
         nodeIDList.push(node.id());
-        node.data('position-before-collapse', {
+        node.data("position-before-collapse", {
           x: node.position().x,
           y: node.position().y
         });
-        node.data('size-before-collapse', {
+        node.data("size-before-collapse", {
           w: node.outerWidth(),
           h: node.outerHeight()
         });
-        node.addClass('cy-expand-collapse-collapsed-node');
+        node.addClass("cy-expand-collapse-collapsed-node");
       }
     });
     var IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
@@ -397,9 +435,9 @@ function complexityManagement(cy) {
     nodes.forEach(function (node) {
       if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
-        node.removeClass('cy-expand-collapse-collapsed-node');
-        node.removeData('position-before-collapse');
-        node.removeData('size-before-collapse');
+        node.removeClass("cy-expand-collapse-collapsed-node");
+        node.removeData("position-before-collapse");
+        node.removeData("size-before-collapse");
       }
     });
     var returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
@@ -408,19 +446,19 @@ function complexityManagement(cy) {
     returnedElements.nodeIDListForVisible.forEach(function (nodeID) {
       var node = cy.getElementById(nodeID);
       if (compMgrInstance.isCollapsible(node.id())) {
-        node.removeClass('cy-expand-collapse-collapsed-node');
-        node.removeData('position-before-collapse');
-        node.removeData('size-before-collapse');
+        node.removeClass("cy-expand-collapse-collapsed-node");
+        node.removeData("position-before-collapse");
+        node.removeData("size-before-collapse");
       } else if (compMgrInstance.isExpandable(node.id())) {
-        node.data('position-before-collapse', {
+        node.data("position-before-collapse", {
           x: node.position().x,
           y: node.position().y
         });
-        node.data('size-before-collapse', {
+        node.data("size-before-collapse", {
           w: node.outerWidth(),
           h: node.outerHeight()
         });
-        node.addClass('cy-expand-collapse-collapsed-node');
+        node.addClass("cy-expand-collapse-collapsed-node");
       }
     });
 
@@ -440,15 +478,15 @@ function complexityManagement(cy) {
     });
     IDsToRemoveTemp.collapsedNodes.forEach(function (nodeID) {
       var node = cy.getElementById(nodeID);
-      node.data('position-before-collapse', {
+      node.data("position-before-collapse", {
         x: node.position().x,
         y: node.position().y
       });
-      node.data('size-before-collapse', {
+      node.data("size-before-collapse", {
         w: node.outerWidth(),
         h: node.outerHeight()
       });
-      node.addClass('cy-expand-collapse-collapsed-node');
+      node.addClass("cy-expand-collapse-collapsed-node");
     });
     IDsToRemoveTemp.edgeIDListForInvisible.forEach(function (id) {
       IDsToRemove.push(id);
@@ -468,16 +506,21 @@ function complexityManagement(cy) {
     actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
     returnedElements.expandedNodes.forEach(function (nodeID) {
       var node = cy.getElementById(nodeID);
-      node.removeClass('cy-expand-collapse-collapsed-node');
-      node.removeData('position-before-collapse');
-      node.removeData('size-before-collapse');
+      node.removeClass("cy-expand-collapse-collapsed-node");
+      node.removeData("position-before-collapse");
+      node.removeData("size-before-collapse");
     });
 
     // Add required elements to cy instance
     actOnVisible(_toConsumableArray(returnedElements.edgeIDListForVisible), cy);
-
+    var cleanup = [];
+    cy.edges('[compound = "T"]').forEach(function (edge) {
+      if (!compMgrInstance.visibleGraphManager.edgesMap.has(edge.data().id)) {
+        cleanup.push(edge.data().id);
+      }
+    });
     // Remove required elements from cy instance
-    actOnInvisible(_toConsumableArray(returnedElements.edgeIDListToRemove), cy);
+    actOnInvisible([].concat(_toConsumableArray(returnedElements.edgeIDListToRemove), cleanup), cy);
   };
   api.collapseEdges = function (edges) {
     var edgeIDList = [];
@@ -827,6 +870,80 @@ var debounce2 = function () {
   return debounce2;
 }();
 
+function getDescendantsInorder(node) {
+  var descendants = {
+    edges: new Set(),
+    simpleNodes: [],
+    compoundNodes: []
+  };
+  var childGraph = node.child;
+  if (childGraph) {
+    var childGraphNodes = childGraph.nodes;
+    childGraphNodes.forEach(function (childNode) {
+      var childDescendents = getDescendantsInorder(childNode);
+      for (var id in childDescendents) {
+        descendants[id] = [].concat(_toConsumableArray(descendants[id] || []), _toConsumableArray(childDescendents[id]));
+      }
+      descendants['edges'] = new Set(descendants['edges']);
+      if (childNode.child) {
+        descendants.compoundNodes.push(childNode);
+      } else {
+        descendants.simpleNodes.push(childNode);
+      }
+      var nodeEdges = childNode.edges;
+      nodeEdges.forEach(function (item) {
+        return descendants['edges'].add(item);
+      });
+    });
+  }
+  return descendants;
+}
+function calculateExpansionFactor(focusID) {
+  var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
+  var nodeDiamensionSum = 0;
+  descendants.simpleNodes.forEach(function (node) {
+    if (!isNaN(node === null || node === void 0 ? void 0 : node.width)) {
+      nodeDiamensionSum += node === null || node === void 0 ? void 0 : node.width;
+    }
+  });
+  var averageNodeDiamension = Math.max(nodeDiamensionSum, 40) / descendants.simpleNodes.length;
+  var edgeDiamensionSum = 0;
+  descendants.edges.forEach(function (edge) {
+    if (edge.source.owner == edge.target.owner) {
+      edgeDiamensionSum += 80;
+    } else {
+      edgeDiamensionSum += 160;
+    }
+  });
+  var averageEdgeDiamension = Math.max(edgeDiamensionSum, 80) / descendants.edges.size;
+  var areaCoveredByGrid = Math.pow((2 * Math.sqrt(descendants.simpleNodes.length) - 1) * averageNodeDiamension, 2);
+  var areaCoveredByEdges = descendants.edges.size * averageEdgeDiamension;
+  var totalAreaCovered = areaCoveredByGrid + areaCoveredByEdges;
+  var expansionFactor = Math.sqrt(totalAreaCovered / Math.PI);
+  return expansionFactor * 7;
+}
+function expandGraph(focusID, cy) {
+  cy.layout({
+    name: 'fcose',
+    quality: "proof",
+    animate: true,
+    animationDuration: 500,
+    randomize: false,
+    nodeRepulsion: function nodeRepulsion(node) {
+      return node.data().id == focusID ? 15000 : 4500;
+    },
+    idealEdgeLength: function idealEdgeLength(edge) {
+      var focusNode = cy.getElementById(focusID);
+      var currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x, 2) + Math.pow(edge.source().position().y - edge.target().position().y, 2));
+      var sourceGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.source().position().x, 2) + Math.pow(focusNode.position().y - edge.source().position().y, 2));
+      var targetGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.target().position().x, 2) + Math.pow(focusNode.position().y - edge.target().position().y, 2));
+      var avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance) / 2;
+      var expansionFactor = calculateExpansionFactor(focusID);
+      console.log(currentEdgeLength, expansionFactor, avgGeometricDistance, expansionFactor / avgGeometricDistance);
+      return currentEdgeLength * (expansionFactor / avgGeometricDistance);
+    }
+  }).run();
+}
 function cueUtilities(params, cy, api) {
   var fn = params;
   var CUE_POS_UPDATE_DELAY = 100;
@@ -1038,7 +1155,6 @@ function cueUtilities(params, cy, api) {
         if (Math.abs(oldMousePos.x - currMousePos.x) < 5 && Math.abs(oldMousePos.y - currMousePos.y) < 5 && cyRenderedPosX >= expandcollapseRenderedStartX - expandcollapseRenderedRectSize * factor && cyRenderedPosX <= expandcollapseRenderedEndX + expandcollapseRenderedRectSize * factor && cyRenderedPosY >= expandcollapseRenderedStartY - expandcollapseRenderedRectSize * factor && cyRenderedPosY <= expandcollapseRenderedEndY + expandcollapseRenderedRectSize * factor) {
           if (api.isCollapsible(node)) {
             clearDraws();
-            node.unselect();
             if (document.getElementById("cbk-flag-recursive").checked) {
               api.collapseNodes([node], true);
             } else {
@@ -1058,23 +1174,40 @@ function cueUtilities(params, cy, api) {
             }
           } else if (api.isExpandable(node)) {
             clearDraws();
-            node.unselect();
             if (document.getElementById("cbk-flag-recursive").checked) {
-              api.expandNodes([node], true);
-            } else {
-              api.expandNodes([node]);
-            }
-            if (document.getElementById("cbk-run-layout2").checked) {
-              cy.layout({
-                name: "fcose",
-                animate: true,
-                randomize: false,
-                stop: function stop() {
+              expandGraph(cy.$(':selected').data().id, cy);
+              setTimeout(function () {
+                api.expandNodes([node], true);
+                if (document.getElementById("cbk-run-layout2").checked) {
+                  cy.layout({
+                    name: "fcose",
+                    animate: true,
+                    randomize: false,
+                    stop: function stop() {
+                      initializer(cy);
+                    }
+                  }).run();
+                } else {
                   initializer(cy);
                 }
-              }).run();
+              }, 600);
             } else {
-              initializer(cy);
+              expandGraph(cy.$(':selected').data().id, cy);
+              setTimeout(function () {
+                api.expandNodes([node]);
+                if (document.getElementById("cbk-run-layout2").checked) {
+                  cy.layout({
+                    name: "fcose",
+                    animate: true,
+                    randomize: false,
+                    stop: function stop() {
+                      initializer(cy);
+                    }
+                  }).run();
+                } else {
+                  initializer(cy);
+                }
+              }, 600);
             }
           }
         }

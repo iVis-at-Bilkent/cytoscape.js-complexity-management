@@ -1,15 +1,14 @@
-import { ComplexityManager } from 'cmgm';
+import { ComplexityManager } from "cmgm";
 
 export function complexityManagement(cy) {
-
   /** Transfer cytoscape graph to complexity management model */
-//  testing github
+  //  testing github
   // This function finds and returns the top-level nodes in the graph
   let getTopMostNodes = (nodes) => {
     let nodesMap = {};
     nodes.forEach((node) => {
       nodesMap[node.id()] = true;
-    })
+    });
     let roots = nodes.filter((ele, i) => {
       if (typeof ele === "number") {
         ele = i;
@@ -70,10 +69,17 @@ export function complexityManagement(cy) {
 
     // Add new node to both visible and invisible graphs
     if (elementToBeAdded.isNode()) {
-      compMgrInstance.addNode(elementToBeAdded.id(), elementToBeAdded.parent().id());
-    }
-    else {  // Add new edge to both visible and invisible graphs
-      compMgrInstance.addEdge(elementToBeAdded.id(), elementToBeAdded.source().id(), elementToBeAdded.target().id());
+      compMgrInstance.addNode(
+        elementToBeAdded.id(),
+        elementToBeAdded.parent().id()
+      );
+    } else {
+      // Add new edge to both visible and invisible graphs
+      compMgrInstance.addEdge(
+        elementToBeAdded.id(),
+        elementToBeAdded.source().id(),
+        elementToBeAdded.target().id()
+      );
     }
 
     // Update filtered elements because new eles added may change the list
@@ -86,8 +92,8 @@ export function complexityManagement(cy) {
     // Remove node from both visible and invisible graphs
     if (elementToBeRemoved.isNode()) {
       compMgrInstance.removeNode(elementToBeRemoved.id());
-    }
-    else {  // Remove edge from both visible and invisible graphs
+    } else {
+      // Remove edge from both visible and invisible graphs
       compMgrInstance.removeEdge(elementToBeRemoved.id());
     }
 
@@ -99,7 +105,11 @@ export function complexityManagement(cy) {
     let edgeToReconnect = evt.target;
 
     // Change the source and/or target of the edge
-    compMgrInstance.reconnect(edgeToReconnect.id(), edgeToReconnect.source().id(), edgeToReconnect.target().id());
+    compMgrInstance.reconnect(
+      edgeToReconnect.id(),
+      edgeToReconnect.source().id(),
+      edgeToReconnect.target().id()
+    );
 
     // Update filtered elements because changed eles may change the list
     updateFilteredElements();
@@ -109,7 +119,10 @@ export function complexityManagement(cy) {
     let nodeToChangeParent = evt.target;
 
     // Change the parent of the node
-    compMgrInstance.changeParent(nodeToChangeParent.id(), nodeToChangeParent.parent().id());
+    compMgrInstance.changeParent(
+      nodeToChangeParent.id(),
+      nodeToChangeParent.parent().id()
+    );
 
     // Update filtered elements because changed eles may change the list
     updateFilteredElements();
@@ -118,16 +131,16 @@ export function complexityManagement(cy) {
   // Events - register action functions to events
 
   // When new element(s) added
-  cy.on('add', actOnAdd);
+  cy.on("add", actOnAdd);
 
   // When some element(s) removed
-  cy.on('remove', actOnRemove);
+  cy.on("remove", actOnRemove);
 
   // When source and/or target of an edge changed
-  cy.on('move', 'edge', actOnReconnect);
+  cy.on("move", "edge", actOnReconnect);
 
   // When parent of a node changed
-  cy.on('move', 'node', actOnParentChange);
+  cy.on("move", "node", actOnParentChange);
 
   /** Filter related operations */
 
@@ -135,12 +148,12 @@ export function complexityManagement(cy) {
   let filteredElements = new Set();
 
   let getFilterRule = () => {
-    return cy.scratch('cyComplexityManagement').options.filterRule;
+    return cy.scratch("cyComplexityManagement").options.filterRule;
   };
 
   let getDifference = function (setA, setB) {
-    return new Set([...setA].filter(element => !setB.has(element)));
-  }
+    return new Set([...setA].filter((element) => !setB.has(element)));
+  };
 
   function actOnInvisible(eleIDList, cy) {
     // Collect cy elements to be removed
@@ -150,16 +163,16 @@ export function complexityManagement(cy) {
     });
 
     // Close remove event temporarily because this is not an actual topology change, but a change because of cmgm
-    cy.off('remove', actOnRemove);
+    cy.off("remove", actOnRemove);
 
     // Remove elements from cy graph and add them to the scratchpad
     let removedEles = cy.remove(elesToRemove);
     removedEles.forEach((ele) => {
-      cy.scratch('cyComplexityManagement').removedEles.set(ele.id(), ele);
+      cy.scratch("cyComplexityManagement").removedEles.set(ele.id(), ele);
     });
 
     // Activate remove event again
-    cy.on('remove', actOnRemove);
+    cy.on("remove", actOnRemove);
   }
 
   function actOnVisible(eleIDList, cy) {
@@ -167,41 +180,53 @@ export function complexityManagement(cy) {
     let nodesToAdd = cy.collection();
     let edgesToAdd = cy.collection();
     eleIDList.forEach((id) => {
-      let element = cy.scratch('cyComplexityManagement').removedEles.get(id);
-      if(element){
+      let element = cy.scratch("cyComplexityManagement").removedEles.get(id);
+      if (element) {
         if (element.isNode()) {
           nodesToAdd.merge(element);
-        }
-        else {
+        } else {
           edgesToAdd.merge(element);
         }
       }
     });
 
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
-    cy.off('add', actOnAdd);
+    cy.off("add", actOnAdd);
 
+    nodesToAdd.forEach(x => {
+    x.position(cy.getElementById(x.data().parent).position())
+  })
     // Add elements from cy graph and remove them from the scratchpad
     let addedEles = cy.add(nodesToAdd.merge(edgesToAdd));
     addedEles.forEach((ele) => {
-      cy.scratch('cyComplexityManagement').removedEles.delete(ele.id());
+      cy.scratch("cyComplexityManagement").removedEles.delete(ele.id());
     });
 
     // Activate remove event again
-    cy.on('add', actOnAdd);
+    cy.on("add", actOnAdd);
   }
 
   function actOnVisibleForMetaEdge(metaEdgeList, cy) {
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
-    cy.off('add', actOnAdd);
+    cy.off("add", actOnAdd);
     metaEdgeList.forEach((metaEdgeData) => {
-      try{
-      cy.add({ group: 'edges', data: { id: metaEdgeData["ID"], source: metaEdgeData["sourceID"], target: metaEdgeData["targetID"], size: metaEdgeData['size'], compound: metaEdgeData['compound']}})
-      }catch(e){console.log(e)}
+      try {
+        cy.add({
+          group: "edges",
+          data: {
+            id: metaEdgeData["ID"],
+            source: metaEdgeData["sourceID"],
+            target: metaEdgeData["targetID"],
+            size: metaEdgeData["size"],
+            compound: metaEdgeData["compound"],
+          },
+        });
+      } catch (e) {
+      }
     });
 
     // Activate remove event again
-    cy.on('add', actOnAdd);
+    cy.on("add", actOnAdd);
   }
 
   function updateFilteredElements() {
@@ -217,7 +242,7 @@ export function complexityManagement(cy) {
     });
 
     // Then trace the temporarily removed elements
-    cy.scratch('cyComplexityManagement').removedEles.forEach((ele) => {
+    cy.scratch("cyComplexityManagement").removedEles.forEach((ele) => {
       if (filterRuleFunc(ele)) {
         newFilteredElements.add(ele.id());
       }
@@ -245,33 +270,41 @@ export function complexityManagement(cy) {
     let edgeIDListToUnfilter = [];
 
     diffToFilter.forEach((id) => {
-      if ((cy.getElementById(id).length > 0 && cy.getElementById(id).isNode()) || 
-          (cy.scratch('cyComplexityManagement').removedEles.has(id) && cy.scratch('cyComplexityManagement').removedEles.get(id).isNode())) {
+      if (
+        (cy.getElementById(id).length > 0 && cy.getElementById(id).isNode()) ||
+        (cy.scratch("cyComplexityManagement").removedEles.has(id) &&
+          cy.scratch("cyComplexityManagement").removedEles.get(id).isNode())
+      ) {
         nodeIDListToFilter.push(id);
-      }
-      else {
+      } else {
         edgeIDListToFilter.push(id);
       }
     });
 
     diffToUnfilter.forEach((id) => {
-      if (cy.scratch('cyComplexityManagement').removedEles.get(id).isNode()) {
+      if (cy.scratch("cyComplexityManagement").removedEles.get(id)?.isNode()) {
         nodeIDListToUnfilter.push(id);
-      }
-      else {
+      } else {
         edgeIDListToUnfilter.push(id);
       }
     });
 
     // Filter toBeFiltered elements
-    let IDsToRemove = compMgrInstance.filter(nodeIDListToFilter, edgeIDListToFilter);
+    let IDsToRemove = compMgrInstance.filter(
+      nodeIDListToFilter,
+      edgeIDListToFilter
+    );
 
     // Unfilter toBeUnfiltered elements
-    let IDsToAdd = compMgrInstance.unfilter(nodeIDListToUnfilter, edgeIDListToUnfilter);
+    let [IDsToAdd,metaEdgeIDs] = compMgrInstance.unfilter(
+      nodeIDListToUnfilter,
+      edgeIDListToUnfilter
+    );
 
     actOnInvisible(IDsToRemove, cy);
 
     actOnVisible(IDsToAdd, cy);
+    actOnVisibleForMetaEdge(metaEdgeIDs,cy);
   }
 
   // API to be returned
@@ -282,7 +315,7 @@ export function complexityManagement(cy) {
   };
 
   api.updateFilterRule = (newFilterRuleFunc) => {
-    cy.scratch('cyComplexityManagement').options.filterRule = newFilterRuleFunc;
+    cy.scratch("cyComplexityManagement").options.filterRule = newFilterRuleFunc;
 
     // Update filtered elements based on the new filter rule
     updateFilteredElements();
@@ -293,16 +326,20 @@ export function complexityManagement(cy) {
     nodes.forEach((node) => {
       let neighborhood = compMgrInstance.getHiddenNeighbors(node.id());
       neighborhood.nodes.forEach((id) => {
-        neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+        neighbors.merge(
+          cy.scratch("cyComplexityManagement").removedEles.get(id)
+        );
       });
 
       neighborhood.edges.forEach((id) => {
-        neighbors.merge(cy.scratch('cyComplexityManagement').removedEles.get(id));
+        neighbors.merge(
+          cy.scratch("cyComplexityManagement").removedEles.get(id)
+        );
       });
     });
 
     return neighbors;
-  }
+  };
 
   api.hide = (eles) => {
     let nodeIDListToHide = [];
@@ -311,8 +348,7 @@ export function complexityManagement(cy) {
     eles.forEach((ele) => {
       if (ele.isNode()) {
         nodeIDListToHide.push(ele.id());
-      }
-      else {
+      } else {
         edgeIDListToHide.push(ele.id());
       }
     });
@@ -330,8 +366,7 @@ export function complexityManagement(cy) {
     eles.forEach((ele) => {
       if (ele.isNode()) {
         nodeIDListToShow.push(ele.id());
-      }
-      else {
+      } else {
         edgeIDListToShow.push(ele.id());
       }
     });
@@ -353,23 +388,25 @@ export function complexityManagement(cy) {
     let nodeIDList = [];
 
     nodes.forEach((node) => {
-      if(compMgrInstance.isCollapsible(node.id())){
+      if (compMgrInstance.isCollapsible(node.id())) {
         nodeIDList.push(node.id());
-        node.data('position-before-collapse', {
+        node.data("position-before-collapse", {
           x: node.position().x,
-          y: node.position().y
+          y: node.position().y,
         });
-  
-        node.data('size-before-collapse', {
+
+        node.data("size-before-collapse", {
           w: node.outerWidth(),
-          h: node.outerHeight()
+          h: node.outerHeight(),
         });
-        node.addClass('cy-expand-collapse-collapsed-node');
+        node.addClass("cy-expand-collapse-collapsed-node");
       }
-      
     });
 
-    let IDsToRemoveTemp = compMgrInstance.collapseNodes(nodeIDList, isRecursive);
+    let IDsToRemoveTemp = compMgrInstance.collapseNodes(
+      nodeIDList,
+      isRecursive
+    );
 
     let IDsToRemove = [];
     let IDsToAdd = [];
@@ -396,11 +433,11 @@ export function complexityManagement(cy) {
     let nodeIDList = [];
 
     nodes.forEach((node) => {
-      if(compMgrInstance.isExpandable(node.id())){
+      if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
-        node.removeClass('cy-expand-collapse-collapsed-node');
-        node.removeData('position-before-collapse');
-        node.removeData('size-before-collapse');
+        node.removeClass("cy-expand-collapse-collapsed-node");
+        node.removeData("position-before-collapse");
+        node.removeData("size-before-collapse");
       }
     });
 
@@ -410,25 +447,23 @@ export function complexityManagement(cy) {
 
     returnedElements.nodeIDListForVisible.forEach((nodeID) => {
       let node = cy.getElementById(nodeID);
-      if(compMgrInstance.isCollapsible(node.id())){
-        node.removeClass('cy-expand-collapse-collapsed-node');
-        node.removeData('position-before-collapse');
-        node.removeData('size-before-collapse');
-      }
-      else if(compMgrInstance.isExpandable(node.id())){
-        node.data('position-before-collapse', {
+      if (compMgrInstance.isCollapsible(node.id())) {
+        node.removeClass("cy-expand-collapse-collapsed-node");
+        node.removeData("position-before-collapse");
+        node.removeData("size-before-collapse");
+      } else if (compMgrInstance.isExpandable(node.id())) {
+        node.data("position-before-collapse", {
           x: node.position().x,
-          y: node.position().y
+          y: node.position().y,
         });
-  
-        node.data('size-before-collapse', {
+
+        node.data("size-before-collapse", {
           w: node.outerWidth(),
-          h: node.outerHeight()
+          h: node.outerHeight(),
         });
-        node.addClass('cy-expand-collapse-collapsed-node');
+        node.addClass("cy-expand-collapse-collapsed-node");
       }
-      
-    })
+    });
 
     // Add required elements to cy instance
     actOnVisible([...returnedElements.edgeIDListForVisible], cy);
@@ -437,12 +472,11 @@ export function complexityManagement(cy) {
     actOnInvisible([...returnedElements.edgeIDListToRemove], cy);
 
     actOnVisibleForMetaEdge([...returnedElements.metaEdgeIDListForVisible], cy);
-    
   };
 
   api.collapseAllNodes = () => {
     let IDsToRemoveTemp = compMgrInstance.collapseAllNodes();
-    
+
     let IDsToRemove = [];
     let IDsToAdd = [];
 
@@ -451,20 +485,18 @@ export function complexityManagement(cy) {
     });
 
     IDsToRemoveTemp.collapsedNodes.forEach((nodeID) => {
-
       let node = cy.getElementById(nodeID);
 
-      node.data('position-before-collapse', {
+      node.data("position-before-collapse", {
         x: node.position().x,
-        y: node.position().y
+        y: node.position().y,
       });
 
-      node.data('size-before-collapse', {
+      node.data("size-before-collapse", {
         w: node.outerWidth(),
-        h: node.outerHeight()
+        h: node.outerHeight(),
       });
-      node.addClass('cy-expand-collapse-collapsed-node');
-    
+      node.addClass("cy-expand-collapse-collapsed-node");
     });
 
     IDsToRemoveTemp.edgeIDListForInvisible.forEach((id) => {
@@ -479,8 +511,6 @@ export function complexityManagement(cy) {
     actOnInvisible(IDsToRemove, cy);
     // Add required elements to cy instance
     actOnVisibleForMetaEdge(IDsToAdd, cy);
-
-
   };
 
   api.expandAllNodes = () => {
@@ -488,25 +518,27 @@ export function complexityManagement(cy) {
     // Add required elements to cy instance
     actOnVisible([...returnedElements.nodeIDListForVisible], cy);
 
-    
     returnedElements.expandedNodes.forEach((nodeID) => {
-
       let node = cy.getElementById(nodeID);
 
-      node.removeClass('cy-expand-collapse-collapsed-node');
-      node.removeData('position-before-collapse');
-      node.removeData('size-before-collapse');
-
+      node.removeClass("cy-expand-collapse-collapsed-node");
+      node.removeData("position-before-collapse");
+      node.removeData("size-before-collapse");
     });
-
+    
     // Add required elements to cy instance
     actOnVisible([...returnedElements.edgeIDListForVisible], cy);
 
+    let cleanup = []
+    cy.edges('[compound = "T"]').forEach(edge => {
+      if(!compMgrInstance.visibleGraphManager.edgesMap.has(edge.data().id)){
+        cleanup.push(edge.data().id)
+      }
+    })
     // Remove required elements from cy instance
-    actOnInvisible([...returnedElements.edgeIDListToRemove], cy);
+    actOnInvisible([...returnedElements.edgeIDListToRemove,...cleanup], cy);
 
-
-  };  
+  };
 
   api.collapseEdges = (edges) => {
     let edgeIDList = [];
@@ -514,8 +546,7 @@ export function complexityManagement(cy) {
     edges.forEach((edge) => {
       edgeIDList.push(edge.id());
     });
-    if(edgeIDList.length>1){
-
+    if (edgeIDList.length > 1) {
       let metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
 
       // Remove required elements from cy instance
@@ -523,18 +554,17 @@ export function complexityManagement(cy) {
 
       // Add required meta edges to cy instance
       actOnVisibleForMetaEdge(metaEdgeID, cy);
-
     }
-  }
+  };
 
   api.collapseEdgesBetweenNodes = (nodes) => {
-      let nodeIDList = [];
-  
-      nodes.forEach((node) => {
-        nodeIDList.push(node.id());
-      });
-  
-      let EdgeIDList = compMgrInstance.collapseEdgesBetweenNodes(nodeIDList);
+    let nodeIDList = [];
+
+    nodes.forEach((node) => {
+      nodeIDList.push(node.id());
+    });
+
+    let EdgeIDList = compMgrInstance.collapseEdgesBetweenNodes(nodeIDList);
 
     // Remove required elements from cy instance
     actOnInvisible(EdgeIDList[0], cy);
@@ -544,7 +574,6 @@ export function complexityManagement(cy) {
   };
 
   api.collapseAllEdges = () => {
-
     let EdgeIDList = compMgrInstance.collapseAllEdges();
 
     // Remove required elements from cy instance
@@ -561,14 +590,17 @@ export function complexityManagement(cy) {
       edgeIDList.push(edge.id());
     });
 
-    let edgesListReturned = compMgrInstance.expandEdges(edgeIDList, isRecursive);
+    let edgesListReturned = compMgrInstance.expandEdges(
+      edgeIDList,
+      isRecursive
+    );
 
     // Remove required elements from cy instance
     actOnInvisible(edgesListReturned[2], cy);
 
     // Add required meta edges to cy instance
     actOnVisible(edgesListReturned[0], cy);
-    
+
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(edgesListReturned[1], cy);
   };
@@ -580,18 +612,20 @@ export function complexityManagement(cy) {
       nodeIDList.push(node.id());
     });
 
-    let EdgeIDList = compMgrInstance.expandEdgesBetweenNodes(nodeIDList, isRecursive);
+    let EdgeIDList = compMgrInstance.expandEdgesBetweenNodes(
+      nodeIDList,
+      isRecursive
+    );
 
     // Remove required elements from cy instance
     actOnInvisible(EdgeIDList[2], cy);
 
     // Add required meta edges to cy instance
     actOnVisible(EdgeIDList[0], cy);
-    
+
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(EdgeIDList[1], cy);
   };
-
 
   api.expandAllEdges = () => {
     let EdgeIDList = compMgrInstance.expandAllEdges();
@@ -601,7 +635,7 @@ export function complexityManagement(cy) {
 
     // Add required meta edges to cy instance
     actOnVisible(EdgeIDList[0], cy);
-    
+
     // Add required meta edges to cy instance
     actOnVisibleForMetaEdge(EdgeIDList[1], cy);
   };

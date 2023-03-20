@@ -293,6 +293,101 @@ function onLoaded() {
     //cyInvisible.fit(cyInvisible.elements(), 30);
   }
 
+  function getDescendantsInorder(node) {
+    let descendants = {
+      edges: new Set(),
+      simpleNodes: [],
+      compoundNodes: []
+    };
+    let childGraph = node.child;
+    if (childGraph) {
+      let childGraphNodes = childGraph.nodes;
+      childGraphNodes.forEach((childNode) => {
+        let childDescendents = getDescendantsInorder(childNode);
+        for (var id in childDescendents) {
+          descendants[id] = [...descendants[id] || [], ...childDescendents[id]];
+        }
+        descendants['edges'] = new Set(descendants['edges']);
+        if (childNode.child) {
+          descendants.compoundNodes.push(childNode);
+        } else {
+          descendants.simpleNodes.push(childNode);
+        }
+        let nodeEdges = childNode.edges;
+        nodeEdges.forEach(item => descendants['edges'].add(item));
+      });
+    }
+  
+    return descendants;
+  }
+  
+  function calculateExpansionFactor(focusID){
+    let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
+    let nodeDiamensionSum = 0;
+    descendants.simpleNodes.forEach( node => {
+        if(!isNaN(node?.width)){
+          nodeDiamensionSum += node?.width;      
+        }
+    })
+    
+    let averageNodeDiamension = Math.max(nodeDiamensionSum,40) / descendants.simpleNodes.length;
+    
+    let edgeDiamensionSum = 0;
+    descendants.edges.forEach(edge => {
+      if(edge.source.owner == edge.target.owner){
+        edgeDiamensionSum += 80;
+      }else{
+        edgeDiamensionSum += 160;
+      }
+    })
+    
+    let averageEdgeDiamension = (Math.max(edgeDiamensionSum,80)) / descendants.edges.size;
+  
+    let areaCoveredByGrid = Math.pow((2 *(Math.sqrt(descendants.simpleNodes.length)) - 1) * averageNodeDiamension , 2)
+    
+    let areaCoveredByEdges = descendants.edges.size * averageEdgeDiamension;
+  
+    let totalAreaCovered = areaCoveredByGrid + areaCoveredByEdges;
+      
+    let expansionFactor = Math.sqrt(totalAreaCovered / Math.PI);
+    
+    return expansionFactor * 7;
+  }
+  
+  
+  function expandGraph(focusID, cy){
+    cy.layout({
+      name: 'fcose',
+        quality: "proof",
+        animate:true,
+        animationDuration: 500,
+        randomize: false, 
+        nodeRepulsion: node => {
+            return node.data().id == focusID ? 15000 : 4500;
+        },
+      idealEdgeLength: function (edge) {
+        
+        let focusNode = cy.getElementById(focusID);
+        
+        let currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x,2) +Math.pow(edge.source().position().y - edge.target().position().y,2));
+  
+        let sourceGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.source().position().x,2) +Math.pow(focusNode.position().y - edge.source().position().y,2));
+        
+        let targetGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.target().position().x,2) +Math.pow(focusNode.position().y - edge.target().position().y,2));
+        
+        let avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance)/2;
+  
+        let constantFactor = 1.25;
+  
+        let expansionFactor = calculateExpansionFactor(focusID);
+  
+        console.log(currentEdgeLength , expansionFactor , avgGeometricDistance ,(expansionFactor / avgGeometricDistance))
+        return currentEdgeLength *  (expansionFactor / avgGeometricDistance);
+      },
+    }).run();
+  }
+  
+
   document.getElementById("addNodeToSelected").addEventListener("click", () => {
     const selectedNode = cy.nodes(":selected")[0];
     let parentID = null;
@@ -334,10 +429,8 @@ function onLoaded() {
                     target: cy.nodes(":selected")[1].id(),
                     weight: Math.floor(Math.random() * 101)}
           });
-          console.log('ne' + newEdgeCount)
           break;
         }catch(e){
-          console.log(e);
           newEdgeCount++;
         }
     }
@@ -591,15 +684,33 @@ function onLoaded() {
 
   document.getElementById("expandSelectedNodes").addEventListener("click", () => {
     if (document.getElementById("cbk-flag-recursive").checked) {
-      instance.expandNodes(cy.nodes(':selected'), true);
+      cy.$(':selected').forEach(node => {
+        expandGraph(node.data().id, cy)
+        setTimeout(() => {
+          
+          instance.expandNodes(cy.nodes(':selected'), true);
+          if (document.getElementById("cbk-run-layout2").checked) {
+            cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+          }
+          else {
+            initializer(cy);
+          }
+        }, 600);
+      })
     }else{
+      cy.$(':selected').forEach(node => {
+        expandGraph(node.data().id, cy)
+        setTimeout(() => {
+          instance.expandNodes(cy.nodes(':selected'), true);
+          if (document.getElementById("cbk-run-layout2").checked) {
+            cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+          }
+          else {
+            initializer(cy);
+          }
+        }, 600); 
+      })
       instance.expandNodes(cy.nodes(':selected'));
-    }
-    if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
-    }
-    else {
-      initializer(cy);
     }
   });
 
@@ -727,7 +838,7 @@ function getRandomNodes() {
         parentID = newCompound.id();
         break;
       case 2: // Existing parent
-        parentID = compoundNodes[Math.floor(Math.random() * compoundNodes.length)].id()
+        parentID = compoundNodes[Math.floor(Math.random() * compoundNodes.length)]?.id()
         break;
       case 3: // No parent
       default:
