@@ -322,52 +322,83 @@ function onLoaded() {
   }
   
   function calculateExpansionFactor(focusID){
+
     let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
-    let nodeDiamensionSum = 0;
-    descendants.simpleNodes.forEach( node => {
-        if(!isNaN(node?.width)){
-          nodeDiamensionSum += node?.width;      
-        }
+
+    var cyLayout = cytoscape({
+      container: undefined
+    });
+
+    cyLayout.remove(cyLayout.elements());
+
+    descendants.compoundNodes.forEach( node => {
+      cyLayout.add({
+        group: 'nodes',
+        data: { id: node.ID, 
+                parent: node.owner.parent.ID == focusID ? null : node.owner.parent.ID,
+         }});
     })
+
+    descendants.simpleNodes.forEach( node => {
+      cyLayout.add({
+        group: 'nodes',
+        data: { id: node.ID, 
+                parent: node.owner.parent.ID == focusID ? null : node.owner.parent.ID,
+         }});
+    })
+
+    let e = [...descendants.edges]
     
-    let averageNodeDiamension = Math.max(nodeDiamensionSum,40) / descendants.simpleNodes.length;
-    
-    let edgeDiamensionSum = 0;
-    descendants.edges.forEach(edge => {
-      if(edge.source.owner == edge.target.owner){
-        edgeDiamensionSum += 80;
-      }else{
-        edgeDiamensionSum += 160;
+    e.forEach( edge => {
+      try{
+        cyLayout.add({
+          group: 'edges',
+          data: { id: edge.ID, 
+                  source: edge.source.ID, 
+                  target: edge.target.ID,
+                }
+        });
+      }catch(e){
       }
     })
+
+    while(true){
+      try{
+        cyLayout.layout({name: 'grid', animate: false}).run();
+        break;
+      }catch(e){}
+    }
+
     
-    let averageEdgeDiamension = (Math.max(edgeDiamensionSum,80)) / descendants.edges.size;
-  
-    let areaCoveredByGrid = Math.pow((2 *(Math.sqrt(descendants.simpleNodes.length)) - 1) * averageNodeDiamension , 2)
+    const boundingBox = cyLayout.elements().boundingBox();
+
+    const area = boundingBox.w * boundingBox.h;
+
+    let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
+
     
-    let areaCoveredByEdges = descendants.edges.size * averageEdgeDiamension;
-  
-    let totalAreaCovered = areaCoveredByGrid + areaCoveredByEdges;
-      
-    let expansionFactor = Math.sqrt(totalAreaCovered / Math.PI);
-    
-    return expansionFactor * 7;
+    return expansionFactor * 3;
   }
   
   
   function expandGraph(focusID, cy){
+
+    let focusNode = cy.getElementById(focusID);
+    
+    let expansionFactor = calculateExpansionFactor(focusID);
+
     cy.layout({
       name: 'fcose',
         quality: "proof",
         animate:true,
-        animationDuration: 500,
+        animationDuration: 1000,
         randomize: false, 
         nodeRepulsion: node => {
-            return node.data().id == focusID ? 15000 : 4500;
+            let nodeGeometricDistance = 1 + Math.sqrt(Math.pow(focusNode.position().x - node.position().x,2) +Math.pow(focusNode.position().y - node.position().y,2));
+
+            return 7500 *  (expansionFactor / nodeGeometricDistance);
         },
       idealEdgeLength: function (edge) {
-        
-        let focusNode = cy.getElementById(focusID);
         
         let currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x,2) +Math.pow(edge.source().position().y - edge.target().position().y,2));
   
@@ -377,11 +408,6 @@ function onLoaded() {
         
         let avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance)/2;
   
-        let constantFactor = 1.25;
-  
-        let expansionFactor = calculateExpansionFactor(focusID);
-  
-        console.log(currentEdgeLength , expansionFactor , avgGeometricDistance ,(expansionFactor / avgGeometricDistance))
         return currentEdgeLength *  (expansionFactor / avgGeometricDistance);
       },
     }).run();
@@ -695,7 +721,7 @@ function onLoaded() {
           else {
             initializer(cy);
           }
-        }, 600);
+        }, 1200);
       })
     }else{
       cy.$(':selected').forEach(node => {
@@ -708,9 +734,8 @@ function onLoaded() {
           else {
             initializer(cy);
           }
-        }, 600); 
+        }, 1200); 
       })
-      instance.expandNodes(cy.nodes(':selected'));
     }
   });
 

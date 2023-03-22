@@ -31,6 +31,7 @@ function getDescendantsInorder(node) {
 }
 
 function calculateExpansionFactor(focusID){
+  
   let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
   let nodeDiamensionSum = 0;
   descendants.simpleNodes.forEach( node => {
@@ -60,23 +61,33 @@ function calculateExpansionFactor(focusID){
     
   let expansionFactor = Math.sqrt(totalAreaCovered / Math.PI);
   
+  console.log(expansionFactor,expansionFactor * 7)
+
   return expansionFactor * 7;
 }
 
 
 function expandGraph(focusID, cy){
+
+  let focusNode = cy.getElementById(focusID);
+
+  let expansionFactor = calculateExpansionFactor(focusID);
+
   cy.layout({
     name: 'fcose',
       quality: "proof",
       animate:true,
-      animationDuration: 500,
+      animationDuration: 1000,
       randomize: false, 
       nodeRepulsion: node => {
-          return node.data().id == focusID ? 15000 : 4500;
+        
+        let nodeGeometricDistance = 1 + Math.sqrt(Math.pow(focusNode.position().x - node.position().x,2) +Math.pow(focusNode.position().y - node.position().y,2));
+
+        console.log(nodeGeometricDistance, expansionFactor, expansionFactor/nodeGeometricDistance)
+
+        return 7500 *  (expansionFactor / nodeGeometricDistance);
       },
     idealEdgeLength: function (edge) {
-      
-      let focusNode = cy.getElementById(focusID);
       
       let currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x,2) +Math.pow(edge.source().position().y - edge.target().position().y,2));
 
@@ -88,9 +99,6 @@ function expandGraph(focusID, cy){
 
       let constantFactor = 1.25;
 
-      let expansionFactor = calculateExpansionFactor(focusID);
-
-      console.log(currentEdgeLength , expansionFactor , avgGeometricDistance ,(expansionFactor / avgGeometricDistance))
       return currentEdgeLength *  (expansionFactor / avgGeometricDistance);
     },
   }).run();
@@ -392,7 +400,7 @@ export function cueUtilities(params, cy, api) {
                 else {
                   initializer(cy);
                 }
-              }, 600);
+              }, 1100);
             }else{
               expandGraph(cy.$(':selected').data().id, cy)
               setTimeout(() => {
@@ -403,7 +411,7 @@ export function cueUtilities(params, cy, api) {
                 else {
                   initializer(cy);
                 }
-              }, 600);
+              }, 1100);
             }
             
           }

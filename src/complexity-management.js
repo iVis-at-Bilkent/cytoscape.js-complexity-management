@@ -174,7 +174,13 @@ export function complexityManagement(cy) {
     // Activate remove event again
     cy.on("remove", actOnRemove);
   }
-
+  function translateB(ax, ay, bx, by, newAx, newAy) {
+    const abx = bx - ax;
+    const aby = by - ay;
+    const newBx = newAx + abx;
+    const newBy = newAy + aby;
+    return { x: newBx, y: newBy };
+  }
   function actOnVisible(eleIDList, cy) {
     // Collect cy elements to be added
     let nodesToAdd = cy.collection();
@@ -193,8 +199,13 @@ export function complexityManagement(cy) {
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
     cy.off("add", actOnAdd);
 
-    nodesToAdd.forEach(x => {
-    x.position(cy.getElementById(x.data().parent).position())
+    nodesToAdd.forEach(node => {
+      let invisibleNode = cyInvisible.getElementById(node.id())
+      let inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent).position();
+      if(cy.getElementById(node.data().parent).position()){
+        let newPos = translateB(invisibleNode.position().x,invisibleNode.position().y,inVisibleParent.x,inVisibleParent.y,cy.getElementById(node.data().parent).position().x,cy.getElementById(node.data().parent).position().y);
+        node.position(newPos);
+      }
   })
     // Add elements from cy graph and remove them from the scratchpad
     let addedEles = cy.add(nodesToAdd.merge(edgesToAdd));

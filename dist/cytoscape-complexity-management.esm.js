@@ -219,6 +219,16 @@ function complexityManagement(cy) {
     // Activate remove event again
     cy.on("remove", actOnRemove);
   }
+  function translateB(ax, ay, bx, by, newAx, newAy) {
+    var abx = bx - ax;
+    var aby = by - ay;
+    var newBx = newAx + abx;
+    var newBy = newAy + aby;
+    return {
+      x: newBx,
+      y: newBy
+    };
+  }
   function actOnVisible(eleIDList, cy) {
     // Collect cy elements to be added
     var nodesToAdd = cy.collection();
@@ -236,8 +246,13 @@ function complexityManagement(cy) {
 
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
     cy.off("add", actOnAdd);
-    nodesToAdd.forEach(function (x) {
-      x.position(cy.getElementById(x.data().parent).position());
+    nodesToAdd.forEach(function (node) {
+      var invisibleNode = cyInvisible.getElementById(node.id());
+      var inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent).position();
+      if (cy.getElementById(node.data().parent).position()) {
+        var newPos = translateB(invisibleNode.position().x, invisibleNode.position().y, inVisibleParent.x, inVisibleParent.y, cy.getElementById(node.data().parent).position().x, cy.getElementById(node.data().parent).position().y);
+        node.position(newPos);
+      }
     });
     // Add elements from cy graph and remove them from the scratchpad
     var addedEles = cy.add(nodesToAdd.merge(edgesToAdd));
@@ -920,26 +935,28 @@ function calculateExpansionFactor(focusID) {
   var areaCoveredByEdges = descendants.edges.size * averageEdgeDiamension;
   var totalAreaCovered = areaCoveredByGrid + areaCoveredByEdges;
   var expansionFactor = Math.sqrt(totalAreaCovered / Math.PI);
+  console.log(expansionFactor, expansionFactor * 7);
   return expansionFactor * 7;
 }
 function expandGraph(focusID, cy) {
+  var focusNode = cy.getElementById(focusID);
+  var expansionFactor = calculateExpansionFactor(focusID);
   cy.layout({
     name: 'fcose',
     quality: "proof",
     animate: true,
-    animationDuration: 500,
+    animationDuration: 1000,
     randomize: false,
     nodeRepulsion: function nodeRepulsion(node) {
-      return node.data().id == focusID ? 15000 : 4500;
+      var nodeGeometricDistance = 1 + Math.sqrt(Math.pow(focusNode.position().x - node.position().x, 2) + Math.pow(focusNode.position().y - node.position().y, 2));
+      console.log(nodeGeometricDistance, expansionFactor, expansionFactor / nodeGeometricDistance);
+      return 7500 * (expansionFactor / nodeGeometricDistance);
     },
     idealEdgeLength: function idealEdgeLength(edge) {
-      var focusNode = cy.getElementById(focusID);
       var currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x, 2) + Math.pow(edge.source().position().y - edge.target().position().y, 2));
       var sourceGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.source().position().x, 2) + Math.pow(focusNode.position().y - edge.source().position().y, 2));
       var targetGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.target().position().x, 2) + Math.pow(focusNode.position().y - edge.target().position().y, 2));
       var avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance) / 2;
-      var expansionFactor = calculateExpansionFactor(focusID);
-      console.log(currentEdgeLength, expansionFactor, avgGeometricDistance, expansionFactor / avgGeometricDistance);
       return currentEdgeLength * (expansionFactor / avgGeometricDistance);
     }
   }).run();
@@ -1190,7 +1207,7 @@ function cueUtilities(params, cy, api) {
                 } else {
                   initializer(cy);
                 }
-              }, 600);
+              }, 1100);
             } else {
               expandGraph(cy.$(':selected').data().id, cy);
               setTimeout(function () {
@@ -1207,7 +1224,7 @@ function cueUtilities(params, cy, api) {
                 } else {
                   initializer(cy);
                 }
-              }, 600);
+              }, 1100);
             }
           }
         }
