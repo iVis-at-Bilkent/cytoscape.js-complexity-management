@@ -1982,7 +1982,7 @@
               // check if current meta edge list is not the last one
               if (index != this.removedElements.metaEdgeIDListForVisible.size - 1) {
                 // loop through current meta edge list
-                edgeIDList.forEach(edgeID => {
+                edgeIDList?.forEach(edgeID => {
                   // delete each id from visible graph's edges map
                   visibleGM.edgesMap.delete(edgeID.ID);
                 });
@@ -2040,7 +2040,7 @@
               // check if current meta edge list is not the last one
               if (index != this.removedElements.metaEdgeIDListForVisible.size - 1) {
                 // loop through current meta edge if list
-                edgeIDList.forEach(edgeID => {
+                edgeIDList?.forEach(edgeID => {
                   // delete meta edge from the visible graph
                   visibleGM.edgesMap.delete(edgeID.ID);
                 });
@@ -2096,7 +2096,7 @@
               // check if current meta edge list is not the last one
               if (index != this.removedElements.metaEdgeIDListForVisible.size - 1) {
                 // loop through current meta edge if list
-                edgeIDList.forEach(edgeID => {
+                edgeIDList?.forEach(edgeID => {
                   // delete meta edge from the visible graph
                   visibleGM.edgesMap.delete(edgeID.ID);
                 });
@@ -3681,19 +3681,54 @@
 
     //  Action functions
 
+    var actOnAddTemp = [];
+    var clearActOnAdd = function clearActOnAdd() {
+      actOnAddTemp.forEach(function (elementToBeAdded) {
+        var parentNode = compMgrInstance.visibleGraphManager.nodesMap.get(elementToBeAdded.parent().id());
+        if (parentNode) {
+          // Add new node to both visible and invisible graphs
+          if (elementToBeAdded.isNode()) {
+            compMgrInstance.addNode(elementToBeAdded.id(), elementToBeAdded.parent().id());
+          }
+          var index = actOnAddTemp.indexOf(elementToBeAdded);
+          if (index > -1) {
+            // only splice array when item is found
+            actOnAddTemp.splice(index, 1); // 2nd parameter means remove one item only
+          }
+          // Update filtered elements because new eles added may change the list
+          updateFilteredElements();
+        }
+      });
+    };
     var actOnAdd = function actOnAdd(evt) {
       var elementToBeAdded = evt.target;
+      if (elementToBeAdded.parent().id()) {
+        var parentNode = compMgrInstance.visibleGraphManager.nodesMap.get(elementToBeAdded.parent().id());
+        if (parentNode) {
+          // Add new node to both visible and invisible graphs
+          if (elementToBeAdded.isNode()) {
+            compMgrInstance.addNode(elementToBeAdded.id(), elementToBeAdded.parent().id());
+          }
 
-      // Add new node to both visible and invisible graphs
-      if (elementToBeAdded.isNode()) {
-        compMgrInstance.addNode(elementToBeAdded.id(), elementToBeAdded.parent().id());
+          // Update filtered elements because new eles added may change the list
+          updateFilteredElements();
+        } else {
+          actOnAddTemp.push(elementToBeAdded);
+        }
       } else {
-        // Add new edge to both visible and invisible graphs
-        compMgrInstance.addEdge(elementToBeAdded.id(), elementToBeAdded.source().id(), elementToBeAdded.target().id());
-      }
+        // Add new node to both visible and invisible graphs
+        if (elementToBeAdded.isNode()) {
+          compMgrInstance.addNode(elementToBeAdded.id(), elementToBeAdded.parent().id());
+        } else {
+          clearActOnAdd();
+          // Add new edge to both visible and invisible graphs
+          compMgrInstance.addEdge(elementToBeAdded.id(), elementToBeAdded.source().id(), elementToBeAdded.target().id());
+        }
 
-      // Update filtered elements because new eles added may change the list
-      updateFilteredElements();
+        // Update filtered elements because new eles added may change the list
+        updateFilteredElements();
+      }
+      clearActOnAdd();
     };
     var actOnRemove = function actOnRemove(evt) {
       var elementToBeRemoved = evt.target;
@@ -3773,15 +3808,22 @@
       // Activate remove event again
       cy.on("remove", actOnRemove);
     }
-    function translateB(ax, ay, bx, by, newAx, newAy) {
-      var abx = bx - ax;
-      var aby = by - ay;
-      var newBx = newAx + abx;
-      var newBy = newAy + aby;
+    function translateB(x1, y1, x2, y2, x3, y3) {
+      var hx = x3 - x2;
+      var hy = y3 - y2;
+      var x4 = x1 + hx;
+      var y4 = y1 + hy;
       return {
-        x: newBx,
-        y: newBy
+        x: x4,
+        y: y4
       };
+    }
+    function getVisibleParentForPositioning(invisibleNode, cy) {
+      if (cy.getElementById(invisibleNode.data().parent).data()) {
+        return cy.getElementById(invisibleNode.data().parent);
+      } else {
+        return getVisibleParentForPositioning(invisibleNode.parent(), cy);
+      }
     }
     function actOnVisible(eleIDList, cy) {
       // Collect cy elements to be added
@@ -3802,9 +3844,13 @@
       cy.off("add", actOnAdd);
       nodesToAdd.forEach(function (node) {
         var invisibleNode = cyInvisible.getElementById(node.id());
-        var inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent).position();
-        if (cy.getElementById(node.data().parent).position()) {
-          var newPos = translateB(invisibleNode.position().x, invisibleNode.position().y, inVisibleParent.x, inVisibleParent.y, cy.getElementById(node.data().parent).position().x, cy.getElementById(node.data().parent).position().y);
+        var inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent);
+        var visibleParent = getVisibleParentForPositioning(invisibleNode, cy);
+        if (visibleParent.id() != inVisibleParent.id()) {
+          inVisibleParent = cyInvisible.getElementById(visibleParent.id());
+        }
+        if (visibleParent.position() && node.isChildless()) {
+          var newPos = translateB(invisibleNode.position().x, invisibleNode.position().y, inVisibleParent.position().x, inVisibleParent.position().y, visibleParent.position().x, visibleParent.position().y);
           node.position(newPos);
         }
       });
@@ -4731,7 +4777,7 @@
               } else {
                 api.collapseNodes([node]);
               }
-              if (document.getElementById("cbk-run-layout2").checked) {
+              if (document.getElementById("cbk-run-layout3").checked) {
                 cy.layout({
                   name: "fcose",
                   animate: true,
@@ -4749,7 +4795,7 @@
                 expandGraph(cy.$(':selected').data().id, cy);
                 setTimeout(function () {
                   api.expandNodes([node], true);
-                  if (document.getElementById("cbk-run-layout2").checked) {
+                  if (document.getElementById("cbk-run-layout3").checked) {
                     cy.layout({
                       name: "fcose",
                       animate: true,
@@ -4766,7 +4812,7 @@
                 expandGraph(cy.$(':selected').data().id, cy);
                 setTimeout(function () {
                   api.expandNodes([node]);
-                  if (document.getElementById("cbk-run-layout2").checked) {
+                  if (document.getElementById("cbk-run-layout3").checked) {
                     cy.layout({
                       name: "fcose",
                       animate: true,

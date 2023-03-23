@@ -381,7 +381,7 @@ export function cueUtilities(params, cy, api) {
             }else{
               api.collapseNodes([node]);
             }
-            if (document.getElementById("cbk-run-layout2").checked) {
+            if (document.getElementById("cbk-run-layout3").checked) {
               cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
             }
             else {
@@ -394,7 +394,7 @@ export function cueUtilities(params, cy, api) {
               expandGraph(cy.$(':selected').data().id, cy)
               setTimeout(() => {
                 api.expandNodes([node], true);
-                if (document.getElementById("cbk-run-layout2").checked) {
+                if (document.getElementById("cbk-run-layout3").checked) {
                   cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
                 }
                 else {
@@ -405,7 +405,7 @@ export function cueUtilities(params, cy, api) {
               expandGraph(cy.$(':selected').data().id, cy)
               setTimeout(() => {
                 api.expandNodes([node]);
-                if (document.getElementById("cbk-run-layout2").checked) {
+                if (document.getElementById("cbk-run-layout3").checked) {
                   cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
                 }
                 else {

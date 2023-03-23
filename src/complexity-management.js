@@ -64,26 +64,75 @@ export function complexityManagement(cy) {
 
   //  Action functions
 
+  let actOnAddTemp = [];
+
+  let clearActOnAdd = () => {
+    actOnAddTemp.forEach(elementToBeAdded => {
+      let parentNode = compMgrInstance.visibleGraphManager.nodesMap.get(elementToBeAdded.parent().id());
+      if(parentNode){
+          // Add new node to both visible and invisible graphs
+        if (elementToBeAdded.isNode()) {
+          compMgrInstance.addNode(
+            elementToBeAdded.id(),
+            elementToBeAdded.parent().id()
+          );
+        } 
+
+        const index = actOnAddTemp.indexOf(elementToBeAdded);
+        if (index > -1) { // only splice array when item is found
+          actOnAddTemp.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        // Update filtered elements because new eles added may change the list
+        updateFilteredElements();
+
+      }
+    })
+
+  }
+
   let actOnAdd = (evt) => {
     let elementToBeAdded = evt.target;
+    if(elementToBeAdded.parent().id()){
+      let parentNode = compMgrInstance.visibleGraphManager.nodesMap.get(elementToBeAdded.parent().id());
+      if(parentNode){
+          // Add new node to both visible and invisible graphs
+        if (elementToBeAdded.isNode()) {
+          compMgrInstance.addNode(
+            elementToBeAdded.id(),
+            elementToBeAdded.parent().id()
+          );
+        } 
+  
+        // Update filtered elements because new eles added may change the list
+        updateFilteredElements();
+  
+      }else{
+        actOnAddTemp.push(elementToBeAdded);
+      }
 
-    // Add new node to both visible and invisible graphs
-    if (elementToBeAdded.isNode()) {
-      compMgrInstance.addNode(
-        elementToBeAdded.id(),
-        elementToBeAdded.parent().id()
-      );
-    } else {
-      // Add new edge to both visible and invisible graphs
-      compMgrInstance.addEdge(
-        elementToBeAdded.id(),
-        elementToBeAdded.source().id(),
-        elementToBeAdded.target().id()
-      );
+    }else{
+        // Add new node to both visible and invisible graphs
+        if (elementToBeAdded.isNode()) {
+          compMgrInstance.addNode(
+            elementToBeAdded.id(),
+            elementToBeAdded.parent().id()
+          );
+        } else {
+          clearActOnAdd()
+          // Add new edge to both visible and invisible graphs
+          compMgrInstance.addEdge(
+            elementToBeAdded.id(),
+            elementToBeAdded.source().id(),
+            elementToBeAdded.target().id()
+          );
+        }
+
+        // Update filtered elements because new eles added may change the list
+        updateFilteredElements();
     }
+    
+    clearActOnAdd();
 
-    // Update filtered elements because new eles added may change the list
-    updateFilteredElements();
   };
 
   let actOnRemove = (evt) => {
@@ -174,12 +223,20 @@ export function complexityManagement(cy) {
     // Activate remove event again
     cy.on("remove", actOnRemove);
   }
-  function translateB(ax, ay, bx, by, newAx, newAy) {
-    const abx = bx - ax;
-    const aby = by - ay;
-    const newBx = newAx + abx;
-    const newBy = newAy + aby;
-    return { x: newBx, y: newBy };
+  function translateB(x1, y1, x2, y2, x3, y3) {
+    let hx = x3 - x2;
+    let hy = y3 - y2;
+    let x4 = x1 + hx;
+    let y4  = y1 + hy
+    return { x: x4, y: y4 };
+  }
+
+  function getVisibleParentForPositioning(invisibleNode,cy){
+    if(cy.getElementById(invisibleNode.data().parent).data()){
+      return cy.getElementById(invisibleNode.data().parent);
+    }else{
+      return getVisibleParentForPositioning(invisibleNode.parent(),cy)
+    }
   }
   function actOnVisible(eleIDList, cy) {
     // Collect cy elements to be added
@@ -195,15 +252,19 @@ export function complexityManagement(cy) {
         }
       }
     });
-
+    
     // Close add event temporarily because this is not an actual topology change, but a change because of cmgm
     cy.off("add", actOnAdd);
 
     nodesToAdd.forEach(node => {
       let invisibleNode = cyInvisible.getElementById(node.id())
-      let inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent).position();
-      if(cy.getElementById(node.data().parent).position()){
-        let newPos = translateB(invisibleNode.position().x,invisibleNode.position().y,inVisibleParent.x,inVisibleParent.y,cy.getElementById(node.data().parent).position().x,cy.getElementById(node.data().parent).position().y);
+      let inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent);
+      let visibleParent = getVisibleParentForPositioning(invisibleNode,cy);
+      if(visibleParent.id() != inVisibleParent.id()){
+        inVisibleParent = cyInvisible.getElementById(visibleParent.id());
+      }
+      if(visibleParent.position() && node.isChildless()){
+        let newPos = translateB(invisibleNode.position().x,invisibleNode.position().y,inVisibleParent.position().x,inVisibleParent.position().y,visibleParent.position().x,visibleParent.position().y);
         node.position(newPos);
       }
   })

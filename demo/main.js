@@ -258,7 +258,10 @@ function onLoaded() {
   let newEdgeCount = 0;
 
   function initializer(cy) {
-    
+    let oldInvisiblePOS = Object.create(null)
+    cyInvisible.nodes().forEach(node => {
+      oldInvisiblePOS[node.id()] = node.position();
+    })
     cyVisible.remove(cyVisible.elements());
     cyInvisible.remove(cyInvisible.elements());
 
@@ -286,6 +289,8 @@ function onLoaded() {
       let cyNode = cy.getElementById(node.id());
       if(cyNode.length > 0 && !node.isParent()) {
         nodePosInBothCyAndInvisible.push({nodeId: cyNode.id(), position: cyNode.position()});
+      }else if(cyNode.length == 0 && !node.isParent()){
+        nodePosInBothCyAndInvisible.push({nodeId: node.id(), position: oldInvisiblePOS[node.id()]});
       }
     });
     cyInvisible.layout({name: 'fcose', animate: false, fixedNodeConstraint: nodePosInBothCyAndInvisible}).run();
@@ -715,7 +720,7 @@ function onLoaded() {
         setTimeout(() => {
           
           instance.expandNodes(cy.nodes(':selected'), true);
-          if (document.getElementById("cbk-run-layout2").checked) {
+          if (document.getElementById("cbk-run-layout3").checked) {
             cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
           }
           else {
@@ -727,8 +732,8 @@ function onLoaded() {
       cy.$(':selected').forEach(node => {
         expandGraph(node.data().id, cy)
         setTimeout(() => {
-          instance.expandNodes(cy.nodes(':selected'), true);
-          if (document.getElementById("cbk-run-layout2").checked) {
+          instance.expandNodes(cy.nodes(':selected'));
+          if (document.getElementById("cbk-run-layout3").checked) {
             cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
           }
           else {
