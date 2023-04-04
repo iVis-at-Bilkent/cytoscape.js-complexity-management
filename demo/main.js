@@ -335,6 +335,14 @@ function onLoaded() {
     });
 
     cyLayout.remove(cyLayout.elements());
+    
+    let InvisiblePOS = Object.create(null)
+
+    cyInvisible.nodes().forEach(node => {
+      InvisiblePOS[node.id()] = node.position();
+    })
+
+    let nodeConstraints = []
 
     descendants.compoundNodes.forEach( node => {
       cyLayout.add({
@@ -342,6 +350,9 @@ function onLoaded() {
         data: { id: node.ID, 
                 parent: node.owner.parent.ID == focusID ? null : node.owner.parent.ID,
          }});
+
+      nodeConstraints.push({nodeId: node.ID, position: InvisiblePOS[node.ID]});
+      
     })
 
     descendants.simpleNodes.forEach( node => {
@@ -374,15 +385,20 @@ function onLoaded() {
       }catch(e){}
     }
 
+
+    // const boundingBox = cyLayout.elements().boundingBox();
     
-    const boundingBox = cyLayout.elements().boundingBox();
-
-    const area = boundingBox.w * boundingBox.h;
-
-    let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
-
+    const boundingBox = cyInvisible.getElementById(focusID).boundingBox();
     
-    return expansionFactor * 3;
+    // const area = boundingBox.w * boundingBox.h;
+
+    // let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
+    
+    let expansionFactor= Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
+    
+    // console.log(expansionFactor,expansionFactor2)
+    
+    return expansionFactor;
   }
   
   

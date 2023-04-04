@@ -2036,14 +2036,12 @@
             // loop through list of meta edge ids list
             // struture list of list of objects
             // strucute [[{meta edge object},{meta edge object}],[{meta edge object},{meta edge object}]]
-            this.removedElements.metaEdgeIDListForVisible.forEach(edgeIDList => {
+            let multipleSelectedMetaEdges = [];
+            this.removedElements.metaEdgeIDListForVisible.forEach(edgeID => {
               // check if current meta edge list is not the last one
               if (index != this.removedElements.metaEdgeIDListForVisible.size - 1) {
                 // loop through current meta edge if list
-                edgeIDList?.forEach(edgeID => {
-                  // delete meta edge from the visible graph
-                  visibleGM.edgesMap.delete(edgeID.ID);
-                });
+                multipleSelectedMetaEdges.push(edgeID);
               }
               // increase index by one when one list is processed
               index = index + 1;
@@ -2051,7 +2049,8 @@
             // get metaEdgeIDListForVisible (struture list of list of objects) as temp 1
             let temp1 = [...this.removedElements.metaEdgeIDListForVisible];
             // get the last list of objects as temp
-            let temp = [...temp1[temp1.length - 1]];
+            let temp = [...temp1[temp1.length - 1], ...multipleSelectedMetaEdges];
+            multipleSelectedMetaEdges = [];
             //  set metaEdgeIDListForVisible as a new set
             this.removedElements.metaEdgeIDListForVisible = new Set();
             // loop through the temp list
@@ -2096,7 +2095,7 @@
               // check if current meta edge list is not the last one
               if (index != this.removedElements.metaEdgeIDListForVisible.size - 1) {
                 // loop through current meta edge if list
-                edgeIDList?.forEach(edgeID => {
+                edgeIDList.forEach(edgeID => {
                   // delete meta edge from the visible graph
                   visibleGM.edgesMap.delete(edgeID.ID);
                 });
@@ -3822,7 +3821,11 @@
       if (cy.getElementById(invisibleNode.data().parent).data()) {
         return cy.getElementById(invisibleNode.data().parent);
       } else {
-        return getVisibleParentForPositioning(invisibleNode.parent(), cy);
+        if (invisibleNode.parent().id()) {
+          return getVisibleParentForPositioning(invisibleNode.parent(), cy);
+        } else {
+          return undefined;
+        }
       }
     }
     function actOnVisible(eleIDList, cy) {
@@ -3844,14 +3847,18 @@
       cy.off("add", actOnAdd);
       nodesToAdd.forEach(function (node) {
         var invisibleNode = cyInvisible.getElementById(node.id());
-        var inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent);
-        var visibleParent = getVisibleParentForPositioning(invisibleNode, cy);
-        if (visibleParent.id() != inVisibleParent.id()) {
-          inVisibleParent = cyInvisible.getElementById(visibleParent.id());
-        }
-        if (visibleParent.position() && node.isChildless()) {
-          var newPos = translateB(invisibleNode.position().x, invisibleNode.position().y, inVisibleParent.position().x, inVisibleParent.position().y, visibleParent.position().x, visibleParent.position().y);
-          node.position(newPos);
+        if (invisibleNode.id()) {
+          var inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent);
+          var visibleParent = getVisibleParentForPositioning(invisibleNode, cy);
+          if (visibleParent) {
+            if (visibleParent.id() != inVisibleParent.id()) {
+              inVisibleParent = cyInvisible.getElementById(visibleParent.id());
+            }
+            if (visibleParent.position() && node.isChildless()) {
+              var newPos = translateB(invisibleNode.position().x, invisibleNode.position().y, inVisibleParent.position().x, inVisibleParent.position().y, visibleParent.position().x, visibleParent.position().y);
+              node.position(newPos);
+            }
+          }
         }
       });
       // Add elements from cy graph and remove them from the scratchpad

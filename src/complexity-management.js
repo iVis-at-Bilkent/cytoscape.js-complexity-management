@@ -135,6 +135,30 @@ export function complexityManagement(cy) {
 
   };
 
+  let  actOnAddOld = (evt) => {
+    var elementsToBeAdded = evt.target;
+    var nodesToBeAdded = elementsToBeAdded.nodes();
+    var edgesToBeAdded = elementsToBeAdded.edges();
+
+    // Add new nodes to both visible and invisible graphs
+    processChildrenList(getTopMostNodes(nodesToBeAdded), compMgrInstance);
+
+    // Add new edges to both visible and invisible graphs
+    processEdges(edgesToBeAdded, compMgrInstance);
+    var elementToBeAdded = evt.target;
+
+    // Add new node to both visible and invisible graphs
+    if (elementToBeAdded.isNode()) {
+      compMgrInstance.addNode(elementToBeAdded.id(), elementToBeAdded.parent().id());
+    } else {
+      // Add new edge to both visible and invisible graphs
+      compMgrInstance.addEdge(elementToBeAdded.id(), elementToBeAdded.source().id(), elementToBeAdded.target().id());
+    }
+
+    // Update filtered elements because new eles added may change the list
+    updateFilteredElements();
+  };
+
   let actOnRemove = (evt) => {
     let elementToBeRemoved = evt.target;
 
@@ -235,10 +259,14 @@ export function complexityManagement(cy) {
     if(cy.getElementById(invisibleNode.data().parent).data()){
       return cy.getElementById(invisibleNode.data().parent);
     }else{
-      return getVisibleParentForPositioning(invisibleNode.parent(),cy)
+      if(invisibleNode.parent().id()){
+        return getVisibleParentForPositioning(invisibleNode.parent(),cy)
+      }else{
+        return undefined
+      }
     }
   }
-  function actOnVisible(eleIDList, cy) {
+  function actOnVisible(eleIDList, cy, expandCollapse=false) {
     // Collect cy elements to be added
     let nodesToAdd = cy.collection();
     let edgesToAdd = cy.collection();
@@ -258,15 +286,19 @@ export function complexityManagement(cy) {
 
     nodesToAdd.forEach(node => {
       let invisibleNode = cyInvisible.getElementById(node.id())
-      let inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent);
+      if(invisibleNode.id()){
+        let inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent);
       let visibleParent = getVisibleParentForPositioning(invisibleNode,cy);
-      if(visibleParent.id() != inVisibleParent.id()){
-        inVisibleParent = cyInvisible.getElementById(visibleParent.id());
+      if(visibleParent){
+        if(visibleParent.id() != inVisibleParent.id()){
+          inVisibleParent = cyInvisible.getElementById(visibleParent.id());
+        }
+        if(visibleParent.position() && node.isChildless()){
+          let newPos = translateB(invisibleNode.position().x,invisibleNode.position().y,inVisibleParent.position().x,inVisibleParent.position().y,visibleParent.position().x,visibleParent.position().y);
+          node.position(newPos);
+        }
       }
-      if(visibleParent.position() && node.isChildless()){
-        let newPos = translateB(invisibleNode.position().x,invisibleNode.position().y,inVisibleParent.position().x,inVisibleParent.position().y,visibleParent.position().x,visibleParent.position().y);
-        node.position(newPos);
-      }
+    }
   })
     // Add elements from cy graph and remove them from the scratchpad
     let addedEles = cy.add(nodesToAdd.merge(edgesToAdd));
@@ -515,7 +547,7 @@ export function complexityManagement(cy) {
 
     let returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
     // Add required elements to cy instance
-    actOnVisible([...returnedElements.nodeIDListForVisible], cy);
+    actOnVisible([...returnedElements.nodeIDListForVisible], cy, true);
 
     returnedElements.nodeIDListForVisible.forEach((nodeID) => {
       let node = cy.getElementById(nodeID);

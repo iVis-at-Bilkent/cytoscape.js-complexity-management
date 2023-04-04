@@ -270,7 +270,11 @@ function complexityManagement(cy) {
     if (cy.getElementById(invisibleNode.data().parent).data()) {
       return cy.getElementById(invisibleNode.data().parent);
     } else {
-      return getVisibleParentForPositioning(invisibleNode.parent(), cy);
+      if (invisibleNode.parent().id()) {
+        return getVisibleParentForPositioning(invisibleNode.parent(), cy);
+      } else {
+        return undefined;
+      }
     }
   }
   function actOnVisible(eleIDList, cy) {
@@ -292,14 +296,18 @@ function complexityManagement(cy) {
     cy.off("add", actOnAdd);
     nodesToAdd.forEach(function (node) {
       var invisibleNode = cyInvisible.getElementById(node.id());
-      var inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent);
-      var visibleParent = getVisibleParentForPositioning(invisibleNode, cy);
-      if (visibleParent.id() != inVisibleParent.id()) {
-        inVisibleParent = cyInvisible.getElementById(visibleParent.id());
-      }
-      if (visibleParent.position() && node.isChildless()) {
-        var newPos = translateB(invisibleNode.position().x, invisibleNode.position().y, inVisibleParent.position().x, inVisibleParent.position().y, visibleParent.position().x, visibleParent.position().y);
-        node.position(newPos);
+      if (invisibleNode.id()) {
+        var inVisibleParent = cyInvisible.getElementById(invisibleNode.data().parent);
+        var visibleParent = getVisibleParentForPositioning(invisibleNode, cy);
+        if (visibleParent) {
+          if (visibleParent.id() != inVisibleParent.id()) {
+            inVisibleParent = cyInvisible.getElementById(visibleParent.id());
+          }
+          if (visibleParent.position() && node.isChildless()) {
+            var newPos = translateB(invisibleNode.position().x, invisibleNode.position().y, inVisibleParent.position().x, inVisibleParent.position().y, visibleParent.position().x, visibleParent.position().y);
+            node.position(newPos);
+          }
+        }
       }
     });
     // Add elements from cy graph and remove them from the scratchpad
