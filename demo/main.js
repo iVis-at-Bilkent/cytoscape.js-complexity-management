@@ -386,15 +386,15 @@ function onLoaded() {
     }
 
 
-    // const boundingBox = cyLayout.elements().boundingBox();
+     const boundingBox = cyLayout.elements().boundingBox();
     
-    const boundingBox = cyInvisible.getElementById(focusID).boundingBox();
+    // const boundingBox = cyInvisible.getElementById(focusID).boundingBox();
     
     // const area = boundingBox.w * boundingBox.h;
 
-    // let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
+     let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
     
-    let expansionFactor= Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
+    // let expansionFactor= Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
     
     // console.log(expansionFactor,expansionFactor2)
     
