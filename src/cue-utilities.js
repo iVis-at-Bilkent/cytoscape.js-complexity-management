@@ -1,5 +1,6 @@
 import debounce from './debounce';
 import debounce2 from './debounce2';
+let layoutOptions = { name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }
 
 
 function getDescendantsInorder(node) {
@@ -373,6 +374,8 @@ export function cueUtilities(params, cy, api) {
           && cyRenderedPosX <= expandcollapseRenderedEndX + expandcollapseRenderedRectSize * factor
           && cyRenderedPosY >= expandcollapseRenderedStartY - expandcollapseRenderedRectSize * factor
           && cyRenderedPosY <= expandcollapseRenderedEndY + expandcollapseRenderedRectSize * factor) {
+          
+          layoutOptions = {...layoutOptions,...cy.options().layout};
          
           if (api.isCollapsible(node)) {
             clearDraws();
@@ -382,7 +385,7 @@ export function cueUtilities(params, cy, api) {
               api.collapseNodes([node]);
             }
             if (document.getElementById("cbk-run-layout3").checked) {
-              cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+              cy.layout(layoutOptions).run();
             }
             else {
               initializer(cy);
@@ -395,7 +398,7 @@ export function cueUtilities(params, cy, api) {
               setTimeout(() => {
                 api.expandNodes([node], true);
                 if (document.getElementById("cbk-run-layout3").checked) {
-                  cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+                  cy.layout(layoutOptions).run();
                 }
                 else {
                   initializer(cy);
@@ -406,7 +409,7 @@ export function cueUtilities(params, cy, api) {
               setTimeout(() => {
                 api.expandNodes([node]);
                 if (document.getElementById("cbk-run-layout3").checked) {
-                  cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+                  cy.layout(layoutOptions).run();
                 }
                 else {
                   initializer(cy);

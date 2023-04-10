@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', onLoaded);
-
+let layoutOptions = { name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }
 function onLoaded() {
   let instance;
   const cyVisible = window.cyVisible = cytoscape({
@@ -294,7 +294,7 @@ function onLoaded() {
       }
     });
     cyInvisible.layout({name: 'fcose', animate: false, fixedNodeConstraint: nodePosInBothCyAndInvisible}).run();
-
+    layoutOptions = {...layoutOptions,...cy.options().layout};
     //cyInvisible.fit(cyInvisible.elements(), 30);
   }
 
@@ -355,12 +355,33 @@ function onLoaded() {
       
     })
 
+
     descendants.simpleNodes.forEach( node => {
+      try{
       cyLayout.add({
         group: 'nodes',
         data: { id: node.ID, 
                 parent: node.owner.parent.ID == focusID ? null : node.owner.parent.ID,
          }});
+          
+          cyInvisible.$(node.ID).connectedEdges().connectedNodes().forEach(neighbor => {
+            cyLayout.add({
+              group: 'nodes',
+              data: { id: neighbor.id(), 
+                      parent: neighbor.parent().id() == focusID ? null : node.owner.parent.ID,
+               }});
+          })
+          cyInvisible.$(node.ID).connectedEdges().forEach(neighborEdge => {
+            cyLayout.add({
+              group: 'edges',
+              data: { id: neighborEdge.id(), 
+                      source: neighborEdge.source().id(), 
+                      target: neighborEdge.target().id(),
+               }});
+          })
+         }catch(e){
+            console.log(e);
+         }
     })
 
     let e = [...descendants.edges]
@@ -398,7 +419,7 @@ function onLoaded() {
     
     // console.log(expansionFactor,expansionFactor2)
     
-    return expansionFactor;
+    return expansionFactor * 2;
   }
   
   
@@ -454,7 +475,7 @@ function onLoaded() {
     newNodeCount++;
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -487,7 +508,7 @@ function onLoaded() {
     newEdgeCount++;
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -498,7 +519,7 @@ function onLoaded() {
     cy.elements(":selected").remove();
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -512,7 +533,7 @@ function onLoaded() {
     selectedEdge.move({ source: newSource.id() });
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -526,7 +547,7 @@ function onLoaded() {
     selectedEdge.move({ target: newTarget.id() });
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -545,7 +566,7 @@ function onLoaded() {
     }
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -560,7 +581,7 @@ function onLoaded() {
     layoutUtilities.placeNewNodes(nodes);
 
     if (document.getElementById("cbk-run-layout2").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -601,7 +622,7 @@ function onLoaded() {
         }
       });
       if (document.getElementById("cbk-run-layout3").checked) {
-        cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+        cy.layout(layoutOptions).run();
       }
       else {
         initializer(cy);
@@ -656,7 +677,7 @@ function onLoaded() {
         }
       });
       if (document.getElementById("cbk-run-layout3").checked) {
-        cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+        cy.layout(layoutOptions).run();
       }
       else {
         initializer(cy);
@@ -682,7 +703,7 @@ function onLoaded() {
     instance.hide(cy.elements(":selected"));
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -695,7 +716,7 @@ function onLoaded() {
     instance.show(neighbors);
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -706,7 +727,7 @@ function onLoaded() {
     instance.showAll();
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -722,7 +743,7 @@ function onLoaded() {
     }
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -737,7 +758,7 @@ function onLoaded() {
           
           instance.expandNodes(cy.nodes(':selected'), true);
           if (document.getElementById("cbk-run-layout3").checked) {
-            cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+            cy.layout(layoutOptions).run();
           }
           else {
             initializer(cy);
@@ -750,7 +771,7 @@ function onLoaded() {
         setTimeout(() => {
           instance.expandNodes(cy.nodes(':selected'));
           if (document.getElementById("cbk-run-layout3").checked) {
-            cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+            cy.layout(layoutOptions).run();
           }
           else {
             initializer(cy);
@@ -764,7 +785,7 @@ function onLoaded() {
     instance.collapseAllNodes();
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -775,7 +796,7 @@ function onLoaded() {
     instance.expandAllNodes();
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -786,7 +807,7 @@ function onLoaded() {
     instance.collapseEdges(cy.edges(':selected'));
 
     if (document.getElementById("cbk-run-layout3").checked) {
-      cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+      cy.layout(layoutOptions).run();
     }
     else {
       initializer(cy);
@@ -800,7 +821,7 @@ document.getElementById("expandSelectedEdges").addEventListener("click", () => {
     instance.expandEdges(cy.edges(':selected'));
   }
   if (document.getElementById("cbk-run-layout3").checked) {
-    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    cy.layout(layoutOptions).run();
   }
   else {
     initializer(cy);
@@ -811,7 +832,7 @@ document.getElementById("collapseEdgesBetweenNodes").addEventListener("click", (
   instance.collapseEdgesBetweenNodes(cy.nodes(':selected'));
 
   if (document.getElementById("cbk-run-layout3").checked) {
-    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    cy.layout(layoutOptions).run();
   }
   else {
     initializer(cy);
@@ -829,7 +850,7 @@ document.getElementById("expandEdgesBetweenNodes").addEventListener("click", () 
   
 
   if (document.getElementById("cbk-run-layout3").checked) {
-    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    cy.layout(layoutOptions).run();
   }
   else {
     initializer(cy);
@@ -840,7 +861,7 @@ document.getElementById("collapseAllEdges").addEventListener("click", () => {
   instance.collapseAllEdges();
 
   if (document.getElementById("cbk-run-layout3").checked) {
-    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    cy.layout(layoutOptions).run();
   }
   else {
     initializer(cy);
@@ -851,7 +872,7 @@ document.getElementById("expandAllEdges").addEventListener("click", () => {
   instance.expandAllEdges();
 
   if (document.getElementById("cbk-run-layout3").checked) {
-    cy.layout({ name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }).run();
+    cy.layout(layoutOptions).run();
   }
   else {
     initializer(cy);

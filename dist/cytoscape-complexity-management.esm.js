@@ -1,5 +1,26 @@
 import { ComplexityManager } from 'cmgm';
 
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+  return target;
+}
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -8,6 +29,19 @@ function _typeof(obj) {
   } : function (obj) {
     return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   }, _typeof(obj);
+}
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
 }
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
@@ -939,6 +973,14 @@ var debounce2 = function () {
   return debounce2;
 }();
 
+var layoutOptions = {
+  name: "fcose",
+  animate: true,
+  randomize: false,
+  stop: function stop() {
+    initializer(cy);
+  }
+};
 function getDescendantsInorder(node) {
   var descendants = {
     edges: new Set(),
@@ -1224,6 +1266,7 @@ function cueUtilities(params, cy, api) {
         var opts = options();
         var factor = (opts.expandCollapseCueSensitivity - 1) / 2;
         if (Math.abs(oldMousePos.x - currMousePos.x) < 5 && Math.abs(oldMousePos.y - currMousePos.y) < 5 && cyRenderedPosX >= expandcollapseRenderedStartX - expandcollapseRenderedRectSize * factor && cyRenderedPosX <= expandcollapseRenderedEndX + expandcollapseRenderedRectSize * factor && cyRenderedPosY >= expandcollapseRenderedStartY - expandcollapseRenderedRectSize * factor && cyRenderedPosY <= expandcollapseRenderedEndY + expandcollapseRenderedRectSize * factor) {
+          layoutOptions = _objectSpread2(_objectSpread2({}, layoutOptions), cy.options().layout);
           if (api.isCollapsible(node)) {
             clearDraws();
             if (document.getElementById("cbk-flag-recursive").checked) {
@@ -1232,14 +1275,7 @@ function cueUtilities(params, cy, api) {
               api.collapseNodes([node]);
             }
             if (document.getElementById("cbk-run-layout3").checked) {
-              cy.layout({
-                name: "fcose",
-                animate: true,
-                randomize: false,
-                stop: function stop() {
-                  initializer(cy);
-                }
-              }).run();
+              cy.layout(layoutOptions).run();
             } else {
               initializer(cy);
             }
@@ -1250,14 +1286,7 @@ function cueUtilities(params, cy, api) {
               setTimeout(function () {
                 api.expandNodes([node], true);
                 if (document.getElementById("cbk-run-layout3").checked) {
-                  cy.layout({
-                    name: "fcose",
-                    animate: true,
-                    randomize: false,
-                    stop: function stop() {
-                      initializer(cy);
-                    }
-                  }).run();
+                  cy.layout(layoutOptions).run();
                 } else {
                   initializer(cy);
                 }
@@ -1267,14 +1296,7 @@ function cueUtilities(params, cy, api) {
               setTimeout(function () {
                 api.expandNodes([node]);
                 if (document.getElementById("cbk-run-layout3").checked) {
-                  cy.layout({
-                    name: "fcose",
-                    animate: true,
-                    randomize: false,
-                    stop: function stop() {
-                      initializer(cy);
-                    }
-                  }).run();
+                  cy.layout(layoutOptions).run();
                 } else {
                   initializer(cy);
                 }
