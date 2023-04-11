@@ -331,7 +331,7 @@ function onLoaded() {
     let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
 
     var cyLayout = cytoscape({
-      container: undefined
+      container: document.getElementById('cyHeadless')
     });
 
     cyLayout.remove(cyLayout.elements());
@@ -340,6 +340,15 @@ function onLoaded() {
 
     cyInvisible.nodes().forEach(node => {
       InvisiblePOS[node.id()] = node.position();
+      if(node.id() == focusID){
+        cyLayout.add({
+          group: 'nodes',
+          data: { id: node.id(), 
+                  parent: node.parent().id(),
+           }}
+
+        )
+      }
     })
 
     let nodeConstraints = []
@@ -348,7 +357,7 @@ function onLoaded() {
       cyLayout.add({
         group: 'nodes',
         data: { id: node.ID, 
-                parent: node.owner.parent.ID == focusID ? null : node.owner.parent.ID,
+                parent: node.owner.parent.ID,
          }});
 
       nodeConstraints.push({nodeId: node.ID, position: InvisiblePOS[node.ID]});
@@ -361,24 +370,9 @@ function onLoaded() {
       cyLayout.add({
         group: 'nodes',
         data: { id: node.ID, 
-                parent: node.owner.parent.ID == focusID ? null : node.owner.parent.ID,
+                parent: node.owner.parent.ID,
          }});
           
-          cyInvisible.$(node.ID).connectedEdges().connectedNodes().forEach(neighbor => {
-            cyLayout.add({
-              group: 'nodes',
-              data: { id: neighbor.id(), 
-                      parent: neighbor.parent().id() == focusID ? null : node.owner.parent.ID,
-               }});
-          })
-          cyInvisible.$(node.ID).connectedEdges().forEach(neighborEdge => {
-            cyLayout.add({
-              group: 'edges',
-              data: { id: neighborEdge.id(), 
-                      source: neighborEdge.source().id(), 
-                      target: neighborEdge.target().id(),
-               }});
-          })
          }catch(e){
             console.log(e);
          }
@@ -388,38 +382,59 @@ function onLoaded() {
     
     e.forEach( edge => {
       try{
-        cyLayout.add({
-          group: 'edges',
-          data: { id: edge.ID, 
-                  source: edge.source.ID, 
-                  target: edge.target.ID,
-                }
-        });
+        if(cyLayout.getElementById(edge.source.ID).length == 0  ){
+          
+          cyLayout.add({
+            group: 'nodes',
+            data: { id: edge.source.ID, 
+            }});
+            
+        }else if(cyLayout.getElementById(edge.target.ID).length == 0){
+
+          cyLayout.add({
+            group: 'nodes',
+            data: { id: edge.target.ID, 
+            }});
+            
+        }
+          cyLayout.add({
+            group: 'edges',
+            data: { id: edge.ID, 
+                    source: edge.source.ID, 
+                    target: edge.target.ID,
+                  }
+          });
+
+        
       }catch(e){
       }
     })
 
     while(true){
       try{
-        cyLayout.layout({name: 'grid', animate: false}).run();
+        cyLayout.layout({name: 'fcose', animate: false}).run();
         break;
-      }catch(e){}
+      }catch(e){
+        console.log(e)
+        break;
+      }
     }
 
 
-     const boundingBox = cyLayout.elements().boundingBox();
+     const boundingBox = cyLayout.getElementById(focusID);
     
     // const boundingBox = cyInvisible.getElementById(focusID).boundingBox();
     
     // const area = boundingBox.w * boundingBox.h;
 
-     let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
+     let expansionFactor = Math.sqrt(Math.pow(boundingBox.width(), 2) + Math.pow(boundingBox.height(), 2));
     
     // let expansionFactor= Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
     
     // console.log(expansionFactor,expansionFactor2)
+    console.log(expansionFactor)
     
-    return expansionFactor * 2;
+    return expansionFactor;
   }
   
   

@@ -81,7 +81,13 @@ body {
   border-width: 1px 2px 2px 1px;
   border-radius: 6px;
 }
-
+#cyHeadless{
+  width: 50%;
+  height: 100%;
+  border: solid #2f4154;
+  border-width: 1px 2px 2px 1px;
+  border-radius: 6px;
+}
 h1 {
   opacity: 0.5;
   font-size: 14px;
