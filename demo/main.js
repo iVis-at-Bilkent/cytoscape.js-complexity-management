@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', onLoaded);
-let layoutOptions = { name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }
+let layoutOptions = { name: "fcose",  nodeRepulsion: node => 4500,animate: true, randomize: false, stop: () => { initializer(cy) } }
 function onLoaded() {
   let instance;
   const cyVisible = window.cyVisible = cytoscape({
@@ -332,6 +332,8 @@ function onLoaded() {
 
     var cyLayout = cytoscape({
       container: document.getElementById('cyHeadless')
+      // headless:true,
+      // styleEnabled:true
     });
 
     cyLayout.remove(cyLayout.elements());
@@ -341,10 +343,11 @@ function onLoaded() {
     cyInvisible.nodes().forEach(node => {
       InvisiblePOS[node.id()] = node.position();
       if(node.id() == focusID){
+
         cyLayout.add({
           group: 'nodes',
           data: { id: node.id(), 
-                  parent: node.parent().id(),
+                  parent: null,
            }}
 
         )
@@ -352,18 +355,31 @@ function onLoaded() {
     })
 
     let nodeConstraints = []
-
+    let savedNodes = [];
     descendants.compoundNodes.forEach( node => {
-      cyLayout.add({
-        group: 'nodes',
-        data: { id: node.ID, 
-                parent: node.owner.parent.ID,
-         }});
+      if(cyLayout.getElementById( node.owner.parent.ID).length!=0){
+        cyLayout.add({
+          group: 'nodes',
+          data: { id: node.ID, 
+                  parent: node.owner.parent.ID,
+           }});
+
+      }else{
+        console.log( node.owner.parent.ID)
+        savedNodes.push({
+          group: 'nodes',
+          data: { id: node.ID, 
+                  parent: node.owner.parent.ID,
+           }})
+      }
 
       nodeConstraints.push({nodeId: node.ID, position: InvisiblePOS[node.ID]});
       
     })
 
+    savedNodes.forEach(cNodeData => {
+      cyLayout.add(cNodeData)
+    })
 
     descendants.simpleNodes.forEach( node => {
       try{
@@ -432,9 +448,9 @@ function onLoaded() {
     // let expansionFactor= Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
     
     // console.log(expansionFactor,expansionFactor2)
-    console.log(expansionFactor)
+    console.log(expansionFactor,boundingBox.height(),boundingBox.width());
     
-    return expansionFactor;
+    return expansionFactor/2;
   }
   
   
@@ -443,7 +459,7 @@ function onLoaded() {
     let focusNode = cy.getElementById(focusID);
     
     let expansionFactor = calculateExpansionFactor(focusID);
-
+    
     cy.layout({
       name: 'fcose',
         quality: "proof",
@@ -453,7 +469,7 @@ function onLoaded() {
         nodeRepulsion: node => {
             let nodeGeometricDistance = 1 + Math.sqrt(Math.pow(focusNode.position().x - node.position().x,2) +Math.pow(focusNode.position().y - node.position().y,2));
 
-            return 7500 *  (expansionFactor / nodeGeometricDistance);
+            return 1000 *  expansionFactor;
         },
       idealEdgeLength: function (edge) {
         
@@ -465,8 +481,9 @@ function onLoaded() {
         
         let avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance)/2;
   
-        return currentEdgeLength *  (expansionFactor / avgGeometricDistance);
+        return currentEdgeLength *  (1 + (expansionFactor / avgGeometricDistance));
       },
+
     }).run();
   }
   
