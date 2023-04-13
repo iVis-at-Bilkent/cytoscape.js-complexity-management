@@ -459,7 +459,7 @@ function onLoaded() {
     let focusNode = cy.getElementById(focusID);
     
     let expansionFactor = calculateExpansionFactor(focusID);
-    
+    console.log({nodeId: focusID, position: {x: cy.$('#'+focusID).position('x'),y:cy.$('#'+focusID).position('y')}})
     cy.layout({
       name: 'fcose',
         quality: "proof",
@@ -483,6 +483,7 @@ function onLoaded() {
   
         return currentEdgeLength *  (1 + (expansionFactor / avgGeometricDistance));
       },
+      fixedNodeConstraint:[{nodeId: focusID, position: {x: cy.$('#'+focusID).position('x'),y:cy.$('#'+focusID).position('y')}}]
 
     }).run();
   }
