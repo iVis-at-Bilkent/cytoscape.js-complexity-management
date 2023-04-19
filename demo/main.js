@@ -584,13 +584,13 @@ function onLoaded() {
         'height': Math.max(width,height)+'px' // Set the new height of the node
       });
 
-      cyLayout.add({
-        group: 'edges',
-        data: { id: 'ne' + compoundsCounter, 
-                source: focusID, 
-                target: newNode.id()
-              }
-      });
+      // cyLayout.add({
+      //   group: 'edges',
+      //   data: { id: 'ne' + compoundsCounter, 
+      //           source: focusID, 
+      //           target: newNode.id()
+      //         }
+      // });
 
       selectedNodes.unselect();
 
