@@ -444,14 +444,13 @@ function onLoaded() {
     
     // const area = boundingBox.w * boundingBox.h;
 
-     let expansionFactor = Math.sqrt(Math.pow(boundingBox.width(), 2) + Math.pow(boundingBox.height(), 2)) /2;
+     let expansionFactor = Math.sqrt(Math.pow(boundingBox.width(), 2) + Math.pow(boundingBox.height(), 2));
     
     // let expansionFactor= Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
     
     // console.log(expansionFactor,expansionFactor2)
     
     cyLayout.remove(cyLayout.elements());
-    var nodes = cy.nodes().clone();
     
 
     let focusNode = cyLayout.add(cy.getElementById(focusID).clone());
@@ -501,6 +500,11 @@ function onLoaded() {
         },
       });
 
+
+      newNode.position({
+        x: newboundingBox.x1,
+        y: newboundingBox.y1
+      });
 
       newNode.style({
         'width': Math.max(width,height)+'px', // Set the new width of the node
@@ -584,6 +588,11 @@ function onLoaded() {
         'height': Math.max(width,height)+'px' // Set the new height of the node
       });
 
+      newNode.position({
+        x: newboundingBox.x1,
+        y: newboundingBox.y1
+      });
+
       // cyLayout.add({
       //   group: 'edges',
       //   data: { id: 'ne' + compoundsCounter, 
@@ -609,19 +618,19 @@ function onLoaded() {
         nodeRepulsion: node => {
             let nodeGeometricDistance = 1 + Math.sqrt(Math.pow(focusNode.position().x - node.position().x,2) +Math.pow(focusNode.position().y - node.position().y,2));
 
-            return 1000 *  expansionFactor;
+            // return 1000 *  expansionFactor;
+            return 4500 ;
         },
       idealEdgeLength: function (edge) {
         
-        let currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x,2) +Math.pow(edge.source().position().y - edge.target().position().y,2));
-  
-        let sourceGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.source().position().x,2) +Math.pow(focusNode.position().y - edge.source().position().y,2));
+        // let sourceGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.source().position().x,2) +Math.pow(focusNode.position().y - edge.source().position().y,2));
         
-        let targetGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.target().position().x,2) +Math.pow(focusNode.position().y - edge.target().position().y,2));
+        // let targetGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.target().position().x,2) +Math.pow(focusNode.position().y - edge.target().position().y,2));
         
-        let avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance)/2;
-  
-        return currentEdgeLength *  (1 + (expansionFactor / avgGeometricDistance));
+        // let avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance)/2;
+        
+        let currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x,2) +Math.pow(edge.source().position().y - edge.target().position().y,2))
+        return currentEdgeLength *  (1 + (expansionFactor / currentEdgeLength));
       },
       fixedNodeConstraint:[{nodeId: focusID, position: {x: cy.$('#'+focusID).position('x'),y:cy.$('#'+focusID).position('y')}}]
 
@@ -677,8 +686,7 @@ function onLoaded() {
 
   function moveChildren(node,translationFactor,focusID){
     if(node.isChildless() && node.id() != focusID){
-      node.shift("x",translationFactor.x)
-      node.shift("y",translationFactor.y)
+      node.shift({ x: translationFactor.x, y: translationFactor.y }, { duration: 500 });
     }else{
       node.children().forEach(child =>{
         moveChildren(child,translationFactor,focusID)
