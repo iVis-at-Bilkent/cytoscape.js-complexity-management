@@ -438,13 +438,17 @@ function onLoaded() {
     }
 
 
-     const boundingBox = cyLayout.getElementById(focusID);
+     const boundingBox = cyLayout.getElementById(focusID).boundingBox();
     
     // const boundingBox = cyInvisible.getElementById(focusID).boundingBox();
     
     // const area = boundingBox.w * boundingBox.h;
 
-     let expansionFactor = Math.sqrt(Math.pow(boundingBox.width(), 2) + Math.pow(boundingBox.height(), 2));
+    
+    var width = boundingBox.w;
+    var height = boundingBox.h;
+
+     let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
     
     // let expansionFactor= Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
     
@@ -456,156 +460,56 @@ function onLoaded() {
     let focusNode = cyLayout.add(cy.getElementById(focusID).clone());
     focusNode.unselect();
 
-    let anchorNodes = []
-
-    cy.getElementById(focusID).connectedEdges().forEach(function(edge) {
-      var source = edge.source();
-      var target = edge.target();
-      var anchorNode = (focusNode.id() === source.id()) ? target : source;
-      anchorNodes.push(anchorNode.id());
+    focusNode.position({
+      x: cy.getElementById(focusID).position().x,
+      y: cy.getElementById(focusID).position().y
     });
-    
+    focusNode.style({
+      'width': Math.max(width,height)+'px', // Set the new width of the node
+      'height': Math.max(width,height)+'px',// Set the new height of the node
+      'background-color': 'red' 
+    });
+
     let compoundsCounter = 1;
     let componentNodes = []
-
-    while(anchorNodes.length>0) {
-
-      let anchorNode = cy.getElementById(anchorNodes[0]);
-      var selectedNodes = cy.$(':selected');
-
-      anchorNodes.splice(0, 1);
-      selectedNodes.unselect();
-
-      dfs(anchorNode, focusID);
-
-      // Get the selected nodes
-      selectedNodes = cy.$(':selected');
-
-      anchorNodes = anchorNodes.filter(anchor => !visited.has(anchor));
-
-      var newboundingBox = cy.collection(selectedNodes).boundingBox();
-
-      // Calculate the width and height of the bounding box
-      var width = newboundingBox.w;
-      var height = newboundingBox.h;
-
-      componentNodes.push({id: 'compound'+compoundsCounter,data:selectedNodes,pos:{x:newboundingBox.x1,y:newboundingBox.y1}});
-
-      // Add the new node to the graph with the calculated size and position
-      var newNode = cyLayout.add({
-        group: 'nodes',
-        data: {
-          id: 'compound'+compoundsCounter,
-          label: 'compound' +compoundsCounter
-        },
-      });
-
-
-      newNode.position({
-        x: newboundingBox.x1,
-        y: newboundingBox.y1
-      });
-
-      newNode.style({
-        'width': Math.max(width,height)+'px', // Set the new width of the node
-        'height': Math.max(width,height)+'px' // Set the new height of the node
-      });
-
-
-      cyLayout.add({
-        group: 'edges',
-        data: { id: 'ne' + compoundsCounter, 
-                source: focusID, 
-                target: newNode.id()
-              }
-      });
-
-      selectedNodes.unselect();
-
-      compoundsCounter++
-    }
-
     
-
-    
-
-    componentNodes.forEach(component => {
-      component.data.select();
+    cy.nodes().forEach(node => {
+      if(node.id()!= focusID && node.parent().length == 0){
+        if(node.isChildless()){
+          node.select();
+          
+        }else{
+          selectChildren(node);
+        }
+        var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+          var width = newboundingBox.w;
+          var height = newboundingBox.h;
+          componentNodes.push({id: 'compound'+compoundsCounter,data:cy.$(":selected"),pos:{
+            x: (newboundingBox.x2 + newboundingBox.x1)/2,
+            y: (newboundingBox.y1 + newboundingBox.y2)/2}});
+          var newNode = cyLayout.add({
+                group: 'nodes',
+                data: {
+                  id: 'compound'+compoundsCounter,
+                  label: 'compound' +compoundsCounter
+                },
+              });
+        
+        
+              newNode.position({
+                x: (newboundingBox.x2 + newboundingBox.x1)/2,
+                y: (newboundingBox.y1 + newboundingBox.y2)/2
+              });
+        
+              newNode.style({
+                'width': Math.max(width,height)+'px', // Set the new width of the node
+                'height': Math.max(width,height)+'px' // Set the new height of the node
+              });
+              cy.nodes().unselect();
+              compoundsCounter++;
+      }
     })
-
-    var allSelectedNodes = cy.nodes(':selected');
-    allSelectedNodes.forEach(function(node) {
-      selectChildren(node);
-    });
-
-    cy.getElementById(focusID).select();
-
-    var unConnectedComponentAnchors = cy.nodes(':unselected')
-    cy.nodes().unselect();
     
-
-    let unConnectedComponents = []
-
- 
-
-    while(unConnectedComponentAnchors.length>0) {
-
-      let anchorNode = cy.getElementById(unConnectedComponentAnchors[0].id());
-      var selectedNodes = cy.$(':selected');
-
-      unConnectedComponentAnchors.splice(0, 1);
-      selectedNodes.unselect();
-
-      dfs(anchorNode, focusID);
-
-      // Get the selected nodes
-      selectedNodes = cy.$(':selected');
-
-      unConnectedComponentAnchors = unConnectedComponentAnchors.filter(anchor => !visited.has(anchor.id()));
-
-      console.log(unConnectedComponentAnchors)
-
-      var newboundingBox = cy.collection(selectedNodes).boundingBox();
-
-      // Calculate the width and height of the bounding box
-      var width = newboundingBox.w;
-      var height = newboundingBox.h;
-
-      unConnectedComponents.push({id: 'compound'+compoundsCounter,data:selectedNodes,pos:{x:newboundingBox.x1,y:newboundingBox.y1}});
-
-      // Add the new node to the graph with the calculated size and position
-      var newNode = cyLayout.add({
-        group: 'nodes',
-        data: {
-          id: 'compound'+compoundsCounter,
-          label: 'compound' +compoundsCounter
-        },
-      });
-
-
-      newNode.style({
-        'width': Math.max(width,height)+'px', // Set the new width of the node
-        'height': Math.max(width,height)+'px' // Set the new height of the node
-      });
-
-      newNode.position({
-        x: newboundingBox.x1,
-        y: newboundingBox.y1
-      });
-
-      // cyLayout.add({
-      //   group: 'edges',
-      //   data: { id: 'ne' + compoundsCounter, 
-      //           source: focusID, 
-      //           target: newNode.id()
-      //         }
-      // });
-
-      selectedNodes.unselect();
-
-      compoundsCounter++
-    }
-
 
     cy.fit();
 
@@ -644,17 +548,9 @@ function onLoaded() {
       })
     })
 
-    
-    unConnectedComponents.forEach(component => {
-          let newComponentPosition = translateComponent(cyLayout.getElementById(focusID).position(),cyLayout.getElementById(component.id).position(), cy.getElementById(focusID).position());
-          let translationFactor = translateNode(component.pos,newComponentPosition);
-          component.data.forEach(node => {
-            moveChildren(node,translationFactor,focusID);
-          })
-        })
     cy.fit();
 
-      cy.getElementById(focusID).select();
+    cy.getElementById(focusID).select();
 
   }
   
@@ -668,7 +564,7 @@ function onLoaded() {
 
     let d = {x:componentNodeInCyLayout.x-focusNodeInCyLayout.x,y:componentNodeInCyLayout.y-focusNodeInCyLayout.y};
 
-    return { x: FocusNodeInCy.x + d.x, y: FocusNodeInCy.y - d.y };
+    return { x: FocusNodeInCy.x + d.x, y: FocusNodeInCy.y + d.y };
     
   }
 
