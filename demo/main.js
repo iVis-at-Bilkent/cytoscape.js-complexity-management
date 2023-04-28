@@ -445,8 +445,8 @@ function onLoaded() {
     // const area = boundingBox.w * boundingBox.h;
 
     
-    var width = boundingBox.w;
-    var height = boundingBox.h;
+    var focusNodeWidth = boundingBox.w;
+    var fcousNodeHeight = boundingBox.h;
 
      let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
     
@@ -457,24 +457,13 @@ function onLoaded() {
     cyLayout.remove(cyLayout.elements());
     
 
-    let focusNode = cyLayout.add(cy.getElementById(focusID).clone());
-    focusNode.unselect();
-
-    focusNode.position({
-      x: cy.getElementById(focusID).position().x,
-      y: cy.getElementById(focusID).position().y
-    });
-    focusNode.style({
-      'width': Math.max(width,height)+'px', // Set the new width of the node
-      'height': Math.max(width,height)+'px',// Set the new height of the node
-      'background-color': 'red' 
-    });
+    let topLevelFocusParent = getTopParent(cy.getElementById(focusID));
 
     let compoundsCounter = 1;
     let componentNodes = []
     
     cy.nodes().forEach(node => {
-      if(node.id()!= focusID && node.parent().length == 0){
+      if(node.id()!= topLevelFocusParent.id() && node.parent().length == 0){
         if(node.isChildless()){
           node.select();
           
@@ -510,6 +499,117 @@ function onLoaded() {
       }
     })
     
+    if(cy.getElementById(focusID).parent().length == 0){
+      focusNode = cyLayout.add(cy.getElementById(focusID).clone());
+      focusNode.unselect();
+  
+      focusNode.position({
+        x: cy.getElementById(focusID).position().x,
+        y: cy.getElementById(focusID).position().y
+      });
+      focusNode.style({
+        'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
+        'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
+        'background-color': 'red' 
+      });
+    }else{
+      var newNode = cyLayout.add({
+        group: 'nodes',
+        data: {
+          id: topLevelFocusParent.id(),
+          label: 'compound' +compoundsCounter
+        },
+      });
+
+
+      newNode.position({
+        x: topLevelFocusParent.position().x,
+        y: topLevelFocusParent.position().y
+      });
+
+      compoundsCounter++;
+
+      // addAllChildren(topLevelFocusParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth);
+    
+      // let descdents = getDescendantsInorderCyGraph(topLevelFocusParent)
+      // let children = [...descdents.compoundNodes,...descdents.simpleNodes]
+
+      selectChildren(topLevelFocusParent);
+      let children = cy.$(":selected")
+
+      cy.nodes().unselect();
+      let nodeCache = []
+      children.forEach(child => {
+        child.select()
+        if(child.id() != focusID){
+          if(child.isChildless()){
+            componentNodes.push({id: child.id(), data:cy.$(":selected"),pos:{
+                x: child.position().x,
+                y: child.position().y}});
+
+              
+              var newNode = cyLayout.add({
+                    group: 'nodes',
+                    data: {
+                      id: child.id(),
+                      label: 'compound' +compoundsCounter,
+                      parent: child.parent().id()
+                    },
+                  });
+            
+                  newNode.position({
+                    x: child.position().x,
+                    y: child.position().y
+                  });
+            
+                  newNode.style({
+                    'width': Math.max(child.width(),child.height())+'px', // Set the new width of the node
+                    'height': Math.max(child.width(),child.height())+'px', // Set the new height of the node
+                  });
+                  cy.nodes().unselect();
+                  compoundsCounter++;
+          }else{
+            var newNode = cyLayout.add({
+              group: 'nodes',
+              data: {
+                id: child.id(),
+                label: 'compound' +compoundsCounter,
+                parent: child.parent().id()
+              },
+            });
+            compoundsCounter++;
+      
+          }
+        }else{
+          componentNodes.push({id: child.id(), data:cy.$(":selected"),pos:{
+            x: child.position().x,
+            y: child.position().y}});
+
+          var newNode = cyLayout.add({
+                group: 'nodes',
+                data: {
+                  id: child.id(),
+                  label: 'compound' +compoundsCounter,
+                  parent: child.parent().id()
+                },
+              });
+        
+              newNode.position({
+                x: child.position().x,
+                y: child.position().y
+              });
+        
+              newNode.style({
+                'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
+                'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
+                'background-color':'red'
+              });
+              cy.nodes().unselect();
+              compoundsCounter++;
+        }
+      })
+    }
+
 
     cy.fit();
 
@@ -520,22 +620,8 @@ function onLoaded() {
         animationDuration: 1000,
         randomize: false, 
         nodeRepulsion: node => {
-            let nodeGeometricDistance = 1 + Math.sqrt(Math.pow(focusNode.position().x - node.position().x,2) +Math.pow(focusNode.position().y - node.position().y,2));
-
-            // return 1000 *  expansionFactor;
             return 4500 ;
         },
-      idealEdgeLength: function (edge) {
-        
-        // let sourceGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.source().position().x,2) +Math.pow(focusNode.position().y - edge.source().position().y,2));
-        
-        // let targetGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.target().position().x,2) +Math.pow(focusNode.position().y - edge.target().position().y,2));
-        
-        // let avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance)/2;
-        
-        let currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x,2) +Math.pow(edge.source().position().y - edge.target().position().y,2))
-        return currentEdgeLength *  (1 + (expansionFactor / currentEdgeLength));
-      },
       fixedNodeConstraint:[{nodeId: focusID, position: {x: cy.$('#'+focusID).position('x'),y:cy.$('#'+focusID).position('y')}}]
 
     }).run();
@@ -553,7 +639,112 @@ function onLoaded() {
     cy.getElementById(focusID).select();
 
   }
+
+  function getDescendantsInorderCyGraph(topLevelParent,){
+    let descendants = {
+      simpleNodes: [],
+      compoundNodes: []
+    };
+    topLevelParent.forEach(child => {
+      if(child.isChildless()){
+        descendants.simpleNodes.push(child)
+      }else{
+        descendants.compoundNodes.push(child)
+        let childDescendents = getDescendantsInorderCyGraph(child)
+        for (var id in childDescendents) {
+          descendants[id] = [...descendants[id] || [], ...childDescendents[id]];
+        }
+      }
+    })
+    return descendants;
+  }
+
+
+  // function addAllChildren(topLevelParent,topLevelParentIDInCyLayout,cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth){
+  //   topLevelParent.children().forEach(child => {
+  //     if(child.id() != focusID){
+  //       if(child.isChildless()){
+  //         var newboundingBox = child.boundingBox();
+  //           var width = newboundingBox.w;
+  //           var height = newboundingBox.h;
+  //           componentNodes.push({id: 'compound'+compoundsCounter,data:cy.$(":selected"),pos:{
+  //             x: (newboundingBox.x2 + newboundingBox.x1)/2,
+  //             y: (newboundingBox.y1 + newboundingBox.y2)/2}});
+  //           var newNode = cyLayout.add({
+  //                 group: 'nodes',
+  //                 data: {
+  //                   id: 'compound'+compoundsCounter,
+  //                   label: 'compound' +compoundsCounter,
+  //                   parent: topLevelParentIDInCyLayout
+  //                 },
+  //               });
+          
+          
+  //               newNode.position({
+  //                 x: (newboundingBox.x2 + newboundingBox.x1)/2,
+  //                 y: (newboundingBox.y1 + newboundingBox.y2)/2
+  //               });
+          
+  //               newNode.style({
+  //                 'width': Math.max(width,height)+'px', // Set the new width of the node
+  //                 'height': Math.max(width,height)+'px' // Set the new height of the node
+  //               });
+  //               cy.nodes().unselect();
+  //               compoundsCounter++;
+  //       }else{
+  //         var newNode = cyLayout.add({
+  //           group: 'nodes',
+  //           data: {
+  //             id: 'compound'+compoundsCounter,
+  //             label: 'compound' +compoundsCounter
+  //           },
+  //         });
+    
+    
+  //         newNode.position({
+  //           x: topLevelParent.position().x,
+  //           y: topLevelParent.position().y
+  //         });
+    
+  //         compoundsCounter++;
+    
+  //         addAllChildren(topLevelParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID);
+        
+  //       }
+  //     }else{
+  //       var newboundingBox = child.boundingBox();
+  //       componentNodes.push({id: focusID,data:cy.$(":selected"),pos:{
+  //         x: (newboundingBox.x2 + newboundingBox.x1)/2,
+  //         y: (newboundingBox.y1 + newboundingBox.y2)/2}});
+  //       var newNode = cyLayout.add({
+  //             group: 'nodes',
+  //             data: {
+  //               id: focusID,
+  //               label: 'compound' +compoundsCounter,
+  //               parent: topLevelParentIDInCyLayout
+  //             },
+  //           });
+      
+      
+  //           newNode.position({
+  //             x: (newboundingBox.x2 + newboundingBox.x1)/2,
+  //             y: (newboundingBox.y1 + newboundingBox.y2)/2
+  //           });
+      
+  //           newNode.style({
+  //             'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
+  //             'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
+  //             'background-color': 'red'
+  //           });
+  //           cy.nodes().unselect();
+  //           compoundsCounter++;
+  //     }
+  //   })
+  // }
   
+ 
+
+
   function translateNode(a,a1) {
     // Step 1: Find the displacement vector d between a and a1
     return { x: a1.x - a.x, y: a1.y - a.y };
@@ -577,6 +768,14 @@ function onLoaded() {
         child.select();
         selectChildren(child);
       });
+    }
+  }
+
+  function getTopParent(node) {
+    if(node.parent().length!=0){
+      return getTopParent(node.parent())
+    }else{
+      return node
     }
   }
 
