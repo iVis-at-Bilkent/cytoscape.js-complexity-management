@@ -328,8 +328,6 @@ function onLoaded() {
   
   function expandGraph(focusID,cy){
     
-    visited = new Set();
-
     let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
 
     var cyLayout = cytoscape({
@@ -339,24 +337,14 @@ function onLoaded() {
     });
 
     cyLayout.remove(cyLayout.elements());
-    
-    let InvisiblePOS = Object.create(null)
 
-    cyInvisible.nodes().forEach(node => {
-      InvisiblePOS[node.id()] = node.position();
-      if(node.id() == focusID){
+    cyLayout.add({
+      group: 'nodes',
+      data: { id: focusID, 
+              parent: null,
+       }}
+    )
 
-        cyLayout.add({
-          group: 'nodes',
-          data: { id: node.id(), 
-                  parent: null,
-           }}
-
-        )
-      }
-    })
-
-    let nodeConstraints = []
     let savedNodes = [];
     descendants.compoundNodes.forEach( node => {
       if(cyLayout.getElementById( node.owner.parent.ID).length!=0){
@@ -374,8 +362,6 @@ function onLoaded() {
            }})
       }
 
-      nodeConstraints.push({nodeId: node.ID, position: InvisiblePOS[node.ID]});
-      
     })
 
     savedNodes.forEach(cNodeData => {
@@ -440,25 +426,15 @@ function onLoaded() {
 
      const boundingBox = cyLayout.getElementById(focusID).boundingBox();
     
-    // const boundingBox = cyInvisible.getElementById(focusID).boundingBox();
-    
-    // const area = boundingBox.w * boundingBox.h;
-
-    
     var focusNodeWidth = boundingBox.w;
     var fcousNodeHeight = boundingBox.h;
 
-     let expansionFactor = Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
-    
-    // let expansionFactor= Math.sqrt(Math.pow(boundingBox.w, 2) + Math.pow(boundingBox.h, 2));
-    
-    // console.log(expansionFactor,expansionFactor2)
     
     cyLayout.remove(cyLayout.elements());
     
 
     let topLevelFocusParent = getTopParent(cy.getElementById(focusID));
-
+    cy.nodes().unselect();
     let compoundsCounter = 1;
     let componentNodes = []
     
@@ -473,14 +449,14 @@ function onLoaded() {
         var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
           var width = newboundingBox.w;
           var height = newboundingBox.h;
-          componentNodes.push({id: 'compound'+compoundsCounter,data:cy.$(":selected"),pos:{
+          componentNodes.push({id: node.id(),data:cy.$(":selected"),pos:{
             x: (newboundingBox.x2 + newboundingBox.x1)/2,
             y: (newboundingBox.y1 + newboundingBox.y2)/2}});
           var newNode = cyLayout.add({
                 group: 'nodes',
                 data: {
-                  id: 'compound'+compoundsCounter,
-                  label: 'compound' +compoundsCounter
+                  id: node.id(),
+                  label: node.id()
                 },
               });
         
@@ -492,7 +468,8 @@ function onLoaded() {
         
               newNode.style({
                 'width': Math.max(width,height)+'px', // Set the new width of the node
-                'height': Math.max(width,height)+'px' // Set the new height of the node
+                'height': Math.max(width,height)+'px', // Set the new height of the node
+                'label' : newNode.data().label
               });
               cy.nodes().unselect();
               compoundsCounter++;
@@ -510,14 +487,15 @@ function onLoaded() {
       focusNode.style({
         'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
         'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
-        'background-color': 'red' 
+        'background-color': 'red',
+        'label' : focusNode.data().label
       });
     }else{
       var newNode = cyLayout.add({
         group: 'nodes',
         data: {
           id: topLevelFocusParent.id(),
-          label: 'compound' +compoundsCounter
+          label: topLevelFocusParent.id()
         },
       });
 
@@ -536,9 +514,12 @@ function onLoaded() {
 
       selectChildren(topLevelFocusParent);
       let children = cy.$(":selected")
+      
+      console.log(children)
 
       cy.nodes().unselect();
       let nodeCache = []
+      cyLayout.add(children)
       children.forEach(child => {
         child.select()
         if(child.id() != focusID){
@@ -548,14 +529,6 @@ function onLoaded() {
                 y: child.position().y}});
 
               
-              var newNode = cyLayout.add({
-                    group: 'nodes',
-                    data: {
-                      id: child.id(),
-                      label: 'compound' +compoundsCounter,
-                      parent: child.parent().id()
-                    },
-                  });
             
                   newNode.position({
                     x: child.position().x,
@@ -565,18 +538,11 @@ function onLoaded() {
                   newNode.style({
                     'width': Math.max(child.width(),child.height())+'px', // Set the new width of the node
                     'height': Math.max(child.width(),child.height())+'px', // Set the new height of the node
+                    'label' : newNode.data().label
                   });
                   cy.nodes().unselect();
                   compoundsCounter++;
           }else{
-            var newNode = cyLayout.add({
-              group: 'nodes',
-              data: {
-                id: child.id(),
-                label: 'compound' +compoundsCounter,
-                parent: child.parent().id()
-              },
-            });
             compoundsCounter++;
       
           }
@@ -585,24 +551,17 @@ function onLoaded() {
             x: child.position().x,
             y: child.position().y}});
 
-          var newNode = cyLayout.add({
-                group: 'nodes',
-                data: {
-                  id: child.id(),
-                  label: 'compound' +compoundsCounter,
-                  parent: child.parent().id()
-                },
-              });
-        
-              newNode.position({
+            let newFNode = cyLayout.getElementById(child.id())
+            newFNode.position({
                 x: child.position().x,
                 y: child.position().y
               });
         
-              newNode.style({
+              newFNode.style({
                 'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
                 'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
-                'background-color':'red'
+                'background-color':'red',
+                'label' : newFNode.data().label
               });
               cy.nodes().unselect();
               compoundsCounter++;
@@ -639,110 +598,6 @@ function onLoaded() {
     cy.getElementById(focusID).select();
 
   }
-
-  function getDescendantsInorderCyGraph(topLevelParent,){
-    let descendants = {
-      simpleNodes: [],
-      compoundNodes: []
-    };
-    topLevelParent.forEach(child => {
-      if(child.isChildless()){
-        descendants.simpleNodes.push(child)
-      }else{
-        descendants.compoundNodes.push(child)
-        let childDescendents = getDescendantsInorderCyGraph(child)
-        for (var id in childDescendents) {
-          descendants[id] = [...descendants[id] || [], ...childDescendents[id]];
-        }
-      }
-    })
-    return descendants;
-  }
-
-
-  // function addAllChildren(topLevelParent,topLevelParentIDInCyLayout,cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth){
-  //   topLevelParent.children().forEach(child => {
-  //     if(child.id() != focusID){
-  //       if(child.isChildless()){
-  //         var newboundingBox = child.boundingBox();
-  //           var width = newboundingBox.w;
-  //           var height = newboundingBox.h;
-  //           componentNodes.push({id: 'compound'+compoundsCounter,data:cy.$(":selected"),pos:{
-  //             x: (newboundingBox.x2 + newboundingBox.x1)/2,
-  //             y: (newboundingBox.y1 + newboundingBox.y2)/2}});
-  //           var newNode = cyLayout.add({
-  //                 group: 'nodes',
-  //                 data: {
-  //                   id: 'compound'+compoundsCounter,
-  //                   label: 'compound' +compoundsCounter,
-  //                   parent: topLevelParentIDInCyLayout
-  //                 },
-  //               });
-          
-          
-  //               newNode.position({
-  //                 x: (newboundingBox.x2 + newboundingBox.x1)/2,
-  //                 y: (newboundingBox.y1 + newboundingBox.y2)/2
-  //               });
-          
-  //               newNode.style({
-  //                 'width': Math.max(width,height)+'px', // Set the new width of the node
-  //                 'height': Math.max(width,height)+'px' // Set the new height of the node
-  //               });
-  //               cy.nodes().unselect();
-  //               compoundsCounter++;
-  //       }else{
-  //         var newNode = cyLayout.add({
-  //           group: 'nodes',
-  //           data: {
-  //             id: 'compound'+compoundsCounter,
-  //             label: 'compound' +compoundsCounter
-  //           },
-  //         });
-    
-    
-  //         newNode.position({
-  //           x: topLevelParent.position().x,
-  //           y: topLevelParent.position().y
-  //         });
-    
-  //         compoundsCounter++;
-    
-  //         addAllChildren(topLevelParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID);
-        
-  //       }
-  //     }else{
-  //       var newboundingBox = child.boundingBox();
-  //       componentNodes.push({id: focusID,data:cy.$(":selected"),pos:{
-  //         x: (newboundingBox.x2 + newboundingBox.x1)/2,
-  //         y: (newboundingBox.y1 + newboundingBox.y2)/2}});
-  //       var newNode = cyLayout.add({
-  //             group: 'nodes',
-  //             data: {
-  //               id: focusID,
-  //               label: 'compound' +compoundsCounter,
-  //               parent: topLevelParentIDInCyLayout
-  //             },
-  //           });
-      
-      
-  //           newNode.position({
-  //             x: (newboundingBox.x2 + newboundingBox.x1)/2,
-  //             y: (newboundingBox.y1 + newboundingBox.y2)/2
-  //           });
-      
-  //           newNode.style({
-  //             'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
-  //             'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
-  //             'background-color': 'red'
-  //           });
-  //           cy.nodes().unselect();
-  //           compoundsCounter++;
-  //     }
-  //   })
-  // }
-  
- 
 
 
   function translateNode(a,a1) {
