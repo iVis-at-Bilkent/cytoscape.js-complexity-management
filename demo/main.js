@@ -515,8 +515,6 @@ function onLoaded() {
       selectChildren(topLevelFocusParent);
       let children = cy.$(":selected")
       
-      console.log(children)
-
       cy.nodes().unselect();
       let nodeCache = []
       cyLayout.add(children)
@@ -578,9 +576,9 @@ function onLoaded() {
         animate:true,
         animationDuration: 1000,
         randomize: false, 
-        nodeRepulsion: node => {
-            return 4500 ;
-        },
+        gravity: 1.0,
+        gravityRange: 1.0, 
+
       fixedNodeConstraint:[{nodeId: focusID, position: {x: cy.$('#'+focusID).position('x'),y:cy.$('#'+focusID).position('y')}}]
 
     }).run();
