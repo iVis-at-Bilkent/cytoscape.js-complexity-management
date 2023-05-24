@@ -475,17 +475,23 @@ export function complexityManagement(cy) {
       }
     });
 
-    let IDsToAdd = compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+    // Show to show elements
+    let [IDsToAdd,metaEdgeIDs] = compMgrInstance.show(
+      nodeIDListToShow,
+      edgeIDListToShow
+    );
 
     // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
+    actOnVisibleForMetaEdge(metaEdgeIDs,cy);
   };
 
   api.showAll = () => {
-    let IDsToAdd = compMgrInstance.showAll();
+    let [IDsToAdd,metaEdgeIDs] = compMgrInstance.showAll();
 
     // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
+    actOnVisibleForMetaEdge(metaEdgeIDs,cy);
   };
 
   api.collapseNodes = (nodes, isRecursive = false) => {

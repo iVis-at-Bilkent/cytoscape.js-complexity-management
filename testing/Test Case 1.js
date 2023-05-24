@@ -2,13 +2,16 @@ let cmgm = cy.complexityManagement('get').getCompMgrInstance()
 
 // Begin Testing
 
-// add edges 3 times
+// add edge
+// hide
 // collapse all nodes 
 // collapse all edges 
 // filter node to 30 
 // filter edges to 50 
+// hide
 // expand all nodes
 // expand all edges.
+// show
 // unfilter all
 
 let startTime = 0;
@@ -19,10 +22,10 @@ let sum = 0
 for (let index = 0; index < 10; index++) {
     
     startTime = new Date().getTime()
-    // add 3 edges b/w c and g
-    addEdgeBetween('#c','#g');
-    addEdgeBetween('#c','#g');
-    addEdgeBetween('#c','#g');
+    // add  edges b/w c and g
+    addEdgeBetween('#105','#126');
+    // hide
+    hide()
     // collapse all nodes
     document.getElementById('collapseAllNodes').click();
     // collapse all edges
@@ -31,10 +34,14 @@ for (let index = 0; index < 10; index++) {
     filterNodes(30,100);
     // filter edge value 50
     filterEdges(0,50);
+    // hide
+    hide()
     // expand all nodes
     document.getElementById('expandAllNodes').click();
     // expand all edges
     document.getElementById('expandAllEdges').click();
+    // show
+    showAll()
     // unfilter all
     filterNodes(0,100);
     filterEdges(0,100);
@@ -126,3 +133,32 @@ function filterEdges(min,max){
 }
 
 
+function hide(){
+    var nodes = cy.nodes();
+
+    // Step 1: Randomly select a node
+    var randomNode = nodes[Math.floor(Math.random() * nodes.length)];
+    randomNode.select()
+    // Step 2: Get the 1-hop neighborhood
+    var oneHopNeighbors = randomNode.isParent() ? randomNode.descendants().neighborhood().nodes() : randomNode.neighborhood().nodes();
+
+    // Step 3: Calculate the number of nodes to select (75%)
+    var numNodesToSelect = Math.floor(oneHopNeighbors.length * 0.75);
+
+    // Step 4: Randomly select nodes from the 1-hop neighborhood
+    var selectedNodes = [];
+    while (selectedNodes.length < numNodesToSelect) {
+    var randomNeighbor = oneHopNeighbors[Math.floor(Math.random() * oneHopNeighbors.length)];
+    if (!selectedNodes.includes(randomNeighbor)) {
+        selectedNodes.push(randomNeighbor);
+        randomNeighbor.select();
+    }
+    }
+
+    document.getElementById("hideSelected").click();
+
+}
+
+function showAll(){
+    document.getElementById("showAll").click();
+}

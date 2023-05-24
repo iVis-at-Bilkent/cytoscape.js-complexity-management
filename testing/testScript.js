@@ -123,3 +123,33 @@ function filterEdges(min,max){
 }
 
 
+function hide(){
+    var nodes = cy.nodes();
+
+    // Step 1: Randomly select a node
+    var randomNode = nodes[Math.floor(Math.random() * nodes.length)];
+    randomNode.select()
+    // Step 2: Get the 1-hop neighborhood
+    var oneHopNeighbors = randomNode.isParent() ? randomNode.descendants().neighborhood().nodes() : randomNode.neighborhood().nodes();
+
+    // Step 3: Calculate the number of nodes to select (75%)
+    var numNodesToSelect = Math.floor(oneHopNeighbors.length * 0.75);
+
+    // Step 4: Randomly select nodes from the 1-hop neighborhood
+    var selectedNodes = [];
+    while (selectedNodes.length < numNodesToSelect) {
+    var randomNeighbor = oneHopNeighbors[Math.floor(Math.random() * oneHopNeighbors.length)];
+    if (!selectedNodes.includes(randomNeighbor)) {
+        selectedNodes.push(randomNeighbor);
+        randomNeighbor.select();
+    }
+    }
+
+    document.getElementById("hideSelected").click();
+
+}
+
+function showAll(){
+    document.getElementById("showAll").click();
+}
+

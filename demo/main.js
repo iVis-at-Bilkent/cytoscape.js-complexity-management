@@ -520,6 +520,10 @@ function onLoaded() {
       cyLayout.add(children)
       children.forEach(child => {
         child.select()
+        var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+        var width = newboundingBox.w;
+        var height = newboundingBox.h;
+         
         if(child.id() != focusID){
           if(child.isChildless()){
             componentNodes.push({id: child.id(), data:cy.$(":selected"),pos:{
@@ -527,27 +531,24 @@ function onLoaded() {
                 y: child.position().y}});
 
               
-            
+                  newNode = cyLayout.getElementById(child.id())
                   newNode.position({
                     x: child.position().x,
                     y: child.position().y
                   });
             
                   newNode.style({
-                    'width': Math.max(child.width(),child.height())+'px', // Set the new width of the node
-                    'height': Math.max(child.width(),child.height())+'px', // Set the new height of the node
+                    'width': Math.max(width,height)+'px', // Set the new width of the node
+                    'height': Math.max(width,height)+'px', // Set the new height of the node
                     'label' : newNode.data().label
                   });
-                  cy.nodes().unselect();
                   compoundsCounter++;
           }else{
             compoundsCounter++;
       
           }
         }else{
-          componentNodes.push({id: child.id(), data:cy.$(":selected"),pos:{
-            x: child.position().x,
-            y: child.position().y}});
+          
 
             let newFNode = cyLayout.getElementById(child.id())
             newFNode.position({
@@ -561,9 +562,10 @@ function onLoaded() {
                 'background-color':'red',
                 'label' : newFNode.data().label
               });
-              cy.nodes().unselect();
               compoundsCounter++;
         }
+        cy.nodes().unselect();
+
       })
     }
 
@@ -574,11 +576,9 @@ function onLoaded() {
       name: 'fcose',
         quality: "proof",
         animate:true,
-        animationDuration: 1000,
+        animationDuration: 500,
         randomize: false, 
-        gravity: 1.0,
-        gravityRange: 1.0, 
-
+        nodeSeparation: 25,
       fixedNodeConstraint:[{nodeId: focusID, position: {x: cy.$('#'+focusID).position('x'),y:cy.$('#'+focusID).position('y')}}]
 
     }).run();
@@ -634,7 +634,13 @@ function onLoaded() {
 
   function moveChildren(node,translationFactor,focusID){
     if(node.isChildless() && node.id() != focusID){
-      node.shift({ x: translationFactor.x, y: translationFactor.y }, { duration: 500 });
+      node.animate({
+        position: { x: node.position().x + translationFactor.x, y: node.position().y + translationFactor.y },
+        
+      }, {
+        duration: 500
+      });
+      // node.shift({ x: translationFactor.x, y: translationFactor.y }, { duration: 500 });
     }else{
       node.children().forEach(child =>{
         moveChildren(child,translationFactor,focusID)
@@ -990,7 +996,7 @@ function onLoaded() {
           else {
             initializer(cy);
           }
-        }, 1200);
+        }, 700);
       })
     }else{
       cy.$(':selected').forEach(node => {
@@ -1003,7 +1009,7 @@ function onLoaded() {
           else {
             initializer(cy);
           }
-        }, 1200); 
+        }, 700); 
       })
     }
   });

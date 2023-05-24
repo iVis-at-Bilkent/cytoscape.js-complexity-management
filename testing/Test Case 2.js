@@ -10,10 +10,10 @@ let cmgm = cy.complexityManagement('get').getCompMgrInstance()
 // filter node to 25 
 // collapse all nodes 
 // filter edges to 40 
-// add neighborhood
+// hide
 // expand all nodes
 // add edges
-// filter edges to 85 
+// show
 // add neighborhood
 // collapse all nodes
 // unfilter all
@@ -40,14 +40,14 @@ let sum = 0
     document.getElementById('collapseAllNodes').click();
     // filter edges to 40 
     filterEdges(40,100);
-    // add neighborhood
-    addNeighbours("#150")
+    // hide
+    hide()
     // expand all nodes
     document.getElementById('expandAllNodes').click();
     // add edges
     addEdgeBetween('#103','#189');
-    // filter edges to 85 
-    filterEdges(40,85);
+    // show
+    showAll();
     // add neighborhood
     addNeighbours("#127")
     // collapse all nodes
@@ -144,3 +144,32 @@ function filterEdges(min,max){
 }
 
 
+function hide(){
+    var nodes = cy.nodes();
+
+    // Step 1: Randomly select a node
+    var randomNode = nodes[Math.floor(Math.random() * nodes.length)];
+    randomNode.select()
+    // Step 2: Get the 1-hop neighborhood
+    var oneHopNeighbors = randomNode.isParent() ? randomNode.descendants().neighborhood().nodes() : randomNode.neighborhood().nodes();
+
+    // Step 3: Calculate the number of nodes to select (75%)
+    var numNodesToSelect = Math.floor(oneHopNeighbors.length * 0.75);
+
+    // Step 4: Randomly select nodes from the 1-hop neighborhood
+    var selectedNodes = [];
+    while (selectedNodes.length < numNodesToSelect) {
+    var randomNeighbor = oneHopNeighbors[Math.floor(Math.random() * oneHopNeighbors.length)];
+    if (!selectedNodes.includes(randomNeighbor)) {
+        selectedNodes.push(randomNeighbor);
+        randomNeighbor.select();
+    }
+    }
+
+    document.getElementById("hideSelected").click();
+
+}
+
+function showAll(){
+    document.getElementById("showAll").click();
+}

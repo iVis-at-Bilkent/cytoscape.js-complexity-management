@@ -504,16 +504,26 @@ function complexityManagement(cy) {
         edgeIDListToShow.push(ele.id());
       }
     });
-    var IDsToAdd = compMgrInstance.show(nodeIDListToShow, edgeIDListToShow);
+
+    // Show to show elements
+    var _compMgrInstance$show = compMgrInstance.show(nodeIDListToShow, edgeIDListToShow),
+      _compMgrInstance$show2 = _slicedToArray(_compMgrInstance$show, 2),
+      IDsToAdd = _compMgrInstance$show2[0],
+      metaEdgeIDs = _compMgrInstance$show2[1];
 
     // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
+    actOnVisibleForMetaEdge(metaEdgeIDs, cy);
   };
   api.showAll = function () {
-    var IDsToAdd = compMgrInstance.showAll();
+    var _compMgrInstance$show3 = compMgrInstance.showAll(),
+      _compMgrInstance$show4 = _slicedToArray(_compMgrInstance$show3, 2),
+      IDsToAdd = _compMgrInstance$show4[0],
+      metaEdgeIDs = _compMgrInstance$show4[1];
 
     // Add required elements to cy instance
     actOnVisible(IDsToAdd, cy);
+    actOnVisibleForMetaEdge(metaEdgeIDs, cy);
   };
   api.collapseNodes = function (nodes) {
     var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
