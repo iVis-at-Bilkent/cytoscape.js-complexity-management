@@ -2396,18 +2396,11 @@
             });
           }
         });
-        //creating a temporary set
-        let tempSet = new Set();
-        //looping throught set of meta edges to keep and filter out the ones that are no longer visible. (in visibleGM.edgesMap)
-        metaEdgeIDListToKeep.forEach((item) => {
-          // if meta edge is visible
-          if (visibleGM.edgesMap.has(item.ID)) {
-            // add it to tempSet
-            tempSet.add(item);
-          }
-        });
+        
+        //filter out the edges that are no longer visible. (in visibleGM.edgesMap)      
+        let metaEdgeIDListToKeepFiltered = metaEdgeIDListToKeep.filter((item) => (visibleGM.edgesMap.has(item.ID)));
         //set filtered tempSet as the new value of metaEdgeIDListForVisible.
-        this.removedElements.metaEdgeIDListForVisible = tempSet;
+        this.removedElements.metaEdgeIDListForVisible = new Set(metaEdgeIDListToKeepFiltered);
       } else {
         // if recusion is not true
         // loop through node id list
@@ -3930,7 +3923,7 @@
         nodeToShow.isHidden = false;
         // set status flag,  that node is allowed to be shown, initalized as true
         let canNodeToShowBeVisible = true;
-        // if node is not filtered
+        // if node is not filtered 
         if (nodeToShow.isFiltered == false) {
           // create temporary copy for node to Show
           let tempNode = nodeToShow;
