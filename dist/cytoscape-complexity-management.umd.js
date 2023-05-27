@@ -1252,7 +1252,13 @@
                 // if edge is not filtered or hidded and source and target both are visible report it
                 if (item.isFiltered == false && item.isHidden == false && item.source.isVisible && item.target.isVisible) {
                   // report edge
-                  descendants['edges'].add(item.ID);
+                  if(visibleGM.edgeToMetaEdgeMap.has(item.ID)){
+                    let topMetaEdge = Auxiliary.getTopMetaEdge(item, visibleGM);
+                    descendants['edges'].add(topMetaEdge.ID);
+                  }else {
+                    descendants['edges'].add(item.ID);
+                  }
+                  
                 }
               });
             }
@@ -1264,7 +1270,12 @@
         // if edge is not filtered or hidded and source and target both are visible report it
         if (edge.isFiltered == false && edge.isHidden == false && edge.source.isVisible && edge.target.isVisible) {
           // report edge
-          descendants.edges.add(edge.ID);
+          if(visibleGM.edgeToMetaEdgeMap.has(edge.ID)){
+            let topMetaEdge = Auxiliary.getTopMetaEdge(edge, visibleGM);
+            descendants.edges.add(topMetaEdge.ID);
+          }else {
+            descendants.edges.add(edge.ID);
+          }
         }
       });
       // report decendant object
