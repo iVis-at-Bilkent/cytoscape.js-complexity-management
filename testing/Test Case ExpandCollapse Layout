@@ -1,0 +1,88 @@
+    
+    console.log('Number of Edge Crossings Before Layout:', calculateNumberOfEdgeCrossings());
+    
+    var compoundNodes =cy.nodes().filter(node => {
+        return node.isParent()
+    })
+    
+    // Randomly select a compound node
+    var randomCompoundNode = compoundNodes[Math.floor(Math.random() * compoundNodes.length)];
+    
+    randomCompoundNode.select()
+    
+    document.getElementById('collapseSelectedNodes').click()
+    
+    
+    let startTime = 0;
+    let endTime = 0;
+    let timeTaken = 0;
+    let sum = 0;
+    startTime = new Date().getTime()
+    document.getElementById('expandSelectedNodes').click()
+    endTime = new Date().getTime();
+    timeTaken = endTime - startTime
+    console.log("Time Per Operation: ", timeTaken)
+    
+    console.log('Number of Edge Crossings After Layout:', calculateNumberOfEdgeCrossings());
+
+    cy.nodes().unselect();
+
+
+
+function calculateNumberOfEdgeCrossings(){
+    // Calculate the number of edge crossings
+    var edgeCrossings = 0;
+
+    cy.edges().forEach(function (edge1) {
+    cy.edges().forEach(function (edge2) {
+        if (edge1.id() !== edge2.id()) {
+        var p1 = edge1.sourceEndpoint();
+        var p2 = edge1.targetEndpoint();
+        var p3 = edge2.sourceEndpoint();
+        var p4 = edge2.targetEndpoint();
+
+        if (doIntersect(p1, p2, p3, p4)) {
+            edgeCrossings++;
+        }
+        }
+    });
+    });
+
+    return edgeCrossings;
+    
+}
+
+// Function to check if two line segments intersect
+function doIntersect(p1, p2, p3, p4) {
+    var o1 = orientation(p1, p2, p3);
+    var o2 = orientation(p1, p2, p4);
+    var o3 = orientation(p3, p4, p1);
+    var o4 = orientation(p3, p4, p2);
+  
+    if (o1 !== o2 && o3 !== o4) {
+      return true;
+    }
+  
+    return false;
+  }
+  
+  // Function to calculate the orientation of three points
+  function orientation(p1, p2, p3) {
+    var val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
+  
+    if (val === 0) {
+      return 0;
+    } else if (val > 0) {
+      return 1; // Clockwise orientation
+    } else {
+      return 2; // Counter-clockwise orientation
+    }
+  }
+
+  function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }

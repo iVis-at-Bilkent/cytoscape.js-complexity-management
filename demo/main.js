@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', onLoaded);
 let layoutOptions = { name: "fcose",  nodeRepulsion: node => 4500,animate: true, randomize: false, stop: () => { initializer(cy) } }
 function onLoaded() {
@@ -298,6 +300,7 @@ function onLoaded() {
     //cyInvisible.fit(cyInvisible.elements(), 30);
   }
 
+  
   function getDescendantsInorder(node) {
     let descendants = {
       edges: new Set(),
@@ -597,7 +600,7 @@ function onLoaded() {
 
   }
 
-
+  
   function translateNode(a,a1) {
     // Step 1: Find the displacement vector d between a and a1
     return { x: a1.x - a.x, y: a1.y - a.y };
@@ -645,45 +648,6 @@ function onLoaded() {
       node.children().forEach(child =>{
         moveChildren(child,translationFactor,focusID)
       })
-    }
-  }
-
-  var visited = new Set();
-  
-  function dfs(node,focusID, ) {
-    // Mark the node as visited
-    visited.add(node.id());
-    
-    // Select the node
-    
-    if(node.parent().length==0 && node.id() != focusID){
-      node.select();
-    }
-  
-    // Traverse the edges connected to the node
-    node.connectedEdges().forEach(function(edge) {
-      var source = edge.source();
-      var target = edge.target();
-      var connectedNode = (node.id() === source.id()) ? target : source;
-  
-      // If the connected node is not visited, recursively call the DFS function
-      if (!visited.has(connectedNode.id()) && connectedNode.id() != focusID) {
-        dfs(connectedNode,focusID);
-      }
-    });
-  
-    // Traverse the children of the node
-    node.children().forEach(function(child) {
-      // If the child is not visited, recursively call the DFS function
-      if (!visited.has(child.id()) && child.id() != focusID) {
-        dfs(child,focusID);
-      }
-    });
-  
-    // Traverse the parent of the node
-    var parent = node.parent();
-    if (parent && !visited.has(parent.id()) && parent.id() != focusID) {
-      dfs(parent,focusID);
     }
   }
 

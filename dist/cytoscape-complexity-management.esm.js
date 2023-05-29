@@ -1037,53 +1037,302 @@ function getDescendantsInorder(node) {
   }
   return descendants;
 }
-function calculateExpansionFactor(focusID) {
-  var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
-  var nodeDiamensionSum = 0;
-  descendants.simpleNodes.forEach(function (node) {
-    if (!isNaN(node === null || node === void 0 ? void 0 : node.width)) {
-      nodeDiamensionSum += node === null || node === void 0 ? void 0 : node.width;
-    }
-  });
-  var averageNodeDiamension = Math.max(nodeDiamensionSum, 40) / descendants.simpleNodes.length;
-  var edgeDiamensionSum = 0;
-  descendants.edges.forEach(function (edge) {
-    if (edge.source.owner == edge.target.owner) {
-      edgeDiamensionSum += 80;
-    } else {
-      edgeDiamensionSum += 160;
-    }
-  });
-  var averageEdgeDiamension = Math.max(edgeDiamensionSum, 80) / descendants.edges.size;
-  var areaCoveredByGrid = Math.pow((2 * Math.sqrt(descendants.simpleNodes.length) - 1) * averageNodeDiamension, 2);
-  var areaCoveredByEdges = descendants.edges.size * averageEdgeDiamension;
-  var totalAreaCovered = areaCoveredByGrid + areaCoveredByEdges;
-  var expansionFactor = Math.sqrt(totalAreaCovered / Math.PI);
-  console.log(expansionFactor, expansionFactor * 7);
-  return expansionFactor * 7;
-}
 function expandGraph(focusID, cy) {
-  var focusNode = cy.getElementById(focusID);
-  var expansionFactor = calculateExpansionFactor(focusID);
-  cy.layout({
+  var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
+  var cyLayout = cytoscape({
+    container: document.getElementById('cyHeadless')
+    // headless:true,
+    // styleEnabled:true
+  });
+
+  cyLayout.remove(cyLayout.elements());
+  cyLayout.add({
+    group: 'nodes',
+    data: {
+      id: focusID,
+      parent: null
+    }
+  });
+  var savedNodes = [];
+  descendants.compoundNodes.forEach(function (node) {
+    if (cyLayout.getElementById(node.owner.parent.ID).length != 0) {
+      cyLayout.add({
+        group: 'nodes',
+        data: {
+          id: node.ID,
+          parent: node.owner.parent.ID
+        }
+      });
+    } else {
+      savedNodes.push({
+        group: 'nodes',
+        data: {
+          id: node.ID,
+          parent: node.owner.parent.ID
+        }
+      });
+    }
+  });
+  savedNodes.forEach(function (cNodeData) {
+    cyLayout.add(cNodeData);
+  });
+  descendants.simpleNodes.forEach(function (node) {
+    try {
+      cyLayout.add({
+        group: 'nodes',
+        data: {
+          id: node.ID,
+          parent: node.owner.parent.ID
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+  var e = _toConsumableArray(descendants.edges);
+  e.forEach(function (edge) {
+    try {
+      if (cyLayout.getElementById(edge.source.ID).length == 0) {
+        cyLayout.add({
+          group: 'nodes',
+          data: {
+            id: edge.source.ID
+          }
+        });
+      } else if (cyLayout.getElementById(edge.target.ID).length == 0) {
+        cyLayout.add({
+          group: 'nodes',
+          data: {
+            id: edge.target.ID
+          }
+        });
+      }
+      cyLayout.add({
+        group: 'edges',
+        data: {
+          id: edge.ID,
+          source: edge.source.ID,
+          target: edge.target.ID
+        }
+      });
+    } catch (e) {}
+  });
+  while (true) {
+    try {
+      cyLayout.layout({
+        name: 'fcose',
+        animate: false
+      }).run();
+      break;
+    } catch (e) {
+      console.log(e);
+      break;
+    }
+  }
+  var boundingBox = cyLayout.getElementById(focusID).boundingBox();
+  var focusNodeWidth = boundingBox.w;
+  var fcousNodeHeight = boundingBox.h;
+  cyLayout.remove(cyLayout.elements());
+  var topLevelFocusParent = getTopParent(cy.getElementById(focusID));
+  cy.nodes().unselect();
+  var componentNodes = [];
+  cy.nodes().forEach(function (node) {
+    if (node.id() != topLevelFocusParent.id() && node.parent().length == 0) {
+      if (node.isChildless()) {
+        node.select();
+      } else {
+        selectChildren(node);
+      }
+      var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+      var width = newboundingBox.w;
+      var height = newboundingBox.h;
+      componentNodes.push({
+        id: node.id(),
+        data: cy.$(":selected"),
+        pos: {
+          x: (newboundingBox.x2 + newboundingBox.x1) / 2,
+          y: (newboundingBox.y1 + newboundingBox.y2) / 2
+        }
+      });
+      var newNode = cyLayout.add({
+        group: 'nodes',
+        data: {
+          id: node.id(),
+          label: node.id()
+        }
+      });
+      newNode.position({
+        x: (newboundingBox.x2 + newboundingBox.x1) / 2,
+        y: (newboundingBox.y1 + newboundingBox.y2) / 2
+      });
+      newNode.style({
+        'width': Math.max(width, height) + 'px',
+        // Set the new width of the node
+        'height': Math.max(width, height) + 'px',
+        // Set the new height of the node
+        'label': newNode.data().label
+      });
+      cy.nodes().unselect();
+    }
+  });
+  if (cy.getElementById(focusID).parent().length == 0) {
+    focusNode = cyLayout.add(cy.getElementById(focusID).clone());
+    focusNode.unselect();
+    focusNode.position({
+      x: cy.getElementById(focusID).position().x,
+      y: cy.getElementById(focusID).position().y
+    });
+    focusNode.style({
+      'width': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
+      // Set the new width of the node
+      'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
+      // Set the new height of the node
+      'background-color': 'red',
+      'label': focusNode.data().label
+    });
+  } else {
+    var newNode = cyLayout.add({
+      group: 'nodes',
+      data: {
+        id: topLevelFocusParent.id(),
+        label: topLevelFocusParent.id()
+      }
+    });
+    newNode.position({
+      x: topLevelFocusParent.position().x,
+      y: topLevelFocusParent.position().y
+    });
+
+    // addAllChildren(topLevelFocusParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth);
+
+    // let descdents = getDescendantsInorderCyGraph(topLevelFocusParent)
+    // let children = [...descdents.compoundNodes,...descdents.simpleNodes]
+
+    selectChildren(topLevelFocusParent);
+    var children = cy.$(":selected");
+    cy.nodes().unselect();
+    cyLayout.add(children);
+    children.forEach(function (child) {
+      child.select();
+      var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+      var width = newboundingBox.w;
+      var height = newboundingBox.h;
+      if (child.id() != focusID) {
+        if (child.isChildless()) {
+          componentNodes.push({
+            id: child.id(),
+            data: cy.$(":selected"),
+            pos: {
+              x: child.position().x,
+              y: child.position().y
+            }
+          });
+          newNode = cyLayout.getElementById(child.id());
+          newNode.position({
+            x: child.position().x,
+            y: child.position().y
+          });
+          newNode.style({
+            'width': Math.max(width, height) + 'px',
+            // Set the new width of the node
+            'height': Math.max(width, height) + 'px',
+            // Set the new height of the node
+            'label': newNode.data().label
+          });
+        }
+      } else {
+        var newFNode = cyLayout.getElementById(child.id());
+        newFNode.position({
+          x: child.position().x,
+          y: child.position().y
+        });
+        newFNode.style({
+          'width': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
+          // Set the new width of the node
+          'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
+          // Set the new height of the node
+          'background-color': 'red',
+          'label': newFNode.data().label
+        });
+      }
+      cy.nodes().unselect();
+    });
+  }
+  cy.fit();
+  cyLayout.layout({
     name: 'fcose',
     quality: "proof",
     animate: true,
-    animationDuration: 1000,
+    animationDuration: 500,
     randomize: false,
-    nodeRepulsion: function nodeRepulsion(node) {
-      var nodeGeometricDistance = 1 + Math.sqrt(Math.pow(focusNode.position().x - node.position().x, 2) + Math.pow(focusNode.position().y - node.position().y, 2));
-      console.log(nodeGeometricDistance, expansionFactor, expansionFactor / nodeGeometricDistance);
-      return 7500 * (expansionFactor / nodeGeometricDistance);
-    },
-    idealEdgeLength: function idealEdgeLength(edge) {
-      var currentEdgeLength = Math.sqrt(Math.pow(edge.source().position().x - edge.target().position().x, 2) + Math.pow(edge.source().position().y - edge.target().position().y, 2));
-      var sourceGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.source().position().x, 2) + Math.pow(focusNode.position().y - edge.source().position().y, 2));
-      var targetGeometricDistance = Math.sqrt(Math.pow(focusNode.position().x - edge.target().position().x, 2) + Math.pow(focusNode.position().y - edge.target().position().y, 2));
-      var avgGeometricDistance = (sourceGeometricDistance + targetGeometricDistance) / 2;
-      return currentEdgeLength * (expansionFactor / avgGeometricDistance);
-    }
+    nodeSeparation: 25,
+    fixedNodeConstraint: [{
+      nodeId: focusID,
+      position: {
+        x: cy.$('#' + focusID).position('x'),
+        y: cy.$('#' + focusID).position('y')
+      }
+    }]
   }).run();
+  componentNodes.forEach(function (component) {
+    var newComponentPosition = translateComponent(cyLayout.getElementById(focusID).position(), cyLayout.getElementById(component.id).position(), cy.getElementById(focusID).position());
+    var translationFactor = translateNode(component.pos, newComponentPosition);
+    component.data.forEach(function (node) {
+      moveChildren(node, translationFactor, focusID);
+    });
+  });
+  cy.fit();
+  cy.getElementById(focusID).select();
+}
+function translateNode(a, a1) {
+  // Step 1: Find the displacement vector d between a and a1
+  return {
+    x: a1.x - a.x,
+    y: a1.y - a.y
+  };
+}
+function translateComponent(focusNodeInCyLayout, componentNodeInCyLayout, FocusNodeInCy) {
+  var d = {
+    x: componentNodeInCyLayout.x - focusNodeInCyLayout.x,
+    y: componentNodeInCyLayout.y - focusNodeInCyLayout.y
+  };
+  return {
+    x: FocusNodeInCy.x + d.x,
+    y: FocusNodeInCy.y + d.y
+  };
+}
+function selectChildren(node) {
+  var children = node.children();
+  if (children.nonempty()) {
+    children.forEach(function (child) {
+      child.select();
+      selectChildren(child);
+    });
+  }
+}
+function getTopParent(node) {
+  if (node.parent().length != 0) {
+    return getTopParent(node.parent());
+  } else {
+    return node;
+  }
+}
+function moveChildren(node, translationFactor, focusID) {
+  if (node.isChildless() && node.id() != focusID) {
+    node.animate({
+      position: {
+        x: node.position().x + translationFactor.x,
+        y: node.position().y + translationFactor.y
+      }
+    }, {
+      duration: 500
+    });
+    // node.shift({ x: translationFactor.x, y: translationFactor.y }, { duration: 500 });
+  } else {
+    node.children().forEach(function (child) {
+      moveChildren(child, translationFactor, focusID);
+    });
+  }
 }
 function cueUtilities(params, cy, api) {
   var fn = params;
@@ -1318,7 +1567,7 @@ function cueUtilities(params, cy, api) {
                 } else {
                   initializer(cy);
                 }
-              }, 1100);
+              }, 700);
             } else {
               expandGraph(cy.$(':selected').data().id, cy);
               setTimeout(function () {
@@ -1328,7 +1577,7 @@ function cueUtilities(params, cy, api) {
                 } else {
                   initializer(cy);
                 }
-              }, 1100);
+              }, 700);
             }
           }
         }
