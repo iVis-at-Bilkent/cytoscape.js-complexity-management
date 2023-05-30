@@ -183,7 +183,7 @@ function expandGraph(focusID,cy){
   })
   
   if(cy.getElementById(focusID).parent().length == 0){
-    focusNode = cyLayout.add(cy.getElementById(focusID).clone());
+    let focusNode = cyLayout.add(cy.getElementById(focusID).clone());
     focusNode.unselect();
 
     focusNode.position({

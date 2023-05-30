@@ -5382,7 +5382,7 @@
       }
     });
     if (cy.getElementById(focusID).parent().length == 0) {
-      focusNode = cyLayout.add(cy.getElementById(focusID).clone());
+      var focusNode = cyLayout.add(cy.getElementById(focusID).clone());
       focusNode.unselect();
       focusNode.position({
         x: cy.getElementById(focusID).position().x,

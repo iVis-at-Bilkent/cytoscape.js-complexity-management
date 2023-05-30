@@ -300,7 +300,7 @@ function onLoaded() {
     //cyInvisible.fit(cyInvisible.elements(), 30);
   }
 
-  
+
   function getDescendantsInorder(node) {
     let descendants = {
       edges: new Set(),
@@ -480,7 +480,7 @@ function onLoaded() {
     })
     
     if(cy.getElementById(focusID).parent().length == 0){
-      focusNode = cyLayout.add(cy.getElementById(focusID).clone());
+      let focusNode = cyLayout.add(cy.getElementById(focusID).clone());
       focusNode.unselect();
   
       focusNode.position({
