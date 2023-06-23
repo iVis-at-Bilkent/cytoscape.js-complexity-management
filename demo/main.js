@@ -158,7 +158,7 @@ function onLoaded() {
             return document.getElementById("cbk-flag-display-node-labels").checked? node.data('label') ? node.data('label') : node.id():"";
           },
           "color" : "black",
-          'font-size': '14px',
+          'font-size': '18px',
           'compound-sizing-wrt-labels': 'include',
           'height': 40,
           'width': 40,
@@ -255,6 +255,12 @@ function onLoaded() {
     layout: { name: 'fcose', animate: true, stop: function () { initializer(cy); } }
   });
 
+  var cyLayout = window.cyLayout =  cytoscape({
+    container: document.getElementById('cyHeadless')
+    // headless:true,
+    // styleEnabled:true
+  });
+
   let layoutUtilities = cy.layoutUtilities({ desigrayAspectRatio: cy.width() / cy.height() });
 
   let newNodeCount = 0;
@@ -334,11 +340,7 @@ function onLoaded() {
     
     let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
 
-    var cyLayout = cytoscape({
-      container: document.getElementById('cyHeadless')
-      // headless:true,
-      // styleEnabled:true
-    });
+    
 
     cyLayout.remove(cyLayout.elements());
 
@@ -719,10 +721,11 @@ function onLoaded() {
 
     // Function to set the label position based on the selected radio button
     function setLabelPosition(position) {
-      cy.style()
-        .selector('node')
-        .style('text-valign', position)
-        .update();
+      var childlessNodes = cy.nodes().filter(function(element) {
+        return element.isChildless();
+      });
+
+      childlessNodes.style('text-valign', position);
     }
 
   document.getElementById("addNodeToSelected").addEventListener("click", () => {

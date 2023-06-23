@@ -150,8 +150,18 @@ function exportSif() {
 function exportPNG(){
   let png64 = cy.png();
   var link = document.createElement('a');
-  link.download = 'testGraph.png';  
+  link.download = 'testGraph_visible.png';  
   link.href = png64;
+  link.click();
+  let png64_main = cyInvisible.png();
+  link = document.createElement('a');
+  link.download = 'testGraph_main.png';  
+  link.href = png64_main;
+  link.click();
+  let png64_proxy = cyLayout.png();
+  link = document.createElement('a');
+  link.download = 'testGraph_proxy.png';  
+  link.href = png64_proxy;
   link.click();
 }
 

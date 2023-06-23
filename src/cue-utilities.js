@@ -36,12 +36,6 @@ function expandGraph(focusID,cy){
   
   let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
 
-  var cyLayout = cytoscape({
-    container: document.getElementById('cyHeadless')
-    // headless:true,
-    // styleEnabled:true
-  });
-
   cyLayout.remove(cyLayout.elements());
 
   cyLayout.add({
