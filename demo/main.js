@@ -304,7 +304,23 @@ function onLoaded() {
     });
     cyInvisible.layout({name: 'fcose', animate: false, fixedNodeConstraint: nodePosInBothCyAndInvisible}).run();
     layoutOptions = {...layoutOptions,...cy.options().layout};
-    //cyInvisible.fit(cyInvisible.elements(), 30);
+   
+    var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
+
+    // Attach event listeners to the radio buttons
+    radioButtons.forEach(function(radio) {
+      if(radio.checked){
+        setLabelPosition(radio.value);
+      }
+    });
+  
+    function setLabelPosition(position) {
+      var childlessNodes = cy.nodes().filter(function(element) {
+        return element.isChildless();
+      });
+
+      childlessNodes.style('text-valign', position);
+    }
   }
 
 
@@ -709,7 +725,7 @@ function onLoaded() {
     handleCheckboxClick('cbk-flag-display-edge-weights', 'edge');
   });
 
-  var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
+    var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
 
     // Attach event listeners to the radio buttons
     radioButtons.forEach(function(radio) {

@@ -299,5 +299,20 @@ function initializer(cy) {
   });
   cyInvisible.layout({name: 'fcose', animate: false, fixedNodeConstraint: nodePosInBothCyAndInvisible}).run();
 
-  //cyInvisible.fit(cyInvisible.elements(), 30);
+  var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
+
+  // Attach event listeners to the radio buttons
+  radioButtons.forEach(function(radio) {
+    if(radio.checked){
+      setLabelPosition(radio.value);
+    }
+  });
+
+  function setLabelPosition(position) {
+    var childlessNodes = cy.nodes().filter(function(element) {
+      return element.isChildless();
+    });
+
+    childlessNodes.style('text-valign', position);
+  }
 }
