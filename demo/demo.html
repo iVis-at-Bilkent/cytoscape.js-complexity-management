@@ -86,6 +86,8 @@
                   <li><a class="dropdown-item" href="#" onclick="exportJson()">JSON</a></li>
                   <li><a class="dropdown-item" href="#" onclick="exportGraphml()">GraphML</a></li>
                   <li><a class="dropdown-item" href="#" onclick="exportSif()">SIF</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="exportPNG()">PNG</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="exportSVG()">SVG</a></li>
                 </ul>
               </div>
               <div class="dropdown m-1">
@@ -256,6 +258,51 @@
           </div>
           <hr>
         </div>
+
+        
+        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+            aria-controls="panelsStayOpen-collapseFour">
+            "Graph View
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show"
+          aria-labelledby="panelsStayOpen-headingFour">
+          <div class="accordion-body d-flex flex-wrap justify-content-center">            
+            <div class="form-check form-control-sm m-1">
+              <input class="form-check-input" type="checkbox" value="" id="cbk-flag-display-node-weight" checked>
+              <label class="form-check-label" for="cbk-run-layout">
+                Display node weights 
+              </label>
+            </div>
+            <div class="form-check form-control-sm m-1">
+              <input class="form-check-input" type="checkbox" value="" id="cbk-flag-display-node-labels" checked>
+              <label class="form-check-label" for="cbk-run-layout">
+                Display node labels
+              </label>
+            </div>
+            <div class="form-check form-control-sm m-1">
+              <input class="form-check-input" type="checkbox" value="" id="cbk-flag-display-edge-weights" checked>
+              <label class="form-check-label" for="cbk-run-layout">
+                Display edge weights
+              </label>
+            </div>
+            
+          </div>
+          <h5>Display node labels</h5>
+          <div class="accordion-body d-flex flex-wrap justify-content-center">  
+            <form>
+              <input type="radio" name="cbk-flag-display-node-label-pos" value="top" checked> Top
+              <input type="radio" name="cbk-flag-display-node-label-pos" value="center"> Middle
+              <input type="radio" name="cbk-flag-display-node-label-pos" value="bottom"> Bottom
+            </form>  
+            
+          </div>
+          <hr>
+        </div>
+
+        
       </div>
     </div>
     <div class="cy-canvas">

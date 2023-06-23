@@ -155,7 +155,7 @@ function onLoaded() {
         selector: 'node',
         style: {
           'label': (node) => {
-            return node.data('label') ? node.data('label') : node.id();
+            return document.getElementById("cbk-flag-display-node-labels").checked? node.data('label') ? node.data('label') : node.id():"";
           },
           "color" : "black",
           'font-size': '14px',
@@ -173,7 +173,8 @@ function onLoaded() {
         selector: 'edge',
         style: {
           'label': (edge) => {
-            if (edge.data('weight') != null) {
+
+            if (edge.data('weight') != null && document.getElementById("cbk-flag-display-edge-weights").checked) {
               return edge.data('weight');
             }
             return '';
@@ -651,7 +652,78 @@ function onLoaded() {
     }
   }
 
+  function handleCheckboxClick(checkboxId, elementType) {
+    const checkbox = document.getElementById(checkboxId);
+    const isChecked = checkbox.checked;
   
+    if (isChecked) {
+      if(elementType == 'node'){
+        if(checkboxId == "cbk-flag-display-node-labels"){
+          if(document.getElementById("cbk-flag-display-node-weight").checked){
+            cy.style().selector(elementType).style('label', 'data(label)').update();
+          }else{
+            cy.style().selector(elementType).style('label', 'data(id)').update();
+          }
+        }else{
+          if(document.getElementById("cbk-flag-display-node-labels").checked){
+            cy.style().selector(elementType).style('label', 'data(label)').update();
+          }else{
+            cy.style().selector(elementType).style('label', 'data(weight)').update();
+          }
+        }
+      }else{
+        cy.style().selector(elementType).style('label', 'data(weight)').update();
+      }
+    } else {
+      if(elementType == 'node'){
+        if(checkboxId == "cbk-flag-display-node-labels"){
+          if(document.getElementById("cbk-flag-display-node-weight").checked){
+            cy.style().selector(elementType).style('label', 'data(weight)').update();
+          }else{
+            cy.style().selector(elementType).style('label', '').update();
+          }
+        }else{
+          if(document.getElementById("cbk-flag-display-node-labels").checked){
+            cy.style().selector(elementType).style('label', 'data(id)').update();
+          }else{
+            cy.style().selector(elementType).style('label', '').update();
+          }
+        }
+      }else{
+        cy.style().selector(elementType).style('label', '').update();
+      }
+    }
+  }
+
+  document.getElementById('cbk-flag-display-node-labels').addEventListener('click', function() {
+    handleCheckboxClick('cbk-flag-display-node-labels', 'node');
+  });
+  
+  document.getElementById('cbk-flag-display-node-weight').addEventListener('click', function() {
+    handleCheckboxClick('cbk-flag-display-node-weight', 'node');
+  });
+
+  document.getElementById('cbk-flag-display-edge-weights').addEventListener('click', function() {
+    handleCheckboxClick('cbk-flag-display-edge-weights', 'edge');
+  });
+
+  var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
+
+    // Attach event listeners to the radio buttons
+    radioButtons.forEach(function(radio) {
+      radio.addEventListener('click', function() {
+        var selectedPosition = this.value;
+        setLabelPosition(selectedPosition);
+      });
+    });
+
+    // Function to set the label position based on the selected radio button
+    function setLabelPosition(position) {
+      cy.style()
+        .selector('node')
+        .style('text-valign', position)
+        .update();
+    }
 
   document.getElementById("addNodeToSelected").addEventListener("click", () => {
     const selectedNode = cy.nodes(":selected")[0];

@@ -147,6 +147,49 @@ function exportSif() {
   str2file(s, 'sample-graph.sif');
 }
 
+function exportPNG(){
+  let png64 = cy.png();
+  var link = document.createElement('a');
+  link.download = 'testGraph.png';  
+  link.href = png64;
+  link.click();
+}
+
+function exportSVG(){
+  // let pngData = cy.png();
+
+  // var canvas = document.createElement('canvas');
+  // var context = canvas.getContext('2d');
+
+  // // Create an image element and set the PNG data
+  // var image = new Image();
+  // image.src = pngData;
+
+  // // After the image is loaded, draw it on the canvas
+  // image.onload = function() {
+  //   canvas.width = image.width;
+  //   canvas.height = image.height;
+  //   context.drawImage(image, 0, 0);
+
+  //   // Create a new temporary link element
+  //   var link = document.createElement('a');
+  //   link.download = "testGraph" + '.svg'; // Set the download filename
+
+  //   // Convert the PNG image to SVG using Potrace
+  //   var potrace = new Potrace();
+  //   potrace.loadImageFromCanvas(canvas);
+  //   var svgData = potrace.getSVG();
+  //   var blob = new Blob([svgData], { type: 'image/svg+xml' });
+  //   var url = URL.createObjectURL(blob);
+
+  //   // Set the link href to the SVG data
+  //   link.href = url;
+
+  //   // Trigger the download by programmatically clicking the link
+  //   link.click();
+  // }
+}
+
 function sif2cy(text) {
   //private members
   const _getNode = function (id, nodes) {
