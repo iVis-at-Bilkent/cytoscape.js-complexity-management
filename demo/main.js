@@ -315,11 +315,19 @@ function onLoaded() {
     });
   
     function setLabelPosition(position) {
-      var childlessNodes = cy.nodes().filter(function(element) {
+      var cyChildlessNodes = cy.nodes().filter(function(element) {
         return element.isChildless();
       });
-
-      childlessNodes.style('text-valign', position);
+      var cyVisibleChildlessNodes = cyVisible.nodes().filter(function(element) {
+        return element.isChildless();
+      });
+      var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function(element) {
+        return element.isChildless();
+      });
+      
+      cyChildlessNodes.style('text-valign', position);
+      cyVisibleChildlessNodes.style('text-valign', position);
+      cyInVisibleChildlessNodes.style('text-valign', position);
     }
   }
 
@@ -491,7 +499,7 @@ function onLoaded() {
               newNode.style({
                 'width': Math.max(width,height)+'px', // Set the new width of the node
                 'height': Math.max(width,height)+'px', // Set the new height of the node
-                'label' : newNode.data().label
+                'label' : ""
               });
               cy.nodes().unselect();
               compoundsCounter++;
@@ -510,7 +518,7 @@ function onLoaded() {
         'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
         'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
         'background-color': 'red',
-        'label' : focusNode.data().label
+        'label' : ""
       });
     }else{
       var newNode = cyLayout.add({
@@ -562,7 +570,7 @@ function onLoaded() {
                   newNode.style({
                     'width': Math.max(width,height)+'px', // Set the new width of the node
                     'height': Math.max(width,height)+'px', // Set the new height of the node
-                    'label' : newNode.data().label
+                    'label' : ""
                   });
                   compoundsCounter++;
           }else{
@@ -582,7 +590,7 @@ function onLoaded() {
                 'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
                 'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
                 'background-color':'red',
-                'label' : newFNode.data().label
+                'label' : ""
               });
               compoundsCounter++;
         }
@@ -616,7 +624,7 @@ function onLoaded() {
     cy.fit();
 
     cy.getElementById(focusID).select();
-
+    cyLayout.style().selector('node').style('label', '').update();
   }
 
   
@@ -679,8 +687,12 @@ function onLoaded() {
         if(checkboxId == "cbk-flag-display-node-labels"){
           if(document.getElementById("cbk-flag-display-node-weight").checked){
             cy.style().selector(elementType).style('label', 'data(label)').update();
+            cyVisible.style().selector(elementType).style('label', 'data(id)').update();
+            cyInvisible.style().selector(elementType).style('label', 'data(id)').update();
           }else{
             cy.style().selector(elementType).style('label', 'data(id)').update();
+            cyVisible.style().selector(elementType).style('label', 'data(id)').update();
+            cyInvisible.style().selector(elementType).style('label', 'data(id)').update();
           }
         }else{
           if(document.getElementById("cbk-flag-display-node-labels").checked){
@@ -691,14 +703,20 @@ function onLoaded() {
         }
       }else{
         cy.style().selector(elementType).style('label', 'data(weight)').update();
+        cyVisible.style().selector(elementType).style('label', 'data(weight)').update();
+        cyInvisible.style().selector(elementType).style('label', 'data(weight)').update();
       }
     } else {
       if(elementType == 'node'){
         if(checkboxId == "cbk-flag-display-node-labels"){
           if(document.getElementById("cbk-flag-display-node-weight").checked){
             cy.style().selector(elementType).style('label', 'data(weight)').update();
+            cyVisible.style().selector(elementType).style('label', '').update();
+            cyInvisible.style().selector(elementType).style('label', '').update();
           }else{
             cy.style().selector(elementType).style('label', '').update();
+            cyVisible.style().selector(elementType).style('label', '').update();
+            cyInvisible.style().selector(elementType).style('label', '').update();
           }
         }else{
           if(document.getElementById("cbk-flag-display-node-labels").checked){
@@ -737,11 +755,19 @@ function onLoaded() {
 
     // Function to set the label position based on the selected radio button
     function setLabelPosition(position) {
-      var childlessNodes = cy.nodes().filter(function(element) {
+      var cyChildlessNodes = cy.nodes().filter(function(element) {
         return element.isChildless();
       });
-
-      childlessNodes.style('text-valign', position);
+      var cyVisibleChildlessNodes = cyVisible.nodes().filter(function(element) {
+        return element.isChildless();
+      });
+      var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function(element) {
+        return element.isChildless();
+      });
+      
+      cyChildlessNodes.style('text-valign', position);
+      cyVisibleChildlessNodes.style('text-valign', position);
+      cyInVisibleChildlessNodes.style('text-valign', position);
     }
 
   document.getElementById("addNodeToSelected").addEventListener("click", () => {

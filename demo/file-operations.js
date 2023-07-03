@@ -148,17 +148,26 @@ function exportSif() {
 }
 
 function exportPNG(){
-  let png64 = cy.png();
+  let png64 = cy.png({
+    scale:2,
+    full:true
+  });
   var link = document.createElement('a');
   link.download = 'testGraph_visible.png';  
   link.href = png64;
   link.click();
-  let png64_main = cyInvisible.png();
+  let png64_main = cyInvisible.png({
+    scale:2,
+    full:true
+  });
   link = document.createElement('a');
   link.download = 'testGraph_main.png';  
   link.href = png64_main;
   link.click();
-  let png64_proxy = cyLayout.png();
+  let png64_proxy = cyLayout.png({
+    scale:2,
+    full:true
+  });
   link = document.createElement('a');
   link.download = 'testGraph_proxy.png';  
   link.href = png64_proxy;
@@ -309,10 +318,18 @@ function initializer(cy) {
   });
 
   function setLabelPosition(position) {
-    var childlessNodes = cy.nodes().filter(function(element) {
+    var cyChildlessNodes = cy.nodes().filter(function(element) {
       return element.isChildless();
     });
-
-    childlessNodes.style('text-valign', position);
+    var cyVisibleChildlessNodes = cyVisible.nodes().filter(function(element) {
+      return element.isChildless();
+    });
+    var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function(element) {
+      return element.isChildless();
+    });
+    
+    cyChildlessNodes.style('text-valign', position);
+    cyVisibleChildlessNodes.style('text-valign', position);
+    cyInVisibleChildlessNodes.style('text-valign', position);
   }
 }
