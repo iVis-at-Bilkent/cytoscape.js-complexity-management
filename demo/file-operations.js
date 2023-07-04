@@ -164,6 +164,11 @@ function exportPNG(){
   link.download = 'testGraph_main.png';  
   link.href = png64_main;
   link.click();
+  link = document.createElement('a');
+  link.download = 'testGraph_transition.png';  
+  link.href = pngExpandGraph;
+  link.click();
+
   let png64_proxy = cyLayout.png({
     scale:2,
     full:true
@@ -172,6 +177,7 @@ function exportPNG(){
   link.download = 'testGraph_proxy.png';  
   link.href = png64_proxy;
   link.click();
+
 }
 
 function exportSVG(){

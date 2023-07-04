@@ -1,5 +1,5 @@
 
-
+let pngExpandGraph = null ;
 document.addEventListener('DOMContentLoaded', onLoaded);
 let layoutOptions = { name: "fcose",  nodeRepulsion: node => 4500,animate: true, randomize: false, stop: () => { initializer(cy) } }
 function onLoaded() {
@@ -1069,7 +1069,10 @@ function onLoaded() {
       cy.$(':selected').forEach(node => {
         expandGraph(node.data().id, cy)
         setTimeout(() => {
-          
+          pngExpandGraph = cy.png({
+            scale:2,
+            full:true
+          });
           instance.expandNodes(cy.nodes(':selected'), true);
           if (document.getElementById("cbk-run-layout3").checked) {
             cy.layout(layoutOptions).run();
@@ -1077,12 +1080,16 @@ function onLoaded() {
           else {
             initializer(cy);
           }
-        }, 700);
+        }, 900);
       })
     }else{
       cy.$(':selected').forEach(node => {
         expandGraph(node.data().id, cy)
         setTimeout(() => {
+          pngExpandGraph = cy.png({
+            scale:2,
+            full:true
+          });
           instance.expandNodes(cy.nodes(':selected'));
           if (document.getElementById("cbk-run-layout3").checked) {
             cy.layout(layoutOptions).run();
@@ -1090,7 +1097,7 @@ function onLoaded() {
           else {
             initializer(cy);
           }
-        }, 700); 
+        }, 900); 
       })
     }
   });
