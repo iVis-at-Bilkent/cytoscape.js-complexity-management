@@ -255,7 +255,7 @@ function onLoaded() {
     layout: { name: 'fcose', animate: true, stop: function () { initializer(cy); } }
   });
 
-  var cyLayout = window.cyLayout =  cytoscape({
+  const cyLayout = window.cyLayout =  cytoscape({
     container: document.getElementById('cyHeadless')
     // headless:true,
     // styleEnabled:true
@@ -324,10 +324,16 @@ function onLoaded() {
       var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function(element) {
         return element.isChildless();
       });
+      var cyLayoutChildlessNodes = cyLayout.nodes().filter(function(element) {
+        return element.isChildless();
+      });
       
+      cy.nodes().style('text-valign', 'top');
+
       cyChildlessNodes.style('text-valign', position);
       cyVisibleChildlessNodes.style('text-valign', position);
       cyInVisibleChildlessNodes.style('text-valign', position);
+      cyLayoutChildlessNodes.style('text-valign', position);
     }
   }
 
@@ -499,7 +505,7 @@ function onLoaded() {
               newNode.style({
                 'width': Math.max(width,height)+'px', // Set the new width of the node
                 'height': Math.max(width,height)+'px', // Set the new height of the node
-                'label' : ""
+                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
               });
               cy.nodes().unselect();
               compoundsCounter++;
@@ -518,7 +524,7 @@ function onLoaded() {
         'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
         'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
         'background-color': 'red',
-        'label' : ""
+        'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
       });
     }else{
       var newNode = cyLayout.add({
@@ -534,7 +540,9 @@ function onLoaded() {
         x: topLevelFocusParent.position().x,
         y: topLevelFocusParent.position().y
       });
-
+      newNode.style({
+        'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+      });
       compoundsCounter++;
 
       // addAllChildren(topLevelFocusParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth);
@@ -570,7 +578,7 @@ function onLoaded() {
                   newNode.style({
                     'width': Math.max(width,height)+'px', // Set the new width of the node
                     'height': Math.max(width,height)+'px', // Set the new height of the node
-                    'label' : ""
+                    'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
                   });
                   compoundsCounter++;
           }else{
@@ -590,7 +598,7 @@ function onLoaded() {
                 'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
                 'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
                 'background-color':'red',
-                'label' : ""
+                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
               });
               compoundsCounter++;
         }
@@ -624,7 +632,11 @@ function onLoaded() {
     cy.fit();
 
     cy.getElementById(focusID).select();
-    cyLayout.style().selector('node').style('label', '').update();
+    radioButtons.forEach(function(radio) {
+      if(radio.checked){
+        setLabelPosition(radio.value);
+      }
+    });
   }
 
   
@@ -689,14 +701,17 @@ function onLoaded() {
             cy.style().selector(elementType).style('label', 'data(label)').update();
             cyVisible.style().selector(elementType).style('label', 'data(id)').update();
             cyInvisible.style().selector(elementType).style('label', 'data(id)').update();
+            cyLayout.nodes().forEach(node => {node.style('label', node.id());});
           }else{
             cy.style().selector(elementType).style('label', 'data(id)').update();
             cyVisible.style().selector(elementType).style('label', 'data(id)').update();
             cyInvisible.style().selector(elementType).style('label', 'data(id)').update();
+            cyLayout.nodes().forEach(node => {node.style('label', node.id());});
           }
         }else{
           if(document.getElementById("cbk-flag-display-node-labels").checked){
             cy.style().selector(elementType).style('label', 'data(label)').update();
+
           }else{
             cy.style().selector(elementType).style('label', 'data(weight)').update();
           }
@@ -713,10 +728,13 @@ function onLoaded() {
             cy.style().selector(elementType).style('label', 'data(weight)').update();
             cyVisible.style().selector(elementType).style('label', '').update();
             cyInvisible.style().selector(elementType).style('label', '').update();
+            cyLayout.nodes().style('label', '');
+
           }else{
             cy.style().selector(elementType).style('label', '').update();
             cyVisible.style().selector(elementType).style('label', '').update();
             cyInvisible.style().selector(elementType).style('label', '').update();
+            cyLayout.nodes().style('label', '');
           }
         }else{
           if(document.getElementById("cbk-flag-display-node-labels").checked){
@@ -764,10 +782,13 @@ function onLoaded() {
       var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function(element) {
         return element.isChildless();
       });
-      
+      var cyLayoutChildlessNodes = cyLayout.nodes().filter(function(element) {
+        return element.isChildless();
+      });
       cyChildlessNodes.style('text-valign', position);
       cyVisibleChildlessNodes.style('text-valign', position);
       cyInVisibleChildlessNodes.style('text-valign', position);
+      cyLayoutChildlessNodes.style('text-valign', position);
     }
 
   document.getElementById("addNodeToSelected").addEventListener("click", () => {
