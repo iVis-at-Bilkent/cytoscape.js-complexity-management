@@ -8,7 +8,6 @@ let cmgm = cy.complexityManagement('get').getCompMgrInstance()
 // collapse all edges 
 // filter node to 30 
 // filter edges to 50 
-// hide
 // expand all nodes
 // expand all edges.
 // show
@@ -34,8 +33,6 @@ for (let index = 0; index < 10; index++) {
     filterNodes(30,100);
     // filter edge value 50
     filterEdges(0,50);
-    // hide
-    hide()
     // expand all nodes
     document.getElementById('expandAllNodes').click();
     // expand all edges
