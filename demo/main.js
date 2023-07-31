@@ -258,7 +258,45 @@ function onLoaded() {
   });
 
   const cyLayout = window.cyLayout =  cytoscape({
-    container: document.getElementById('cyHeadless')
+    container: document.getElementById('cyHeadless'),
+    style: [
+      {
+        selector: 'node',
+        style: {
+          'label': (node) => {
+            return document.getElementById("cbk-flag-display-node-labels").checked? node.data('label') ? node.data('label') : node.id():"";
+          },
+          "color" : "black",
+          'font-size': '20px',
+          'compound-sizing-wrt-labels': 'include',
+          'height': 40,
+          'width': 40,
+          'padding': "5px",
+          "background-fit": "cover",
+          "border-color": "black",
+          "border-width": 1,
+          "border-opacity": 1,
+        }
+      },
+      {
+        selector: 'edge',
+        style: {
+          'label': (edge) => {
+
+            if (edge.data('weight') != null && document.getElementById("cbk-flag-display-edge-weights").checked) {
+              return edge.data('weight');
+            }
+            return '';
+          },
+          'curve-style': 'bezier',
+          'target-arrow-shape': 'triangle',
+          'text-rotation': 'autorotate',
+          'width': '1.5px',
+          'text-margin-y': '10px',
+          'line-color' : 'black',
+          'target-arrow-color': 'black',
+        }
+      }]
     // headless:true,
     // styleEnabled:true
   });
