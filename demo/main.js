@@ -532,18 +532,14 @@ function onLoaded() {
     
     cy.nodes().forEach(node => {
       if(node.id()!= topLevelFocusParent.id() && node.parent().length == 0){
-        if(node.isChildless()){
-          node.select();
-          
-        }else{
-          selectChildren(node);
-        }
-        var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+        
+        var newboundingBox = {w: node.width(),h:node.height(), ...node.position()};
           var width = newboundingBox.w;
           var height = newboundingBox.h;
+          
           componentNodes.push({id: node.id(),data:cy.$(":selected"),pos:{
-            x: (newboundingBox.x2 + newboundingBox.x1)/2,
-            y: (newboundingBox.y1 + newboundingBox.y2)/2}});
+            x: newboundingBox.x,
+            y: newboundingBox.y}});
           var newNode = cyLayout.add({
                 group: 'nodes',
                 data: {
@@ -554,16 +550,16 @@ function onLoaded() {
         
         
               newNode.position({
-                x: (newboundingBox.x2 + newboundingBox.x1)/2,
-                y: (newboundingBox.y1 + newboundingBox.y2)/2
+                x: newboundingBox.x,
+                y: newboundingBox.y
               });
         
               newNode.style({
-                'width': Math.max(width,height)+'px', // Set the new width of the node
-                'height': Math.max(width,height)+'px', // Set the new height of the node
+                'width': Math.max(width,height), // Set the new width of the node
+                'height': Math.max(width,height), // Set the new height of the node
                 'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
               });
-              cy.nodes().unselect();
+
               compoundsCounter++;
       }
     })
