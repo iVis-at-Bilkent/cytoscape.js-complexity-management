@@ -512,7 +512,11 @@ function onLoaded() {
     var fcousNodeHeight = boundingBox.h;
 
     cyLayout.nodes().forEach(node => {node.style('label', node.id());})
-
+    radioButtons.forEach(function(radio) {
+      if(radio.checked){
+        setLabelPosition(radio.value);
+      }
+    });
     pngSizeProxyGraph = cyLayout.png({
       scale:2,
       full:true
