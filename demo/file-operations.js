@@ -64,6 +64,7 @@ function jsonFileSelected() {
     if (document.getElementById('cbk-run-layout').checked) {
       cy.layout({ name: 'fcose', animate: true, stop: () => {initializer(cy);} }).run();
     } else {
+      cy.fit();
       initializer(cy);
     }
   });
@@ -88,6 +89,7 @@ function graphmlFileSelected() {
     if (document.getElementById('cbk-run-layout').checked) {
       cy.layout({ name: 'fcose', animate: true, stop: () => {initializer(cy);} }).run();
     } else {
+      cy.fit();
       initializer(cy);
     }
   });
@@ -111,6 +113,7 @@ function sifFileSelected() {
     if (document.getElementById('cbk-run-layout').checked) {
       cy.layout({ name: 'fcose', animate: true, stop: () => {initializer(cy);} }).run();
     } else {
+      cy.fit();
       initializer(cy);
     }
   });
@@ -278,7 +281,8 @@ function loadSample(globalVarName) {
   if (document.getElementById('cbk-run-layout').checked) {
     cy.layout({ name: 'fcose', animate: true, stop: () => {initializer(cy);} }).run();
   } else {
-    initializer(cy);
+      cy.fit();
+      initializer(cy);
   }
 }
 

@@ -13,7 +13,7 @@ function onLoaded() {
         style: {
           'label': 'data(id)',
           "color" : "black",
-          'font-size': '18px',
+          'font-size': '20px',
           'compound-sizing-wrt-labels': 'include',
           'height': 40,
           'width': 40,
@@ -55,7 +55,7 @@ function onLoaded() {
         style: {
           'label': 'data(label)',
           "color" : "black",
-          'font-size': '18px',
+          'font-size': '20px',
           'compound-sizing-wrt-labels': 'include',
           'height': 40,
           'width': 40,
@@ -158,7 +158,7 @@ function onLoaded() {
             return document.getElementById("cbk-flag-display-node-labels").checked? node.data('label') ? node.data('label') : node.id():"";
           },
           "color" : "black",
-          'font-size': '18px',
+          'font-size': '20px',
           'compound-sizing-wrt-labels': 'include',
           'height': 40,
           'width': 40,
