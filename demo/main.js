@@ -1,5 +1,7 @@
 
 let pngExpandGraph = null ;
+let pngSizeProxyGraph = null ;
+let pngBeforeFinalGraph = null ;
 document.addEventListener('DOMContentLoaded', onLoaded);
 let layoutOptions = { name: "fcose",  nodeRepulsion: node => 4500,animate: true, randomize: false, stop: () => { initializer(cy) } }
 function onLoaded() {
@@ -378,6 +380,7 @@ function onLoaded() {
       group: 'nodes',
       data: { id: focusID, 
               parent: null,
+              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
        }}
     )
 
@@ -388,13 +391,15 @@ function onLoaded() {
           group: 'nodes',
           data: { id: node.ID, 
                   parent: node.owner.parent.ID,
-           }});
+                  'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+            }});
 
       }else{
         savedNodes.push({
           group: 'nodes',
           data: { id: node.ID, 
                   parent: node.owner.parent.ID,
+                  'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
            }})
       }
 
@@ -410,7 +415,8 @@ function onLoaded() {
         group: 'nodes',
         data: { id: node.ID, 
                 parent: node.owner.parent.ID,
-         }});
+                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+              }});
           
          }catch(e){
             console.log(e);
@@ -426,6 +432,7 @@ function onLoaded() {
           cyLayout.add({
             group: 'nodes',
             data: { id: edge.source.ID, 
+              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
             }});
             
         }else if(cyLayout.getElementById(edge.target.ID).length == 0){
@@ -433,6 +440,7 @@ function onLoaded() {
           cyLayout.add({
             group: 'nodes',
             data: { id: edge.target.ID, 
+              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
             }});
             
         }
@@ -465,6 +473,12 @@ function onLoaded() {
     var focusNodeWidth = boundingBox.w;
     var fcousNodeHeight = boundingBox.h;
 
+    cyLayout.nodes().forEach(node => {node.style('label', node.id());})
+
+    pngSizeProxyGraph = cyLayout.png({
+      scale:2,
+      full:true
+    });
     
     cyLayout.remove(cyLayout.elements());
     
@@ -1088,37 +1102,62 @@ function onLoaded() {
   document.getElementById("expandSelectedNodes").addEventListener("click", () => {
     if (document.getElementById("cbk-flag-recursive").checked) {
       cy.$(':selected').forEach(node => {
-        expandGraph(node.data().id, cy)
-        setTimeout(() => {
-          pngExpandGraph = cy.png({
-            scale:2,
-            full:true
-          });
+        if (document.getElementById("cbk-run-layout3").checked) {
+          expandGraph(node.data().id, cy)
+          setTimeout(() => {
+            pngExpandGraph = cy.png({
+              scale:2,
+              full:true
+            });
+            instance.expandNodes(cy.nodes(':selected'), true);
+            pngBeforeFinalGraph = cy.png({
+              scale:2,
+              full:true
+            }); ;
+
+            if (document.getElementById("cbk-run-layout3").checked) {
+              cy.layout(layoutOptions).run();
+            }
+            else {
+              initializer(cy);
+            }
+          }, 900);
+        }else{
           instance.expandNodes(cy.nodes(':selected'), true);
-          if (document.getElementById("cbk-run-layout3").checked) {
-            cy.layout(layoutOptions).run();
-          }
-          else {
-            initializer(cy);
-          }
-        }, 900);
+          cy.fit();
+          initializer(cy);
+        }
+        
       })
     }else{
       cy.$(':selected').forEach(node => {
-        expandGraph(node.data().id, cy)
-        setTimeout(() => {
-          pngExpandGraph = cy.png({
-            scale:2,
-            full:true
-          });
+
+        if (document.getElementById("cbk-run-layout3").checked) {
+          expandGraph(node.data().id, cy)
+          setTimeout(() => {
+            pngExpandGraph = cy.png({
+              scale:2,
+              full:true
+            });
+            instance.expandNodes(cy.nodes(':selected'));
+            pngBeforeFinalGraph = cy.png({
+              scale:2,
+              full:true
+            }); ;
+            if (document.getElementById("cbk-run-layout3").checked) {
+              cy.layout(layoutOptions).run();
+            }
+            else {
+              initializer(cy);
+            }
+          }, 900); 
+        }else{
           instance.expandNodes(cy.nodes(':selected'));
-          if (document.getElementById("cbk-run-layout3").checked) {
-            cy.layout(layoutOptions).run();
-          }
-          else {
-            initializer(cy);
-          }
-        }, 900); 
+          cy.fit();
+          initializer(cy);
+        }
+
+        
       })
     }
   });

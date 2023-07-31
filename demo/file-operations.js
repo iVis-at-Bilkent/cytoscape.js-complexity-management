@@ -173,6 +173,18 @@ function exportPNG(){
     link.href = pngExpandGraph;
     link.click();
   }
+  if(pngBeforeFinalGraph!=null){
+    link = document.createElement('a');
+    link.download = 'testGraph_BeforeFinal.png';  
+    link.href = pngBeforeFinalGraph;
+    link.click();
+  }
+  if(pngSizeProxyGraph!=null){
+    link = document.createElement('a');
+    link.download = 'testGraph_BoundingBox.png';  
+    link.href = pngSizeProxyGraph;
+    link.click();
+  }
   let png64_proxy = cyLayout.png({
     scale:2,
     full:true
