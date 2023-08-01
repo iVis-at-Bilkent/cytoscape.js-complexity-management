@@ -179,14 +179,20 @@ function expandGraph(focusID,cy){
   
   cy.nodes().forEach(node => {
     if(node.id()!= topLevelFocusParent.id() && node.parent().length == 0){
-      
-      var newboundingBox = {w: node.width(),h:node.height(), ...node.position()};
+      if(node.isChildless()){
+        node.select();
+       
+      }else{
+        selectChildren(node);
+      }
+        var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+        newboundingBox = {...newboundingBox,w: node.width(),h:node.height()};
         var width = newboundingBox.w;
         var height = newboundingBox.h;
         
         componentNodes.push({id: node.id(),data:cy.$(":selected"),pos:{
-          x: newboundingBox.x,
-          y: newboundingBox.y}});
+          x: (newboundingBox.x2 + newboundingBox.x1)/2,
+          y: (newboundingBox.y1 + newboundingBox.y2)/2}});
         var newNode = cyLayout.add({
               group: 'nodes',
               data: {
@@ -197,8 +203,8 @@ function expandGraph(focusID,cy){
       
       
             newNode.position({
-              x: newboundingBox.x,
-              y: newboundingBox.y
+              x: (newboundingBox.x2 + newboundingBox.x1)/2,
+              y: (newboundingBox.y1 + newboundingBox.y2)/2
             });
       
             newNode.style({
@@ -206,7 +212,8 @@ function expandGraph(focusID,cy){
               'height': Math.max(width,height), // Set the new height of the node
               'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
             });
-
+            
+            cy.nodes().unselect();
             compoundsCounter++;
     }
   })
@@ -257,21 +264,22 @@ function expandGraph(focusID,cy){
     cyLayout.add(children)
     children.forEach(child => {
       child.select()
-      var newboundingBox = {w: child.width(),h:child.height(), ...child.position()};
+      var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+      newboundingBox = {...newboundingBox,w: child.width(),h:child.height()};
       var width = newboundingBox.w;
       var height = newboundingBox.h;
        
       if(child.id() != focusID){
         if(child.isChildless()){
           componentNodes.push({id: child.id(), data:cy.$(":selected"),pos:{
-              x: child.position().x,
-              y: child.position().y}});
+              x: (newboundingBox.x2 + newboundingBox.x1)/2,
+              y: (newboundingBox.y1 + newboundingBox.y2)/2}});
 
             
                 newNode = cyLayout.getElementById(child.id())
                 newNode.position({
-                  x: child.position().x,
-                  y: child.position().y
+                  x: (newboundingBox.x2 + newboundingBox.x1)/2,
+                  y: (newboundingBox.y1 + newboundingBox.y2)/2
                 });
           
                 newNode.style({
@@ -337,7 +345,6 @@ function expandGraph(focusID,cy){
     }
   });
 }
-
 
 function translateNode(a,a1) {
   // Step 1: Find the displacement vector d between a and a1
