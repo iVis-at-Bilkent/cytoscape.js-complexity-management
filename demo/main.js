@@ -582,7 +582,7 @@ function onLoaded() {
       focusNode.style({
         'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
         'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
-        'background-color': 'red',
+        'background-color': '#35baf6',
         'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
       });
     }else{
@@ -657,7 +657,7 @@ function onLoaded() {
               newFNode.style({
                 'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
                 'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
-                'background-color':'red',
+                'background-color':'#35baf6',
                 'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
               });
               compoundsCounter++;
