@@ -684,27 +684,49 @@ export function cueUtilities(params, cy, api) {
           else if (api.isExpandable(node)) {
             clearDraws();
             if (document.getElementById("cbk-flag-recursive").checked) {
-              expandGraph(cy.$(':selected').data().id, cy)
-              setTimeout(() => {
+              if (document.getElementById("cbk-run-layout3").checked) {
+                expandGraph(cy.$(':selected').data().id, cy)
+                setTimeout(() => {
+                  api.expandNodes([node], true);
+                  if (document.getElementById("cbk-run-layout3").checked) {
+                    cy.layout(layoutOptions).run();
+                  }
+                  else {
+                    initializer(cy);
+                  }
+                }, 700);
+              }else{
                 api.expandNodes([node], true);
-                if (document.getElementById("cbk-run-layout3").checked) {
-                  cy.layout(layoutOptions).run();
-                }
-                else {
-                  initializer(cy);
-                }
-              }, 700);
+                  if (document.getElementById("cbk-run-layout3").checked) {
+                    cy.layout(layoutOptions).run();
+                  }
+                  else {
+                    initializer(cy);
+                  }
+              }
             }else{
-              expandGraph(cy.$(':selected').data().id, cy)
-              setTimeout(() => {
+              if (document.getElementById("cbk-run-layout3").checked) {
+                expandGraph(cy.$(':selected').data().id, cy)
+                setTimeout(() => {
+                  api.expandNodes([node]);
+                  if (document.getElementById("cbk-run-layout3").checked) {
+                    cy.layout(layoutOptions).run();
+                  }
+                  else {
+                    initializer(cy);
+                  }
+                }, 700);
+              }else{
                 api.expandNodes([node]);
-                if (document.getElementById("cbk-run-layout3").checked) {
-                  cy.layout(layoutOptions).run();
-                }
-                else {
-                  initializer(cy);
-                }
-              }, 700);
+                  if (document.getElementById("cbk-run-layout3").checked) {
+                    cy.layout(layoutOptions).run();
+                  }
+                  else {
+                    initializer(cy);
+                  }
+              }
+              
+              
             }
             
           }
