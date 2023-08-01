@@ -5373,6 +5373,27 @@
       initializer(cy);
     }
   };
+  var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
+
+  // Function to set the label position based on the selected radio button
+  function setLabelPosition(position) {
+    var cyChildlessNodes = cy.nodes().filter(function (element) {
+      return element.isChildless();
+    });
+    var cyVisibleChildlessNodes = cyVisible.nodes().filter(function (element) {
+      return element.isChildless();
+    });
+    var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function (element) {
+      return element.isChildless();
+    });
+    var cyLayoutChildlessNodes = cyLayout.nodes().filter(function (element) {
+      return element.isChildless();
+    });
+    cyChildlessNodes.style('text-valign', position);
+    cyVisibleChildlessNodes.style('text-valign', position);
+    cyInVisibleChildlessNodes.style('text-valign', position);
+    cyLayoutChildlessNodes.style('text-valign', position);
+  }
   function getDescendantsInorder(node) {
     var descendants = {
       edges: new Set(),
@@ -5408,7 +5429,8 @@
       group: 'nodes',
       data: {
         id: focusID,
-        parent: null
+        parent: null,
+        'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
       }
     });
     var savedNodes = [];
@@ -5418,7 +5440,8 @@
           group: 'nodes',
           data: {
             id: node.ID,
-            parent: node.owner.parent.ID
+            parent: node.owner.parent.ID,
+            'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
           }
         });
       } else {
@@ -5426,7 +5449,8 @@
           group: 'nodes',
           data: {
             id: node.ID,
-            parent: node.owner.parent.ID
+            parent: node.owner.parent.ID,
+            'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
           }
         });
       }
@@ -5440,7 +5464,8 @@
           group: 'nodes',
           data: {
             id: node.ID,
-            parent: node.owner.parent.ID
+            parent: node.owner.parent.ID,
+            'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
           }
         });
       } catch (e) {
@@ -5454,14 +5479,16 @@
           cyLayout.add({
             group: 'nodes',
             data: {
-              id: edge.source.ID
+              id: edge.source.ID,
+              'label': document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
             }
           });
         } else if (cyLayout.getElementById(edge.target.ID).length == 0) {
           cyLayout.add({
             group: 'nodes',
             data: {
-              id: edge.target.ID
+              id: edge.target.ID,
+              'label': document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
             }
           });
         }
@@ -5490,26 +5517,36 @@
     var boundingBox = cyLayout.getElementById(focusID).boundingBox();
     var focusNodeWidth = boundingBox.w;
     var fcousNodeHeight = boundingBox.h;
+    cyLayout.nodes().forEach(function (node) {
+      node.style('label', node.id());
+    });
+    radioButtons.forEach(function (radio) {
+      if (radio.checked) {
+        setLabelPosition(radio.value);
+      }
+    });
+    pngSizeProxyGraph = cyLayout.png({
+      scale: 2,
+      full: true
+    });
     cyLayout.remove(cyLayout.elements());
     var topLevelFocusParent = getTopParent(cy.getElementById(focusID));
     cy.nodes().unselect();
     var componentNodes = [];
     cy.nodes().forEach(function (node) {
       if (node.id() != topLevelFocusParent.id() && node.parent().length == 0) {
-        if (node.isChildless()) {
-          node.select();
-        } else {
-          selectChildren(node);
-        }
-        var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+        var newboundingBox = _objectSpread2({
+          w: node.width(),
+          h: node.height()
+        }, node.position());
         var width = newboundingBox.w;
         var height = newboundingBox.h;
         componentNodes.push({
           id: node.id(),
           data: cy.$(":selected"),
           pos: {
-            x: (newboundingBox.x2 + newboundingBox.x1) / 2,
-            y: (newboundingBox.y1 + newboundingBox.y2) / 2
+            x: newboundingBox.x,
+            y: newboundingBox.y
           }
         });
         var newNode = cyLayout.add({
@@ -5520,17 +5557,16 @@
           }
         });
         newNode.position({
-          x: (newboundingBox.x2 + newboundingBox.x1) / 2,
-          y: (newboundingBox.y1 + newboundingBox.y2) / 2
+          x: newboundingBox.x,
+          y: newboundingBox.y
         });
         newNode.style({
-          'width': Math.max(width, height) + 'px',
+          'width': Math.max(width, height),
           // Set the new width of the node
-          'height': Math.max(width, height) + 'px',
+          'height': Math.max(width, height),
           // Set the new height of the node
-          'label': newNode.data().label
+          'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
         });
-        cy.nodes().unselect();
       }
     });
     if (cy.getElementById(focusID).parent().length == 0) {
@@ -5546,7 +5582,7 @@
         'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
         // Set the new height of the node
         'background-color': 'red',
-        'label': focusNode.data().label
+        'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
       });
     } else {
       var newNode = cyLayout.add({
@@ -5559,6 +5595,9 @@
       newNode.position({
         x: topLevelFocusParent.position().x,
         y: topLevelFocusParent.position().y
+      });
+      newNode.style({
+        'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
       });
 
       // addAllChildren(topLevelFocusParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth);
@@ -5595,7 +5634,7 @@
               // Set the new width of the node
               'height': Math.max(width, height) + 'px',
               // Set the new height of the node
-              'label': newNode.data().label
+              'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
             });
           }
         } else {
@@ -5610,7 +5649,7 @@
             'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
             // Set the new height of the node
             'background-color': 'red',
-            'label': newFNode.data().label
+            'label': document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
           });
         }
         cy.nodes().unselect();
@@ -5641,6 +5680,11 @@
     });
     cy.fit();
     cy.getElementById(focusID).select();
+    radioButtons.forEach(function (radio) {
+      if (radio.checked) {
+        setLabelPosition(radio.value);
+      }
+    });
   }
   function translateNode(a, a1) {
     // Step 1: Find the displacement vector d between a and a1

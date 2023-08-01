@@ -3,6 +3,27 @@ import debounce2 from './debounce2';
 
 let layoutOptions = { name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }
 
+var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
+
+// Function to set the label position based on the selected radio button
+function setLabelPosition(position) {
+  var cyChildlessNodes = cy.nodes().filter(function(element) {
+    return element.isChildless();
+  });
+  var cyVisibleChildlessNodes = cyVisible.nodes().filter(function(element) {
+    return element.isChildless();
+  });
+  var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function(element) {
+    return element.isChildless();
+  });
+  var cyLayoutChildlessNodes = cyLayout.nodes().filter(function(element) {
+    return element.isChildless();
+  });
+  cyChildlessNodes.style('text-valign', position);
+  cyVisibleChildlessNodes.style('text-valign', position);
+  cyInVisibleChildlessNodes.style('text-valign', position);
+  cyLayoutChildlessNodes.style('text-valign', position);
+}
 
 function getDescendantsInorder(node) {
   let descendants = {
@@ -33,8 +54,10 @@ function getDescendantsInorder(node) {
 }
 
 function expandGraph(focusID,cy){
-  
+    
   let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
+
+  
 
   cyLayout.remove(cyLayout.elements());
 
@@ -42,6 +65,7 @@ function expandGraph(focusID,cy){
     group: 'nodes',
     data: { id: focusID, 
             parent: null,
+            'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
      }}
   )
 
@@ -52,13 +76,15 @@ function expandGraph(focusID,cy){
         group: 'nodes',
         data: { id: node.ID, 
                 parent: node.owner.parent.ID,
-         }});
+                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+          }});
 
     }else{
       savedNodes.push({
         group: 'nodes',
         data: { id: node.ID, 
                 parent: node.owner.parent.ID,
+                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
          }})
     }
 
@@ -74,7 +100,8 @@ function expandGraph(focusID,cy){
       group: 'nodes',
       data: { id: node.ID, 
               parent: node.owner.parent.ID,
-       }});
+              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+            }});
         
        }catch(e){
           console.log(e);
@@ -90,6 +117,7 @@ function expandGraph(focusID,cy){
         cyLayout.add({
           group: 'nodes',
           data: { id: edge.source.ID, 
+            'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
           }});
           
       }else if(cyLayout.getElementById(edge.target.ID).length == 0){
@@ -97,6 +125,7 @@ function expandGraph(focusID,cy){
         cyLayout.add({
           group: 'nodes',
           data: { id: edge.target.ID, 
+            'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
           }});
           
       }
@@ -129,6 +158,16 @@ function expandGraph(focusID,cy){
   var focusNodeWidth = boundingBox.w;
   var fcousNodeHeight = boundingBox.h;
 
+  cyLayout.nodes().forEach(node => {node.style('label', node.id());})
+  radioButtons.forEach(function(radio) {
+    if(radio.checked){
+      setLabelPosition(radio.value);
+    }
+  });
+  pngSizeProxyGraph = cyLayout.png({
+    scale:2,
+    full:true
+  });
   
   cyLayout.remove(cyLayout.elements());
   
@@ -140,18 +179,14 @@ function expandGraph(focusID,cy){
   
   cy.nodes().forEach(node => {
     if(node.id()!= topLevelFocusParent.id() && node.parent().length == 0){
-      if(node.isChildless()){
-        node.select();
-        
-      }else{
-        selectChildren(node);
-      }
-      var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+      
+      var newboundingBox = {w: node.width(),h:node.height(), ...node.position()};
         var width = newboundingBox.w;
         var height = newboundingBox.h;
+        
         componentNodes.push({id: node.id(),data:cy.$(":selected"),pos:{
-          x: (newboundingBox.x2 + newboundingBox.x1)/2,
-          y: (newboundingBox.y1 + newboundingBox.y2)/2}});
+          x: newboundingBox.x,
+          y: newboundingBox.y}});
         var newNode = cyLayout.add({
               group: 'nodes',
               data: {
@@ -162,16 +197,16 @@ function expandGraph(focusID,cy){
       
       
             newNode.position({
-              x: (newboundingBox.x2 + newboundingBox.x1)/2,
-              y: (newboundingBox.y1 + newboundingBox.y2)/2
+              x: newboundingBox.x,
+              y: newboundingBox.y
             });
       
             newNode.style({
-              'width': Math.max(width,height)+'px', // Set the new width of the node
-              'height': Math.max(width,height)+'px', // Set the new height of the node
-              'label' : newNode.data().label
+              'width': Math.max(width,height), // Set the new width of the node
+              'height': Math.max(width,height), // Set the new height of the node
+              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
             });
-            cy.nodes().unselect();
+
             compoundsCounter++;
     }
   })
@@ -188,7 +223,7 @@ function expandGraph(focusID,cy){
       'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
       'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
       'background-color': 'red',
-      'label' : focusNode.data().label
+      'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
     });
   }else{
     var newNode = cyLayout.add({
@@ -204,7 +239,9 @@ function expandGraph(focusID,cy){
       x: topLevelFocusParent.position().x,
       y: topLevelFocusParent.position().y
     });
-
+    newNode.style({
+      'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+    });
     compoundsCounter++;
 
     // addAllChildren(topLevelFocusParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth);
@@ -240,7 +277,7 @@ function expandGraph(focusID,cy){
                 newNode.style({
                   'width': Math.max(width,height)+'px', // Set the new width of the node
                   'height': Math.max(width,height)+'px', // Set the new height of the node
-                  'label' : newNode.data().label
+                  'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
                 });
                 compoundsCounter++;
         }else{
@@ -260,7 +297,7 @@ function expandGraph(focusID,cy){
               'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
               'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
               'background-color':'red',
-              'label' : newFNode.data().label
+              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
             });
             compoundsCounter++;
       }
@@ -294,7 +331,11 @@ function expandGraph(focusID,cy){
   cy.fit();
 
   cy.getElementById(focusID).select();
-
+  radioButtons.forEach(function(radio) {
+    if(radio.checked){
+      setLabelPosition(radio.value);
+    }
+  });
 }
 
 
