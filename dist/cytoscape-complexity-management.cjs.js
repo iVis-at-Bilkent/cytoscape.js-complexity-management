@@ -1063,13 +1063,16 @@ function getDescendantsInorder(node) {
 function expandGraph(focusID, cy) {
   var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
   cyLayout.remove(cyLayout.elements());
-  cyLayout.add({
+  var fNode = cyLayout.add({
     group: 'nodes',
     data: {
       id: focusID,
       parent: null,
       'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
     }
+  });
+  fNode.style({
+    'background-color': '#4fc3f7'
   });
   var savedNodes = [];
   descendants.compoundNodes.forEach(function (node) {

@@ -61,14 +61,14 @@ function expandGraph(focusID,cy){
 
   cyLayout.remove(cyLayout.elements());
 
-  cyLayout.add({
+  let fNode = cyLayout.add({
     group: 'nodes',
     data: { id: focusID, 
             parent: null,
             'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
      }}
   )
-
+  fNode.style({'background-color': '#4fc3f7',})
   let savedNodes = [];
   descendants.compoundNodes.forEach( node => {
     if(cyLayout.getElementById( node.owner.parent.ID).length!=0){
