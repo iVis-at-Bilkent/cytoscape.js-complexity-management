@@ -257,7 +257,7 @@ function expandGraph(focusID,cy){
     cyLayout.add(children)
     children.forEach(child => {
       child.select()
-      var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+      var newboundingBox = {w: child.width(),h:child.height(), ...child.position()};
       var width = newboundingBox.w;
       var height = newboundingBox.h;
        

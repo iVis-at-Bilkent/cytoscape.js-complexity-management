@@ -5611,7 +5611,10 @@
       cyLayout.add(children);
       children.forEach(function (child) {
         child.select();
-        var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
+        var newboundingBox = _objectSpread2({
+          w: child.width(),
+          h: child.height()
+        }, child.position());
         var width = newboundingBox.w;
         var height = newboundingBox.h;
         if (child.id() != focusID) {
