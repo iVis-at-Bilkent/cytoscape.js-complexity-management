@@ -1072,7 +1072,7 @@ function expandGraph(focusID, cy) {
     }
   });
   fNode.style({
-    'background-color': '#4fc3f7'
+    'background-color': '#CCE1F9'
   });
   var savedNodes = [];
   descendants.compoundNodes.forEach(function (node) {
@@ -1229,7 +1229,7 @@ function expandGraph(focusID, cy) {
       // Set the new width of the node
       'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
       // Set the new height of the node
-      'background-color': '#35baf6',
+      'background-color': '#CCE1F9',
       'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
     });
   } else {
@@ -1300,7 +1300,7 @@ function expandGraph(focusID, cy) {
           // Set the new width of the node
           'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
           // Set the new height of the node
-          'background-color': '#35baf6',
+          'background-color': '#CCE1F9',
           'label': document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
         });
       }

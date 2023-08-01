@@ -421,7 +421,7 @@ function onLoaded() {
               'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
        }}
     )
-    fNode.style({'background-color': '#4fc3f7',})
+    fNode.style({'background-color': '#CCE1F9',})
     let savedNodes = [];
     descendants.compoundNodes.forEach( node => {
       if(cyLayout.getElementById( node.owner.parent.ID).length!=0){
@@ -582,7 +582,7 @@ function onLoaded() {
       focusNode.style({
         'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
         'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
-        'background-color': '#35baf6',
+        'background-color': '#CCE1F9',
         'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
       });
     }else{
@@ -657,7 +657,7 @@ function onLoaded() {
               newFNode.style({
                 'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
                 'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
-                'background-color':'#35baf6',
+                'background-color':'#CCE1F9',
                 'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
               });
               compoundsCounter++;
