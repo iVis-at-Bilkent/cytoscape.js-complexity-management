@@ -19,6 +19,7 @@ let cmgm = cy.complexityManagement('get').getCompMgrInstance()
 // unfilter all
 // expand all edges
 // expand all nodes
+for (let q = 0; q < 2; q++) {
 
 
 let startTime = 0;
@@ -26,12 +27,14 @@ let endTime = 0;
 let timeTaken = 0
 let sum = 0
 
-    
+
+for (let index = 0; index < 5; index++) {
+
     startTime = new Date().getTime()
 
     // add neighborhood
     // add edges
-    addEdgeBetween('#39','#24');
+    addEdgeBetween();
     // collapse all edges 
     document.getElementById('collapseAllEdges').click();
     // filter node to 25 
@@ -45,16 +48,16 @@ let sum = 0
     // expand all nodes
     document.getElementById('expandAllNodes').click();
     // add edges
-    addEdgeBetween('#103','#189');
-    // show
-    showAll();
-    // add neighborhood
-    addNeighbours("#127")
+    addEdgeBetween();
+     // hide
+     hide()
     // collapse all nodes
     document.getElementById('collapseAllNodes').click();
     // unfilter all
     filterNodes(0,100);
     filterEdges(0,100);
+    // show
+    showAll();
     // expand all edges
     document.getElementById('expandAllEdges').click();
     // expand all nodes
@@ -62,13 +65,18 @@ let sum = 0
 
     endTime = new Date().getTime();
     timeTaken = endTime - startTime
-    console.log("Time Per Operation: ", timeTaken/15)
+    console.log("Time Per Operation: ", timeTaken/15, "index",index)
     sum+=timeTaken
-
+    
     document.getElementById('collapseAllNodes').click();
     document.getElementById('expandAllNodes').click();
     document.getElementById('expandAllEdges').click();
-    
+}
+console.error("Avg Time Per Operation: ", sum/75," Size : ", cy.nodes().length)
+
+    // add neighborhood
+    addNeighbours()
+
     
     // checking final count
     let finalinvisibleGraphNodes = 0;
@@ -88,21 +96,39 @@ let sum = 0
     
     }
     
+}
 
 
 
 
 
-
-function addEdgeBetween(a,b){
-    cy.$(a).select();
-    cy.$(b).select();
+function addEdgeBetween(){
+    cy.$().unselect();
+    while(true){
+        var nodes = cy.nodes().filter(node=> !node.selected());
+        if (nodes.length > 0) {
+            var randomIndex = Math.floor(Math.random() * nodes.length);
+            cy.getElementById(nodes[randomIndex].id()).select();
+        
+        if(cy.$(":selected").length == 2){
+            break
+        }
+    }else{
+        break
+    }
+    }
+    
     document.getElementById('addEdgeBetweenSelected').click();
     cy.$().unselect();
 }
 
-function addNeighbours(a){
-    cy.$(a).select()
+function addNeighbours(){
+    cy.$().unselect();
+    var nodes = cy.nodes().filter(node=> !node.selected());
+    if (nodes.length > 0) {
+        var randomIndex = Math.floor(Math.random() * nodes.length);
+        cy.getElementById(nodes[randomIndex].id()).select();
+    }
     document.getElementById('addRandomElements').click();
     cy.$().unselect();
 }
@@ -149,7 +175,11 @@ function hide(){
 
     // Step 1: Randomly select a node
     var randomNode = nodes[Math.floor(Math.random() * nodes.length)];
-    randomNode.select()
+    if(randomNode){
+        randomNode.select()
+    }else{
+        return
+    }
     // Step 2: Get the 1-hop neighborhood
     var oneHopNeighbors = randomNode.isParent() ? randomNode.descendants().neighborhood().nodes() : randomNode.neighborhood().nodes();
 
@@ -172,4 +202,13 @@ function hide(){
 
 function showAll(){
     document.getElementById("showAll").click();
+}
+
+
+function selectRandomCompound(){
+    var compoundNodes = cy.nodes().filter(node => !node.isChildless());
+    if (compoundNodes.length > 0) {
+        var randomIndex = Math.floor(Math.random() * compoundNodes.length);
+        cy.getElementById(compoundNodes[randomIndex].id()).select();
+    }
 }

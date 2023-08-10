@@ -13,16 +13,22 @@ let cmgm = cy.complexityManagement('get').getCompMgrInstance()
 // show
 // unfilter all
 
+for (let e = 0; e < 5; e++) {
+
+
 let startTime = 0;
 let endTime = 0;
 let timeTaken = 0
 let sum = 0
 
-for (let index = 0; index < 10; index++) {
+for (let index = 0; index < 5; index++) {
     
     startTime = new Date().getTime()
     // add  edges b/w c and g
-    addEdgeBetween('#105','#126');
+    cy.$().unselect()
+    selectRandomNode()
+    selectRandomNode()
+    addEdgeBetween();
     // hide
     hide()
     // collapse all nodes
@@ -33,26 +39,33 @@ for (let index = 0; index < 10; index++) {
     filterNodes(30,100);
     // filter edge value 50
     filterEdges(0,50);
-    // expand all nodes
-    document.getElementById('expandAllNodes').click();
-    // expand all edges
-    document.getElementById('expandAllEdges').click();
     // show
     showAll()
     // unfilter all
     filterNodes(0,100);
     filterEdges(0,100);
     
+    // expand all nodes
+    document.getElementById('expandAllNodes').click();
+    // expand all edges
+    document.getElementById('expandAllEdges').click();
+    
     endTime = new Date().getTime();
     timeTaken = endTime - startTime
-    console.log("Time Per Operation: ", timeTaken/10)
+    console.log("Time Per Operation: ", timeTaken/10 , "index",index)
     sum+=timeTaken
 
     document.getElementById('collapseAllNodes').click();
     document.getElementById('expandAllNodes').click();
     document.getElementById('expandAllEdges').click();
+   
+}
     
-    
+    console.error("Avg Time Per Operation: ", sum/50," Size : ", cy.nodes().length , "index", e)
+
+    // add neighborhood
+    addNeighbours()
+
     // checking final count
     let finalinvisibleGraphNodes = 0;
     let finalinvisibleGraphEdges = 0;
@@ -65,30 +78,34 @@ for (let index = 0; index < 10; index++) {
     finalinvisibleGraphEdges += cmgm.visibleGraphManager.edges.length;
     
     if(finalinvisibleGraphNodes == finalCyGraphNodes && finalinvisibleGraphEdges == finalCyGraphEdges){
-        console.log("Test sucessfull", index);
+        console.log("Test sucessfull");
     }else{
-        console.error("Test Failed", index);
+        console.error("Test Failed");
         break
     
     }
     
 }
 
-console.log("AVG Time Per Operation: ",sum/100);
+
 
 
 
 
 
 function addEdgeBetween(a,b){
-    cy.$(a).select();
-    cy.$(b).select();
     document.getElementById('addEdgeBetweenSelected').click();
     cy.$().unselect();
 }
 
-function addNeighbours(a){
-    cy.$(a).select()
+
+function addNeighbours(){
+    cy.$().unselect();
+    var nodes = cy.nodes().filter(node=> !node.selected());
+    if (nodes.length > 0) {
+        var randomIndex = Math.floor(Math.random() * nodes.length);
+        cy.getElementById(nodes[randomIndex].id()).select();
+    }
     document.getElementById('addRandomElements').click();
     cy.$().unselect();
 }
@@ -158,4 +175,20 @@ function hide(){
 
 function showAll(){
     document.getElementById("showAll").click();
+}
+
+
+function selectRandomCompound(){
+    var compoundNodes = cy.nodes().filter(node => !node.isChildless());
+    if (compoundNodes.length > 0) {
+        var randomIndex = Math.floor(Math.random() * compoundNodes.length);
+        cy.getElementById(compoundNodes[randomIndex].id()).select();
+    }
+}
+function selectRandomNode(){
+    var nodes = cy.nodes();
+    if (nodes.length > 0) {
+        var randomIndex = Math.floor(Math.random() * nodes.length);
+        cy.getElementById(nodes[randomIndex].id()).select();
+    }
 }

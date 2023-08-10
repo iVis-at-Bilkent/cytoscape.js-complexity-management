@@ -300,7 +300,7 @@ function onLoaded() {
     // headless:true,
     // styleEnabled:true
   });
-
+  
   let layoutUtilities = cy.layoutUtilities({ desigrayAspectRatio: cy.width() / cy.height() });
 
   let newNodeCount = 0;
@@ -682,7 +682,10 @@ function onLoaded() {
     }).run();
 
     componentNodes.forEach(component => {
-      let newComponentPosition = translateComponent(cyLayout.getElementById(focusID).position(),cyLayout.getElementById(component.id).position(), cy.getElementById(focusID).position());
+      let newBox = cyLayout.getElementById(component.id).boundingBox()
+      let newPos = {x: (newBox.x2 + newBox.x1)/2,
+                    y: (newBox.y1 + newBox.y2)/2}
+      let newComponentPosition = translateComponent(component.pos,newPos, component.pos);
       let translationFactor = translateNode(component.pos,newComponentPosition);
       component.data.forEach(node => {
         moveChildren(node,translationFactor,focusID);

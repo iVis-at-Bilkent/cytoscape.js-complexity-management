@@ -1,47 +1,46 @@
 let cmgm = cy.complexityManagement('get').getCompMgrInstance()
 
+let finalCyGraphNodes = cy.nodes().length;
+let finalCyGraphEdges = cy.edges().length;
 // Begin Testing
 
-// add eges 
+// collapse random compound
+// collapse edge between random nodes
+// hide random nodes
 // collapse all nodes
-// add neighbours
-// collapse all edges
-// add neigbours
-// collapse all nodes
+// expand all nodes
 // filter node to 30
 // filter edges to 50
-// expand all nodes
 // expand all edges.
-// add neighbours
 // unfilter all
 
 
 for (let index = 0; index < 10; index++) {
     
-    // add 3 edges b/w c and g
-    addEdgeBetween('#c','#g');
-    addEdgeBetween('#c','#g');
-    addEdgeBetween('#c','#g');
-    // collapse all nodes
-    document.getElementById('collapseAllNodes').click();
-    //adding random neighbours to c3
-    addNeighbours('#c3');
+
+    // collapse random compound
+    selectRandomCompound()
+    document.getElementById('collapseSelectedNodes').click();
+    cy.nodes().unselect()
     // collapse all edges
-    document.getElementById('collapseAllEdges').click();
-    //adding random neighbours to c3
-    addNeighbours('#c1');
+    selectRandomNode();
+    selectRandomNode();
+    document.getElementById('collapseSelectedEdges').click();
+    cy.nodes().unselect()
+    // hide randomly
+    hide()
     // collapse all nodes
     document.getElementById('collapseAllNodes').click();
+    // expand all nodes
+    document.getElementById('expandAllNodes').click();
     // filter node value 30
     filterNodes(30,100);
     // filter edge value 50
     filterEdges(0,50);
-    // expand all nodes
-    document.getElementById('expandAllNodes').click();
+    // show
+    showAll()
     // expand all edges
     document.getElementById('expandAllEdges').click();
-    //adding random neighbours to c3
-    addNeighbours('#g');
     // unfilter all
     filterNodes(0,100);
     filterEdges(0,100);
@@ -52,15 +51,9 @@ for (let index = 0; index < 10; index++) {
     
     
     // checking final count
-    let finalinvisibleGraphNodes = 0;
-    let finalinvisibleGraphEdges = 0;
-    let finalCyGraphNodes = cy.nodes().length;
-    let finalCyGraphEdges = cy.edges().length;
-    cmgm.visibleGraphManager.graphs.forEach(graph => {
-        finalinvisibleGraphNodes += graph.nodes.length;
-        finalinvisibleGraphEdges += graph.edges.length;
-    })
-    finalinvisibleGraphEdges += cmgm.visibleGraphManager.edges.length;
+    let finalinvisibleGraphNodes = cy.nodes().length;
+    let finalinvisibleGraphEdges = cy.edges().length;
+   
     
     if(finalinvisibleGraphNodes == finalCyGraphNodes && finalinvisibleGraphEdges == finalCyGraphEdges){
         console.log("Test sucessfull", index);
@@ -153,3 +146,17 @@ function showAll(){
     document.getElementById("showAll").click();
 }
 
+function selectRandomCompound(){
+    var compoundNodes = cy.nodes().filter(node => !node.isChildless());
+    if (compoundNodes.length > 0) {
+        var randomIndex = Math.floor(Math.random() * compoundNodes.length);
+        cy.getElementById(compoundNodes[randomIndex].id()).select();
+    }
+}
+function selectRandomNode(){
+    var nodes = cy.nodes();
+    if (nodes.length > 0) {
+        var randomIndex = Math.floor(Math.random() * nodes.length);
+        cy.getElementById(nodes[randomIndex].id()).select();
+    }
+}
