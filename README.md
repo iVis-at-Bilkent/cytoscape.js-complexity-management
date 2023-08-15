@@ -11,13 +11,12 @@ Based on [this framework](https://github.com/iVis-at-Bilkent/cmgm) this extensio
 Click [here](https://ivis-at-bilkent.github.io/cytoscape.js-complexity-management/demo/demo.html) for a demo.
 
 ## API
- * Cytoscape.js ^3.2.0
- * fcose ^ 2.0.0
- * cmgm.js (unified complexity management model) ^1.0.0
 ## Default Options
 
 ## Dependencies
-
+ * Cytoscape.js ^3.2.0
+ * fcose ^ 2.0.0
+ * cmgm.js (unified complexity management model) ^1.0.0
 ## Usage instructions
 
 ## Team
