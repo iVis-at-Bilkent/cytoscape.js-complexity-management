@@ -1152,7 +1152,12 @@ function onLoaded() {
     if (document.getElementById("cbk-flag-recursive").checked) {
       cy.$(':selected').forEach(node => {
         if (document.getElementById("cbk-run-layout3").checked) {
+          
+          // For DEMO purposes only we are using expandGraph function from main.js file with additional demo functionalities
+          // Label positioning, Label Display functions, Saving transition graphs to png files
           expandGraph(node.data().id, cy)
+          // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
+          // instance.expandGraph(node.data().id, cy)
           setTimeout(() => {
             pngExpandGraph = cy.png({
               scale:2,
@@ -1182,7 +1187,11 @@ function onLoaded() {
       cy.$(':selected').forEach(node => {
 
         if (document.getElementById("cbk-run-layout3").checked) {
+          // For DEMO purposes only we are using expandGraph function from main.js file with additional demo functionalities
+          // Label positioning, Label Display functions, Saving transition graphs to png files
           expandGraph(node.data().id, cy)
+          // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
+          // instance.expandGraph(node.data().id, cy)
           setTimeout(() => {
             pngExpandGraph = cy.png({
               scale:2,
