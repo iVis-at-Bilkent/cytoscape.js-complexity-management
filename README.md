@@ -113,6 +113,18 @@ require(['cytoscape', 'cytoscape-complexity-management'], function( cytoscape, c
 
 Plain HTML/JS has the extension registered for you automatically, because no `require()` is needed.
 
+## Publishing instructions
+
+This project is set up to automatically be published to npm and bower.  To publish:
+
+1. Build the extension : `npm run build:release`
+1. Commit the build : `git commit -am "Build for release"`
+1. Bump the version number and tag: `npm version major|minor|patch`
+1. Push to origin: `git push && git push --tags`
+1. Publish to npm: `npm publish .`
+1. If publishing to bower for the first time, you'll need to run `bower register cytoscape-complexity-management https://github.com/iVis-at-Bilkent/cytoscape.js-complexity-management.git`
+1. [Make a new release](https://github.com/iVis-at-Bilkent/cytoscape.js-complexity-management/releases/new) for Zenodo.
+
 ## Team
 
   * [Osama Zafar](https://github.com/osamazafar980), [Hasan Balcı](https://github.com/hasanbalci) and [Ugur Dogrusoz](https://github.com/ugurdogrusoz) of [i-Vis at Bilkent University](http://www.cs.bilkent.edu.tr/~ivis)
