@@ -4,7 +4,7 @@ A Cytoscape.js extension for a set of complexity management operations for compo
 
 ## Description
 
-Based on [Complexity Management Graph Model (CMGM)](https://github.com/iVis-at-Bilkent/cmgm), this extension provides a unified set of complexity management operations working seamlessly. It also provides automatic adjustment of the graph layout after each complexity management operation to protect the user's mental map.
+Based on [Complexity Management Graph Model (CMGM)](https://github.com/iVis-at-Bilkent/cmgm), this extension provides a unified set of complexity management operations working seamlessly. It also provides automatic adjustment of the graph layout after each complexity management operation to protect the user's mental map. The supported operations include filter/unfilter, hide/show and collapse/expand nodes/edges.  
 
 ## Demo
 
@@ -94,7 +94,16 @@ Download the library:
  * via bower: `bower install cytoscape-complexity-management`, or
  * via direct download in the repository (probably from a tag).
 
-`require()` the library as appropriate for your project:
+Import the library as appropriate for your project:
+
+ES import:
+
+```js
+import cytoscape from 'cytoscape';
+import complexityManagement from 'cytoscape-complexity-management';
+
+cytoscape.use( complexityManagement ); // register extension
+```
 
 CommonJS:
 ```js
@@ -117,7 +126,7 @@ Plain HTML/JS has the extension registered for you automatically, because no `re
 
 This project is set up to automatically be published to npm and bower.  To publish:
 
-1. Build the extension : `npm run build:release`
+1. Build the extension : `npm run build`
 1. Commit the build : `git commit -am "Build for release"`
 1. Bump the version number and tag: `npm version major|minor|patch`
 1. Push to origin: `git push && git push --tags`
