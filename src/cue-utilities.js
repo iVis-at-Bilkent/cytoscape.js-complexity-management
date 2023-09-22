@@ -55,7 +55,7 @@ function getDescendantsInorder(node) {
 
 function expandGraph(focusID,cy){
     
-  let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
+  let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
 
   
 

@@ -51,11 +51,11 @@ for (let index = 0; index < 10; index++) {
     
     
     // checking final count
-    let finalinvisibleGraphNodes = cy.nodes().length;
-    let finalinvisibleGraphEdges = cy.edges().length;
+    let finalmainGraphNodes = cy.nodes().length;
+    let finalmainGraphEdges = cy.edges().length;
    
     
-    if(finalinvisibleGraphNodes == finalCyGraphNodes && finalinvisibleGraphEdges == finalCyGraphEdges){
+    if(finalmainGraphNodes == finalCyGraphNodes && finalmainGraphEdges == finalCyGraphEdges){
         console.log("Test sucessfull", index);
     }else{
         console.error("Test Failed", index);

@@ -67,17 +67,17 @@ for (let index = 0; index < 5; index++) {
     addNeighbours()
 
     // checking final count
-    let finalinvisibleGraphNodes = 0;
-    let finalinvisibleGraphEdges = 0;
+    let finalmainGraphNodes = 0;
+    let finalmainGraphEdges = 0;
     let finalCyGraphNodes = cy.nodes().length;
     let finalCyGraphEdges = cy.edges().length;
     cmgm.visibleGraphManager.graphs.forEach(graph => {
-        finalinvisibleGraphNodes += graph.nodes.length;
-        finalinvisibleGraphEdges += graph.edges.length;
+        finalmainGraphNodes += graph.nodes.length;
+        finalmainGraphEdges += graph.edges.length;
     })
-    finalinvisibleGraphEdges += cmgm.visibleGraphManager.edges.length;
+    finalmainGraphEdges += cmgm.visibleGraphManager.edges.length;
     
-    if(finalinvisibleGraphNodes == finalCyGraphNodes && finalinvisibleGraphEdges == finalCyGraphEdges){
+    if(finalmainGraphNodes == finalCyGraphNodes && finalmainGraphEdges == finalCyGraphEdges){
         console.log("Test sucessfull");
     }else{
         console.error("Test Failed");

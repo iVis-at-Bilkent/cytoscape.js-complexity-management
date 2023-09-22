@@ -540,17 +540,22 @@ export function complexityManagement(cy) {
   };
 
   api.expandNodes = (nodes, isRecursive = false) => {
+
     let nodeIDList = [];
 
-    nodes.forEach((node) => {
+    nodes.forEach( (node) => {
       if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
+        expandGraph(node.data().id, cy)
         node.removeClass("cy-expand-collapse-collapsed-node");
         node.removeData("position-before-collapse");
         node.removeData("size-before-collapse");
       }
     });
 
+    
+    setTimeout(() => {
+    
     let returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
     // Add required elements to cy instance
     actOnVisible([...returnedElements.nodeIDListForVisible], cy, true);
@@ -582,6 +587,8 @@ export function complexityManagement(cy) {
     actOnInvisible([...returnedElements.edgeIDListToRemove], cy);
 
     actOnVisibleForMetaEdge([...returnedElements.metaEdgeIDListForVisible], cy);
+
+    }, 600);
   };
 
   api.collapseAllNodes = () => {
@@ -758,9 +765,9 @@ export function complexityManagement(cy) {
     return compMgrInstance.isExpandable(node.id());
   };
 
-  api.expandGraph = (focusID,cy) => {
+  let expandGraph = (focusID,cy) => {
     
-    let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
+    let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
 
     
 

@@ -327,11 +327,11 @@ function onLoaded() {
 
     let nodesToAddInvisible = [];
     let nodePosInBothCyAndInvisible = [];
-    instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.forEach((nodeItem, key) => {
+    instance.getCompMgrInstance('get').mainGraphManager.nodesMap.forEach((nodeItem, key) => {
       nodesToAddInvisible.push({ data: { id: nodeItem.ID , visible : nodeItem.isVisible?'T':"F", filtered : nodeItem.isFiltered?'T':"F", hidden : nodeItem.isHidden?'T':"F", label: nodeItem.ID + (nodeItem.isFiltered ? "(f)" : "") + (nodeItem.isHidden ? "(h)" : "") + (nodeItem.isCollapsed ? "(-)" : "") + (nodeItem.isVisible ? "" : "(i)"), parent: instance.getCompMgrInstance().visibleGraphManager.rootGraph === nodeItem.owner ? null : nodeItem.owner.parent.ID }});
     });
     cyInvisible.add(nodesToAddInvisible);
-    instance.getCompMgrInstance('get').invisibleGraphManager.edgesMap.forEach((edgeItem, key) => {
+    instance.getCompMgrInstance('get').mainGraphManager.edgesMap.forEach((edgeItem, key) => {
       cyInvisible.add({ data: { id: edgeItem.ID, visible : edgeItem.isVisible?'T':"F", filtered : edgeItem.isFiltered?'T':"F", hidden : edgeItem.isHidden?'T':"F", label: (edgeItem.isFiltered ? "(f)" : "") + (edgeItem.isHidden ? "(h)" : "") + (edgeItem.isVisible ? "" : "(i)"), source: edgeItem.source.ID, target: edgeItem.target.ID } });
     });
     cyInvisible.nodes().forEach((node) => {
@@ -408,7 +408,7 @@ function onLoaded() {
   
   function expandGraph(focusID,cy){
     
-    let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').invisibleGraphManager.nodesMap.get(focusID));
+    let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
 
     
 
@@ -1148,17 +1148,16 @@ function onLoaded() {
     }
   });
 
-  document.getElementById("expandSelectedNodes").addEventListener("click", () => {
+  document.getElementById("expandSelectedNodes").addEventListener("click", async () => {
     if (document.getElementById("cbk-flag-recursive").checked) {
       cy.$(':selected').forEach(node => {
         if (document.getElementById("cbk-run-layout3").checked) {
           
           // For DEMO purposes only we are using expandGraph function from main.js file with additional demo functionalities
           // Label positioning, Label Display functions, Saving transition graphs to png files
-          expandGraph(node.data().id, cy)
+          // expandGraph(node.data().id, cy)
           // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
           // instance.expandGraph(node.data().id, cy)
-          setTimeout(() => {
             pngExpandGraph = cy.png({
               scale:2,
               full:true
@@ -1175,7 +1174,6 @@ function onLoaded() {
             else {
               initializer(cy);
             }
-          }, 900);
         }else{
           instance.expandNodes(cy.nodes(':selected'), true);
           cy.fit();
@@ -1189,10 +1187,9 @@ function onLoaded() {
         if (document.getElementById("cbk-run-layout3").checked) {
           // For DEMO purposes only we are using expandGraph function from main.js file with additional demo functionalities
           // Label positioning, Label Display functions, Saving transition graphs to png files
-          expandGraph(node.data().id, cy)
+          // expandGraph(node.data().id, cy)
           // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
           // instance.expandGraph(node.data().id, cy)
-          setTimeout(() => {
             pngExpandGraph = cy.png({
               scale:2,
               full:true
@@ -1202,13 +1199,16 @@ function onLoaded() {
               scale:2,
               full:true
             }); ;
-            if (document.getElementById("cbk-run-layout3").checked) {
-              cy.layout(layoutOptions).run();
-            }
-            else {
-              initializer(cy);
-            }
-          }, 900); 
+            setTimeout(() => {
+
+              if (document.getElementById("cbk-run-layout3").checked) {
+                cy.layout(layoutOptions).run();
+              }
+              else {
+                initializer(cy);
+              }
+            }, 700);
+          
         }else{
           instance.expandNodes(cy.nodes(':selected'));
           cy.fit();
