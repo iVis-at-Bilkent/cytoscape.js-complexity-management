@@ -2,6 +2,8 @@
 let pngExpandGraph = null ;
 let pngSizeProxyGraph = null ;
 let pngBeforeFinalGraph = null ;
+let api;
+let cy2;
 document.addEventListener('DOMContentLoaded', onLoaded);
 let layoutOptions = { name: "fcose",  nodeRepulsion: node => 4500,animate: true, randomize: false, stop: () => { initializer(cy) } }
 function onLoaded() {
@@ -257,6 +259,8 @@ function onLoaded() {
     layout: { name: 'fcose', animate: true, stop: function () { initializer(cy); } }
   });
 
+  api = cy.layvo('get');
+  cy2 = cytoscape();
   const cyLayout = window.cyLayout =  cytoscape({
     container: document.getElementById('cyHeadless'),
     style: [
@@ -1167,13 +1171,16 @@ function onLoaded() {
               scale:2,
               full:true
             }); ;
+            setTimeout(() => {
 
-            if (document.getElementById("cbk-run-layout3").checked) {
-              cy.layout(layoutOptions).run();
-            }
-            else {
-              initializer(cy);
-            }
+              if (document.getElementById("cbk-run-layout3").checked) {
+                cy.layout(layoutOptions).run();
+              }
+              else {
+                initializer(cy);
+              }
+            }, 700);
+            
         }else{
           instance.expandNodes(cy.nodes(':selected'), true);
           cy.fit();

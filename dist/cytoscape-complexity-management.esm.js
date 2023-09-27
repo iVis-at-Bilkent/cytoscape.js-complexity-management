@@ -1359,383 +1359,7 @@ var layoutOptions = {
     initializer(cy);
   }
 };
-var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
-
-// Function to set the label position based on the selected radio button
-function setLabelPosition(position) {
-  var cyChildlessNodes = cy.nodes().filter(function (element) {
-    return element.isChildless();
-  });
-  var cyVisibleChildlessNodes = cyVisible.nodes().filter(function (element) {
-    return element.isChildless();
-  });
-  var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function (element) {
-    return element.isChildless();
-  });
-  var cyLayoutChildlessNodes = cyLayout.nodes().filter(function (element) {
-    return element.isChildless();
-  });
-  cyChildlessNodes.style('text-valign', position);
-  cyVisibleChildlessNodes.style('text-valign', position);
-  cyInVisibleChildlessNodes.style('text-valign', position);
-  cyLayoutChildlessNodes.style('text-valign', position);
-}
-function getDescendantsInorder(node) {
-  var descendants = {
-    edges: new Set(),
-    simpleNodes: [],
-    compoundNodes: []
-  };
-  var childGraph = node.child;
-  if (childGraph) {
-    var childGraphNodes = childGraph.nodes;
-    childGraphNodes.forEach(function (childNode) {
-      var childDescendents = getDescendantsInorder(childNode);
-      for (var id in childDescendents) {
-        descendants[id] = [].concat(_toConsumableArray(descendants[id] || []), _toConsumableArray(childDescendents[id]));
-      }
-      descendants['edges'] = new Set(descendants['edges']);
-      if (childNode.child) {
-        descendants.compoundNodes.push(childNode);
-      } else {
-        descendants.simpleNodes.push(childNode);
-      }
-      var nodeEdges = childNode.edges;
-      nodeEdges.forEach(function (item) {
-        return descendants['edges'].add(item);
-      });
-    });
-  }
-  return descendants;
-}
-function expandGraph(focusID, cy) {
-  var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
-  cyLayout.remove(cyLayout.elements());
-  var fNode = cyLayout.add({
-    group: 'nodes',
-    data: {
-      id: focusID,
-      parent: null,
-      'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
-    }
-  });
-  fNode.style({
-    'background-color': '#CCE1F9'
-  });
-  var savedNodes = [];
-  descendants.compoundNodes.forEach(function (node) {
-    if (cyLayout.getElementById(node.owner.parent.ID).length != 0) {
-      cyLayout.add({
-        group: 'nodes',
-        data: {
-          id: node.ID,
-          parent: node.owner.parent.ID,
-          'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-        }
-      });
-    } else {
-      savedNodes.push({
-        group: 'nodes',
-        data: {
-          id: node.ID,
-          parent: node.owner.parent.ID,
-          'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-        }
-      });
-    }
-  });
-  savedNodes.forEach(function (cNodeData) {
-    cyLayout.add(cNodeData);
-  });
-  descendants.simpleNodes.forEach(function (node) {
-    try {
-      cyLayout.add({
-        group: 'nodes',
-        data: {
-          id: node.ID,
-          parent: node.owner.parent.ID,
-          'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-        }
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  });
-  var e = _toConsumableArray(descendants.edges);
-  e.forEach(function (edge) {
-    try {
-      if (cyLayout.getElementById(edge.source.ID).length == 0) {
-        cyLayout.add({
-          group: 'nodes',
-          data: {
-            id: edge.source.ID,
-            'label': document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
-          }
-        });
-      } else if (cyLayout.getElementById(edge.target.ID).length == 0) {
-        cyLayout.add({
-          group: 'nodes',
-          data: {
-            id: edge.target.ID,
-            'label': document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
-          }
-        });
-      }
-      cyLayout.add({
-        group: 'edges',
-        data: {
-          id: edge.ID,
-          source: edge.source.ID,
-          target: edge.target.ID
-        }
-      });
-    } catch (e) {}
-  });
-  while (true) {
-    try {
-      cyLayout.layout({
-        name: 'fcose',
-        animate: false
-      }).run();
-      break;
-    } catch (e) {
-      console.log(e);
-      break;
-    }
-  }
-  var boundingBox = cyLayout.getElementById(focusID).boundingBox();
-  var focusNodeWidth = boundingBox.w;
-  var fcousNodeHeight = boundingBox.h;
-  cyLayout.nodes().forEach(function (node) {
-    node.style('label', node.id());
-  });
-  radioButtons.forEach(function (radio) {
-    if (radio.checked) {
-      setLabelPosition(radio.value);
-    }
-  });
-  pngSizeProxyGraph = cyLayout.png({
-    scale: 2,
-    full: true
-  });
-  cyLayout.remove(cyLayout.elements());
-  var topLevelFocusParent = getTopParent(cy.getElementById(focusID));
-  cy.nodes().unselect();
-  var componentNodes = [];
-  cy.nodes().forEach(function (node) {
-    if (node.id() != topLevelFocusParent.id() && node.parent().length == 0) {
-      if (node.isChildless()) {
-        node.select();
-      } else {
-        selectChildren(node);
-      }
-      var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
-      newboundingBox = _objectSpread2(_objectSpread2({}, newboundingBox), {}, {
-        w: node.width(),
-        h: node.height()
-      });
-      var width = newboundingBox.w;
-      var height = newboundingBox.h;
-      componentNodes.push({
-        id: node.id(),
-        data: cy.$(":selected"),
-        pos: {
-          x: (newboundingBox.x2 + newboundingBox.x1) / 2,
-          y: (newboundingBox.y1 + newboundingBox.y2) / 2
-        }
-      });
-      var newNode = cyLayout.add({
-        group: 'nodes',
-        data: {
-          id: node.id(),
-          label: node.id()
-        }
-      });
-      newNode.position({
-        x: (newboundingBox.x2 + newboundingBox.x1) / 2,
-        y: (newboundingBox.y1 + newboundingBox.y2) / 2
-      });
-      newNode.style({
-        'width': Math.max(width, height),
-        // Set the new width of the node
-        'height': Math.max(width, height),
-        // Set the new height of the node
-        'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
-      });
-      cy.nodes().unselect();
-    }
-  });
-  if (cy.getElementById(focusID).parent().length == 0) {
-    var focusNode = cyLayout.add(cy.getElementById(focusID).clone());
-    focusNode.unselect();
-    focusNode.position({
-      x: cy.getElementById(focusID).position().x,
-      y: cy.getElementById(focusID).position().y
-    });
-    focusNode.style({
-      'width': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
-      // Set the new width of the node
-      'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
-      // Set the new height of the node
-      'background-color': '#CCE1F9',
-      'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
-    });
-  } else {
-    var newNode = cyLayout.add({
-      group: 'nodes',
-      data: {
-        id: topLevelFocusParent.id(),
-        label: topLevelFocusParent.id()
-      }
-    });
-    newNode.position({
-      x: topLevelFocusParent.position().x,
-      y: topLevelFocusParent.position().y
-    });
-    newNode.style({
-      'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
-    });
-
-    // addAllChildren(topLevelFocusParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth);
-
-    // let descdents = getDescendantsInorderCyGraph(topLevelFocusParent)
-    // let children = [...descdents.compoundNodes,...descdents.simpleNodes]
-
-    selectChildren(topLevelFocusParent);
-    var children = cy.$(":selected");
-    cy.nodes().unselect();
-    cyLayout.add(children);
-    children.forEach(function (child) {
-      child.select();
-      var newboundingBox = cy.collection(cy.$(":selected")).boundingBox();
-      newboundingBox = _objectSpread2(_objectSpread2({}, newboundingBox), {}, {
-        w: child.width(),
-        h: child.height()
-      });
-      var width = newboundingBox.w;
-      var height = newboundingBox.h;
-      if (child.id() != focusID) {
-        if (child.isChildless()) {
-          componentNodes.push({
-            id: child.id(),
-            data: cy.$(":selected"),
-            pos: {
-              x: (newboundingBox.x2 + newboundingBox.x1) / 2,
-              y: (newboundingBox.y1 + newboundingBox.y2) / 2
-            }
-          });
-          newNode = cyLayout.getElementById(child.id());
-          newNode.position({
-            x: (newboundingBox.x2 + newboundingBox.x1) / 2,
-            y: (newboundingBox.y1 + newboundingBox.y2) / 2
-          });
-          newNode.style({
-            'width': Math.max(width, height) + 'px',
-            // Set the new width of the node
-            'height': Math.max(width, height) + 'px',
-            // Set the new height of the node
-            'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
-          });
-        }
-      } else {
-        var newFNode = cyLayout.getElementById(child.id());
-        newFNode.position({
-          x: child.position().x,
-          y: child.position().y
-        });
-        newFNode.style({
-          'width': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
-          // Set the new width of the node
-          'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
-          // Set the new height of the node
-          'background-color': '#CCE1F9',
-          'label': document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
-        });
-      }
-      cy.nodes().unselect();
-    });
-  }
-  cy.fit();
-  cyLayout.layout({
-    name: 'fcose',
-    quality: "proof",
-    animate: true,
-    animationDuration: 500,
-    randomize: false,
-    nodeSeparation: 25,
-    fixedNodeConstraint: [{
-      nodeId: focusID,
-      position: {
-        x: cy.$('#' + focusID).position('x'),
-        y: cy.$('#' + focusID).position('y')
-      }
-    }]
-  }).run();
-  componentNodes.forEach(function (component) {
-    var newComponentPosition = translateComponent(cyLayout.getElementById(focusID).position(), cyLayout.getElementById(component.id).position(), cy.getElementById(focusID).position());
-    var translationFactor = translateNode(component.pos, newComponentPosition);
-    component.data.forEach(function (node) {
-      moveChildren(node, translationFactor, focusID);
-    });
-  });
-  cy.fit();
-  cy.getElementById(focusID).select();
-  radioButtons.forEach(function (radio) {
-    if (radio.checked) {
-      setLabelPosition(radio.value);
-    }
-  });
-}
-function translateNode(a, a1) {
-  // Step 1: Find the displacement vector d between a and a1
-  return {
-    x: a1.x - a.x,
-    y: a1.y - a.y
-  };
-}
-function translateComponent(focusNodeInCyLayout, componentNodeInCyLayout, FocusNodeInCy) {
-  var d = {
-    x: componentNodeInCyLayout.x - focusNodeInCyLayout.x,
-    y: componentNodeInCyLayout.y - focusNodeInCyLayout.y
-  };
-  return {
-    x: FocusNodeInCy.x + d.x,
-    y: FocusNodeInCy.y + d.y
-  };
-}
-function selectChildren(node) {
-  var children = node.children();
-  if (children.nonempty()) {
-    children.forEach(function (child) {
-      child.select();
-      selectChildren(child);
-    });
-  }
-}
-function getTopParent(node) {
-  if (node.parent().length != 0) {
-    return getTopParent(node.parent());
-  } else {
-    return node;
-  }
-}
-function moveChildren(node, translationFactor, focusID) {
-  if (node.isChildless() && node.id() != focusID) {
-    node.animate({
-      position: {
-        x: node.position().x + translationFactor.x,
-        y: node.position().y + translationFactor.y
-      }
-    }, {
-      duration: 500
-    });
-    // node.shift({ x: translationFactor.x, y: translationFactor.y }, { duration: 500 });
-  } else {
-    node.children().forEach(function (child) {
-      moveChildren(child, translationFactor, focusID);
-    });
-  }
-}
+document.getElementsByName('cbk-flag-display-node-label-pos');
 function cueUtilities(params, cy, api) {
   var fn = params;
   var CUE_POS_UPDATE_DELAY = 100;
@@ -1962,9 +1586,8 @@ function cueUtilities(params, cy, api) {
             clearDraws();
             if (document.getElementById("cbk-flag-recursive").checked) {
               if (document.getElementById("cbk-run-layout3").checked) {
-                expandGraph(cy.$(':selected').data().id, cy);
+                api.expandNodes([node], true);
                 setTimeout(function () {
-                  api.expandNodes([node], true);
                   if (document.getElementById("cbk-run-layout3").checked) {
                     cy.layout(layoutOptions).run();
                   } else {
@@ -1973,17 +1596,18 @@ function cueUtilities(params, cy, api) {
                 }, 700);
               } else {
                 api.expandNodes([node], true);
-                if (document.getElementById("cbk-run-layout3").checked) {
-                  cy.layout(layoutOptions).run();
-                } else {
-                  initializer(cy);
-                }
+                setTimeout(function () {
+                  if (document.getElementById("cbk-run-layout3").checked) {
+                    cy.layout(layoutOptions).run();
+                  } else {
+                    initializer(cy);
+                  }
+                }, 700);
               }
             } else {
               if (document.getElementById("cbk-run-layout3").checked) {
-                expandGraph(cy.$(':selected').data().id, cy);
+                api.expandNodes([node]);
                 setTimeout(function () {
-                  api.expandNodes([node]);
                   if (document.getElementById("cbk-run-layout3").checked) {
                     cy.layout(layoutOptions).run();
                   } else {
@@ -1992,11 +1616,13 @@ function cueUtilities(params, cy, api) {
                 }, 700);
               } else {
                 api.expandNodes([node]);
-                if (document.getElementById("cbk-run-layout3").checked) {
-                  cy.layout(layoutOptions).run();
-                } else {
-                  initializer(cy);
-                }
+                setTimeout(function () {
+                  if (document.getElementById("cbk-run-layout3").checked) {
+                    cy.layout(layoutOptions).run();
+                  } else {
+                    initializer(cy);
+                  }
+                }, 700);
               }
             }
           }

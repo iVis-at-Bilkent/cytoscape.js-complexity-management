@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- This code is for demonstration purposes only.  You should not hotlink to Github, Rawgit, or files from the Cytoscape.js documentation in your production apps. -->
+<html>
+<head>
+<link href="style.css" rel="stylesheet" />
+<meta charset=utf-8 />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+<title>Multiple instances</title>
+<script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+<script src="https://ivis-at-bilkent.github.io/cytoscape.js-synched/cytoscape-synched.js"></script>
+<script src="../cytoscape-layvo.js"></script>
+</head>
+<body>
+<button type="button" style="position:relative; z-index: 1;" onclick="api.differenceMetrics(cy, cy2)">Calculate Similarity</button>
+<button type="button" style="position:relative; z-index: 1;" onclick="api.applyUnnamedLayout(cy, cy2)">Unnamed Layout</button>
+<button type="button" style="position:relative; z-index: 1;" onclick="randomize()">Randomize</button>
+
+<div id="cy"></div>
+<div id="cy2"></div>
+<!-- Load application code at the end to ensure DOM is loaded -->
+<script src="code.js"></script>
+</body>
+</html>

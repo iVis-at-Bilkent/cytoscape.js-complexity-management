@@ -685,45 +685,49 @@ export function cueUtilities(params, cy, api) {
             clearDraws();
             if (document.getElementById("cbk-flag-recursive").checked) {
               if (document.getElementById("cbk-run-layout3").checked) {
-                expandGraph(cy.$(':selected').data().id, cy)
-                setTimeout(() => {
                   api.expandNodes([node], true);
-                  if (document.getElementById("cbk-run-layout3").checked) {
-                    cy.layout(layoutOptions).run();
-                  }
-                  else {
-                    initializer(cy);
-                  }
-                }, 700);
+                  setTimeout(() => {
+                      if (document.getElementById("cbk-run-layout3").checked) {
+                        cy.layout(layoutOptions).run();
+                      }
+                      else {
+                        initializer(cy);
+                      }
+                  }, 700);
+                  
               }else{
                 api.expandNodes([node], true);
-                  if (document.getElementById("cbk-run-layout3").checked) {
-                    cy.layout(layoutOptions).run();
-                  }
-                  else {
-                    initializer(cy);
-                  }
+                setTimeout(() => {
+                    if (document.getElementById("cbk-run-layout3").checked) {
+                      cy.layout(layoutOptions).run();
+                    }
+                    else {
+                      initializer(cy);
+                    }
+                }, 700);
+                  
               }
             }else{
               if (document.getElementById("cbk-run-layout3").checked) {
-                expandGraph(cy.$(':selected').data().id, cy)
+                api.expandNodes([node]);
                 setTimeout(() => {
-                  api.expandNodes([node]);
-                  if (document.getElementById("cbk-run-layout3").checked) {
-                    cy.layout(layoutOptions).run();
-                  }
-                  else {
-                    initializer(cy);
-                  }
+                    if (document.getElementById("cbk-run-layout3").checked) {
+                      cy.layout(layoutOptions).run();
+                    }
+                    else {
+                      initializer(cy);
+                    }
                 }, 700);
               }else{
                 api.expandNodes([node]);
-                  if (document.getElementById("cbk-run-layout3").checked) {
-                    cy.layout(layoutOptions).run();
-                  }
-                  else {
-                    initializer(cy);
-                  }
+                setTimeout(() => {
+                    if (document.getElementById("cbk-run-layout3").checked) {
+                      cy.layout(layoutOptions).run();
+                    }
+                    else {
+                      initializer(cy);
+                    }
+                }, 700);
               }
               
               
