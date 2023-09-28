@@ -95,7 +95,10 @@ h1 {
   margin: 1%;
   background-color: transparent;
 }
-
+#smallTag{
+  font-size: 14px;
+  padding-right: 5px;
+}
 .break {
   flex-basis: 100%;
   height: 0;
