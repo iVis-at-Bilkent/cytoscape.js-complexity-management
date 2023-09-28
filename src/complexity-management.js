@@ -658,20 +658,35 @@ export function complexityManagement(cy) {
   };
 
   api.collapseEdges = (edges) => {
-    let edgeIDList = [];
+    const groupedEdges = new Map();
 
-    edges.forEach((edge) => {
-      edgeIDList.push(edge.id());
-    });
-    if (edgeIDList.length > 1) {
-      let metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
+      // Iterate through the edges and group them by their end nodes (regardless of direction)
+      edges.forEach(edge => {
+        const edgeKey = [edge.source().id(), edge.target().id()].sort().join('-');
+        // If the edge key is not in the Map, create a new entry
+        if (!groupedEdges.has(edgeKey)) {
+          groupedEdges.set(edgeKey, [edge.id()]);
+        } else {
+          // If the edge key is already in the Map, append the edge to the existing list
+          groupedEdges.get(edgeKey).push(edge.id());
+        }
+      });
 
-      // Remove required elements from cy instance
-      actOnInvisible(edgeIDList, cy);
-
-      // Add required meta edges to cy instance
-      actOnVisibleForMetaEdge(metaEdgeID, cy);
-    }
+      // Convert the Map to an array of arrays
+      const ListOfEdgeIDList = Array.from(groupedEdges.values());
+    
+      ListOfEdgeIDList.forEach(edgeIDList => {
+        if (edgeIDList.length > 1) {
+          let metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
+  
+          // Remove required elements from cy instance
+          actOnInvisible(edgeIDList, cy);
+  
+          // Add required meta edges to cy instance
+          actOnVisibleForMetaEdge(metaEdgeID, cy);
+        }
+      })
+      
   };
 
   api.collapseEdgesBetweenNodes = (nodes) => {

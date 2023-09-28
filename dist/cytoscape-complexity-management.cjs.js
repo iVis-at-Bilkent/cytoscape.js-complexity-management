@@ -659,19 +659,33 @@ function complexityManagement(cy) {
     actOnInvisible([].concat(_toConsumableArray(returnedElements.edgeIDListToRemove), cleanup), cy);
   };
   api.collapseEdges = function (edges) {
-    var edgeIDList = [];
+    var groupedEdges = new Map();
+
+    // Iterate through the edges and group them by their end nodes (regardless of direction)
     edges.forEach(function (edge) {
-      edgeIDList.push(edge.id());
+      var edgeKey = [edge.source().id(), edge.target().id()].sort().join('-');
+      // If the edge key is not in the Map, create a new entry
+      if (!groupedEdges.has(edgeKey)) {
+        groupedEdges.set(edgeKey, [edge.id()]);
+      } else {
+        // If the edge key is already in the Map, append the edge to the existing list
+        groupedEdges.get(edgeKey).push(edge.id());
+      }
     });
-    if (edgeIDList.length > 1) {
-      var metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
 
-      // Remove required elements from cy instance
-      actOnInvisible(edgeIDList, cy);
+    // Convert the Map to an array of arrays
+    var ListOfEdgeIDList = Array.from(groupedEdges.values());
+    ListOfEdgeIDList.forEach(function (edgeIDList) {
+      if (edgeIDList.length > 1) {
+        var metaEdgeID = compMgrInstance.collapseEdges(edgeIDList);
 
-      // Add required meta edges to cy instance
-      actOnVisibleForMetaEdge(metaEdgeID, cy);
-    }
+        // Remove required elements from cy instance
+        actOnInvisible(edgeIDList, cy);
+
+        // Add required meta edges to cy instance
+        actOnVisibleForMetaEdge(metaEdgeID, cy);
+      }
+    });
   };
   api.collapseEdgesBetweenNodes = function (nodes) {
     var nodeIDList = [];
