@@ -4927,12 +4927,13 @@
     api.expandNodes = function (nodes) {
       var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var runLayout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      var pngSizeProxyGraph = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var nodeIDList = [];
       nodes.forEach(function (node) {
         if (compMgrInstance.isExpandable(node.id())) {
           nodeIDList.push(node.id());
           if (runLayout) {
-            expandGraph(node.data().id, cy);
+            expandGraph(node.data().id, cy, pngSizeProxyGraph);
           }
           node.removeClass("cy-expand-collapse-collapsed-node");
           node.removeData("position-before-collapse");
@@ -5126,7 +5127,7 @@
     api.isExpandable = function (node) {
       return compMgrInstance.isExpandable(node.id());
     };
-    var expandGraph = function expandGraph(focusID, cy) {
+    var expandGraph = function expandGraph(focusID, cy, pngSizeProxyGraph) {
       var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
       cyLayout.remove(cyLayout.elements());
       var fNode = cyLayout.add({
@@ -5227,6 +5228,12 @@
       cyLayout.nodes().forEach(function (node) {
         node.style('label', node.id());
       });
+      if (pngSizeProxyGraph != null) {
+        pngSizeProxyGraph.img = cyLayout.png({
+          scale: 2,
+          full: true
+        });
+      }
       cyLayout.remove(cyLayout.elements());
       var topLevelFocusParent = getTopParent(cy.getElementById(focusID));
       cy.nodes().unselect();

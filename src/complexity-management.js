@@ -539,7 +539,7 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
 
-  api.expandNodes = (nodes, isRecursive = false, runLayout = true) => {
+  api.expandNodes = (nodes, isRecursive = false, runLayout = true, pngSizeProxyGraph = null) => {
 
     let nodeIDList = [];
 
@@ -547,7 +547,7 @@ export function complexityManagement(cy) {
       if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
         if(runLayout){
-          expandGraph(node.data().id, cy)
+          expandGraph(node.data().id, cy, pngSizeProxyGraph)
         }
         node.removeClass("cy-expand-collapse-collapsed-node");
         node.removeData("position-before-collapse");
@@ -782,11 +782,11 @@ export function complexityManagement(cy) {
     return compMgrInstance.isExpandable(node.id());
   };
 
-  let expandGraph = (focusID,cy) => {
+  let expandGraph = (focusID,cy,pngSizeProxyGraph) => {
     
     let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
 
-    
+   
 
     cyLayout.remove(cyLayout.elements());
 
@@ -889,6 +889,12 @@ export function complexityManagement(cy) {
 
     cyLayout.nodes().forEach(node => {node.style('label', node.id());})
     
+    if(pngSizeProxyGraph!= null){
+      pngSizeProxyGraph.img = cyLayout.png({
+        scale:2,
+        full:true
+      });
+    }
     
     cyLayout.remove(cyLayout.elements());
     

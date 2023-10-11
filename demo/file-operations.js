@@ -179,10 +179,10 @@ function exportPNG(){
     link.href = pngBeforeFinalGraph;
     link.click();
   }
-  if(pngSizeProxyGraph!=null){
+  if(pngSizeProxyGraph.img!=null){
     link = document.createElement('a');
     link.download = 'testGraph_BoundingBox.png';  
-    link.href = pngSizeProxyGraph;
+    link.href = pngSizeProxyGraph.img;
     link.click();
   }
   let png64_proxy = cyLayout.png({
