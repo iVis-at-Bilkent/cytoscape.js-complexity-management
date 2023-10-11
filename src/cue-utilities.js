@@ -685,7 +685,7 @@ export function cueUtilities(params, cy, api) {
             clearDraws();
             if (document.getElementById("cbk-flag-recursive").checked) {
               if (document.getElementById("cbk-run-layout3").checked) {
-                  api.expandNodes([node], true);
+                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked);
                   setTimeout(() => {
                       if (document.getElementById("cbk-run-layout3").checked) {
                         cy.layout(layoutOptions).run();
@@ -693,10 +693,10 @@ export function cueUtilities(params, cy, api) {
                       else {
                         initializer(cy);
                       }
-                  }, 700);
+                  }, document.getElementById("cbk-run-layout3").checked?700:0);
                   
               }else{
-                api.expandNodes([node], true);
+                api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked);
                 setTimeout(() => {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
@@ -704,12 +704,12 @@ export function cueUtilities(params, cy, api) {
                     else {
                       initializer(cy);
                     }
-                }, 700);
+                }, document.getElementById("cbk-run-layout3").checked?700:0);
                   
               }
             }else{
               if (document.getElementById("cbk-run-layout3").checked) {
-                api.expandNodes([node]);
+                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked);
                 setTimeout(() => {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
@@ -717,9 +717,9 @@ export function cueUtilities(params, cy, api) {
                     else {
                       initializer(cy);
                     }
-                }, 700);
+                }, document.getElementById("cbk-run-layout3").checked?700:0);
               }else{
-                api.expandNodes([node]);
+                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked);
                 setTimeout(() => {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
@@ -727,7 +727,7 @@ export function cueUtilities(params, cy, api) {
                     else {
                       initializer(cy);
                     }
-                }, 700);
+                }, document.getElementById("cbk-run-layout3").checked?700:0);
               }
               
               

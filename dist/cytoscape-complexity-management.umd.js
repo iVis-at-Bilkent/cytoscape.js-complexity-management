@@ -4926,11 +4926,14 @@
     };
     api.expandNodes = function (nodes) {
       var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var runLayout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       var nodeIDList = [];
       nodes.forEach(function (node) {
         if (compMgrInstance.isExpandable(node.id())) {
           nodeIDList.push(node.id());
-          expandGraph(node.data().id, cy);
+          if (runLayout) {
+            expandGraph(node.data().id, cy);
+          }
           node.removeClass("cy-expand-collapse-collapsed-node");
           node.removeData("position-before-collapse");
           node.removeData("size-before-collapse");
@@ -4965,7 +4968,7 @@
         // Remove required elements from cy instance
         actOnInvisible(_toConsumableArray(returnedElements.edgeIDListToRemove), cy);
         actOnVisibleForMetaEdge(_toConsumableArray(returnedElements.metaEdgeIDListForVisible), cy);
-      }, 600);
+      }, runLayout ? 600 : 0);
     };
     api.collapseAllNodes = function () {
       var IDsToRemoveTemp = compMgrInstance.collapseAllNodes();
@@ -5964,43 +5967,43 @@
               clearDraws();
               if (document.getElementById("cbk-flag-recursive").checked) {
                 if (document.getElementById("cbk-run-layout3").checked) {
-                  api.expandNodes([node], true);
+                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked);
                   setTimeout(function () {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
                     } else {
                       initializer(cy);
                     }
-                  }, 700);
+                  }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
                 } else {
-                  api.expandNodes([node], true);
+                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked);
                   setTimeout(function () {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
                     } else {
                       initializer(cy);
                     }
-                  }, 700);
+                  }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
                 }
               } else {
                 if (document.getElementById("cbk-run-layout3").checked) {
-                  api.expandNodes([node]);
+                  api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked);
                   setTimeout(function () {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
                     } else {
                       initializer(cy);
                     }
-                  }, 700);
+                  }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
                 } else {
-                  api.expandNodes([node]);
+                  api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked);
                   setTimeout(function () {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
                     } else {
                       initializer(cy);
                     }
-                  }, 700);
+                  }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
                 }
               }
             }

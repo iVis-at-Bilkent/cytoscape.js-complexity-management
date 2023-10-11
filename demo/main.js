@@ -1166,23 +1166,23 @@ function onLoaded() {
               scale:2,
               full:true
             });
-            instance.expandNodes(cy.nodes(':selected'), true);
-            pngBeforeFinalGraph = cy.png({
-              scale:2,
-              full:true
-            }); ;
+            instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked);
+            
             setTimeout(() => {
-
+              pngBeforeFinalGraph = cy.png({
+                scale:2,
+                full:true
+              }); ;
               if (document.getElementById("cbk-run-layout3").checked) {
                 cy.layout(layoutOptions).run();
               }
               else {
                 initializer(cy);
               }
-            }, 700);
+            }, document.getElementById("cbk-run-layout3").checked?700:0);
             
         }else{
-          instance.expandNodes(cy.nodes(':selected'), true);
+          instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked);
           cy.fit();
           initializer(cy);
         }
@@ -1201,23 +1201,23 @@ function onLoaded() {
               scale:2,
               full:true
             });
-            instance.expandNodes(cy.nodes(':selected'));
-            pngBeforeFinalGraph = cy.png({
-              scale:2,
-              full:true
-            }); ;
+            instance.expandNodes(cy.nodes(':selected'), false, document.getElementById("cbk-run-layout3").checked);
+            
             setTimeout(() => {
-
+              pngBeforeFinalGraph = cy.png({
+                scale:2,
+                full:true
+              }); 
               if (document.getElementById("cbk-run-layout3").checked) {
                 cy.layout(layoutOptions).run();
               }
               else {
                 initializer(cy);
               }
-            }, 700);
+            }, document.getElementById("cbk-run-layout3").checked?700:0);
           
         }else{
-          instance.expandNodes(cy.nodes(':selected'));
+          instance.expandNodes(cy.nodes(':selected'),false,document.getElementById("cbk-run-layout3").checked);
           cy.fit();
           initializer(cy);
         }

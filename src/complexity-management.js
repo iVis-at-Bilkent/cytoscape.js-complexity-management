@@ -539,14 +539,16 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
 
-  api.expandNodes = (nodes, isRecursive = false) => {
+  api.expandNodes = (nodes, isRecursive = false, runLayout = true) => {
 
     let nodeIDList = [];
 
     nodes.forEach( (node) => {
       if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
-        expandGraph(node.data().id, cy)
+        if(runLayout){
+          expandGraph(node.data().id, cy)
+        }
         node.removeClass("cy-expand-collapse-collapsed-node");
         node.removeData("position-before-collapse");
         node.removeData("size-before-collapse");
@@ -588,7 +590,7 @@ export function complexityManagement(cy) {
 
     actOnVisibleForMetaEdge([...returnedElements.metaEdgeIDListForVisible], cy);
 
-    }, 600);
+    }, runLayout?600:0);
   };
 
   api.collapseAllNodes = () => {
