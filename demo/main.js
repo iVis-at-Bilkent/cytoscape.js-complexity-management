@@ -1,6 +1,6 @@
 
-let pngExpandGraph = null ;
-let pngSizeProxyGraph = {img:null} ;
+let pngImage = {pngExpandGraph:null, pngSizeProxyGraph:null} ;
+let pngSizeProxyGraph = null ;
 let pngBeforeFinalGraph = null ;
 let api;
 let cy2;
@@ -520,10 +520,6 @@ function onLoaded() {
       if(radio.checked){
         setLabelPosition(radio.value);
       }
-    });
-    pngSizeProxyGraph = cyLayout.png({
-      scale:2,
-      full:true
     });
     
     cyLayout.remove(cyLayout.elements());
@@ -1162,11 +1158,8 @@ function onLoaded() {
           // expandGraph(node.data().id, cy)
           // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
           // instance.expandGraph(node.data().id, cy)
-            pngExpandGraph = cy.png({
-              scale:2,
-              full:true
-            });
-            instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngSizeProxyGraph);
+            
+            instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage);
             
             setTimeout(() => {
               pngBeforeFinalGraph = cy.png({
@@ -1182,7 +1175,7 @@ function onLoaded() {
             }, document.getElementById("cbk-run-layout3").checked?700:0);
             
         }else{
-          instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngSizeProxyGraph);
+          instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage);
           cy.fit();
           initializer(cy);
         }
@@ -1201,7 +1194,7 @@ function onLoaded() {
               scale:2,
               full:true
             });
-            instance.expandNodes(cy.nodes(':selected'), false, document.getElementById("cbk-run-layout3").checked, pngSizeProxyGraph);
+            instance.expandNodes(cy.nodes(':selected'), false, document.getElementById("cbk-run-layout3").checked, pngImage);
             
             setTimeout(() => {
               pngBeforeFinalGraph = cy.png({
@@ -1217,7 +1210,7 @@ function onLoaded() {
             }, document.getElementById("cbk-run-layout3").checked?700:0);
           
         }else{
-          instance.expandNodes(cy.nodes(':selected'),false,document.getElementById("cbk-run-layout3").checked, pngSizeProxyGraph);
+          instance.expandNodes(cy.nodes(':selected'),false,document.getElementById("cbk-run-layout3").checked, pngImage);
           cy.fit();
           initializer(cy);
         }

@@ -4927,13 +4927,13 @@
     api.expandNodes = function (nodes) {
       var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var runLayout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      var pngSizeProxyGraph = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var pngImage = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var nodeIDList = [];
       nodes.forEach(function (node) {
         if (compMgrInstance.isExpandable(node.id())) {
           nodeIDList.push(node.id());
           if (runLayout) {
-            expandGraph(node.data().id, cy, pngSizeProxyGraph);
+            expandGraph(node.data().id, cy, pngImage);
           }
           node.removeClass("cy-expand-collapse-collapsed-node");
           node.removeData("position-before-collapse");
@@ -4941,6 +4941,10 @@
         }
       });
       setTimeout(function () {
+        pngImage.pngExpandGraph = cy.png({
+          scale: 2,
+          full: true
+        });
         var returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
         // Add required elements to cy instance
         actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
@@ -5127,7 +5131,7 @@
     api.isExpandable = function (node) {
       return compMgrInstance.isExpandable(node.id());
     };
-    var expandGraph = function expandGraph(focusID, cy, pngSizeProxyGraph) {
+    var expandGraph = function expandGraph(focusID, cy, pngImage) {
       var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
       cyLayout.remove(cyLayout.elements());
       var fNode = cyLayout.add({
@@ -5228,8 +5232,8 @@
       cyLayout.nodes().forEach(function (node) {
         node.style('label', node.id());
       });
-      if (pngSizeProxyGraph != null) {
-        pngSizeProxyGraph.img = cyLayout.png({
+      if (pngImage != null) {
+        pngImage.pngSizeProxyGraph = cyLayout.png({
           scale: 2,
           full: true
         });

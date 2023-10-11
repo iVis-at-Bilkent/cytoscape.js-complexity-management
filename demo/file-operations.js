@@ -167,10 +167,10 @@ function exportPNG(){
   link.download = 'testGraph_main.png';  
   link.href = png64_main;
   link.click();
-  if(pngExpandGraph!=null){
+  if(pngImage.pngExpandGraph!=null){
     link = document.createElement('a');
     link.download = 'testGraph_transition.png';  
-    link.href = pngExpandGraph;
+    link.href = pngImage.pngExpandGraph;
     link.click();
   }
   if(pngBeforeFinalGraph!=null){
@@ -179,10 +179,10 @@ function exportPNG(){
     link.href = pngBeforeFinalGraph;
     link.click();
   }
-  if(pngSizeProxyGraph.img!=null){
+  if(pngImage.pngSizeProxyGraph!=null){
     link = document.createElement('a');
     link.download = 'testGraph_BoundingBox.png';  
-    link.href = pngSizeProxyGraph.img;
+    link.href = pngImage.pngSizeProxyGraph;
     link.click();
   }
   let png64_proxy = cyLayout.png({
