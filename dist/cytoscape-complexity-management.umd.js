@@ -4928,12 +4928,13 @@
       var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var runLayout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       var pngImage = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var setLabelPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
       var nodeIDList = [];
       nodes.forEach(function (node) {
         if (compMgrInstance.isExpandable(node.id())) {
           nodeIDList.push(node.id());
           if (runLayout) {
-            expandGraph(node.data().id, cy, pngImage);
+            expandGraph(node.data().id, cy, pngImage, setLabelPosition);
           }
           node.removeClass("cy-expand-collapse-collapsed-node");
           node.removeData("position-before-collapse");
@@ -5131,7 +5132,7 @@
     api.isExpandable = function (node) {
       return compMgrInstance.isExpandable(node.id());
     };
-    var expandGraph = function expandGraph(focusID, cy, pngImage) {
+    var expandGraph = function expandGraph(focusID, cy, pngImage, setLabelPosition) {
       var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
       cyLayout.remove(cyLayout.elements());
       var fNode = cyLayout.add({
@@ -5231,6 +5232,12 @@
       var fcousNodeHeight = boundingBox.h;
       cyLayout.nodes().forEach(function (node) {
         node.style('label', node.id());
+      });
+      var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
+      radioButtons.forEach(function (radio) {
+        if (radio.checked) {
+          setLabelPosition(radio.value);
+        }
       });
       if (pngImage != null) {
         pngImage.pngSizeProxyGraph = cyLayout.png({

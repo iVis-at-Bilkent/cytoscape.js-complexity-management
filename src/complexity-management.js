@@ -539,7 +539,7 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
 
-  api.expandNodes = (nodes, isRecursive = false, runLayout = true, pngImage = null) => {
+  api.expandNodes = (nodes, isRecursive = false, runLayout = true, pngImage = null, setLabelPosition = null) => {
 
     let nodeIDList = [];
 
@@ -547,7 +547,7 @@ export function complexityManagement(cy) {
       if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
         if(runLayout){
-          expandGraph(node.data().id, cy, pngImage)
+          expandGraph(node.data().id, cy, pngImage, setLabelPosition)
         }
         node.removeClass("cy-expand-collapse-collapsed-node");
         node.removeData("position-before-collapse");
@@ -562,7 +562,7 @@ export function complexityManagement(cy) {
         scale:2,
         full:true
       });
-      
+
     let returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
     // Add required elements to cy instance
     actOnVisible([...returnedElements.nodeIDListForVisible], cy, true);
@@ -787,7 +787,7 @@ export function complexityManagement(cy) {
     return compMgrInstance.isExpandable(node.id());
   };
 
-  let expandGraph = (focusID,cy,pngImage) => {
+  let expandGraph = (focusID,cy,pngImage,setLabelPosition) => {
     
     let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
 
@@ -893,7 +893,12 @@ export function complexityManagement(cy) {
     var fcousNodeHeight = boundingBox.h;
 
     cyLayout.nodes().forEach(node => {node.style('label', node.id());})
-    
+    var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
+    radioButtons.forEach(function(radio) {
+      if(radio.checked){
+        setLabelPosition(radio.value);
+      }
+    });
     if(pngImage!= null){
       pngImage.pngSizeProxyGraph = cyLayout.png({
         scale:2,

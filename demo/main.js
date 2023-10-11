@@ -1159,7 +1159,7 @@ function onLoaded() {
           // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
           // instance.expandGraph(node.data().id, cy)
             
-            instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage);
+            instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
             
             setTimeout(() => {
               pngBeforeFinalGraph = cy.png({
@@ -1175,7 +1175,7 @@ function onLoaded() {
             }, document.getElementById("cbk-run-layout3").checked?700:0);
             
         }else{
-          instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage);
+          instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
           cy.fit();
           initializer(cy);
         }
@@ -1194,7 +1194,7 @@ function onLoaded() {
               scale:2,
               full:true
             });
-            instance.expandNodes(cy.nodes(':selected'), false, document.getElementById("cbk-run-layout3").checked, pngImage);
+            instance.expandNodes(cy.nodes(':selected'), false, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
             
             setTimeout(() => {
               pngBeforeFinalGraph = cy.png({
@@ -1210,7 +1210,7 @@ function onLoaded() {
             }, document.getElementById("cbk-run-layout3").checked?700:0);
           
         }else{
-          instance.expandNodes(cy.nodes(':selected'),false,document.getElementById("cbk-run-layout3").checked, pngImage);
+          instance.expandNodes(cy.nodes(':selected'),false,document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
           cy.fit();
           initializer(cy);
         }
