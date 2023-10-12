@@ -779,7 +779,8 @@ function complexityManagement(cy) {
         id: focusID,
         parent: null,
         'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
-      }
+      },
+      position: cyInvisible.getElementById(focusID).position()
     });
     fNode.style({
       'background-color': '#CCE1F9'
@@ -793,7 +794,8 @@ function complexityManagement(cy) {
             id: node.ID,
             parent: node.owner.parent.ID,
             'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-          }
+          },
+          position: cyInvisible.getElementById(node.ID).position()
         });
       } else {
         savedNodes.push({
@@ -802,7 +804,8 @@ function complexityManagement(cy) {
             id: node.ID,
             parent: node.owner.parent.ID,
             'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-          }
+          },
+          position: cyInvisible.getElementById(node.ID).position()
         });
       }
     });
@@ -817,7 +820,8 @@ function complexityManagement(cy) {
             id: node.ID,
             parent: node.owner.parent.ID,
             'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-          }
+          },
+          position: cyInvisible.getElementById(node.ID).position()
         });
       } catch (e) {
         console.log(e);
@@ -832,7 +836,8 @@ function complexityManagement(cy) {
             data: {
               id: edge.source.ID,
               'label': document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
-            }
+            },
+            position: cyInvisible.getElementById(edge.source.ID).position()
           });
         } else if (cyLayout.getElementById(edge.target.ID).length == 0) {
           cyLayout.add({
@@ -840,7 +845,8 @@ function complexityManagement(cy) {
             data: {
               id: edge.target.ID,
               'label': document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
-            }
+            },
+            position: cyInvisible.getElementById(edge.target.ID).position()
           });
         }
         cyLayout.add({
@@ -853,18 +859,11 @@ function complexityManagement(cy) {
         });
       } catch (e) {}
     });
-    while (true) {
-      try {
-        cyLayout.layout({
-          name: 'fcose',
-          animate: false
-        }).run();
-        break;
-      } catch (e) {
-        console.log(e);
-        break;
-      }
-    }
+    cyLayout.layout({
+      name: 'fcose',
+      randomize: false,
+      animate: false
+    }).run();
     var boundingBox = cyLayout.getElementById(focusID).boundingBox();
     var focusNodeWidth = boundingBox.w;
     var fcousNodeHeight = boundingBox.h;

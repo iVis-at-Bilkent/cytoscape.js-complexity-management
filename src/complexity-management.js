@@ -800,7 +800,9 @@ export function complexityManagement(cy) {
       data: { id: focusID, 
               parent: null,
               'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
-       }}
+       },
+       position: cyInvisible.getElementById(focusID).position()
+      }
     )
     fNode.style({'background-color': '#CCE1F9',})
     let savedNodes = [];
@@ -811,7 +813,9 @@ export function complexityManagement(cy) {
           data: { id: node.ID, 
                   parent: node.owner.parent.ID,
                   'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-            }});
+            },
+            position: cyInvisible.getElementById(node.ID).position()
+          });
 
       }else{
         savedNodes.push({
@@ -819,7 +823,9 @@ export function complexityManagement(cy) {
           data: { id: node.ID, 
                   parent: node.owner.parent.ID,
                   'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-           }})
+           },
+           position: cyInvisible.getElementById(node.ID).position()
+          })
       }
 
     })
@@ -835,7 +841,9 @@ export function complexityManagement(cy) {
         data: { id: node.ID, 
                 parent: node.owner.parent.ID,
                 'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
-              }});
+              },
+              position: cyInvisible.getElementById(node.ID).position()
+            });
           
          }catch(e){
             console.log(e);
@@ -852,7 +860,9 @@ export function complexityManagement(cy) {
             group: 'nodes',
             data: { id: edge.source.ID, 
               'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
-            }});
+            },
+            position: cyInvisible.getElementById(edge.source.ID).position()
+          });
             
         }else if(cyLayout.getElementById(edge.target.ID).length == 0){
 
@@ -860,7 +870,9 @@ export function complexityManagement(cy) {
             group: 'nodes',
             data: { id: edge.target.ID, 
               'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
-            }});
+            },
+            position: cyInvisible.getElementById(edge.target.ID).position()
+          });
             
         }
           cyLayout.add({
@@ -876,15 +888,7 @@ export function complexityManagement(cy) {
       }
     })
 
-    while(true){
-      try{
-        cyLayout.layout({name: 'fcose', animate: false}).run();
-        break;
-      }catch(e){
-        console.log(e)
-        break;
-      }
-    }
+        cyLayout.layout({name: 'fcose', randomize: false, animate: false}).run();
 
 
      const boundingBox = cyLayout.getElementById(focusID).boundingBox();
