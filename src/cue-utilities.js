@@ -685,7 +685,8 @@ export function cueUtilities(params, cy, api) {
             clearDraws();
             if (document.getElementById("cbk-flag-recursive").checked) {
               if (document.getElementById("cbk-run-layout3").checked) {
-                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked);
+
+                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
                   setTimeout(() => {
                       if (document.getElementById("cbk-run-layout3").checked) {
                         cy.layout(layoutOptions).run();
@@ -696,7 +697,7 @@ export function cueUtilities(params, cy, api) {
                   }, document.getElementById("cbk-run-layout3").checked?700:0);
                   
               }else{
-                api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked);
+                api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
                 setTimeout(() => {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
@@ -709,7 +710,7 @@ export function cueUtilities(params, cy, api) {
               }
             }else{
               if (document.getElementById("cbk-run-layout3").checked) {
-                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked);
+                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
                 setTimeout(() => {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
@@ -719,7 +720,7 @@ export function cueUtilities(params, cy, api) {
                     }
                 }, document.getElementById("cbk-run-layout3").checked?700:0);
               }else{
-                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked);
+                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
                 setTimeout(() => {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();

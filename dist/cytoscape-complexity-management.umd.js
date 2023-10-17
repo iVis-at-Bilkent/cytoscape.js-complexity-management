@@ -5758,6 +5758,26 @@
     }
   };
   document.getElementsByName('cbk-flag-display-node-label-pos');
+
+  // Function to set the label position based on the selected radio button
+  function setLabelPosition(position) {
+    var cyChildlessNodes = cy.nodes().filter(function (element) {
+      return element.isChildless();
+    });
+    var cyVisibleChildlessNodes = cyVisible.nodes().filter(function (element) {
+      return element.isChildless();
+    });
+    var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function (element) {
+      return element.isChildless();
+    });
+    var cyLayoutChildlessNodes = cyLayout.nodes().filter(function (element) {
+      return element.isChildless();
+    });
+    cyChildlessNodes.style('text-valign', position);
+    cyVisibleChildlessNodes.style('text-valign', position);
+    cyInVisibleChildlessNodes.style('text-valign', position);
+    cyLayoutChildlessNodes.style('text-valign', position);
+  }
   function cueUtilities(params, cy, api) {
     var fn = params;
     var CUE_POS_UPDATE_DELAY = 100;
@@ -5984,7 +6004,7 @@
               clearDraws();
               if (document.getElementById("cbk-flag-recursive").checked) {
                 if (document.getElementById("cbk-run-layout3").checked) {
-                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked);
+                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
                   setTimeout(function () {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
@@ -5993,7 +6013,7 @@
                     }
                   }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
                 } else {
-                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked);
+                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
                   setTimeout(function () {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
@@ -6004,7 +6024,7 @@
                 }
               } else {
                 if (document.getElementById("cbk-run-layout3").checked) {
-                  api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked);
+                  api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
                   setTimeout(function () {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
@@ -6013,7 +6033,7 @@
                     }
                   }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
                 } else {
-                  api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked);
+                  api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
                   setTimeout(function () {
                     if (document.getElementById("cbk-run-layout3").checked) {
                       cy.layout(layoutOptions).run();
