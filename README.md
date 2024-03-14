@@ -88,6 +88,7 @@ Get whether the given node is expandible.
  * cmgm.js (unified complexity management model) ^1.0.0
    
 ## Usage instructions
+*Please note that this package hasn't been released on npm and bower yet. The instructions below are for use after the release.*
 
 Download the library:
  * via npm: `npm install cytoscape-complexity-management`,
