@@ -539,7 +539,7 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
 
-  api.expandNodes = (nodes, isRecursive = false, runLayout = true, pngImage = null, setLabelPosition = null) => {
+  api.expandNodes = (nodes, isRecursive = false, runLayout = true, setLabelPosition = null) => {
 
     let nodeIDList = [];
 
@@ -547,7 +547,7 @@ export function complexityManagement(cy) {
       if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
         if(runLayout){
-          expandGraph(node.data().id, cy, pngImage, setLabelPosition)
+          expandGraph(node.data().id, cy, setLabelPosition)
         }
         node.removeClass("cy-expand-collapse-collapsed-node");
         node.removeData("position-before-collapse");
@@ -557,12 +557,6 @@ export function complexityManagement(cy) {
 
     
     setTimeout(() => {
-    
-      pngImage.pngExpandGraph = cy.png({
-        scale:2,
-        full:true
-      });
-
     let returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
     // Add required elements to cy instance
     actOnVisible([...returnedElements.nodeIDListForVisible], cy, true);
@@ -787,7 +781,9 @@ export function complexityManagement(cy) {
     return compMgrInstance.isExpandable(node.id());
   };
 
-  let expandGraph = (focusID,cy,pngImage,setLabelPosition) => {
+  // cbkFlagDisplayLabels is flag to set if node/edge label is to be item.ID or empty string.  Default = true
+  // cbkFlagLabelsPos is flag to set if node/edge label position which can be bottom, top and center passed as string. Default = 'bottom'.
+  let expandGraph = (focusID,cy,setLabelPosition, cbkFlagDisplayLabels = true, cbkFlagLabelsPos = 'bottom') => {
     
     let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
 
@@ -799,7 +795,7 @@ export function complexityManagement(cy) {
       group: 'nodes',
       data: { id: focusID, 
               parent: null,
-              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
+              'label' : cbkFlagDisplayLabels ? focusID : ''
        },
        position: cyInvisible.getElementById(focusID).position()
       }
@@ -812,7 +808,7 @@ export function complexityManagement(cy) {
           group: 'nodes',
           data: { id: node.ID, 
                   parent: node.owner.parent.ID,
-                  'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+                  'label' : cbkFlagDisplayLabels ? node.ID : ''
             },
             position: cyInvisible.getElementById(node.ID).position()
           });
@@ -822,7 +818,7 @@ export function complexityManagement(cy) {
           group: 'nodes',
           data: { id: node.ID, 
                   parent: node.owner.parent.ID,
-                  'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+                  'label' : cbkFlagDisplayLabels ? node.ID : ''
            },
            position: cyInvisible.getElementById(node.ID).position()
           })
@@ -840,7 +836,7 @@ export function complexityManagement(cy) {
         group: 'nodes',
         data: { id: node.ID, 
                 parent: node.owner.parent.ID,
-                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+                'label' : cbkFlagDisplayLabels ? node.ID : ''
               },
               position: cyInvisible.getElementById(node.ID).position()
             });
@@ -859,7 +855,7 @@ export function complexityManagement(cy) {
           cyLayout.add({
             group: 'nodes',
             data: { id: edge.source.ID, 
-              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
+              'label' : cbkFlagDisplayLabels ? edge.source.ID : ''
             },
             position: cyInvisible.getElementById(edge.source.ID).position()
           });
@@ -869,7 +865,7 @@ export function complexityManagement(cy) {
           cyLayout.add({
             group: 'nodes',
             data: { id: edge.target.ID, 
-              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
+              'label' : cbkFlagDisplayLabels ? edge.target.ID : ''
             },
             position: cyInvisible.getElementById(edge.target.ID).position()
           });
@@ -897,18 +893,8 @@ export function complexityManagement(cy) {
     var fcousNodeHeight = boundingBox.h;
 
     cyLayout.nodes().forEach(node => {node.style('label', node.id());})
-    var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
-    radioButtons.forEach(function(radio) {
-      if(radio.checked){
-        setLabelPosition(radio.value);
-      }
-    });
-    if(pngImage!= null){
-      pngImage.pngSizeProxyGraph = cyLayout.png({
-        scale:2,
-        full:true
-      });
-    }
+    setLabelPosition(cbkFlagLabelsPos);
+    
     
     cyLayout.remove(cyLayout.elements());
     
@@ -951,7 +937,7 @@ export function complexityManagement(cy) {
               newNode.style({
                 'width': Math.max(width,height), // Set the new width of the node
                 'height': Math.max(width,height), // Set the new height of the node
-                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+                'label' : cbkFlagDisplayLabels ? newNode.data().id : ''
               });
               
               cy.nodes().unselect();
@@ -971,7 +957,7 @@ export function complexityManagement(cy) {
         'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
         'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
         'background-color': '#CCE1F9',
-        'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
+        'label' : cbkFlagDisplayLabels ? focusNode.data().id : ''
       });
     }else{
       var newNode = cyLayout.add({
@@ -988,7 +974,7 @@ export function complexityManagement(cy) {
         y: topLevelFocusParent.position().y
       });
       newNode.style({
-        'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+        'label' : cbkFlagDisplayLabels ? newNode.data().id : ''
       });
       compoundsCounter++;
 
@@ -1026,7 +1012,7 @@ export function complexityManagement(cy) {
                   newNode.style({
                     'width': Math.max(width,height)+'px', // Set the new width of the node
                     'height': Math.max(width,height)+'px', // Set the new height of the node
-                    'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+                    'label' : cbkFlagDisplayLabels ? newNode.data().id : ''
                   });
                   compoundsCounter++;
           }else{
@@ -1046,7 +1032,7 @@ export function complexityManagement(cy) {
                 'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
                 'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
                 'background-color':'#CCE1F9',
-                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
+                'label' : cbkFlagDisplayLabels ? newFNode.data().id : ''
               });
               compoundsCounter++;
         }

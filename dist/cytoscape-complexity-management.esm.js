@@ -1,5 +1,27 @@
 import { ComplexityManager } from 'cmgm';
 
+function _arrayLikeToArray(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+  return n;
+}
+function _arrayWithHoles(r) {
+  if (Array.isArray(r)) return r;
+}
+function _arrayWithoutHoles(r) {
+  if (Array.isArray(r)) return _arrayLikeToArray(r);
+}
+function _defineProperty(e, r, t) {
+  return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+    value: t,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[r] = t, e;
+}
+function _iterableToArray(r) {
+  if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
+}
 function _iterableToArrayLimit(r, l) {
   var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
   if (null != t) {
@@ -27,6 +49,12 @@ function _iterableToArrayLimit(r, l) {
     return a;
   }
 }
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
 function ownKeys(e, r) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
@@ -48,6 +76,26 @@ function _objectSpread2(e) {
   }
   return e;
 }
+function _slicedToArray(r, e) {
+  return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest();
+}
+function _toConsumableArray(r) {
+  return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : i + "";
+}
 function _typeof(o) {
   "@babel/helpers - typeof";
 
@@ -57,67 +105,12 @@ function _typeof(o) {
     return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
   }, _typeof(o);
 }
-function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
+function _unsupportedIterableToArray(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
   }
-  return obj;
-}
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _toPrimitive(input, hint) {
-  if (typeof input !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (typeof res !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return (hint === "string" ? String : Number)(input);
-}
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, "string");
-  return typeof key === "symbol" ? key : String(key);
 }
 
 function complexityManagement(cy) {
@@ -146,14 +139,14 @@ function complexityManagement(cy) {
   };
 
   // This function processes nodes to add them into both visible and invisible graphs
-  var processChildrenList = function processChildrenList(children, compMgr) {
+  var _processChildrenList = function processChildrenList(children, compMgr) {
     var size = children.length;
     for (var i = 0; i < size; i++) {
       var theChild = children[i];
       var children_of_children = theChild.children();
       compMgr.addNode(theChild.id(), theChild.parent().id());
       if (children_of_children != null && children_of_children.length > 0) {
-        processChildrenList(children_of_children, compMgr);
+        _processChildrenList(children_of_children, compMgr);
       }
     }
   };
@@ -170,7 +163,7 @@ function complexityManagement(cy) {
   var edges = cy.edges();
 
   // Add nodes to both visible and invisible graphs
-  processChildrenList(getTopMostNodes(nodes), compMgrInstance);
+  _processChildrenList(getTopMostNodes(nodes), compMgrInstance);
 
   // Add edges to both visible and invisible graphs
   processEdges(edges, compMgrInstance);
@@ -563,14 +556,13 @@ function complexityManagement(cy) {
   api.expandNodes = function (nodes) {
     var isRecursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var runLayout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-    var pngImage = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-    var setLabelPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+    var setLabelPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
     var nodeIDList = [];
     nodes.forEach(function (node) {
       if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
         if (runLayout) {
-          expandGraph(node.data().id, cy, pngImage, setLabelPosition);
+          expandGraph(node.data().id, cy, setLabelPosition);
         }
         node.removeClass("cy-expand-collapse-collapsed-node");
         node.removeData("position-before-collapse");
@@ -578,10 +570,6 @@ function complexityManagement(cy) {
       }
     });
     setTimeout(function () {
-      pngImage.pngExpandGraph = cy.png({
-        scale: 2,
-        full: true
-      });
       var returnedElements = compMgrInstance.expandNodes(nodeIDList, isRecursive);
       // Add required elements to cy instance
       actOnVisible(_toConsumableArray(returnedElements.nodeIDListForVisible), cy);
@@ -768,7 +756,12 @@ function complexityManagement(cy) {
   api.isExpandable = function (node) {
     return compMgrInstance.isExpandable(node.id());
   };
-  var expandGraph = function expandGraph(focusID, cy, pngImage, setLabelPosition) {
+
+  // cbkFlagDisplayLabels is flag to set if node/edge label is to be item.ID or empty string.  Default = true
+  // cbkFlagLabelsPos is flag to set if node/edge label position which can be bottom, top and center passed as string. Default = 'bottom'.
+  var expandGraph = function expandGraph(focusID, cy, setLabelPosition) {
+    var cbkFlagDisplayLabels = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+    var cbkFlagLabelsPos = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'bottom';
     var descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
     cyLayout.remove(cyLayout.elements());
     var fNode = cyLayout.add({
@@ -776,7 +769,7 @@ function complexityManagement(cy) {
       data: {
         id: focusID,
         parent: null,
-        'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
+        'label': cbkFlagDisplayLabels ? focusID : ''
       },
       position: cyInvisible.getElementById(focusID).position()
     });
@@ -791,7 +784,7 @@ function complexityManagement(cy) {
           data: {
             id: node.ID,
             parent: node.owner.parent.ID,
-            'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+            'label': cbkFlagDisplayLabels ? node.ID : ''
           },
           position: cyInvisible.getElementById(node.ID).position()
         });
@@ -801,7 +794,7 @@ function complexityManagement(cy) {
           data: {
             id: node.ID,
             parent: node.owner.parent.ID,
-            'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+            'label': cbkFlagDisplayLabels ? node.ID : ''
           },
           position: cyInvisible.getElementById(node.ID).position()
         });
@@ -817,7 +810,7 @@ function complexityManagement(cy) {
           data: {
             id: node.ID,
             parent: node.owner.parent.ID,
-            'label': document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+            'label': cbkFlagDisplayLabels ? node.ID : ''
           },
           position: cyInvisible.getElementById(node.ID).position()
         });
@@ -833,7 +826,7 @@ function complexityManagement(cy) {
             group: 'nodes',
             data: {
               id: edge.source.ID,
-              'label': document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
+              'label': cbkFlagDisplayLabels ? edge.source.ID : ''
             },
             position: cyInvisible.getElementById(edge.source.ID).position()
           });
@@ -842,7 +835,7 @@ function complexityManagement(cy) {
             group: 'nodes',
             data: {
               id: edge.target.ID,
-              'label': document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
+              'label': cbkFlagDisplayLabels ? edge.target.ID : ''
             },
             position: cyInvisible.getElementById(edge.target.ID).position()
           });
@@ -868,18 +861,7 @@ function complexityManagement(cy) {
     cyLayout.nodes().forEach(function (node) {
       node.style('label', node.id());
     });
-    var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
-    radioButtons.forEach(function (radio) {
-      if (radio.checked) {
-        setLabelPosition(radio.value);
-      }
-    });
-    if (pngImage != null) {
-      pngImage.pngSizeProxyGraph = cyLayout.png({
-        scale: 2,
-        full: true
-      });
-    }
+    setLabelPosition(cbkFlagLabelsPos);
     cyLayout.remove(cyLayout.elements());
     var topLevelFocusParent = getTopParent(cy.getElementById(focusID));
     cy.nodes().unselect();
@@ -922,7 +904,7 @@ function complexityManagement(cy) {
           // Set the new width of the node
           'height': Math.max(width, height),
           // Set the new height of the node
-          'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+          'label': cbkFlagDisplayLabels ? newNode.data().id : ''
         });
         cy.nodes().unselect();
       }
@@ -940,7 +922,7 @@ function complexityManagement(cy) {
         'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
         // Set the new height of the node
         'background-color': '#CCE1F9',
-        'label': document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
+        'label': cbkFlagDisplayLabels ? focusNode.data().id : ''
       });
     } else {
       var newNode = cyLayout.add({
@@ -955,7 +937,7 @@ function complexityManagement(cy) {
         y: topLevelFocusParent.position().y
       });
       newNode.style({
-        'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+        'label': cbkFlagDisplayLabels ? newNode.data().id : ''
       });
 
       // addAllChildren(topLevelFocusParent,'compound'+(compoundsCounter-1),cyLayout,compoundsCounter,componentNodes,focusID,fcousNodeHeight,focusNodeWidth);
@@ -996,7 +978,7 @@ function complexityManagement(cy) {
               // Set the new width of the node
               'height': Math.max(width, height) + 'px',
               // Set the new height of the node
-              'label': document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+              'label': cbkFlagDisplayLabels ? newNode.data().id : ''
             });
           }
         } else {
@@ -1011,7 +993,7 @@ function complexityManagement(cy) {
             'height': Math.max(focusNodeWidth, fcousNodeHeight) + 'px',
             // Set the new height of the node
             'background-color': '#CCE1F9',
-            'label': document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
+            'label': cbkFlagDisplayLabels ? newFNode.data().id : ''
           });
         }
         cy.nodes().unselect();
@@ -1393,7 +1375,6 @@ var layoutOptions = {
     initializer(cy);
   }
 };
-document.getElementsByName('cbk-flag-display-node-label-pos');
 
 // Function to set the label position based on the selected radio button
 function setLabelPosition(position) {
@@ -1626,59 +1607,82 @@ function cueUtilities(params, cy, api) {
           layoutOptions = _objectSpread2(_objectSpread2({}, layoutOptions), cy.options().layout);
           if (api.isCollapsible(node)) {
             clearDraws();
-            if (document.getElementById("cbk-flag-recursive").checked) {
-              api.collapseNodes([node], true);
-            } else {
-              api.collapseNodes([node]);
-            }
-            if (document.getElementById("cbk-run-layout3").checked) {
-              cy.layout(layoutOptions).run();
-            } else {
-              initializer(cy);
-            }
+            // Here document.getElementById("cbk-flag-recursive" is a flag that can be check box in you demo or something that reflects that you wish to run a recursive collapse or not 
+            //  For recursive api call needs to have the true flag. COde is commented by default we are running no recursive. 
+            // if (document.getElementById("cbk-flag-recursive").checked) {
+            //   api.collapseNodes([node], true);
+            // }else{
+            //   api.collapseNodes([node]);
+            // }
+            api.collapseNodes([node]);
+            // similarly cbk-run-layout3 checkbox tells wether to run a layout after action or not. By defualt we run it code is commented for latter use. 
+            // if (document.getElementById("cbk-run-layout3").checked) {
+            //   cy.layout(layoutOptions).run();
+            // }
+            // else {
+            //   initializer(cy);
+            // }
+            cy.layout(layoutOptions).run();
           } else if (api.isExpandable(node)) {
             clearDraws();
-            if (document.getElementById("cbk-flag-recursive").checked) {
-              if (document.getElementById("cbk-run-layout3").checked) {
-                api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
-                setTimeout(function () {
-                  if (document.getElementById("cbk-run-layout3").checked) {
-                    cy.layout(layoutOptions).run();
-                  } else {
-                    initializer(cy);
-                  }
-                }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
-              } else {
-                api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
-                setTimeout(function () {
-                  if (document.getElementById("cbk-run-layout3").checked) {
-                    cy.layout(layoutOptions).run();
-                  } else {
-                    initializer(cy);
-                  }
-                }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
-              }
-            } else {
-              if (document.getElementById("cbk-run-layout3").checked) {
-                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
-                setTimeout(function () {
-                  if (document.getElementById("cbk-run-layout3").checked) {
-                    cy.layout(layoutOptions).run();
-                  } else {
-                    initializer(cy);
-                  }
-                }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
-              } else {
-                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
-                setTimeout(function () {
-                  if (document.getElementById("cbk-run-layout3").checked) {
-                    cy.layout(layoutOptions).run();
-                  } else {
-                    initializer(cy);
-                  }
-                }, document.getElementById("cbk-run-layout3").checked ? 700 : 0);
-              }
-            }
+            // Here document.getElementById("cbk-flag-recursive" is a flag that can be check box in you demo or something that reflects that you wish to run a recursive collapse or not 
+            //  For recursive api call needs to have the true flag. COde is commented by default we are running no recursive. 
+            // similarly cbk-run-layout3 checkbox tells wether to run a layout after action or not. By defualt we run it code is commented for latter use. 
+
+            // if (document.getElementById("cbk-flag-recursive").checked) {
+            //   if (document.getElementById("cbk-run-layout3").checked) {
+
+            //       api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, setLabelPosition);
+            //       setTimeout(() => {
+            //           if (document.getElementById("cbk-run-layout3").checked) {
+            //             cy.layout(layoutOptions).run();
+            //           }
+            //           else {
+            //             initializer(cy);
+            //           }
+            //       }, document.getElementById("cbk-run-layout3").checked?700:0);
+
+            //   }else{
+            //     api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, setLabelPosition);
+            //     setTimeout(() => {
+            //         if (document.getElementById("cbk-run-layout3").checked) {
+            //           cy.layout(layoutOptions).run();
+            //         }
+            //         else {
+            //           initializer(cy);
+            //         }
+            //     }, document.getElementById("cbk-run-layout3").checked?700:0);
+
+            //   }
+            // }else{
+            //   if (document.getElementById("cbk-run-layout3").checked) {
+            //     api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, setLabelPosition);
+            //     setTimeout(() => {
+            //         if (document.getElementById("cbk-run-layout3").checked) {
+            //           cy.layout(layoutOptions).run();
+            //         }
+            //         else {
+            //           initializer(cy);
+            //         }
+            //     }, document.getElementById("cbk-run-layout3").checked?700:0);
+            //   }else{
+            //     api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, setLabelPosition);
+            //     setTimeout(() => {
+            //         if (document.getElementById("cbk-run-layout3").checked) {
+            //           cy.layout(layoutOptions).run();
+            //         }
+            //         else {
+            //           initializer(cy);
+            //         }
+            //     }, document.getElementById("cbk-run-layout3").checked?700:0);
+            //   }
+
+            // }
+
+            api.expandNodes([node], false, true, setLabelPosition);
+            setTimeout(function () {
+              cy.layout(layoutOptions).run();
+            }, 700);
           }
         }
       });

@@ -3,7 +3,6 @@ import debounce2 from './debounce2';
 
 let layoutOptions = { name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }
 
-var radioButtons = document.getElementsByName('cbk-flag-display-node-label-pos');
 
 // Function to set the label position based on the selected radio button
 function setLabelPosition(position) {
@@ -53,7 +52,8 @@ function getDescendantsInorder(node) {
   return descendants;
 }
 
-function expandGraph(focusID,cy){
+// cbkFlagLabelsPos is flag to set if node/edge label position which can be bottom, top and center passed as string. Default = 'bottom'.
+function expandGraph(focusID,cy, cbkFlagDisplayLabels = true, cbkFlagLabelsPos = 'bottom'){
     
   let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
 
@@ -65,7 +65,7 @@ function expandGraph(focusID,cy){
     group: 'nodes',
     data: { id: focusID, 
             parent: null,
-            'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusID : ''
+            'label' : cbkFlagDisplayLabels ? focusID : ''
      }}
   )
   fNode.style({'background-color': '#CCE1F9',})
@@ -76,7 +76,7 @@ function expandGraph(focusID,cy){
         group: 'nodes',
         data: { id: node.ID, 
                 parent: node.owner.parent.ID,
-                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+                'label' : cbkFlagDisplayLabels ? node.ID : ''
           }});
 
     }else{
@@ -84,7 +84,7 @@ function expandGraph(focusID,cy){
         group: 'nodes',
         data: { id: node.ID, 
                 parent: node.owner.parent.ID,
-                'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+                'label' : cbkFlagDisplayLabels ? node.ID : ''
          }})
     }
 
@@ -100,7 +100,7 @@ function expandGraph(focusID,cy){
       group: 'nodes',
       data: { id: node.ID, 
               parent: node.owner.parent.ID,
-              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? node.ID : ''
+              'label' : cbkFlagDisplayLabels ? node.ID : ''
             }});
         
        }catch(e){
@@ -117,7 +117,7 @@ function expandGraph(focusID,cy){
         cyLayout.add({
           group: 'nodes',
           data: { id: edge.source.ID, 
-            'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.source.ID : ''
+            'label' : cbkFlagDisplayLabels ? edge.source.ID : ''
           }});
           
       }else if(cyLayout.getElementById(edge.target.ID).length == 0){
@@ -125,7 +125,7 @@ function expandGraph(focusID,cy){
         cyLayout.add({
           group: 'nodes',
           data: { id: edge.target.ID, 
-            'label' : document.getElementById("cbk-flag-display-node-labels").checked ? edge.target.ID : ''
+            'label' : cbkFlagDisplayLabels ? edge.target.ID : ''
           }});
           
       }
@@ -159,11 +159,7 @@ function expandGraph(focusID,cy){
   var fcousNodeHeight = boundingBox.h;
 
   cyLayout.nodes().forEach(node => {node.style('label', node.id());})
-  radioButtons.forEach(function(radio) {
-    if(radio.checked){
-      setLabelPosition(radio.value);
-    }
-  });
+  setLabelPosition(cbkFlagLabelsPos);
   pngSizeProxyGraph = cyLayout.png({
     scale:2,
     full:true
@@ -210,7 +206,7 @@ function expandGraph(focusID,cy){
             newNode.style({
               'width': Math.max(width,height), // Set the new width of the node
               'height': Math.max(width,height), // Set the new height of the node
-              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+              'label' : cbkFlagDisplayLabels ? newNode.data().id : ''
             });
             
             cy.nodes().unselect();
@@ -230,7 +226,7 @@ function expandGraph(focusID,cy){
       'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
       'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px',// Set the new height of the node
       'background-color': '#CCE1F9',
-      'label' : document.getElementById("cbk-flag-display-node-labels").checked ? focusNode.data().id : ''
+      'label' : cbkFlagDisplayLabels ? focusNode.data().id : ''
     });
   }else{
     var newNode = cyLayout.add({
@@ -247,7 +243,7 @@ function expandGraph(focusID,cy){
       y: topLevelFocusParent.position().y
     });
     newNode.style({
-      'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+      'label' : cbkFlagDisplayLabels ? newNode.data().id : ''
     });
     compoundsCounter++;
 
@@ -285,7 +281,7 @@ function expandGraph(focusID,cy){
                 newNode.style({
                   'width': Math.max(width,height)+'px', // Set the new width of the node
                   'height': Math.max(width,height)+'px', // Set the new height of the node
-                  'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newNode.data().id : ''
+                  'label' : cbkFlagDisplayLabels ? newNode.data().id : ''
                 });
                 compoundsCounter++;
         }else{
@@ -305,7 +301,7 @@ function expandGraph(focusID,cy){
               'width': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new width of the node
               'height': Math.max(focusNodeWidth,fcousNodeHeight)+'px', // Set the new height of the node
               'background-color':'#CCE1F9',
-              'label' : document.getElementById("cbk-flag-display-node-labels").checked ? newFNode.data().id : ''
+              'label' : cbkFlagDisplayLabels ? newFNode.data().id : ''
             });
             compoundsCounter++;
       }
@@ -339,11 +335,8 @@ function expandGraph(focusID,cy){
   cy.fit();
 
   cy.getElementById(focusID).select();
-  radioButtons.forEach(function(radio) {
-    if(radio.checked){
-      setLabelPosition(radio.value);
-    }
-  });
+  setLabelPosition(cbkFlagLabelsPos);
+  
 }
 
 function translateNode(a,a1) {
@@ -669,70 +662,84 @@ export function cueUtilities(params, cy, api) {
          
           if (api.isCollapsible(node)) {
             clearDraws();
-            if (document.getElementById("cbk-flag-recursive").checked) {
-              api.collapseNodes([node], true);
-            }else{
-              api.collapseNodes([node]);
-            }
-            if (document.getElementById("cbk-run-layout3").checked) {
-              cy.layout(layoutOptions).run();
-            }
-            else {
-              initializer(cy);
-            }
+            // Here document.getElementById("cbk-flag-recursive" is a flag that can be check box in you demo or something that reflects that you wish to run a recursive collapse or not 
+            //  For recursive api call needs to have the true flag. COde is commented by default we are running no recursive. 
+            // if (document.getElementById("cbk-flag-recursive").checked) {
+            //   api.collapseNodes([node], true);
+            // }else{
+            //   api.collapseNodes([node]);
+            // }
+            api.collapseNodes([node]);
+            // similarly cbk-run-layout3 checkbox tells wether to run a layout after action or not. By defualt we run it code is commented for latter use. 
+            // if (document.getElementById("cbk-run-layout3").checked) {
+            //   cy.layout(layoutOptions).run();
+            // }
+            // else {
+            //   initializer(cy);
+            // }
+            cy.layout(layoutOptions).run();
           }
           else if (api.isExpandable(node)) {
             clearDraws();
-            if (document.getElementById("cbk-flag-recursive").checked) {
-              if (document.getElementById("cbk-run-layout3").checked) {
+            // Here document.getElementById("cbk-flag-recursive" is a flag that can be check box in you demo or something that reflects that you wish to run a recursive collapse or not 
+            //  For recursive api call needs to have the true flag. COde is commented by default we are running no recursive. 
+            // similarly cbk-run-layout3 checkbox tells wether to run a layout after action or not. By defualt we run it code is commented for latter use. 
+            
+            // if (document.getElementById("cbk-flag-recursive").checked) {
+            //   if (document.getElementById("cbk-run-layout3").checked) {
 
-                  api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
-                  setTimeout(() => {
-                      if (document.getElementById("cbk-run-layout3").checked) {
-                        cy.layout(layoutOptions).run();
-                      }
-                      else {
-                        initializer(cy);
-                      }
-                  }, document.getElementById("cbk-run-layout3").checked?700:0);
+            //       api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, setLabelPosition);
+            //       setTimeout(() => {
+            //           if (document.getElementById("cbk-run-layout3").checked) {
+            //             cy.layout(layoutOptions).run();
+            //           }
+            //           else {
+            //             initializer(cy);
+            //           }
+            //       }, document.getElementById("cbk-run-layout3").checked?700:0);
                   
-              }else{
-                api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
-                setTimeout(() => {
-                    if (document.getElementById("cbk-run-layout3").checked) {
-                      cy.layout(layoutOptions).run();
-                    }
-                    else {
-                      initializer(cy);
-                    }
-                }, document.getElementById("cbk-run-layout3").checked?700:0);
+            //   }else{
+            //     api.expandNodes([node], true, document.getElementById("cbk-run-layout3").checked, setLabelPosition);
+            //     setTimeout(() => {
+            //         if (document.getElementById("cbk-run-layout3").checked) {
+            //           cy.layout(layoutOptions).run();
+            //         }
+            //         else {
+            //           initializer(cy);
+            //         }
+            //     }, document.getElementById("cbk-run-layout3").checked?700:0);
                   
-              }
-            }else{
-              if (document.getElementById("cbk-run-layout3").checked) {
-                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
-                setTimeout(() => {
-                    if (document.getElementById("cbk-run-layout3").checked) {
-                      cy.layout(layoutOptions).run();
-                    }
-                    else {
-                      initializer(cy);
-                    }
-                }, document.getElementById("cbk-run-layout3").checked?700:0);
-              }else{
-                api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
-                setTimeout(() => {
-                    if (document.getElementById("cbk-run-layout3").checked) {
-                      cy.layout(layoutOptions).run();
-                    }
-                    else {
-                      initializer(cy);
-                    }
-                }, document.getElementById("cbk-run-layout3").checked?700:0);
-              }
+            //   }
+            // }else{
+            //   if (document.getElementById("cbk-run-layout3").checked) {
+            //     api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, setLabelPosition);
+            //     setTimeout(() => {
+            //         if (document.getElementById("cbk-run-layout3").checked) {
+            //           cy.layout(layoutOptions).run();
+            //         }
+            //         else {
+            //           initializer(cy);
+            //         }
+            //     }, document.getElementById("cbk-run-layout3").checked?700:0);
+            //   }else{
+            //     api.expandNodes([node], false, document.getElementById("cbk-run-layout3").checked, setLabelPosition);
+            //     setTimeout(() => {
+            //         if (document.getElementById("cbk-run-layout3").checked) {
+            //           cy.layout(layoutOptions).run();
+            //         }
+            //         else {
+            //           initializer(cy);
+            //         }
+            //     }, document.getElementById("cbk-run-layout3").checked?700:0);
+            //   }
               
               
-            }
+            // }
+
+            api.expandNodes([node], false, true,setLabelPosition);
+                setTimeout(() => {
+                    cy.layout(layoutOptions).run();
+                }, 700);
             
           }
         }
