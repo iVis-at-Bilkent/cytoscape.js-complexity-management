@@ -29,7 +29,7 @@ body {
   grid-area: cy;
 }
 .cy-container {
-  height: 50%;
+  height: 100%;
   padding: 8px;
   grid-area: cy;
 }
