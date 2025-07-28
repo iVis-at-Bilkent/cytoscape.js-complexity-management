@@ -277,11 +277,11 @@ function onLoaded() {
                 },
                 {
                     "data": {
-                        "id": "e33",
+                        "id": "e333",
                         "source": "h3",
                         "target": "v2",
-                        "weight": 90,
-                        "label": "e33(90)"
+                        "weight": 92,
+                        "label": "e333(92)"
                     },
                     "position": {
                         "x": 0,
@@ -295,6 +295,89 @@ function onLoaded() {
                     "grabbable": true,
                     "pannable": true,
                     "classes": ""
+                },{
+                    "data": {
+                        "id": "e331",
+                        "source": "h3",
+                        "target": "v2",
+                        "weight": 92,
+                        "label": "e331(92)"
+                    },
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    },
+                    "group": "edges",
+                    "removed": false,
+                    "selected": false,
+                    "selectable": true,
+                    "locked": false,
+                    "grabbable": true,
+                    "pannable": true,
+                    "classes": ""
+                },
+                {
+                  "data": {
+                      "id": "e332",
+                      "source": "h3",
+                      "target": "v2",
+                      "weight": 95,
+                      "label": "e332(95)"
+                  },
+                  "position": {
+                      "x": 0,
+                      "y": 0
+                  },
+                  "group": "edges",
+                  "removed": false,
+                  "selected": false,
+                  "selectable": true,
+                  "locked": false,
+                  "grabbable": true,
+                  "pannable": true,
+                  "classes": ""
+                },
+                {
+                  "data": {
+                      "id": "e334",
+                      "source": "h3",
+                      "target": "v2",
+                      "weight": 94,
+                      "label": "e34(94)"
+                  },
+                  "position": {
+                      "x": 0,
+                      "y": 0
+                  },
+                  "group": "edges",
+                  "removed": false,
+                  "selected": false,
+                  "selectable": true,
+                  "locked": false,
+                  "grabbable": true,
+                  "pannable": true,
+                  "classes": ""
+                },
+                {
+                  "data": {
+                      "id": "e33",
+                      "source": "h3",
+                      "target": "v2",
+                      "weight": 90,
+                      "label": "e33(90)"
+                  },
+                  "position": {
+                      "x": 0,
+                      "y": 0
+                  },
+                  "group": "edges",
+                  "removed": false,
+                  "selected": false,
+                  "selectable": true,
+                  "locked": false,
+                  "grabbable": true,
+                  "pannable": true,
+                  "classes": ""
                 },
                 {
                     "data": {
