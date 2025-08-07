@@ -1065,7 +1065,7 @@ export function complexityManagement(cy) {
         animationDuration: 500,
         randomize: false, 
         nodeSeparation: 25,
-      fixedNodeConstraint:[{nodeId: focusID, position: {x: cy.$('#'+focusID).position('x'),y:cy.$('#'+focusID).position('y')}}]
+      fixedNodeConstraint:[{nodeId: focusID, position: {x: cy.getElementById(focusID).position('x'),y:cy.getElementById(focusID).position('y')}}]
 
     }).run();
 
