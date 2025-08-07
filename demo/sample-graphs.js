@@ -45305,3 +45305,10208 @@ window.sampleGraphCompound4 = {
         }
     ]
 };
+
+window.Pathway1 = {
+    "nodes": [
+        {
+            "data": {
+                "id": "corum:Complex_9b82da9f-14a9-49e2-8ec3-bce0d0bac6e3___null__2818_",
+                "label": "BRCA1-BARD1-BRCA2-DNA damage complex III"
+            },
+            "position": {
+                "x": -1565.762765447835,
+                "y": 1215.2507683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Protein_uniprotkb_P38398_identity_1716223740031_0c46900b89c583f86209685c0c746376",
+                "label": "BRCA1",
+                "parent": "corum:Complex_9b82da9f-14a9-49e2-8ec3-bce0d0bac6e3___null__2818_"
+            },
+            "position": {
+                "x": -1596.387765447835,
+                "y": 1196.1257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Protein_uniprotkb_P51587_identity_1716223744034_0c46900b89c583f86209685c0c746376",
+                "label": "BRCA2",
+                "parent": "corum:Complex_9b82da9f-14a9-49e2-8ec3-bce0d0bac6e3___null__2818_"
+            },
+            "position": {
+                "x": -1596.387765447835,
+                "y": 1234.3757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Protein_uniprotkb_Q99728_identity_1716223740032_0c46900b89c583f86209685c0c746376",
+                "label": "BARD1",
+                "parent": "corum:Complex_9b82da9f-14a9-49e2-8ec3-bce0d0bac6e3___null__2818_"
+            },
+            "position": {
+                "x": -1535.137765447835,
+                "y": 1196.1257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Complex_0b64ea5b-9afd-48d6-8386-ca03873bc5a6___null__5400_",
+                "label": "BRCC complex"
+            },
+            "position": {
+                "x": -1565.762765447835,
+                "y": 1099.6257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Protein_uniprotkb_Q9NXR7_identity_1716223750774_0d92e4adc0ae88535f7d205c5ab4f235",
+                "label": "BABAM2",
+                "parent": "corum:Complex_0b64ea5b-9afd-48d6-8386-ca03873bc5a6___null__5400_"
+            },
+            "position": {
+                "x": -1596.387765447835,
+                "y": 1061.3757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Protein_uniprotkb_P38398_identity_1716223740031_0d92e4adc0ae88535f7d205c5ab4f235",
+                "label": "BRCA1",
+                "parent": "corum:Complex_0b64ea5b-9afd-48d6-8386-ca03873bc5a6___null__5400_"
+            },
+            "position": {
+                "x": -1596.387765447835,
+                "y": 1099.6257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Protein_uniprotkb_P51587_identity_1716223744034_0d92e4adc0ae88535f7d205c5ab4f235",
+                "label": "BRCA2",
+                "parent": "corum:Complex_0b64ea5b-9afd-48d6-8386-ca03873bc5a6___null__5400_"
+            },
+            "position": {
+                "x": -1535.137765447835,
+                "y": 1061.3757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Protein_uniprotkb_P46736_identity_1716223750771_0d92e4adc0ae88535f7d205c5ab4f235",
+                "label": "BRCC3",
+                "parent": "corum:Complex_0b64ea5b-9afd-48d6-8386-ca03873bc5a6___null__5400_"
+            },
+            "position": {
+                "x": -1535.137765447835,
+                "y": 1099.6257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "corum:Protein_uniprotkb_Q06609_identity_1716223746907_0d92e4adc0ae88535f7d205c5ab4f235",
+                "label": "RAD51",
+                "parent": "corum:Complex_0b64ea5b-9afd-48d6-8386-ca03873bc5a6___null__5400_"
+            },
+            "position": {
+                "x": -1596.387765447835,
+                "y": 1137.8757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Complex_d6c861d2-02bd-4339-9f23-11a564cec0d6___null__19137_",
+                "label": "brcc_human"
+            },
+            "position": {
+                "x": -1423.262765447835,
+                "y": 1099.6257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_P51587_identity_1716222494552_9179f36586beb6f119edf9f1b4cab45c",
+                "label": "BRCA2",
+                "parent": "intact.complex:Complex_d6c861d2-02bd-4339-9f23-11a564cec0d6___null__19137_"
+            },
+            "position": {
+                "x": -1453.887765447835,
+                "y": 1061.3757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_P38398_identity_1716222494551_9179f36586beb6f119edf9f1b4cab45c",
+                "label": "BRCA1",
+                "parent": "intact.complex:Complex_d6c861d2-02bd-4339-9f23-11a564cec0d6___null__19137_"
+            },
+            "position": {
+                "x": -1453.887765447835,
+                "y": 1099.6257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_Q9NXR7_identity_1716222494550_9179f36586beb6f119edf9f1b4cab45c",
+                "label": "BABAM2",
+                "parent": "intact.complex:Complex_d6c861d2-02bd-4339-9f23-11a564cec0d6___null__19137_"
+            },
+            "position": {
+                "x": -1392.637765447835,
+                "y": 1061.3757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_Q99728_identity_1716222494555_9179f36586beb6f119edf9f1b4cab45c",
+                "label": "BARD1",
+                "parent": "intact.complex:Complex_d6c861d2-02bd-4339-9f23-11a564cec0d6___null__19137_"
+            },
+            "position": {
+                "x": -1392.637765447835,
+                "y": 1099.6257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_Q06609_identity_1716222494553_9179f36586beb6f119edf9f1b4cab45c",
+                "label": "RAD51",
+                "parent": "intact.complex:Complex_d6c861d2-02bd-4339-9f23-11a564cec0d6___null__19137_"
+            },
+            "position": {
+                "x": -1453.887765447835,
+                "y": 1137.8757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_P46736_identity_1716222494554_9179f36586beb6f119edf9f1b4cab45c",
+                "label": "BRCC3",
+                "parent": "intact.complex:Complex_d6c861d2-02bd-4339-9f23-11a564cec0d6___null__19137_"
+            },
+            "position": {
+                "x": -1392.637765447835,
+                "y": 1137.8757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Complex_51ef8323-2c5a-4bb5-a1c8-65a4648c978f___null__18256_",
+                "label": "brca2-palb2_human"
+            },
+            "position": {
+                "x": -1423.262765447835,
+                "y": 1215.2507683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_Q86YC2_identity_1716222506429_46629fa846a1b388f34abd0ac7b35a7a",
+                "label": "PALB2",
+                "parent": "intact.complex:Complex_51ef8323-2c5a-4bb5-a1c8-65a4648c978f___null__18256_"
+            },
+            "position": {
+                "x": -1453.887765447835,
+                "y": 1196.1257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_P38398_identity_1716222506430_46629fa846a1b388f34abd0ac7b35a7a",
+                "label": "BRCA1",
+                "parent": "intact.complex:Complex_51ef8323-2c5a-4bb5-a1c8-65a4648c978f___null__18256_"
+            },
+            "position": {
+                "x": -1453.887765447835,
+                "y": 1234.3757683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "intact.complex:Protein_uniprotkb_P51587_identity_1716222506428_46629fa846a1b388f34abd0ac7b35a7a",
+                "label": "BRCA2",
+                "parent": "intact.complex:Complex_51ef8323-2c5a-4bb5-a1c8-65a4648c978f___null__18256_"
+            },
+            "position": {
+                "x": -1392.637765447835,
+                "y": 1196.1257683128583
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "nucleoplasm",
+                "label": "nucleoplasm"
+            },
+            "position": {
+                "x": 192.0000000000001,
+                "y": -2.8124999999998863
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14939",
+                "label": "D-Loop:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-BRCA1-C complex:PALB2:p-T3387-BRCA2:SEM1:p-T309-RAD51:RAD51AP1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1128.8189622177683,
+                "y": 193.18676663730247
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_ad1c04ec408cbf52bacba54655619ba5",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14939"
+            },
+            "position": {
+                "x": 1048.137260871035,
+                "y": 257.73735824454184
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_e872081d5d4bad0c29c60d0208159024",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex14939"
+            },
+            "position": {
+                "x": 1031.4381939058926,
+                "y": 348.02140850881034
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_d996c0d8a3cdfb868c8bcfd687087de3",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_e872081d5d4bad0c29c60d0208159024"
+            },
+            "position": {
+                "x": 1035.3051056705986,
+                "y": 326.39640850881034
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_d996c0d8a3cdfb868c8bcfd687087de3",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_e872081d5d4bad0c29c60d0208159024"
+            },
+            "position": {
+                "x": 1035.3051056705986,
+                "y": 369.64640850881034
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_e872081d5d4bad0c29c60d0208159024",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14939"
+            },
+            "position": {
+                "x": 948.6483844965494,
+                "y": 219.34431651113675
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_a0afcce9d37edfa3b83973a10f68f816",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_e872081d5d4bad0c29c60d0208159024"
+            },
+            "position": {
+                "x": 954.7329433200788,
+                "y": 197.71931651113678
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_a0afcce9d37edfa3b83973a10f68f816",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_e872081d5d4bad0c29c60d0208159024"
+            },
+            "position": {
+                "x": 954.7329433200788,
+                "y": 240.96931651113675
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_ad1c04ec408cbf52bacba54655619ba5",
+                "label": "BRCA2",
+                "parent": "reactome:Complex14939"
+            },
+            "position": {
+                "x": 1087.1947835700203,
+                "y": 0.10212476579457075
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_ad1c04ec408cbf52bacba54655619ba5",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex14939"
+            },
+            "position": {
+                "x": 1210.8235592548936,
+                "y": 251.55323555716802
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_9a522255109813e8b8b136f30a801d38",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex14939"
+            },
+            "position": {
+                "x": 1293.0971753981369,
+                "y": 296.7284654546557
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_fbbc9eda15a2677505cb7a23c417312e",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1262.4721753981369,
+                "y": 299.5409654546557
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_fbbc9eda15a2677505cb7a23c417312e",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1323.7221753981369,
+                "y": 299.5409654546557
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_9a522255109813e8b8b136f30a801d38",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex14939"
+            },
+            "position": {
+                "x": 1158.4169625254185,
+                "y": 330.16103398301976
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_ffa2896e7e86e67cc082cb64491b3273",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1158.4169625254185,
+                "y": 313.84853398301976
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_ffa2896e7e86e67cc082cb64491b3273",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1158.4169625254185,
+                "y": 354.59853398301976
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_9a522255109813e8b8b136f30a801d38",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex14939"
+            },
+            "position": {
+                "x": 1308.5740987625168,
+                "y": 154.98138027626428
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_2531aa7238484209616d6ba21cbe95ba",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1277.9490987625168,
+                "y": 114.54388027626428
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_2531aa7238484209616d6ba21cbe95ba",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1339.1990987625168,
+                "y": 114.54388027626428
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_2531aa7238484209616d6ba21cbe95ba",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1277.9490987625168,
+                "y": 157.79388027626428
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_2531aa7238484209616d6ba21cbe95ba",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1339.1990987625168,
+                "y": 157.79388027626428
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_2531aa7238484209616d6ba21cbe95ba",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_9a522255109813e8b8b136f30a801d38"
+            },
+            "position": {
+                "x": 1277.9490987625168,
+                "y": 201.04388027626428
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14941",
+                "label": "CX3 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 383.58474930672344,
+                "y": 100.15534489111587
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein30907_55786d874cd24a622d85240d427ea214",
+                "label": "XRCC3",
+                "parent": "reactome:Complex14941"
+            },
+            "position": {
+                "x": 352.95974930672344,
+                "y": 102.96784489111587
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein6575_55786d874cd24a622d85240d427ea214",
+                "label": "RAD51C",
+                "parent": "reactome:Complex14941"
+            },
+            "position": {
+                "x": 414.20974930672344,
+                "y": 102.96784489111587
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5782",
+                "label": "9-1-1 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1310.1548389216841,
+                "y": -583.8666059229582
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13517_11a0b7e82887bb22dd5f2962139249a6",
+                "label": "RAD9",
+                "parent": "reactome:Complex5782"
+            },
+            "position": {
+                "x": 1279.5298389216841,
+                "y": -559.4291059229582
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13516_11a0b7e82887bb22dd5f2962139249a6",
+                "label": "RAD1",
+                "parent": "reactome:Complex5782"
+            },
+            "position": {
+                "x": 1279.5298389216841,
+                "y": -600.1791059229582
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13515_11a0b7e82887bb22dd5f2962139249a6",
+                "label": "HUS1",
+                "parent": "reactome:Complex5782"
+            },
+            "position": {
+                "x": 1340.7798389216841,
+                "y": -600.1791059229582
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13454",
+                "label": "ATM",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 358.5291661423233,
+                "y": 46.567980130818384
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 391.9084079446658,
+                "y": 60.46864102560819
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_0aa6778644770fafd4c46273b2f65cf6",
+                "label": "DNA2:WRN",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 142.4664442316885,
+                "y": 49.39692198799915
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_c1495eb1536a97e03dc4fd91c27d023b",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 111.84144423168851,
+                "y": 52.20942198799915
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_c1495eb1536a97e03dc4fd91c27d023b",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 173.0914442316885,
+                "y": 52.20942198799915
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5774",
+                "label": "p-S327,T847,T859-RBBP8 homotetramer",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 455.8098999198587,
+                "y": -35.3132087035858
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13508_0cd67e45b2ba7448ba5722b49ec69b4a",
+                "label": "RBBP8",
+                "parent": "reactome:Complex5774"
+            },
+            "position": {
+                "x": 461.63710580221164,
+                "y": -35.3132087035858
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12878",
+                "label": "ATR:ATRIP:p-RPA:3' overhanging ssDNA-DSBs:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:BRCA1-C complex:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:RAD17:RFC:RAD9:HUS1:RAD1:RHNO1:TOPBP1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1385.809336450685,
+                "y": -1102.0806440002273
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_0918a24cfc72e61562cc279bcf9ded37",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex12878"
+            },
+            "position": {
+                "x": 1299.8667786840815,
+                "y": -1013.0087635847702
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_4e7fc9b56a98c914c2e3ed318dabb0e6",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex12878"
+            },
+            "position": {
+                "x": 1389.0243251999677,
+                "y": -1009.6620563133129
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_0d088e1f7304f8b8f30c58cdc9921b88",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_4e7fc9b56a98c914c2e3ed318dabb0e6"
+            },
+            "position": {
+                "x": 1392.8912369646737,
+                "y": -1031.2870563133129
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_0d088e1f7304f8b8f30c58cdc9921b88",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_4e7fc9b56a98c914c2e3ed318dabb0e6"
+            },
+            "position": {
+                "x": 1392.8912369646737,
+                "y": -988.037056313313
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_4e7fc9b56a98c914c2e3ed318dabb0e6",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex12878"
+            },
+            "position": {
+                "x": 1229.440466277064,
+                "y": -1094.2222076641267
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_a7a60a749642ec5ab785373b01a36776",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_4e7fc9b56a98c914c2e3ed318dabb0e6"
+            },
+            "position": {
+                "x": 1235.5250251005932,
+                "y": -1115.8472076641267
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_a7a60a749642ec5ab785373b01a36776",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_4e7fc9b56a98c914c2e3ed318dabb0e6"
+            },
+            "position": {
+                "x": 1235.5250251005932,
+                "y": -1072.5972076641267
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_0918a24cfc72e61562cc279bcf9ded37",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex12878"
+            },
+            "position": {
+                "x": 1436.8927021271634,
+                "y": -1133.8262507139084
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_a18b640588440a2e09833da75f1ffada",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex12878"
+            },
+            "position": {
+                "x": 1498.4325768779954,
+                "y": -1193.8717772810055
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_80c362b48b15b3b0ab74c746a6d812a4",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1467.8075768779954,
+                "y": -1191.0592772810055
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_80c362b48b15b3b0ab74c746a6d812a4",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1529.0575768779954,
+                "y": -1191.0592772810055
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_a18b640588440a2e09833da75f1ffada",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex12878"
+            },
+            "position": {
+                "x": 1365.6295203671132,
+                "y": -1199.8117316871417
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_1bd96ec573cf38a039b4c04328b3672b",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1365.6295203671132,
+                "y": -1216.1242316871417
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_1bd96ec573cf38a039b4c04328b3672b",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1365.6295203671132,
+                "y": -1175.3742316871417
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_a18b640588440a2e09833da75f1ffada",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex12878"
+            },
+            "position": {
+                "x": 1541.762765447835,
+                "y": -1065.9813792915584
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_67ed4a7737b49973c33493f997804e2e",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1511.137765447835,
+                "y": -1106.4188792915584
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_67ed4a7737b49973c33493f997804e2e",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1572.387765447835,
+                "y": -1106.4188792915584
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_67ed4a7737b49973c33493f997804e2e",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1511.137765447835,
+                "y": -1063.1688792915584
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_67ed4a7737b49973c33493f997804e2e",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1572.387765447835,
+                "y": -1063.1688792915584
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_67ed4a7737b49973c33493f997804e2e",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_a18b640588440a2e09833da75f1ffada"
+            },
+            "position": {
+                "x": 1511.137765447835,
+                "y": -1019.9188792915584
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12869",
+                "label": "Defective 3' overhanging ssDNA-DSBs:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:BRCA1-C complex:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-T309-RAD51:p-T3387-BRCA2:BCDX2 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -222.37905756454748,
+                "y": -964.743557815638
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_cf8467c7a614873e0c17e17e819a521f",
+                "label": "BRCA2",
+                "parent": "reactome:Complex12869"
+            },
+            "position": {
+                "x": -55.310839973724626,
+                "y": -799.7046236462234
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_cf8467c7a614873e0c17e17e819a521f",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex12869"
+            },
+            "position": {
+                "x": -265.87356814738484,
+                "y": -1040.3392703670502
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_ff296316e4e49a5c74b0629117703028",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex12869"
+            },
+            "position": {
+                "x": -179.753591581497,
+                "y": -995.7213788129379
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_71900a589efbde45e9291081fd832bb3",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -210.37859158149703,
+                "y": -992.9088788129379
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_71900a589efbde45e9291081fd832bb3",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -149.128591581497,
+                "y": -992.9088788129379
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_ff296316e4e49a5c74b0629117703028",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex12869"
+            },
+            "position": {
+                "x": -198.22821097390704,
+                "y": -1106.796125731887
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_cc3965fc834911eede2aa9a05546488d",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -198.22821097390704,
+                "y": -1123.108625731887
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_cc3965fc834911eede2aa9a05546488d",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -198.22821097390704,
+                "y": -1082.358625731887
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_ff296316e4e49a5c74b0629117703028",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex12869"
+            },
+            "position": {
+                "x": -342.19727515537033,
+                "y": -1148.5949919850527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_5aa8cff6bdf8d43f176755351cb4750e",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -372.82227515537033,
+                "y": -1189.0324919850527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_5aa8cff6bdf8d43f176755351cb4750e",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -311.57227515537033,
+                "y": -1189.0324919850527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_5aa8cff6bdf8d43f176755351cb4750e",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -372.82227515537033,
+                "y": -1145.7824919850527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_5aa8cff6bdf8d43f176755351cb4750e",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -311.57227515537033,
+                "y": -1145.7824919850527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_5aa8cff6bdf8d43f176755351cb4750e",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_ff296316e4e49a5c74b0629117703028"
+            },
+            "position": {
+                "x": -372.82227515537033,
+                "y": -1102.5324919850527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein25938_cf8467c7a614873e0c17e17e819a521f",
+                "label": "BRCA1 mutants (PALB2 binding)",
+                "parent": "reactome:Complex12869"
+            },
+            "position": {
+                "x": -55.310839973724626,
+                "y": -715.7046236462234
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14100",
+                "label": "RAD51",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -741.5389518602497,
+                "y": -871.4549312067073
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity948",
+                "label": "3' overhanging DNA at resected DSB ends",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -676.145236491797,
+                "y": -810.5177656494243
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12874",
+                "label": "p-T3387-BRCA2:SEM1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1173.6963269263113,
+                "y": -634.5161658786517
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1066_8108e9ed3ea41fe1f1563e7e2beb5d88",
+                "label": "SEM1",
+                "parent": "reactome:Complex12874"
+            },
+            "position": {
+                "x": 1143.0713269263113,
+                "y": -634.5161658786517
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_8108e9ed3ea41fe1f1563e7e2beb5d88",
+                "label": "BRCA2",
+                "parent": "reactome:Complex12874"
+            },
+            "position": {
+                "x": 1204.3213269263113,
+                "y": -634.5161658786517
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 335.025853271488,
+                "y": 24.6668636895416
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex6233",
+                "label": "H2AFX-Nucleosome",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -787.5611688312172,
+                "y": -720.0452394746528
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein969_9287935b1e5587b5947b5f68dcfa6b28",
+                "label": "Histone H2B",
+                "parent": "reactome:Complex6233"
+            },
+            "position": {
+                "x": -756.9361688312172,
+                "y": -698.1077394746528
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13489_9287935b1e5587b5947b5f68dcfa6b28",
+                "label": "H3-4",
+                "parent": "reactome:Complex6233"
+            },
+            "position": {
+                "x": -818.1861688312172,
+                "y": -738.8577394746528
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11961_9287935b1e5587b5947b5f68dcfa6b28",
+                "label": "H4C3",
+                "parent": "reactome:Complex6233"
+            },
+            "position": {
+                "x": -756.9361688312172,
+                "y": -738.8577394746528
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein994_9287935b1e5587b5947b5f68dcfa6b28",
+                "label": "H2AX",
+                "parent": "reactome:Complex6233"
+            },
+            "position": {
+                "x": -818.1861688312172,
+                "y": -695.6077394746528
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14101",
+                "label": "ATM",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -732.8798291281416,
+                "y": -787.9405451566372
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12886",
+                "label": "3' overhanging ssDNA-DSBs:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:BRCA1-C complex:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-T309-RAD51:p-T3387-BRCA2:SEM1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 713.5058578674793,
+                "y": -948.8795185660128
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_dd77aaca7c05f637124590401a205e77",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex12886"
+            },
+            "position": {
+                "x": 777.5683916333502,
+                "y": -1043.0077392269864
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_79be65fac47a0f36f3b97f793917b498",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex12886"
+            },
+            "position": {
+                "x": 870.5867889947324,
+                "y": -1019.6521770786865
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_105c4518419f4973facd25495f726777",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_79be65fac47a0f36f3b97f793917b498"
+            },
+            "position": {
+                "x": 874.4537007594383,
+                "y": -1041.2771770786865
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_105c4518419f4973facd25495f726777",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_79be65fac47a0f36f3b97f793917b498"
+            },
+            "position": {
+                "x": 874.4537007594383,
+                "y": -998.0271770786865
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_79be65fac47a0f36f3b97f793917b498",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex12886"
+            },
+            "position": {
+                "x": 751.0320384814721,
+                "y": -1134.399872438761
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_04683137b46a69e24132d5e2437bef2b",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_79be65fac47a0f36f3b97f793917b498"
+            },
+            "position": {
+                "x": 757.1165973050015,
+                "y": -1156.024872438761
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_04683137b46a69e24132d5e2437bef2b",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_79be65fac47a0f36f3b97f793917b498"
+            },
+            "position": {
+                "x": 757.1165973050015,
+                "y": -1112.774872438761
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_dd77aaca7c05f637124590401a205e77",
+                "label": "BRCA2",
+                "parent": "reactome:Complex12886"
+            },
+            "position": {
+                "x": 506.2080149755203,
+                "y": -725.1091646932647
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_dd77aaca7c05f637124590401a205e77",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex12886"
+            },
+            "position": {
+                "x": 750.2498247789487,
+                "y": -930.089438656274
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_43e78de989645faba0866ec5ef613a91",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex12886"
+            },
+            "position": {
+                "x": 709.954113313826,
+                "y": -868.2349204653439
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_06e9607a1b16ccad5cedcfb5b71105dd",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 679.329113313826,
+                "y": -865.4224204653439
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_06e9607a1b16ccad5cedcfb5b71105dd",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 740.579113313826,
+                "y": -865.4224204653439
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_43e78de989645faba0866ec5ef613a91",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex12886"
+            },
+            "position": {
+                "x": 831.0138536927135,
+                "y": -902.4316553557809
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_d9395fb27d22b01e7a955c7591ef1ff8",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 831.0138536927135,
+                "y": -918.7441553557809
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_d9395fb27d22b01e7a955c7591ef1ff8",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 831.0138536927135,
+                "y": -877.9941553557809
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_43e78de989645faba0866ec5ef613a91",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex12886"
+            },
+            "position": {
+                "x": 642.0380863906582,
+                "y": -988.4056950038052
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_08af6e92daeab628f485cb25ae8ff752",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 611.4130863906582,
+                "y": -1028.8431950038052
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_08af6e92daeab628f485cb25ae8ff752",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 672.6630863906582,
+                "y": -1028.8431950038052
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_08af6e92daeab628f485cb25ae8ff752",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 611.4130863906582,
+                "y": -985.5931950038051
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_08af6e92daeab628f485cb25ae8ff752",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 672.6630863906582,
+                "y": -985.5931950038051
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_08af6e92daeab628f485cb25ae8ff752",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_43e78de989645faba0866ec5ef613a91"
+            },
+            "position": {
+                "x": 611.4130863906582,
+                "y": -942.3431950038051
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein25937",
+                "label": "PALB2",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 494.89579127000405,
+                "y": 16.42872831021444
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14960",
+                "label": "Cleaved Holliday Junction:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:EXO1,DNA2:BLM,WRN:p-BRCA1-C complex:PALB2:p-T3387-BRCA2:SEM1:p-T309-RAD51:RAD51AP1:CX3 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 155.54693800848605,
+                "y": -349.30433944316997
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_65125e965fc66a82d704661c861ee4f6",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14960"
+            },
+            "position": {
+                "x": 253.4181774978734,
+                "y": -301.4678748278016
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_045dace7e308abe56249c502332fdc44",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex14960"
+            },
+            "position": {
+                "x": 341.8730241962645,
+                "y": -259.8318033328385
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_1dafe5bb4e2231fcefdda53373db315b",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_045dace7e308abe56249c502332fdc44"
+            },
+            "position": {
+                "x": 345.73993596097034,
+                "y": -281.4568033328385
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_1dafe5bb4e2231fcefdda53373db315b",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_045dace7e308abe56249c502332fdc44"
+            },
+            "position": {
+                "x": 345.73993596097034,
+                "y": -238.2068033328385
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_045dace7e308abe56249c502332fdc44",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14960"
+            },
+            "position": {
+                "x": 208.42796007923616,
+                "y": -388.066772519709
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_c5cbc93a8e5e62e6e13697f5bd685feb",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_045dace7e308abe56249c502332fdc44"
+            },
+            "position": {
+                "x": 214.51251890276558,
+                "y": -409.691772519709
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_c5cbc93a8e5e62e6e13697f5bd685feb",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_045dace7e308abe56249c502332fdc44"
+            },
+            "position": {
+                "x": 214.51251890276558,
+                "y": -366.441772519709
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_65125e965fc66a82d704661c861ee4f6",
+                "label": "BRCA2",
+                "parent": "reactome:Complex14960"
+            },
+            "position": {
+                "x": -80.99605994399826,
+                "y": -539.0090760062494
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_65125e965fc66a82d704661c861ee4f6",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex14960"
+            },
+            "position": {
+                "x": 102.35738730188865,
+                "y": -208.01488608799798
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_f7a0a483698a5e175941abe3f654a672",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex14960"
+            },
+            "position": {
+                "x": -3.378984935836513,
+                "y": -173.41210288009054
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_2df8717226412e5496aa89c513ead365",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": -34.00398493583651,
+                "y": -170.59960288009054
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_2df8717226412e5496aa89c513ead365",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": 27.246015064163487,
+                "y": -170.59960288009054
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_f7a0a483698a5e175941abe3f654a672",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex14960"
+            },
+            "position": {
+                "x": 178.40313213510305,
+                "y": -229.75836462983284
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_1f2100d4290984d88a5d23369380ea23",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": 178.40313213510305,
+                "y": -246.07086462983284
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_1f2100d4290984d88a5d23369380ea23",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": 178.40313213510305,
+                "y": -205.32086462983287
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_f7a0a483698a5e175941abe3f654a672",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex14960"
+            },
+            "position": {
+                "x": 45.223406891540776,
+                "y": -317.87906271453664
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_5b1fa9814eb3b59aa90324a1817069e5",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": 14.598406891540776,
+                "y": -358.31656271453664
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_5b1fa9814eb3b59aa90324a1817069e5",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": 75.84840689154078,
+                "y": -358.31656271453664
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_5b1fa9814eb3b59aa90324a1817069e5",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": 14.598406891540776,
+                "y": -315.06656271453664
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_5b1fa9814eb3b59aa90324a1817069e5",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": 75.84840689154078,
+                "y": -315.06656271453664
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_5b1fa9814eb3b59aa90324a1817069e5",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_f7a0a483698a5e175941abe3f654a672"
+            },
+            "position": {
+                "x": 14.598406891540776,
+                "y": -271.81656271453664
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14943",
+                "label": "Extended D-Loop:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-BRCA1-C complex:PALB2:p-T3387-BRCA2:SEM1:p-T309-RAD51:RAD51AP1:CX3 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 715.9670090309628,
+                "y": 456.69303530864886
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_ea67528c40e1d63475b22890956d60b3",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14943"
+            },
+            "position": {
+                "x": 741.3530236031506,
+                "y": 623.7703672980915
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_0200ef18b331d7264dccd6160a622c2e",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex14943"
+            },
+            "position": {
+                "x": 832.4166885830664,
+                "y": 654.6051298122313
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_c0ffbb9775d0c839a465011d880c21e8",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_0200ef18b331d7264dccd6160a622c2e"
+            },
+            "position": {
+                "x": 836.2836003477723,
+                "y": 632.9801298122313
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_c0ffbb9775d0c839a465011d880c21e8",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_0200ef18b331d7264dccd6160a622c2e"
+            },
+            "position": {
+                "x": 836.2836003477723,
+                "y": 676.2301298122313
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_0200ef18b331d7264dccd6160a622c2e",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14943"
+            },
+            "position": {
+                "x": 744.5516354867713,
+                "y": 536.2720402920395
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_41fd210b479cff671777d227cdf64f10",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_0200ef18b331d7264dccd6160a622c2e"
+            },
+            "position": {
+                "x": 750.6361943103007,
+                "y": 514.6470402920395
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_41fd210b479cff671777d227cdf64f10",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_0200ef18b331d7264dccd6160a622c2e"
+            },
+            "position": {
+                "x": 750.6361943103007,
+                "y": 557.8970402920395
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_ea67528c40e1d63475b22890956d60b3",
+                "label": "BRCA2",
+                "parent": "reactome:Complex14943"
+            },
+            "position": {
+                "x": 540.6539065529774,
+                "y": 220.53094080506645
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_ea67528c40e1d63475b22890956d60b3",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex14943"
+            },
+            "position": {
+                "x": 732.1425365640298,
+                "y": 423.705466950965
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_79b83de52179ad15933342864cb47eed",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex14943"
+            },
+            "position": {
+                "x": 844.030111508948,
+                "y": 434.82482467760553
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_e433c1b0bcd5ee21da6649c04e18f897",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 813.405111508948,
+                "y": 437.63732467760553
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_e433c1b0bcd5ee21da6649c04e18f897",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 874.655111508948,
+                "y": 437.63732467760553
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_79b83de52179ad15933342864cb47eed",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex14943"
+            },
+            "position": {
+                "x": 649.794036924979,
+                "y": 432.78932864372797
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_8e914bdb6240d654c944dba60233ae0c",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 649.794036924979,
+                "y": 416.47682864372797
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_8e914bdb6240d654c944dba60233ae0c",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 649.794036924979,
+                "y": 457.22682864372797
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_79b83de52179ad15933342864cb47eed",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex14943"
+            },
+            "position": {
+                "x": 773.6339526091843,
+                "y": 309.6673676803781
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_3659a3b6b7447b1fba7e95d7454b5986",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 743.0089526091843,
+                "y": 269.2298676803781
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_3659a3b6b7447b1fba7e95d7454b5986",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 804.2589526091843,
+                "y": 269.2298676803781
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_3659a3b6b7447b1fba7e95d7454b5986",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 743.0089526091843,
+                "y": 312.4798676803781
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_3659a3b6b7447b1fba7e95d7454b5986",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 804.2589526091843,
+                "y": 312.4798676803781
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_3659a3b6b7447b1fba7e95d7454b5986",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_79b83de52179ad15933342864cb47eed"
+            },
+            "position": {
+                "x": 743.0089526091843,
+                "y": 355.7298676803781
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5783",
+                "label": "RAD17:RFC",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1218.3338076059679,
+                "y": -459.1768523474675
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1150_de6044a1ff178ea14b385376ca2ea744",
+                "label": "RFC4",
+                "parent": "reactome:Complex5783"
+            },
+            "position": {
+                "x": 1187.7088076059679,
+                "y": -499.6143523474675
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13522_de6044a1ff178ea14b385376ca2ea744",
+                "label": "RAD17",
+                "parent": "reactome:Complex5783"
+            },
+            "position": {
+                "x": 1248.9588076059679,
+                "y": -499.6143523474675
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1149_de6044a1ff178ea14b385376ca2ea744",
+                "label": "RFC5",
+                "parent": "reactome:Complex5783"
+            },
+            "position": {
+                "x": 1187.7088076059679,
+                "y": -456.36435234746756
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1147_de6044a1ff178ea14b385376ca2ea744",
+                "label": "RFC3",
+                "parent": "reactome:Complex5783"
+            },
+            "position": {
+                "x": 1248.9588076059679,
+                "y": -456.36435234746756
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1148_de6044a1ff178ea14b385376ca2ea744",
+                "label": "RFC2",
+                "parent": "reactome:Complex5783"
+            },
+            "position": {
+                "x": 1187.7088076059679,
+                "y": -413.11435234746756
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5751",
+                "label": "p-MRN",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 368.4126270462501,
+                "y": -63.477450110909544
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13487_913f3fa3071027665c40351ea4016073",
+                "label": "RAD50",
+                "parent": "reactome:Complex5751"
+            },
+            "position": {
+                "x": 337.7876270462501,
+                "y": -82.28995011090954
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13486_913f3fa3071027665c40351ea4016073",
+                "label": "NBN",
+                "parent": "reactome:Complex5751"
+            },
+            "position": {
+                "x": 399.0376270462501,
+                "y": -82.28995011090954
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13485_913f3fa3071027665c40351ea4016073",
+                "label": "MRE11",
+                "parent": "reactome:Complex5751"
+            },
+            "position": {
+                "x": 337.7876270462501,
+                "y": -39.039950110909544
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12873",
+                "label": "SEM1:p-T3387-BRCA2:p-T309-RAD51 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 316.77346206512595,
+                "y": -44.31091400563221
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1066_a159ecfb5436acb9637af7c163326b15",
+                "label": "SEM1",
+                "parent": "reactome:Complex12873"
+            },
+            "position": {
+                "x": 286.14846206512595,
+                "y": -65.93591400563221
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_a159ecfb5436acb9637af7c163326b15",
+                "label": "BRCA2",
+                "parent": "reactome:Complex12873"
+            },
+            "position": {
+                "x": 347.39846206512595,
+                "y": -65.93591400563221
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26078_a159ecfb5436acb9637af7c163326b15",
+                "label": "RAD51",
+                "parent": "reactome:Complex12873"
+            },
+            "position": {
+                "x": 286.14846206512595,
+                "y": -22.685914005632213
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12882",
+                "label": "3' overhanging ssDNA-DSBs:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:BRCA1-C complex:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-T309-RAD51:BRCA2 mutants (PALB2 binding):SEM1:BCDX2 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -928.5079556131068,
+                "y": -373.3937872681537
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_c93720917fb8d92544cbfa50d2fe3e9c",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex12882"
+            },
+            "position": {
+                "x": -920.4095296627247,
+                "y": -291.235168838509
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_212a14f57754b986d0089407a3a82b18",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex12882"
+            },
+            "position": {
+                "x": -918.228067544773,
+                "y": -200.47856822218023
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_3bc9e35be35f06644d0c956cb95f0c22",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_212a14f57754b986d0089407a3a82b18"
+            },
+            "position": {
+                "x": -914.3611557800671,
+                "y": -222.10356822218023
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_3bc9e35be35f06644d0c956cb95f0c22",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_212a14f57754b986d0089407a3a82b18"
+            },
+            "position": {
+                "x": -914.3611557800671,
+                "y": -178.85356822218023
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_212a14f57754b986d0089407a3a82b18",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex12882"
+            },
+            "position": {
+                "x": -1019.5344744043183,
+                "y": -321.6774489069217
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_684f9a1bb10370c84c26f26c1a16983f",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_212a14f57754b986d0089407a3a82b18"
+            },
+            "position": {
+                "x": -1013.4499155807889,
+                "y": -343.3024489069217
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_684f9a1bb10370c84c26f26c1a16983f",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_212a14f57754b986d0089407a3a82b18"
+            },
+            "position": {
+                "x": -1013.4499155807889,
+                "y": -300.0524489069217
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26435_c93720917fb8d92544cbfa50d2fe3e9c",
+                "label": "BRCA2 mutants (PALB2 binding)",
+                "parent": "reactome:Complex12882"
+            },
+            "position": {
+                "x": -652.0031457783787,
+                "y": -220.16048697214495
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_c93720917fb8d92544cbfa50d2fe3e9c",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex12882"
+            },
+            "position": {
+                "x": -1051.6124013724393,
+                "y": -421.36134956504037
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_8f4f3c78c71b2a6629d162057abf15b3",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex12882"
+            },
+            "position": {
+                "x": -1157.762765447835,
+                "y": -388.8430815162907
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_f3b2078a4b7ef0c5b268c531935f17a9",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -1188.387765447835,
+                "y": -386.0305815162907
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_f3b2078a4b7ef0c5b268c531935f17a9",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -1127.137765447835,
+                "y": -386.0305815162907
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_8f4f3c78c71b2a6629d162057abf15b3",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex12882"
+            },
+            "position": {
+                "x": -989.7504590748863,
+                "y": -502.82844882009977
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_b2edfa8094367a8185f8e8b65139b7f4",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -989.7504590748863,
+                "y": -519.1409488200998
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_b2edfa8094367a8185f8e8b65139b7f4",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -989.7504590748863,
+                "y": -478.3909488200998
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_8f4f3c78c71b2a6629d162057abf15b3",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex12882"
+            },
+            "position": {
+                "x": -1140.222542144347,
+                "y": -527.4965063141271
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_4ff7ef2f7a848c217e01d145e50658dc",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -1170.847542144347,
+                "y": -567.9340063141271
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_4ff7ef2f7a848c217e01d145e50658dc",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -1109.597542144347,
+                "y": -567.9340063141271
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_4ff7ef2f7a848c217e01d145e50658dc",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -1170.847542144347,
+                "y": -524.6840063141271
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_4ff7ef2f7a848c217e01d145e50658dc",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -1109.597542144347,
+                "y": -524.6840063141271
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_4ff7ef2f7a848c217e01d145e50658dc",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_8f4f3c78c71b2a6629d162057abf15b3"
+            },
+            "position": {
+                "x": -1170.847542144347,
+                "y": -481.43400631412715
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity1820",
+                "label": "ss-gap-reannealed DNA",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 578.2848945195766,
+                "y": -18.523633855893586
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex6234",
+                "label": "Meiotic single-stranded DNA complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -806.8345003952456,
+                "y": -1013.6430225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1097_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "RPA2",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -841.4595003952456,
+                "y": -1099.8305225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13636_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "CDK4",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -894.7095003952456,
+                "y": -1046.5805225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1095_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "RPA3",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -833.4595003952456,
+                "y": -1046.5805225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11896_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "BRCA1",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -894.7095003952456,
+                "y": -1003.3305225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1096_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "RPA1",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -833.4595003952456,
+                "y": -1003.3305225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13489_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "H3-4",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -780.2095003952456,
+                "y": -1099.8305225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11961_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "H4C3",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -894.7095003952456,
+                "y": -960.0805225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein969_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "Histone H2B",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -894.7095003952456,
+                "y": -919.3305225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14100_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "RAD51",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -833.4595003952456,
+                "y": -960.0805225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14101_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "ATM",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -772.2095003952456,
+                "y": -1046.5805225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity948_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "3' overhanging DNA at resected DSB ends",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -898.7095003952456,
+                "y": -1094.8305225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14102_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "DMC1",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -772.2095003952456,
+                "y": -1003.3305225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14103_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "BRCA2",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -772.2095003952456,
+                "y": -960.0805225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14104_a9db5fcf3c4652a15d6929833133d4a8",
+                "label": "H2AX",
+                "parent": "reactome:Complex6234"
+            },
+            "position": {
+                "x": -718.9595003952456,
+                "y": -1099.8305225027632
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13521",
+                "label": "RHNO1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 980.7208253016933,
+                "y": -633.9025227499272
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein25936",
+                "label": "RAD51AP1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 438.74666875692753,
+                "y": 41.83015698090375
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity1818",
+                "label": "Sister Chromatid Arm with Crossover",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 522.2480957536386,
+                "y": -9.136554019409601
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14952",
+                "label": "Holliday Junction:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-BRCA1-C complex:PALB2:p-T3387-BRCA2:SEM1:p-T309-RAD51:RAD51AP1:CX3 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 65.15757109504435,
+                "y": 460.1338061863646
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_20a6e83bdc1056c1df614a3a6b68c63f",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14952"
+            },
+            "position": {
+                "x": -11.47482650252033,
+                "y": 473.17022879863765
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_dd7454259f18d93aee9081e20f58f9dd",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex14952"
+            },
+            "position": {
+                "x": -43.75484436078136,
+                "y": 561.888077377895
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_babaa4319340f482bc7670c722927dab",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_dd7454259f18d93aee9081e20f58f9dd"
+            },
+            "position": {
+                "x": -39.88793259607547,
+                "y": 540.263077377895
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_babaa4319340f482bc7670c722927dab",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_dd7454259f18d93aee9081e20f58f9dd"
+            },
+            "position": {
+                "x": -39.88793259607547,
+                "y": 583.513077377895
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_dd7454259f18d93aee9081e20f58f9dd",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14952"
+            },
+            "position": {
+                "x": -107.95265760718613,
+                "y": 420.3645720828873
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_bc299b6ff57767c3af306e1a8f2e9586",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_dd7454259f18d93aee9081e20f58f9dd"
+            },
+            "position": {
+                "x": -101.8680987836567,
+                "y": 398.7395720828873
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_bc299b6ff57767c3af306e1a8f2e9586",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_dd7454259f18d93aee9081e20f58f9dd"
+            },
+            "position": {
+                "x": -101.8680987836567,
+                "y": 441.9895720828873
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_20a6e83bdc1056c1df614a3a6b68c63f",
+                "label": "BRCA2",
+                "parent": "reactome:Complex14952"
+            },
+            "position": {
+                "x": 216.33798732606346,
+                "y": 264.18896513735586
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_20a6e83bdc1056c1df614a3a6b68c63f",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex14952"
+            },
+            "position": {
+                "x": 133.30988084513402,
+                "y": 603.889775849984
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_8e91d3f409810f3b7b2572c73ecbb2a3",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex14952"
+            },
+            "position": {
+                "x": 237.85235862080424,
+                "y": 642.2661472353733
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_5996ec6861f0a0c84cd113e6cc6eb0d5",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 207.22735862080424,
+                "y": 645.0786472353733
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_5996ec6861f0a0c84cd113e6cc6eb0d5",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 268.47735862080424,
+                "y": 645.0786472353733
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_8e91d3f409810f3b7b2572c73ecbb2a3",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex14952"
+            },
+            "position": {
+                "x": 90.5739023604296,
+                "y": 518.5969282263683
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_f54784cc1e32f70b577bb3d5e05fa8c7",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 90.5739023604296,
+                "y": 502.2844282263683
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_f54784cc1e32f70b577bb3d5e05fa8c7",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 90.5739023604296,
+                "y": 543.0344282263683
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_8e91d3f409810f3b7b2572c73ecbb2a3",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex14952"
+            },
+            "position": {
+                "x": 231.64801747474132,
+                "y": 502.2922221185945
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_2073d81ccd5d1b19bad7ec21350ec779",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 201.0230174747413,
+                "y": 461.85472211859445
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_2073d81ccd5d1b19bad7ec21350ec779",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 262.2730174747413,
+                "y": 461.85472211859445
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_2073d81ccd5d1b19bad7ec21350ec779",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 201.0230174747413,
+                "y": 505.1047221185945
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_2073d81ccd5d1b19bad7ec21350ec779",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 262.2730174747413,
+                "y": 505.1047221185945
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_2073d81ccd5d1b19bad7ec21350ec779",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_8e91d3f409810f3b7b2572c73ecbb2a3"
+            },
+            "position": {
+                "x": 201.0230174747413,
+                "y": 548.3547221185945
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_5a69074b1b5b6819559b5c6453e8610a",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 298.94957683959296,
+                "y": 121.19968668568004
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_c2a841af8dd79b2c8875d7aacaaed275",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_5a69074b1b5b6819559b5c6453e8610a"
+            },
+            "position": {
+                "x": 305.03413566312236,
+                "y": 99.57468668568004
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_c2a841af8dd79b2c8875d7aacaaed275",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_5a69074b1b5b6819559b5c6453e8610a"
+            },
+            "position": {
+                "x": 305.03413566312236,
+                "y": 142.82468668568004
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_5a69074b1b5b6819559b5c6453e8610a",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 239.03466131913024,
+                "y": 73.15087201090094
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_085bb4044547f6a014234aac0c2fe09e",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_5a69074b1b5b6819559b5c6453e8610a"
+            },
+            "position": {
+                "x": 242.90157308383615,
+                "y": 51.52587201090094
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_085bb4044547f6a014234aac0c2fe09e",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_5a69074b1b5b6819559b5c6453e8610a"
+            },
+            "position": {
+                "x": 242.90157308383615,
+                "y": 94.77587201090094
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule4820",
+                "label": "dNTP",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 354.76688369216237,
+                "y": 740.0025213369905
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14942",
+                "label": "D-Loop:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-BRCA1-C complex:PALB2:p-T3387-BRCA2:SEM1:p-T309-RAD51:RAD51AP1:CX3 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 115.8389871958187,
+                "y": 1031.588708690995
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_f5e3f41360f8a1349320684c1b87fdfe",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14942"
+            },
+            "position": {
+                "x": 198.88589565607947,
+                "y": 1067.2097979931698
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_39c4a1cf826ea3f63fc749ad41222902",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex14942"
+            },
+            "position": {
+                "x": 234.71380021384823,
+                "y": 1155.7444221815706
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_986f982fc7fe0f23d2e1382976c439ce",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_39c4a1cf826ea3f63fc749ad41222902"
+            },
+            "position": {
+                "x": 238.5807119785541,
+                "y": 1134.1194221815706
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_986f982fc7fe0f23d2e1382976c439ce",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_39c4a1cf826ea3f63fc749ad41222902"
+            },
+            "position": {
+                "x": 238.5807119785541,
+                "y": 1177.3694221815706
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_39c4a1cf826ea3f63fc749ad41222902",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14942"
+            },
+            "position": {
+                "x": 285.45010664007407,
+                "y": 1026.7956692735033
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_933490949a2ac87822507b96ae3983da",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_39c4a1cf826ea3f63fc749ad41222902"
+            },
+            "position": {
+                "x": 291.5346654636035,
+                "y": 1005.1706692735033
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_933490949a2ac87822507b96ae3983da",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_39c4a1cf826ea3f63fc749ad41222902"
+            },
+            "position": {
+                "x": 291.5346654636035,
+                "y": 1048.4206692735033
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_f5e3f41360f8a1349320684c1b87fdfe",
+                "label": "BRCA2",
+                "parent": "reactome:Complex14942"
+            },
+            "position": {
+                "x": 91.43500508725754,
+                "y": 836.0531856948479
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_f5e3f41360f8a1349320684c1b87fdfe",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex14942"
+            },
+            "position": {
+                "x": 52.07508348286177,
+                "y": 1064.7294940071895
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_b9cffcd248bb7f3fe2b48353b7858103",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex14942"
+            },
+            "position": {
+                "x": -53.356691071966054,
+                "y": 1031.022429008008
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_4ec1680cfe0cdfc6e98ab0b4105e377a",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": -83.98169107196605,
+                "y": 1033.834929008008
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_4ec1680cfe0cdfc6e98ab0b4105e377a",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": -22.731691071966054,
+                "y": 1033.834929008008
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_b9cffcd248bb7f3fe2b48353b7858103",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex14942"
+            },
+            "position": {
+                "x": 118.86139961299983,
+                "y": 1125.4233973602306
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_e8734e991007263fb5d97481439c5c8b",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": 118.86139961299983,
+                "y": 1109.1108973602306
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_e8734e991007263fb5d97481439c5c8b",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": 118.86139961299983,
+                "y": 1149.8608973602306
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_b9cffcd248bb7f3fe2b48353b7858103",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex14942"
+            },
+            "position": {
+                "x": -10.391461274621747,
+                "y": 1170.061731687142
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_bb531a887e4bd9ce5b463cbc738f0229",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": -41.01646127462175,
+                "y": 1129.624231687142
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_bb531a887e4bd9ce5b463cbc738f0229",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": 20.233538725378253,
+                "y": 1129.624231687142
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_bb531a887e4bd9ce5b463cbc738f0229",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": -41.01646127462175,
+                "y": 1172.874231687142
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_bb531a887e4bd9ce5b463cbc738f0229",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": 20.233538725378253,
+                "y": 1172.874231687142
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_bb531a887e4bd9ce5b463cbc738f0229",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_b9cffcd248bb7f3fe2b48353b7858103"
+            },
+            "position": {
+                "x": -41.01646127462175,
+                "y": 1216.124231687142
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex415",
+                "label": "RPA heterotrimer",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -909.8551393331918,
+                "y": -714.152342740588
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1097_f94ea44e900f33447cb024c136b86caf",
+                "label": "RPA2",
+                "parent": "reactome:Complex415"
+            },
+            "position": {
+                "x": -940.4801393331918,
+                "y": -732.964842740588
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1095_f94ea44e900f33447cb024c136b86caf",
+                "label": "RPA3",
+                "parent": "reactome:Complex415"
+            },
+            "position": {
+                "x": -879.2301393331918,
+                "y": -732.964842740588
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1096_f94ea44e900f33447cb024c136b86caf",
+                "label": "RPA1",
+                "parent": "reactome:Complex415"
+            },
+            "position": {
+                "x": -940.4801393331918,
+                "y": -689.714842740588
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity1817",
+                "label": "dsDNA with crossover",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 524.6183775128104,
+                "y": 29.10438596517095
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12881",
+                "label": "p-RPA heterotrimer",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1164.6685772339329,
+                "y": -545.8927073970619
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1095_dea5b35b216532da7731a3832b6a0809",
+                "label": "RPA3",
+                "parent": "reactome:Complex12881"
+            },
+            "position": {
+                "x": 1134.0435772339329,
+                "y": -567.5177073970619
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1096_dea5b35b216532da7731a3832b6a0809",
+                "label": "RPA1",
+                "parent": "reactome:Complex12881"
+            },
+            "position": {
+                "x": 1195.2935772339329,
+                "y": -567.5177073970619
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26434_dea5b35b216532da7731a3832b6a0809",
+                "label": "RPA2",
+                "parent": "reactome:Complex12881"
+            },
+            "position": {
+                "x": 1134.0435772339329,
+                "y": -524.2677073970619
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12885",
+                "label": "3' overhanging ssDNA-DSBs:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:BRCA1-C complex:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-T309-RAD51:p-T3387-BRCA2:SEM1:BCDX2 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 821.195685940557,
+                "y": -354.036746215204
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_5cffa1aa7dae5a7d9af0370ef5847d72",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex12885"
+            },
+            "position": {
+                "x": 888.2558106556424,
+                "y": -195.4801602179622
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_51cec825328759ec12f437d368bbdadc",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex12885"
+            },
+            "position": {
+                "x": 978.0471566273218,
+                "y": -159.40233481696626
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_b052e2c552482cf2b401f81dd5b0c87b",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_51cec825328759ec12f437d368bbdadc"
+            },
+            "position": {
+                "x": 981.9140683920277,
+                "y": -181.02733481696626
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_b052e2c552482cf2b401f81dd5b0c87b",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_51cec825328759ec12f437d368bbdadc"
+            },
+            "position": {
+                "x": 981.9140683920277,
+                "y": -137.77733481696626
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_51cec825328759ec12f437d368bbdadc",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex12885"
+            },
+            "position": {
+                "x": 874.7694963204143,
+                "y": -284.46034055632055
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_b63dd917b38c6bd37e17f51b31d8b289",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_51cec825328759ec12f437d368bbdadc"
+            },
+            "position": {
+                "x": 880.8540551439437,
+                "y": -306.08534055632055
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_b63dd917b38c6bd37e17f51b31d8b289",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_51cec825328759ec12f437d368bbdadc"
+            },
+            "position": {
+                "x": 880.8540551439437,
+                "y": -262.83534055632055
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_5cffa1aa7dae5a7d9af0370ef5847d72",
+                "label": "BRCA2",
+                "parent": "reactome:Complex12885"
+            },
+            "position": {
+                "x": 611.7471475193274,
+                "y": -327.52988321190804
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_5cffa1aa7dae5a7d9af0370ef5847d72",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex12885"
+            },
+            "position": {
+                "x": 874.7142748966094,
+                "y": -418.15326594503574
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_b90fd1d4b62e29e8a98b627ad3e40313",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex12885"
+            },
+            "position": {
+                "x": 983.3942243617867,
+                "y": -381.55129041635143
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_f498b5f0fc249a6c91436d8a8c2e7251",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 952.7692243617867,
+                "y": -378.73879041635143
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_f498b5f0fc249a6c91436d8a8c2e7251",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 1014.0192243617867,
+                "y": -378.73879041635143
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_b90fd1d4b62e29e8a98b627ad3e40313",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex12885"
+            },
+            "position": {
+                "x": 942.6401869732663,
+                "y": -481.4745514866081
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_465e4b3169f52c99b74253276e55e67a",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 942.6401869732663,
+                "y": -497.7870514866081
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_465e4b3169f52c99b74253276e55e67a",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 942.6401869732663,
+                "y": -457.03705148660816
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_b90fd1d4b62e29e8a98b627ad3e40313",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex12885"
+            },
+            "position": {
+                "x": 811.6501842722353,
+                "y": -529.8586576134418
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_e5354d285f0af0f23cc497aaa263f88e",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 781.0251842722353,
+                "y": -570.2961576134418
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_e5354d285f0af0f23cc497aaa263f88e",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 842.2751842722353,
+                "y": -570.2961576134418
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_e5354d285f0af0f23cc497aaa263f88e",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 781.0251842722353,
+                "y": -527.0461576134418
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_e5354d285f0af0f23cc497aaa263f88e",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 842.2751842722353,
+                "y": -527.0461576134418
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_e5354d285f0af0f23cc497aaa263f88e",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_b90fd1d4b62e29e8a98b627ad3e40313"
+            },
+            "position": {
+                "x": 781.0251842722353,
+                "y": -483.7961576134418
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity1191",
+                "label": "dsDNA",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 409.3102492927423,
+                "y": -98.39250971037688
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13520",
+                "label": "TOPBP1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1053.0265760010225,
+                "y": -638.1528721858527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity469",
+                "label": "DNA",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -864.0574010914524,
+                "y": -858.6812836381762
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11896",
+                "label": "BRCA1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -677.2642023049698,
+                "y": -863.6958166593006
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_0aa6778644770fafd4c46273b2f65cf6",
+                "label": "EXO1:BLM,WRN",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 263.1210992236663,
+                "y": -80.71862383878899
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_34ca7c567de8178132ac118f4da85bf6",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 263.1210992236663,
+                "y": -97.03112383878899
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_34ca7c567de8178132ac118f4da85bf6",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 263.1210992236663,
+                "y": -56.281123838788986
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex6236",
+                "label": "Meiotic D-loop complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -582.3258060425999,
+                "y": -674.1955450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1097_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "RPA2",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -616.9508060425999,
+                "y": -744.0705450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13636_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "CDK4",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -670.2008060425999,
+                "y": -690.8205450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1095_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "RPA3",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -608.9508060425999,
+                "y": -690.8205450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1096_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "RPA1",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -670.2008060425999,
+                "y": -647.5705450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13489_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "H3-4",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -608.9508060425999,
+                "y": -647.5705450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11961_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "H4C3",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -555.7008060425999,
+                "y": -744.0705450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity995_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "Heteroduplex DNA containing D-loop structure",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -674.2008060425999,
+                "y": -739.0705450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein969_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "Histone H2B",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -494.4508060425999,
+                "y": -746.5705450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14100_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "RAD51",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -670.2008060425999,
+                "y": -604.3205450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14101_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "ATM",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -608.9508060425999,
+                "y": -604.3205450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14102_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "DMC1",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -547.7008060425999,
+                "y": -690.8205450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14103_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "BRCA2",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -547.7008060425999,
+                "y": -647.5705450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14104_f5c6b1552071fddc31bb8691e33eb412",
+                "label": "H2AX",
+                "parent": "reactome:Complex6236"
+            },
+            "position": {
+                "x": -547.7008060425999,
+                "y": -604.3205450136546
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13636",
+                "label": "CDK4",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -736.8480050285589,
+                "y": -829.0395834364622
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_0aa6778644770fafd4c46273b2f65cf6",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 155.97690161143436,
+                "y": -52.7963252038556
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_df3a201f9ce33a620bcd7aadf02574a9",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 125.35190161143436,
+                "y": -93.2338252038556
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_df3a201f9ce33a620bcd7aadf02574a9",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 186.60190161143436,
+                "y": -93.2338252038556
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_df3a201f9ce33a620bcd7aadf02574a9",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 125.35190161143436,
+                "y": -49.9838252038556
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_df3a201f9ce33a620bcd7aadf02574a9",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 186.60190161143436,
+                "y": -49.9838252038556
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_df3a201f9ce33a620bcd7aadf02574a9",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_0aa6778644770fafd4c46273b2f65cf6"
+            },
+            "position": {
+                "x": 125.35190161143436,
+                "y": -6.733825203855602
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule2624",
+                "label": "PPi",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 410.72029223303673,
+                "y": 736.1713077800937
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13488",
+                "label": "KAT5",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 380.5112499278265,
+                "y": 30.314697606065153
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13509",
+                "label": "BRIP1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 437.60312751476897,
+                "y": -11.35539997876661
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14955",
+                "label": "Holliday Junction:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:EXO1,DNA2:BLM,WRN:p-S990,Ac-K1249-BRIP1:p-BRCA1-C complex:PALB2:p-T3387-BRCA2:SEM1:FIRRM:FIGNL1:p-T309-RAD51:RAD51AP1:CX3 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -522.1187659778755,
+                "y": 145.0282984487297
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_a135ee81db1e7dd7ba7cd3337f29f8db",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14955"
+            },
+            "position": {
+                "x": -637.2312984809954,
+                "y": 53.11045622914837
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_44a89ffbd6af437bf1c4f786013675fd",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex14955"
+            },
+            "position": {
+                "x": -547.0352795006859,
+                "y": 25.252194882333825
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_96f7eca35843764de01e088e27abb702",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_44a89ffbd6af437bf1c4f786013675fd"
+            },
+            "position": {
+                "x": -543.16836773598,
+                "y": 3.627194882333825
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_96f7eca35843764de01e088e27abb702",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_44a89ffbd6af437bf1c4f786013675fd"
+            },
+            "position": {
+                "x": -543.16836773598,
+                "y": 46.877194882333825
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_44a89ffbd6af437bf1c4f786013675fd",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14955"
+            },
+            "position": {
+                "x": -695.8658559259608,
+                "y": -31.49429253182676
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_89296ed8210460c766ef19a6a602bdcd",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_44a89ffbd6af437bf1c4f786013675fd"
+            },
+            "position": {
+                "x": -689.7812971024314,
+                "y": -53.11929253182676
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_89296ed8210460c766ef19a6a602bdcd",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_44a89ffbd6af437bf1c4f786013675fd"
+            },
+            "position": {
+                "x": -689.7812971024314,
+                "y": -9.869292531826758
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_a135ee81db1e7dd7ba7cd3337f29f8db",
+                "label": "BRCA2",
+                "parent": "reactome:Complex14955"
+            },
+            "position": {
+                "x": -274.17487438544686,
+                "y": 14.17738446083105
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_a135ee81db1e7dd7ba7cd3337f29f8db",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex14955"
+            },
+            "position": {
+                "x": -647.3227067449299,
+                "y": 200.4235742539614
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_f5db0496f2979007234875fca3b572e7",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex14955"
+            },
+            "position": {
+                "x": -569.9791369291479,
+                "y": 147.68376499141078
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_a5fd19a3e60ffadf47da64a56ad8e49b",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -600.6041369291479,
+                "y": 150.49626499141078
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_a5fd19a3e60ffadf47da64a56ad8e49b",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -539.3541369291479,
+                "y": 150.49626499141078
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_f5db0496f2979007234875fca3b572e7",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex14955"
+            },
+            "position": {
+                "x": -578.7688905063819,
+                "y": 258.60137283629206
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_4eb0e5e30f1f8807cf00eb3912d53f3a",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -578.7688905063819,
+                "y": 242.28887283629206
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_4eb0e5e30f1f8807cf00eb3912d53f3a",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -578.7688905063819,
+                "y": 283.03887283629206
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_f5db0496f2979007234875fca3b572e7",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex14955"
+            },
+            "position": {
+                "x": -722.812657570304,
+                "y": 302.7383894292862
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_243b8161eaccf17e6edfafb7949eae21",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -753.437657570304,
+                "y": 262.3008894292862
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_243b8161eaccf17e6edfafb7949eae21",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -692.187657570304,
+                "y": 262.3008894292862
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_243b8161eaccf17e6edfafb7949eae21",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -753.437657570304,
+                "y": 305.5508894292862
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_243b8161eaccf17e6edfafb7949eae21",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -692.187657570304,
+                "y": 305.5508894292862
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_243b8161eaccf17e6edfafb7949eae21",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_f5db0496f2979007234875fca3b572e7"
+            },
+            "position": {
+                "x": -753.437657570304,
+                "y": 348.8008894292862
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5735",
+                "label": "ATR:ATRIP",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1003.1535611296599,
+                "y": -644.137889846923
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13476_1d68ab18cbfaa57784345758b84b43f4",
+                "label": "ATR",
+                "parent": "reactome:Complex5735"
+            },
+            "position": {
+                "x": 972.52856112966,
+                "y": -641.325389846923
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13475_1d68ab18cbfaa57784345758b84b43f4",
+                "label": "ATRIP",
+                "parent": "reactome:Complex5735"
+            },
+            "position": {
+                "x": 1033.77856112966,
+                "y": -641.325389846923
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26078",
+                "label": "RAD51",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1114.9893663595435,
+                "y": -587.8128360385559
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14102",
+                "label": "DMC1",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -832.5589037694467,
+                "y": -805.3634787450823
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12875",
+                "label": "BCDX2 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 483.36560613206643,
+                "y": -92.40641274568526
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26080_ee0c94256ba3699538fa92d7d56c7480",
+                "label": "XRCC2",
+                "parent": "reactome:Complex12875"
+            },
+            "position": {
+                "x": 452.74060613206643,
+                "y": -111.21891274568527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein6575_ee0c94256ba3699538fa92d7d56c7480",
+                "label": "RAD51C",
+                "parent": "reactome:Complex12875"
+            },
+            "position": {
+                "x": 513.9906061320664,
+                "y": -111.21891274568527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein6576_ee0c94256ba3699538fa92d7d56c7480",
+                "label": "RAD51B",
+                "parent": "reactome:Complex12875"
+            },
+            "position": {
+                "x": 452.74060613206643,
+                "y": -67.96891274568527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein21184_ee0c94256ba3699538fa92d7d56c7480",
+                "label": "RAD51D",
+                "parent": "reactome:Complex12875"
+            },
+            "position": {
+                "x": 513.9906061320664,
+                "y": -67.96891274568527
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14103",
+                "label": "BRCA2",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -891.9850903696897,
+                "y": -799.5184531087116
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14950",
+                "label": "Cleaved D-Loop:p-MRN:p-S1981,Ac-K3016-ATM:KAT5:EXO1,DNA2:BLM,WRN:p-BRCA1-C complex:PALB2:p-T3387-BRCA2:p-T309-RAD51:RAD51AP1:CX3 complex",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1155.099779912342,
+                "y": 831.4586915773535
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5771_d9d863344bc2cecce63139e6686d3465",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14950"
+            },
+            "position": {
+                "x": 1263.3900182168313,
+                "y": 718.3976438720797
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_db3015f490f2fbe7f818299a158405e2",
+                "label": "K6PolyUb,p-5S-BRCA1:K6PolyUb,p-2T-BARD1",
+                "parent": "reactome:Complex14950"
+            },
+            "position": {
+                "x": 1325.3445809210302,
+                "y": 800.2679204796477
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13507_ed176685f68b88f7bbadc16b66a34551",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5773_db3015f490f2fbe7f818299a158405e2"
+            },
+            "position": {
+                "x": 1329.2114926857362,
+                "y": 778.6429204796477
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13478_ed176685f68b88f7bbadc16b66a34551",
+                "label": "BARD1",
+                "parent": "reactome:Complex5773_db3015f490f2fbe7f818299a158405e2"
+            },
+            "position": {
+                "x": 1329.2114926857362,
+                "y": 821.8929204796477
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_db3015f490f2fbe7f818299a158405e2",
+                "label": "p-5S-BRCA1:p-2T-BARD1",
+                "parent": "reactome:Complex14950"
+            },
+            "position": {
+                "x": 1169.0965572465993,
+                "y": 785.525359367676
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13480_baedc277db8a8010e4f8fa016238e0dd",
+                "label": "BARD1",
+                "parent": "reactome:Complex5772_db3015f490f2fbe7f818299a158405e2"
+            },
+            "position": {
+                "x": 1175.1811160701286,
+                "y": 763.900359367676
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13506_baedc277db8a8010e4f8fa016238e0dd",
+                "label": "BRCA1",
+                "parent": "reactome:Complex5772_db3015f490f2fbe7f818299a158405e2"
+            },
+            "position": {
+                "x": 1175.1811160701286,
+                "y": 807.150359367676
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26079_d9d863344bc2cecce63139e6686d3465",
+                "label": "BRCA2",
+                "parent": "reactome:Complex14950"
+            },
+            "position": {
+                "x": 1025.5258848878636,
+                "y": 583.265474471815
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5777_d9d863344bc2cecce63139e6686d3465",
+                "label": "EXO1,DNA2:BLM,WRN",
+                "parent": "reactome:Complex14950"
+            },
+            "position": {
+                "x": 1062.7235639853977,
+                "y": 921.6125206435754
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_5655f4916d61a49b63dc672010f104b8",
+                "label": "DNA2:WRN",
+                "parent": "reactome:Complex14950"
+            },
+            "position": {
+                "x": 1168.9001715165832,
+                "y": 891.8409208331548
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11940_5f45725a938babd7a51af5c9ed676436",
+                "label": "WRN",
+                "parent": "reactome:Complex5781_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 1138.2751715165832,
+                "y": 894.6534208331548
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_5f45725a938babd7a51af5c9ed676436",
+                "label": "DNA2",
+                "parent": "reactome:Complex5781_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 1199.5251715165832,
+                "y": 894.6534208331548
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_5655f4916d61a49b63dc672010f104b8",
+                "label": "EXO1:BLM,WRN",
+                "parent": "reactome:Complex14950"
+            },
+            "position": {
+                "x": 1125.989343229989,
+                "y": 996.3076994302023
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13514_8fe085a4f3d9a5bd668397dc0f86c981",
+                "label": "EXO1",
+                "parent": "reactome:Complex5780_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 1125.989343229989,
+                "y": 979.9951994302023
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13513_8fe085a4f3d9a5bd668397dc0f86c981",
+                "label": "BLM,WRN",
+                "parent": "reactome:Complex5780_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 1125.989343229989,
+                "y": 1020.7451994302023
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_5655f4916d61a49b63dc672010f104b8",
+                "label": "DNA2:BLM:TOP3A:RMI1:RMI2",
+                "parent": "reactome:Complex14950"
+            },
+            "position": {
+                "x": 981.8880671389479,
+                "y": 1022.5894086828921
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13512_bcc12e5373301a5451d0392c16acfa22",
+                "label": "TOP3A",
+                "parent": "reactome:Complex5778_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 951.2630671389479,
+                "y": 982.1519086828921
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11894_bcc12e5373301a5451d0392c16acfa22",
+                "label": "BLM",
+                "parent": "reactome:Complex5778_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 1012.5130671389479,
+                "y": 982.1519086828921
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13511_bcc12e5373301a5451d0392c16acfa22",
+                "label": "RMI2",
+                "parent": "reactome:Complex5778_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 951.2630671389479,
+                "y": 1025.401908682892
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13510_bcc12e5373301a5451d0392c16acfa22",
+                "label": "RMI1",
+                "parent": "reactome:Complex5778_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 1012.5130671389479,
+                "y": 1025.401908682892
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein1157_bcc12e5373301a5451d0392c16acfa22",
+                "label": "DNA2",
+                "parent": "reactome:Complex5778_5655f4916d61a49b63dc672010f104b8"
+            },
+            "position": {
+                "x": 951.2630671389479,
+                "y": 1068.651908682892
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule839_0e1735084116c8103b797b86159526ee",
+                "label": "Pi",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 577.2408194350138,
+                "y": 23.105395224893677
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule837_3f5470ff17fc7fe54a1418da35ed0217",
+                "label": "ATP",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 264.9782600931039,
+                "y": -4.106778081832008
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule837_0e1735084116c8103b797b86159526ee",
+                "label": "ATP",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 565.8794388604668,
+                "y": 56.46970272495204
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule839_3f5470ff17fc7fe54a1418da35ed0217",
+                "label": "Pi",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 268.40947684125706,
+                "y": 28.5707110524514
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule930_0e1735084116c8103b797b86159526ee",
+                "label": "H2O",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 509.2007517375009,
+                "y": 52.20168954591365
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule930_3f5470ff17fc7fe54a1418da35ed0217",
+                "label": "H2O",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 210.49128075759228,
+                "y": 10.090113519346673
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule838_3f5470ff17fc7fe54a1418da35ed0217",
+                "label": "ADP",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 353.70319079209713,
+                "y": 1.181776950393406
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule838_0e1735084116c8103b797b86159526ee",
+                "label": "ADP",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 434.1910718334465,
+                "y": 62.233300725957974
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 451.75200828521525,
+                "y": 29.9987492247009
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5693584_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 69.46291083305061,
+                "y": -1.1586783547265895
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 613.8971807289112,
+                "y": 50.37186580341155
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 477.23915709240896,
+                "y": 68.5361685972795
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 309.26395188274296,
+                "y": 21.244103462178565
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 1093.3183652823022,
+                "y": -621.8730255139371
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5693539_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 315.8432268650631,
+                "y": 71.93984156680806
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 415.33038592653054,
+                "y": 771.4457520350066
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5686440_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 811.0756099046639,
+                "y": 760.8516288656497
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -783.7937482378329,
+                "y": -814.4140042816424
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5685341_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 469.0289374405591,
+                "y": -434.7736083073733
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 413.07235129364665,
+                "y": 2.9060495763553718
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": -786.36448047867,
+                "y": -842.346373675887
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "http://bioregistry.io/reactome:R-HSA-5685838_LEFTTORIGHT",
+                "parent": "nucleoplasm"
+            },
+            "position": {
+                "x": 438.65741869177697,
+                "y": 305.02199441758086
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "chromosome",
+                "label": "chromosome"
+            },
+            "position": {
+                "x": -131.05951232885036,
+                "y": 750.5528731551184
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity963",
+                "label": "Sister Chromatid",
+                "parent": "chromosome"
+            },
+            "position": {
+                "x": -131.05951232885036,
+                "y": 750.5528731551184
+            },
+            "group": "nodes",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        }
+    ],
+    "edges": [
+        {
+            "data": {
+                "id": "reactome:SmallMolecule930_3f5470ff17fc7fe54a1418da35ed0217--TO--INP_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "source": "reactome:SmallMolecule930_3f5470ff17fc7fe54a1418da35ed0217",
+                "target": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12875--TO--INP_http://bioregistry.io/reactome:R-HSA-5685341_LEFTTORIGHT",
+                "source": "reactome:Complex12875",
+                "target": "http://bioregistry.io/reactome:R-HSA-5685341_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14960--TO--INP_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "source": "reactome:Complex14960",
+                "target": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_79b83de52179ad15933342864cb47eed--TO--reactome:Complex5777_ea67528c40e1d63475b22890956d60b3",
+                "source": "reactome:Complex5781_79b83de52179ad15933342864cb47eed",
+                "target": "reactome:Complex5777_ea67528c40e1d63475b22890956d60b3"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Protein13488",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Protein13488"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_39c4a1cf826ea3f63fc749ad41222902--TO--reactome:Complex5771_f5e3f41360f8a1349320684c1b87fdfe",
+                "source": "reactome:Complex5773_39c4a1cf826ea3f63fc749ad41222902",
+                "target": "reactome:Complex5771_f5e3f41360f8a1349320684c1b87fdfe"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_f5db0496f2979007234875fca3b572e7--TO--reactome:Complex5777_a135ee81db1e7dd7ba7cd3337f29f8db",
+                "source": "reactome:Complex5781_f5db0496f2979007234875fca3b572e7",
+                "target": "reactome:Complex5777_a135ee81db1e7dd7ba7cd3337f29f8db"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex6234--TO--http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT",
+                "source": "reactome:Complex6234",
+                "target": "http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_b90fd1d4b62e29e8a98b627ad3e40313--TO--reactome:Complex5777_5cffa1aa7dae5a7d9af0370ef5847d72",
+                "source": "reactome:Complex5778_b90fd1d4b62e29e8a98b627ad3e40313",
+                "target": "reactome:Complex5777_5cffa1aa7dae5a7d9af0370ef5847d72"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12885--TO--INP_http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT",
+                "source": "reactome:Complex12885",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_5a69074b1b5b6819559b5c6453e8610a--TO--reactome:Complex5771",
+                "source": "reactome:Complex5773_5a69074b1b5b6819559b5c6453e8610a",
+                "target": "reactome:Complex5771"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT--TO--reactome:Complex6236",
+                "source": "http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT",
+                "target": "reactome:Complex6236"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein25937--TO--INP_http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT",
+                "source": "reactome:Protein25937",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14955--TO--http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "source": "reactome:Complex14955",
+                "target": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Protein25936",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Protein25936"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_a18b640588440a2e09833da75f1ffada--TO--reactome:Complex5777_0918a24cfc72e61562cc279bcf9ded37",
+                "source": "reactome:Complex5778_a18b640588440a2e09833da75f1ffada",
+                "target": "reactome:Complex5777_0918a24cfc72e61562cc279bcf9ded37"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_79b83de52179ad15933342864cb47eed--TO--reactome:Complex5777_ea67528c40e1d63475b22890956d60b3",
+                "source": "reactome:Complex5778_79b83de52179ad15933342864cb47eed",
+                "target": "reactome:Complex5777_ea67528c40e1d63475b22890956d60b3"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:SmallMolecule838_3f5470ff17fc7fe54a1418da35ed0217",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:SmallMolecule838_3f5470ff17fc7fe54a1418da35ed0217"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Protein25937",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Protein25937"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex6233--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:Complex6233",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Protein25936",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Protein25936"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_0aa6778644770fafd4c46273b2f65cf6--TO--reactome:Complex5777",
+                "source": "reactome:Complex5778_0aa6778644770fafd4c46273b2f65cf6",
+                "target": "reactome:Complex5777"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_79b83de52179ad15933342864cb47eed--TO--reactome:Complex5777_ea67528c40e1d63475b22890956d60b3",
+                "source": "reactome:Complex5780_79b83de52179ad15933342864cb47eed",
+                "target": "reactome:Complex5777_ea67528c40e1d63475b22890956d60b3"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14939--TO--INP_http://bioregistry.io/reactome:R-HSA-5685838_LEFTTORIGHT",
+                "source": "reactome:Complex14939",
+                "target": "http://bioregistry.io/reactome:R-HSA-5685838_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_43e78de989645faba0866ec5ef613a91--TO--reactome:Complex5777_dd77aaca7c05f637124590401a205e77",
+                "source": "reactome:Complex5780_43e78de989645faba0866ec5ef613a91",
+                "target": "reactome:Complex5777_dd77aaca7c05f637124590401a205e77"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Complex5751",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Complex5751"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex415--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:Complex415",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Complex5774",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Complex5774"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14943--TO--INP_http://bioregistry.io/reactome:R-HSA-5693539_LEFTTORIGHT",
+                "source": "reactome:Complex14943",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693539_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Protein25937",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Protein25937"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Complex5774",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Complex5774"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_b90fd1d4b62e29e8a98b627ad3e40313--TO--reactome:Complex5777_5cffa1aa7dae5a7d9af0370ef5847d72",
+                "source": "reactome:Complex5780_b90fd1d4b62e29e8a98b627ad3e40313",
+                "target": "reactome:Complex5777_5cffa1aa7dae5a7d9af0370ef5847d72"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14943--TO--INP_http://bioregistry.io/reactome:R-HSA-5686440_LEFTTORIGHT",
+                "source": "reactome:Complex14943",
+                "target": "http://bioregistry.io/reactome:R-HSA-5686440_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Protein25936",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Protein25936"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Complex5771",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Complex5771"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Complex5777",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Complex5777"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_0aa6778644770fafd4c46273b2f65cf6--TO--reactome:Complex5777",
+                "source": "reactome:Complex5781_0aa6778644770fafd4c46273b2f65cf6",
+                "target": "reactome:Complex5777"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Complex5777",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Complex5777"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693584_LEFTTORIGHT--TO--reactome:Complex14960",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693584_LEFTTORIGHT",
+                "target": "reactome:Complex14960"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_b9cffcd248bb7f3fe2b48353b7858103--TO--reactome:Complex5777_f5e3f41360f8a1349320684c1b87fdfe",
+                "source": "reactome:Complex5778_b9cffcd248bb7f3fe2b48353b7858103",
+                "target": "reactome:Complex5777_f5e3f41360f8a1349320684c1b87fdfe"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Protein13454",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Protein13454"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Complex5751",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Complex5751"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_0200ef18b331d7264dccd6160a622c2e--TO--reactome:Complex5771_ea67528c40e1d63475b22890956d60b3",
+                "source": "reactome:Complex5772_0200ef18b331d7264dccd6160a622c2e",
+                "target": "reactome:Complex5771_ea67528c40e1d63475b22890956d60b3"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT--TO--reactome:Complex14943",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT",
+                "target": "reactome:Complex14943"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT--TO--reactome:Complex5782",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "target": "reactome:Complex5782"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14103--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:Protein14103",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT--TO--reactome:Complex5783",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "target": "reactome:Complex5783"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_0aa6778644770fafd4c46273b2f65cf6--TO--reactome:Complex5777",
+                "source": "reactome:Complex5780_0aa6778644770fafd4c46273b2f65cf6",
+                "target": "reactome:Complex5777"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_79be65fac47a0f36f3b97f793917b498--TO--reactome:Complex5771_dd77aaca7c05f637124590401a205e77",
+                "source": "reactome:Complex5772_79be65fac47a0f36f3b97f793917b498",
+                "target": "reactome:Complex5771_dd77aaca7c05f637124590401a205e77"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Complex5771",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Complex5771"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein26078--TO--INP_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "source": "reactome:Protein26078",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_5655f4916d61a49b63dc672010f104b8--TO--reactome:Complex5777_d9d863344bc2cecce63139e6686d3465",
+                "source": "reactome:Complex5781_5655f4916d61a49b63dc672010f104b8",
+                "target": "reactome:Complex5777_d9d863344bc2cecce63139e6686d3465"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_a18b640588440a2e09833da75f1ffada--TO--reactome:Complex5777_0918a24cfc72e61562cc279bcf9ded37",
+                "source": "reactome:Complex5781_a18b640588440a2e09833da75f1ffada",
+                "target": "reactome:Complex5777_0918a24cfc72e61562cc279bcf9ded37"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_8f4f3c78c71b2a6629d162057abf15b3--TO--reactome:Complex5777_c93720917fb8d92544cbfa50d2fe3e9c",
+                "source": "reactome:Complex5781_8f4f3c78c71b2a6629d162057abf15b3",
+                "target": "reactome:Complex5777_c93720917fb8d92544cbfa50d2fe3e9c"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_9a522255109813e8b8b136f30a801d38--TO--reactome:Complex5777_ad1c04ec408cbf52bacba54655619ba5",
+                "source": "reactome:Complex5780_9a522255109813e8b8b136f30a801d38",
+                "target": "reactome:Complex5777_ad1c04ec408cbf52bacba54655619ba5"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule837_0e1735084116c8103b797b86159526ee--TO--INP_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "source": "reactome:SmallMolecule837_0e1735084116c8103b797b86159526ee",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12886--TO--INP_http://bioregistry.io/reactome:R-HSA-5685341_LEFTTORIGHT",
+                "source": "reactome:Complex12886",
+                "target": "http://bioregistry.io/reactome:R-HSA-5685341_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Complex14941",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Complex14941"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5685341_LEFTTORIGHT--TO--reactome:Complex12885",
+                "source": "http://bioregistry.io/reactome:R-HSA-5685341_LEFTTORIGHT",
+                "target": "reactome:Complex12885"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_e872081d5d4bad0c29c60d0208159024--TO--reactome:Complex5771_ad1c04ec408cbf52bacba54655619ba5",
+                "source": "reactome:Complex5772_e872081d5d4bad0c29c60d0208159024",
+                "target": "reactome:Complex5771_ad1c04ec408cbf52bacba54655619ba5"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14950--TO--INP_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "source": "reactome:Complex14950",
+                "target": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein13636--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:Protein13636",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_39c4a1cf826ea3f63fc749ad41222902--TO--reactome:Complex5771_f5e3f41360f8a1349320684c1b87fdfe",
+                "source": "reactome:Complex5772_39c4a1cf826ea3f63fc749ad41222902",
+                "target": "reactome:Complex5771_f5e3f41360f8a1349320684c1b87fdfe"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_b90fd1d4b62e29e8a98b627ad3e40313--TO--reactome:Complex5777_5cffa1aa7dae5a7d9af0370ef5847d72",
+                "source": "reactome:Complex5781_b90fd1d4b62e29e8a98b627ad3e40313",
+                "target": "reactome:Complex5777_5cffa1aa7dae5a7d9af0370ef5847d72"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_dd7454259f18d93aee9081e20f58f9dd--TO--reactome:Complex5771_20a6e83bdc1056c1df614a3a6b68c63f",
+                "source": "reactome:Complex5772_dd7454259f18d93aee9081e20f58f9dd",
+                "target": "reactome:Complex5771_20a6e83bdc1056c1df614a3a6b68c63f"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT--TO--reactome:Complex14939",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT",
+                "target": "reactome:Complex14939"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:PhysicalEntity1818",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:PhysicalEntity1818"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:PhysicalEntity1817",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:PhysicalEntity1817"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_5655f4916d61a49b63dc672010f104b8--TO--reactome:Complex5777_d9d863344bc2cecce63139e6686d3465",
+                "source": "reactome:Complex5780_5655f4916d61a49b63dc672010f104b8",
+                "target": "reactome:Complex5777_d9d863344bc2cecce63139e6686d3465"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_a18b640588440a2e09833da75f1ffada--TO--reactome:Complex5777_0918a24cfc72e61562cc279bcf9ded37",
+                "source": "reactome:Complex5780_a18b640588440a2e09833da75f1ffada",
+                "target": "reactome:Complex5777_0918a24cfc72e61562cc279bcf9ded37"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_43e78de989645faba0866ec5ef613a91--TO--reactome:Complex5777_dd77aaca7c05f637124590401a205e77",
+                "source": "reactome:Complex5778_43e78de989645faba0866ec5ef613a91",
+                "target": "reactome:Complex5777_dd77aaca7c05f637124590401a205e77"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_045dace7e308abe56249c502332fdc44--TO--reactome:Complex5771_65125e965fc66a82d704661c861ee4f6",
+                "source": "reactome:Complex5773_045dace7e308abe56249c502332fdc44",
+                "target": "reactome:Complex5771_65125e965fc66a82d704661c861ee4f6"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Protein25937",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Protein25937"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14101--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:Protein14101",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Complex12873",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Complex12873"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_0200ef18b331d7264dccd6160a622c2e--TO--reactome:Complex5771_ea67528c40e1d63475b22890956d60b3",
+                "source": "reactome:Complex5773_0200ef18b331d7264dccd6160a622c2e",
+                "target": "reactome:Complex5771_ea67528c40e1d63475b22890956d60b3"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Complex12875",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Complex12875"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Complex5751",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Complex5751"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_ff296316e4e49a5c74b0629117703028--TO--reactome:Complex5777_cf8467c7a614873e0c17e17e819a521f",
+                "source": "reactome:Complex5780_ff296316e4e49a5c74b0629117703028",
+                "target": "reactome:Complex5777_cf8467c7a614873e0c17e17e819a521f"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Complex5751",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Complex5751"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Complex12875",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Complex12875"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Complex12873",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Complex12873"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_79be65fac47a0f36f3b97f793917b498--TO--reactome:Complex5771_dd77aaca7c05f637124590401a205e77",
+                "source": "reactome:Complex5773_79be65fac47a0f36f3b97f793917b498",
+                "target": "reactome:Complex5771_dd77aaca7c05f637124590401a205e77"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14100--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:Protein14100",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Protein13488",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Protein13488"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_43e78de989645faba0866ec5ef613a91--TO--reactome:Complex5777_dd77aaca7c05f637124590401a205e77",
+                "source": "reactome:Complex5781_43e78de989645faba0866ec5ef613a91",
+                "target": "reactome:Complex5777_dd77aaca7c05f637124590401a205e77"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Complex5774",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Complex5774"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14943--TO--INP_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "source": "reactome:Complex14943",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_44a89ffbd6af437bf1c4f786013675fd--TO--reactome:Complex5771_a135ee81db1e7dd7ba7cd3337f29f8db",
+                "source": "reactome:Complex5772_44a89ffbd6af437bf1c4f786013675fd",
+                "target": "reactome:Complex5771_a135ee81db1e7dd7ba7cd3337f29f8db"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Complex14941",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Complex14941"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT--TO--reactome:Protein13520",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "target": "reactome:Protein13520"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT--TO--reactome:Protein13521",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "target": "reactome:Protein13521"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Complex5771",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Complex5771"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693539_LEFTTORIGHT--TO--reactome:Complex14952",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693539_LEFTTORIGHT",
+                "target": "reactome:Complex14952"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_8e91d3f409810f3b7b2572c73ecbb2a3--TO--reactome:Complex5777_20a6e83bdc1056c1df614a3a6b68c63f",
+                "source": "reactome:Complex5780_8e91d3f409810f3b7b2572c73ecbb2a3",
+                "target": "reactome:Complex5777_20a6e83bdc1056c1df614a3a6b68c63f"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_ff296316e4e49a5c74b0629117703028--TO--reactome:Complex5777_cf8467c7a614873e0c17e17e819a521f",
+                "source": "reactome:Complex5781_ff296316e4e49a5c74b0629117703028",
+                "target": "reactome:Complex5777_cf8467c7a614873e0c17e17e819a521f"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_9a522255109813e8b8b136f30a801d38--TO--reactome:Complex5777_ad1c04ec408cbf52bacba54655619ba5",
+                "source": "reactome:Complex5781_9a522255109813e8b8b136f30a801d38",
+                "target": "reactome:Complex5777_ad1c04ec408cbf52bacba54655619ba5"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_8e91d3f409810f3b7b2572c73ecbb2a3--TO--reactome:Complex5777_20a6e83bdc1056c1df614a3a6b68c63f",
+                "source": "reactome:Complex5778_8e91d3f409810f3b7b2572c73ecbb2a3",
+                "target": "reactome:Complex5777_20a6e83bdc1056c1df614a3a6b68c63f"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Complex14941",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Complex14941"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule837_3f5470ff17fc7fe54a1418da35ed0217--TO--INP_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "source": "reactome:SmallMolecule837_3f5470ff17fc7fe54a1418da35ed0217",
+                "target": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_dd7454259f18d93aee9081e20f58f9dd--TO--reactome:Complex5771_20a6e83bdc1056c1df614a3a6b68c63f",
+                "source": "reactome:Complex5773_dd7454259f18d93aee9081e20f58f9dd",
+                "target": "reactome:Complex5771_20a6e83bdc1056c1df614a3a6b68c63f"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Complex14941",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Complex14941"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_8f4f3c78c71b2a6629d162057abf15b3--TO--reactome:Complex5777_c93720917fb8d92544cbfa50d2fe3e9c",
+                "source": "reactome:Complex5780_8f4f3c78c71b2a6629d162057abf15b3",
+                "target": "reactome:Complex5777_c93720917fb8d92544cbfa50d2fe3e9c"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686440_LEFTTORIGHT--TO--reactome:Complex14950",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686440_LEFTTORIGHT",
+                "target": "reactome:Complex14950"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT--TO--reactome:Complex6234",
+                "source": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "target": "reactome:Complex6234"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein25936--TO--INP_http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT",
+                "source": "reactome:Protein25936",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Protein25937",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Protein25937"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_212a14f57754b986d0089407a3a82b18--TO--reactome:Complex5771_c93720917fb8d92544cbfa50d2fe3e9c",
+                "source": "reactome:Complex5773_212a14f57754b986d0089407a3a82b18",
+                "target": "reactome:Complex5771_c93720917fb8d92544cbfa50d2fe3e9c"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_045dace7e308abe56249c502332fdc44--TO--reactome:Complex5771_65125e965fc66a82d704661c861ee4f6",
+                "source": "reactome:Complex5772_045dace7e308abe56249c502332fdc44",
+                "target": "reactome:Complex5771_65125e965fc66a82d704661c861ee4f6"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Protein13454",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Protein13454"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule4820--TO--INP_http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT",
+                "source": "reactome:SmallMolecule4820",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:PhysicalEntity963",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:PhysicalEntity963"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Protein13488",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Protein13488"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_8f4f3c78c71b2a6629d162057abf15b3--TO--reactome:Complex5777_c93720917fb8d92544cbfa50d2fe3e9c",
+                "source": "reactome:Complex5778_8f4f3c78c71b2a6629d162057abf15b3",
+                "target": "reactome:Complex5777_c93720917fb8d92544cbfa50d2fe3e9c"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein14102--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:Protein14102",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Protein25936",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Protein25936"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:PhysicalEntity963",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:PhysicalEntity963"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Complex12875",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Complex12875"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity948--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:PhysicalEntity948",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Protein13509",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Protein13509"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14942--TO--INP_http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT",
+                "source": "reactome:Complex14942",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Complex12873",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Complex12873"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:SmallMolecule839_3f5470ff17fc7fe54a1418da35ed0217",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:SmallMolecule839_3f5470ff17fc7fe54a1418da35ed0217"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_5655f4916d61a49b63dc672010f104b8--TO--reactome:Complex5777_d9d863344bc2cecce63139e6686d3465",
+                "source": "reactome:Complex5778_5655f4916d61a49b63dc672010f104b8",
+                "target": "reactome:Complex5777_d9d863344bc2cecce63139e6686d3465"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:PhysicalEntity1191",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:PhysicalEntity1191"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT--TO--reactome:SmallMolecule2624",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693593_LEFTTORIGHT",
+                "target": "reactome:SmallMolecule2624"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Complex12873",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Complex12873"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Complex12875",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Complex12875"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_e872081d5d4bad0c29c60d0208159024--TO--reactome:Complex5771_ad1c04ec408cbf52bacba54655619ba5",
+                "source": "reactome:Complex5773_e872081d5d4bad0c29c60d0208159024",
+                "target": "reactome:Complex5771_ad1c04ec408cbf52bacba54655619ba5"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity469--TO--INP_http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT",
+                "source": "reactome:PhysicalEntity469",
+                "target": "http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_9a522255109813e8b8b136f30a801d38--TO--reactome:Complex5777_ad1c04ec408cbf52bacba54655619ba5",
+                "source": "reactome:Complex5778_9a522255109813e8b8b136f30a801d38",
+                "target": "reactome:Complex5777_ad1c04ec408cbf52bacba54655619ba5"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:PhysicalEntity1820",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:PhysicalEntity1820"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_44a89ffbd6af437bf1c4f786013675fd--TO--reactome:Complex5771_a135ee81db1e7dd7ba7cd3337f29f8db",
+                "source": "reactome:Complex5773_44a89ffbd6af437bf1c4f786013675fd",
+                "target": "reactome:Complex5771_a135ee81db1e7dd7ba7cd3337f29f8db"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_51cec825328759ec12f437d368bbdadc--TO--reactome:Complex5771_5cffa1aa7dae5a7d9af0370ef5847d72",
+                "source": "reactome:Complex5772_51cec825328759ec12f437d368bbdadc",
+                "target": "reactome:Complex5771_5cffa1aa7dae5a7d9af0370ef5847d72"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Protein13509",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Protein13509"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12878--TO--INP_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "source": "reactome:Complex12878",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_b9cffcd248bb7f3fe2b48353b7858103--TO--reactome:Complex5777_f5e3f41360f8a1349320684c1b87fdfe",
+                "source": "reactome:Complex5781_b9cffcd248bb7f3fe2b48353b7858103",
+                "target": "reactome:Complex5777_f5e3f41360f8a1349320684c1b87fdfe"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_db3015f490f2fbe7f818299a158405e2--TO--reactome:Complex5771_d9d863344bc2cecce63139e6686d3465",
+                "source": "reactome:Complex5773_db3015f490f2fbe7f818299a158405e2",
+                "target": "reactome:Complex5771_d9d863344bc2cecce63139e6686d3465"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14941--TO--INP_http://bioregistry.io/reactome:R-HSA-5685838_LEFTTORIGHT",
+                "source": "reactome:Complex14941",
+                "target": "http://bioregistry.io/reactome:R-HSA-5685838_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_ff296316e4e49a5c74b0629117703028--TO--reactome:Complex5777_cf8467c7a614873e0c17e17e819a521f",
+                "source": "reactome:Complex5778_ff296316e4e49a5c74b0629117703028",
+                "target": "reactome:Complex5777_cf8467c7a614873e0c17e17e819a521f"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_5a69074b1b5b6819559b5c6453e8610a--TO--reactome:Complex5771",
+                "source": "reactome:Complex5772_5a69074b1b5b6819559b5c6453e8610a",
+                "target": "reactome:Complex5771"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Complex5777",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Complex5777"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex12874--TO--INP_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "source": "reactome:Complex12874",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_212a14f57754b986d0089407a3a82b18--TO--reactome:Complex5771_c93720917fb8d92544cbfa50d2fe3e9c",
+                "source": "reactome:Complex5772_212a14f57754b986d0089407a3a82b18",
+                "target": "reactome:Complex5771_c93720917fb8d92544cbfa50d2fe3e9c"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT--TO--reactome:Protein13509",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686483_LEFTTORIGHT",
+                "target": "reactome:Protein13509"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_4e7fc9b56a98c914c2e3ed318dabb0e6--TO--reactome:Complex5771_0918a24cfc72e61562cc279bcf9ded37",
+                "source": "reactome:Complex5773_4e7fc9b56a98c914c2e3ed318dabb0e6",
+                "target": "reactome:Complex5771_0918a24cfc72e61562cc279bcf9ded37"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14952--TO--INP_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "source": "reactome:Complex14952",
+                "target": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:PhysicalEntity963--TO--INP_http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT",
+                "source": "reactome:PhysicalEntity963",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693620_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_f7a0a483698a5e175941abe3f654a672--TO--reactome:Complex5777_65125e965fc66a82d704661c861ee4f6",
+                "source": "reactome:Complex5778_f7a0a483698a5e175941abe3f654a672",
+                "target": "reactome:Complex5777_65125e965fc66a82d704661c861ee4f6"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5778_f5db0496f2979007234875fca3b572e7--TO--reactome:Complex5777_a135ee81db1e7dd7ba7cd3337f29f8db",
+                "source": "reactome:Complex5778_f5db0496f2979007234875fca3b572e7",
+                "target": "reactome:Complex5777_a135ee81db1e7dd7ba7cd3337f29f8db"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_f5db0496f2979007234875fca3b572e7--TO--reactome:Complex5777_a135ee81db1e7dd7ba7cd3337f29f8db",
+                "source": "reactome:Complex5780_f5db0496f2979007234875fca3b572e7",
+                "target": "reactome:Complex5777_a135ee81db1e7dd7ba7cd3337f29f8db"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:SmallMolecule930_0e1735084116c8103b797b86159526ee--TO--INP_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "source": "reactome:SmallMolecule930_0e1735084116c8103b797b86159526ee",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Protein13454",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Protein13454"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_f7a0a483698a5e175941abe3f654a672--TO--reactome:Complex5777_65125e965fc66a82d704661c861ee4f6",
+                "source": "reactome:Complex5780_f7a0a483698a5e175941abe3f654a672",
+                "target": "reactome:Complex5777_65125e965fc66a82d704661c861ee4f6"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Protein11896--TO--INP_http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT",
+                "source": "reactome:Protein11896",
+                "target": "http://bioregistry.io/reactome:R-HSA-912503_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5685838_LEFTTORIGHT--TO--reactome:Complex14942",
+                "source": "http://bioregistry.io/reactome:R-HSA-5685838_LEFTTORIGHT",
+                "target": "reactome:Complex14942"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT--TO--reactome:Complex12886",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "target": "reactome:Complex12886"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Complex5771",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Complex5771"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5773_51cec825328759ec12f437d368bbdadc--TO--reactome:Complex5771_5cffa1aa7dae5a7d9af0370ef5847d72",
+                "source": "reactome:Complex5773_51cec825328759ec12f437d368bbdadc",
+                "target": "reactome:Complex5771_5cffa1aa7dae5a7d9af0370ef5847d72"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT--TO--reactome:Complex5735",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "target": "reactome:Complex5735"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_db3015f490f2fbe7f818299a158405e2--TO--reactome:Complex5771_d9d863344bc2cecce63139e6686d3465",
+                "source": "reactome:Complex5772_db3015f490f2fbe7f818299a158405e2",
+                "target": "reactome:Complex5771_d9d863344bc2cecce63139e6686d3465"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_f7a0a483698a5e175941abe3f654a672--TO--reactome:Complex5777_65125e965fc66a82d704661c861ee4f6",
+                "source": "reactome:Complex5781_f7a0a483698a5e175941abe3f654a672",
+                "target": "reactome:Complex5777_65125e965fc66a82d704661c861ee4f6"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Complex5777",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Complex5777"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:SmallMolecule839_0e1735084116c8103b797b86159526ee",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:SmallMolecule839_0e1735084116c8103b797b86159526ee"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:Protein13488",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:Protein13488"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5780_b9cffcd248bb7f3fe2b48353b7858103--TO--reactome:Complex5777_f5e3f41360f8a1349320684c1b87fdfe",
+                "source": "reactome:Complex5780_b9cffcd248bb7f3fe2b48353b7858103",
+                "target": "reactome:Complex5777_f5e3f41360f8a1349320684c1b87fdfe"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex6234--TO--INP_http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT",
+                "source": "reactome:Complex6234",
+                "target": "http://bioregistry.io/reactome:R-HSA-912458_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:Complex5774",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:Complex5774"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT--TO--reactome:SmallMolecule838_0e1735084116c8103b797b86159526ee",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693589_LEFTTORIGHT",
+                "target": "reactome:SmallMolecule838_0e1735084116c8103b797b86159526ee"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:PhysicalEntity1817",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:PhysicalEntity1817"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT--TO--reactome:PhysicalEntity1818",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686469_LEFTTORIGHT",
+                "target": "reactome:PhysicalEntity1818"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex14952--TO--INP_http://bioregistry.io/reactome:R-HSA-5693584_LEFTTORIGHT",
+                "source": "reactome:Complex14952",
+                "target": "http://bioregistry.io/reactome:R-HSA-5693584_LEFTTORIGHT"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5772_4e7fc9b56a98c914c2e3ed318dabb0e6--TO--reactome:Complex5771_0918a24cfc72e61562cc279bcf9ded37",
+                "source": "reactome:Complex5772_4e7fc9b56a98c914c2e3ed318dabb0e6",
+                "target": "reactome:Complex5771_0918a24cfc72e61562cc279bcf9ded37"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "reactome:Complex5781_8e91d3f409810f3b7b2572c73ecbb2a3--TO--reactome:Complex5777_20a6e83bdc1056c1df614a3a6b68c63f",
+                "source": "reactome:Complex5781_8e91d3f409810f3b7b2572c73ecbb2a3",
+                "target": "reactome:Complex5777_20a6e83bdc1056c1df614a3a6b68c63f"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT--TO--reactome:Complex12881",
+                "source": "http://bioregistry.io/reactome:R-HSA-5693561_LEFTTORIGHT",
+                "target": "reactome:Complex12881"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        },
+        {
+            "data": {
+                "id": "OUT_http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT--TO--reactome:Protein13454",
+                "source": "http://bioregistry.io/reactome:R-HSA-5686410_LEFTTORIGHT",
+                "target": "reactome:Protein13454"
+            },
+            "position": {},
+            "group": "edges",
+            "removed": false,
+            "selected": false,
+            "selectable": true,
+            "locked": false,
+            "grabbable": true,
+            "classes": ""
+        }
+    ]
+}
