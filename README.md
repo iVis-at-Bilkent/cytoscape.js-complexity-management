@@ -2,9 +2,12 @@
 
 A Cytoscape.js extension for a set of complexity management operations for compound graphs.
 
-## Description
+Based on [Complexity Management Graph Model (CMGM)](https://github.com/iVis-at-Bilkent/cmgm), this extension provides a unified set of complexity management operations working seamlessly. It also provides automatic adjustment of the graph layout after each complexity management operation to protect the user's mental map. The supported operations include filter/unfilter, hide/show, and collapse/expand nodes/edges.  
 
-Based on [Complexity Management Graph Model (CMGM)](https://github.com/iVis-at-Bilkent/cmgm), this extension provides a unified set of complexity management operations working seamlessly. It also provides automatic adjustment of the graph layout after each complexity management operation to protect the user's mental map. The supported operations include filter/unfilter, hide/show and collapse/expand nodes/edges.  
+## How to Cite Usage
+Please cite the following when you use this extension:
+
+O. Zafar, H. Balci, A.F. Halac, and U. Dogrusoz, "CMGV: algorithms and a unified framework for complexity management in graph visualization", Information Visualization, to appear, 2025.
 
 ## Demo
 
