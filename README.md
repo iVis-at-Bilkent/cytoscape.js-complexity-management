@@ -7,7 +7,7 @@ Based on [Complexity Management Graph Model (CMGM)](https://github.com/iVis-at-B
 ## How to Cite Usage
 Please cite the following when you use this extension:
 
-O. Zafar, H. Balci, A.F. Halac, and U. Dogrusoz, "CMGV: algorithms and a unified framework for complexity management in graph visualization", Information Visualization, to appear, 2025.
+O. Zafar, U. Dogrusoz, H. Balci, and A.F. Halac, "CMGV: algorithms and a unified framework for complexity management in graph visualization", Information Visualization, to appear, 2025.
 
 ## Demo
 
