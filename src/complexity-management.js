@@ -785,7 +785,7 @@ export function complexityManagement(cy) {
   // cbkFlagLabelsPos is flag to set if node/edge label position which can be bottom, top and center passed as string. Default = 'bottom'.
   let expandGraph = (focusID,cy,setLabelPosition, cbkFlagDisplayLabels = true, cbkFlagLabelsPos = 'bottom') => {
     
-    let descendants = getDescendantsInorder(instance.getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
+    let descendants = getDescendantsInorder(cy.complexityManagement().getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
 
    
 
