@@ -1,7 +1,7 @@
 import debounce from './debounce';
 import debounce2 from './debounce2';
 
-let layoutOptions = { name: "fcose", animate: true, randomize: false, stop: () => { initializer(cy) } }
+let layoutOptions = { name: "fcose", animate: true, randomize: false}
 
 
 // Function to set the label position based on the selected radio button
@@ -658,7 +658,7 @@ export function cueUtilities(params, cy, api) {
           && cyRenderedPosY >= expandcollapseRenderedStartY - expandcollapseRenderedRectSize * factor
           && cyRenderedPosY <= expandcollapseRenderedEndY + expandcollapseRenderedRectSize * factor) {
           
-          layoutOptions = {...layoutOptions,...cy.options().layout};
+          layoutOptions = opts.layoutBy!=null?{...opts.layoutBy}:null;
          
           if (api.isCollapsible(node)) {
             clearDraws();
@@ -677,7 +677,9 @@ export function cueUtilities(params, cy, api) {
             // else {
             //   initializer(cy);
             // }
-            cy.layout(layoutOptions).run();
+            if(layoutOptions!=null){
+              cy.layout(layoutOptions).run();
+            }
           }
           else if (api.isExpandable(node)) {
             clearDraws();
@@ -738,7 +740,10 @@ export function cueUtilities(params, cy, api) {
 
             api.expandNodes([node], false, true,setLabelPosition);
                 setTimeout(() => {
-                    cy.layout(layoutOptions).run();
+                  
+                    if(layoutOptions!=null){
+                      cy.layout(layoutOptions).run();
+                    }
                 }, 700);
             
           }

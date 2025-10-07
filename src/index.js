@@ -6,6 +6,7 @@ export default function register(cytoscape) {	// register with cytoscape.js
     let cy = this;
 
     let options = {
+      layoutBy: null,
       filterRule: (ele) => {
         return false;
       },
