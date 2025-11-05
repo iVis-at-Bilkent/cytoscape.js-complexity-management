@@ -35,7 +35,7 @@ Show all hidden elements.
 `instance.collapseNodes(nodes, isRecursive = false)`
 Collapse given nodes, recursively if isRecursive option is true.
 
-`instance.expandNodes(nodes, isRecursive = false)`
+`instance.expandNodes(nodes, isRecursive = false, runLayout = true)`
 Expand given nodes, recursively if isRecursive option is true.
 
 `instance.collapseAllNodes()`
@@ -71,6 +71,8 @@ Get whether the given node is expandible.
 ## Default Options
 ```javascript
     var options = {
+      layoutBy:null, // to rearrange after each operation. It's just layout options or whole layout function. Choose your side!
+      // recommended usage: use fcose layout with randomize: false to preserve mental map.
       filterRule: (ele) => {
         return false;
       }, // function to specify the filtering rules desired
