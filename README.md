@@ -32,7 +32,7 @@ Show all hidden elements.
 `instance.collapseNodes(nodes, isRecursive = false)`
 Collapse given nodes, recursively if isRecursive option is true.
 
-`instance.expandNodes(nodes, isRecursive = false)`
+`instance.expandNodes(nodes, isRecursive = false, runLayout = true)`
 Expand given nodes, recursively if isRecursive option is true.
 
 `instance.collapseAllNodes()`
