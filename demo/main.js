@@ -145,7 +145,12 @@ function onLoaded() {
   });
   const cy = window.cy = cytoscape({
     ready: function () {
-      instance = window.instance = this.complexityManagement();
+      instance = window.instance = this.complexityManagement({
+        layoutBy: {
+          name: "fcose",
+          randomize: false
+        }}
+      );
       this.elements().forEach((ele) => {
         let randomWeight = Math.floor(Math.random() * 101);
         ele.data('weight', randomWeight);
@@ -2610,469 +2615,469 @@ function onLoaded() {
       cyLayoutChildlessNodes.style('text-valign', position);
     }
 
-  // document.getElementById("addNodeToSelected").addEventListener("click", () => {
-  //   const selectedNode = cy.nodes(":selected")[0];
-  //   let parentID = null;
-  //   let position = { x: 0, y: 0 };
-  //   if (selectedNode) {
-  //     parentID = selectedNode.id();
-  //     position = { x: selectedNode.bb().x1 + selectedNode.bb().w / 2, y: selectedNode.bb().y1 + selectedNode.bb().h / 2 }
-  //   }
-  //   let newNode = cy.add({
-  //     group: 'nodes',
-  //     data: { id: 'nn' + newNodeCount, 
-  //             parent: parentID,
-  //             weight: Math.floor(Math.random() * 101)},
-  //     position: position
-  //   });
-  //   newNode.data('label', newNode.data('id') + '(' + newNode.data('weight') + ')')
-  //   newNodeCount++;
+  document.getElementById("addNodeToSelected").addEventListener("click", () => {
+    const selectedNode = cy.nodes(":selected")[0];
+    let parentID = null;
+    let position = { x: 0, y: 0 };
+    if (selectedNode) {
+      parentID = selectedNode.id();
+      position = { x: selectedNode.bb().x1 + selectedNode.bb().w / 2, y: selectedNode.bb().y1 + selectedNode.bb().h / 2 }
+    }
+    let newNode = cy.add({
+      group: 'nodes',
+      data: { id: 'nn' + newNodeCount, 
+              parent: parentID,
+              weight: Math.floor(Math.random() * 101)},
+      position: position
+    });
+    newNode.data('label', newNode.data('id') + '(' + newNode.data('weight') + ')')
+    newNodeCount++;
 
-  //   if (document.getElementById("cbk-run-layout2").checked) {
-  //     cy.layout(layoutOptions).run();
-  //   }
-  //   else {
-  //     initializer(cy);
-  //   }
-  // });
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-  // document.getElementById("addEdgeBetweenSelected").addEventListener("click", () => {
-  //   let firstSelectedNode = cy.nodes(":selected")[0];
-  //   let secondSelectedNode = cy.nodes(":selected")[1];
+  document.getElementById("addEdgeBetweenSelected").addEventListener("click", () => {
+    let firstSelectedNode = cy.nodes(":selected")[0];
+    let secondSelectedNode = cy.nodes(":selected")[1];
 
-  //   if (cy.nodes(":selected").length == 2 && firstSelectedNode.intersection(secondSelectedNode.ancestors()).length == 0 && 
-  //     secondSelectedNode.intersection(firstSelectedNode.ancestors()).length == 0) {
-  //     while(true){
-  //       try{
-  //         cy.add({
-  //           group: 'edges',
-  //           data: { id: 'ne' + newEdgeCount, 
-  //                   source: cy.nodes(":selected")[0].id(), 
-  //                   target: cy.nodes(":selected")[1].id(),
-  //                   weight: Math.floor(Math.random() * 101)}
-  //         });
-  //         break;
-  //       }catch(e){
-  //         newEdgeCount++;
-  //       }
-  //   }
+    if (cy.nodes(":selected").length == 2 && firstSelectedNode.intersection(secondSelectedNode.ancestors()).length == 0 && 
+      secondSelectedNode.intersection(firstSelectedNode.ancestors()).length == 0) {
+      while(true){
+        try{
+          cy.add({
+            group: 'edges',
+            data: { id: 'ne' + newEdgeCount, 
+                    source: cy.nodes(":selected")[0].id(), 
+                    target: cy.nodes(":selected")[1].id(),
+                    weight: Math.floor(Math.random() * 101)}
+          });
+          break;
+        }catch(e){
+          newEdgeCount++;
+        }
+    }
     
-  //   }
+    }
 
-  //   newEdgeCount++;
+    newEdgeCount++;
 
-  //   if (document.getElementById("cbk-run-layout2").checked) {
-  //     cy.layout(layoutOptions).run();
-  //   }
-  //   else {
-  //     initializer(cy);
-  //   }
-  // });
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-  // document.getElementById("removeSelected").addEventListener("click", () => {
-  //   cy.elements(":selected").remove();
+  document.getElementById("removeSelected").addEventListener("click", () => {
+    cy.elements(":selected").remove();
 
-  //   if (document.getElementById("cbk-run-layout2").checked) {
-  //     cy.layout(layoutOptions).run();
-  //   }
-  //   else {
-  //     initializer(cy);
-  //   }
-  // });
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-  // document.getElementById("changeSource").addEventListener("click", () => {
-  //   let selectedEdge = cy.edges(':selected')[0];
-  //   let newSource = cy.nodes(':selected')[0];
+  document.getElementById("changeSource").addEventListener("click", () => {
+    let selectedEdge = cy.edges(':selected')[0];
+    let newSource = cy.nodes(':selected')[0];
 
-  //   selectedEdge.move({ source: newSource.id() });
+    selectedEdge.move({ source: newSource.id() });
 
-  //   if (document.getElementById("cbk-run-layout2").checked) {
-  //     cy.layout(layoutOptions).run();
-  //   }
-  //   else {
-  //     initializer(cy);
-  //   }
-  // });
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-  // document.getElementById("changeTarget").addEventListener("click", () => {
-  //   let selectedEdge = cy.edges(':selected')[0];
-  //   let newTarget = cy.nodes(':selected')[0];
+  document.getElementById("changeTarget").addEventListener("click", () => {
+    let selectedEdge = cy.edges(':selected')[0];
+    let newTarget = cy.nodes(':selected')[0];
 
-  //   selectedEdge.move({ target: newTarget.id() });
+    selectedEdge.move({ target: newTarget.id() });
 
-  //   if (document.getElementById("cbk-run-layout2").checked) {
-  //     cy.layout(layoutOptions).run();
-  //   }
-  //   else {
-  //     initializer(cy);
-  //   }
-  // });
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-  // document.getElementById("changeParent").addEventListener("click", () => {
-  //   let firstSelectedNode = cy.nodes(':selected')[0];
-  //   let newParent = cy.nodes(':selected')[1];
+  document.getElementById("changeParent").addEventListener("click", () => {
+    let firstSelectedNode = cy.nodes(':selected')[0];
+    let newParent = cy.nodes(':selected')[1];
 
-  //   if (newParent) {
-  //     firstSelectedNode.move({ parent: newParent.id() });
-  //   }
-  //   else {
-  //     firstSelectedNode.move({ parent: null });
-  //   }
+    if (newParent) {
+      firstSelectedNode.move({ parent: newParent.id() });
+    }
+    else {
+      firstSelectedNode.move({ parent: null });
+    }
 
-  //   if (document.getElementById("cbk-run-layout2").checked) {
-  //     cy.layout(layoutOptions).run();
-  //   }
-  //   else {
-  //     initializer(cy);
-  //   }
-  // });
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-  // window.iteration = 0;
+  window.iteration = 0;
 
-  // document.getElementById("addRandomElements").addEventListener("click", () => {
-  //   window.iteration = (window.iteration || 0) + 1;
-  //   const nodes = getRandomNodes();
-  //   layoutUtilities.placeNewNodes(nodes);
+  document.getElementById("addRandomElements").addEventListener("click", () => {
+    window.iteration = (window.iteration || 0) + 1;
+    const nodes = getRandomNodes();
+    layoutUtilities.placeNewNodes(nodes);
 
-  //   if (document.getElementById("cbk-run-layout2").checked) {
-  //     cy.layout(layoutOptions).run();
-  //   }
-  //   else {
-  //     initializer(cy);
-  //   }
-  // });
+    if (document.getElementById("cbk-run-layout2").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
   // Slider operations
-//   $("#slider-nodes").slider({
-//     range: true,
-//     min: 0,
-//     max: 100,
-//     step: 1,
-//     values: [0, 100],
-//     slide: function (event, ui) {
-//       let delay = function () {
-//         let handleIndex = ui.handleIndex;
-//         let label = handleIndex == 0 ? '#min-weight-node' : '#max-weight-node';
-//         $(label).html(ui.value).position({
-//           my: 'center top',
-//           at: 'center bottom',
-//           of: ui.handle,
-//           offset: "0, 10"
-//         });
-//       };
-//       // wait for the ui.handle to set its position
-//       setTimeout(delay, 5);
-//     },
-//     change: function () {
-//       instance.updateFilterRule((ele) => {
-//         if (ele.isNode() && (ele.data('weight') < parseInt($('#min-weight-node').html()) || ele.data('weight') > parseInt($('#max-weight-node').html()))) {
-//           return true;
-//         }
-//         else if (ele.isEdge() && (ele.data('weight') < parseInt($('#min-weight-edge').html()) || ele.data('weight') > parseInt($('#max-weight-edge').html()))) {
-//           return true;
-//         }
-//         else {
-//           return false;
-//         }
-//       });
-//       if (document.getElementById("cbk-run-layout3").checked) {
-//         cy.layout(layoutOptions).run();
-//       }
-//       else {
-//         initializer(cy);
-//       }
-//     }
-//   });
+  $("#slider-nodes").slider({
+    range: true,
+    min: 0,
+    max: 100,
+    step: 1,
+    values: [0, 100],
+    slide: function (event, ui) {
+      let delay = function () {
+        let handleIndex = ui.handleIndex;
+        let label = handleIndex == 0 ? '#min-weight-node' : '#max-weight-node';
+        $(label).html(ui.value).position({
+          my: 'center top',
+          at: 'center bottom',
+          of: ui.handle,
+          offset: "0, 10"
+        });
+      };
+      // wait for the ui.handle to set its position
+      setTimeout(delay, 5);
+    },
+    change: function () {
+      instance.updateFilterRule((ele) => {
+        if (ele.isNode() && (ele.data('weight') < parseInt($('#min-weight-node').html()) || ele.data('weight') > parseInt($('#max-weight-node').html()))) {
+          return true;
+        }
+        else if (ele.isEdge() && (ele.data('weight') < parseInt($('#min-weight-edge').html()) || ele.data('weight') > parseInt($('#max-weight-edge').html()))) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      });
+      if (document.getElementById("cbk-run-layout3").checked) {
+        cy.layout(layoutOptions).run();
+      }
+      else {
+        initializer(cy);
+      }
+    }
+  });
 
-//   $('#min-weight-node').html($('#slider-nodes').slider('values', 0)).position({
-//     my: 'center top',
-//     at: 'center bottom',
-//     of: $('#slider-nodes span:eq(0)'),
-//     offset: "0, 0"
-//   });
+  $('#min-weight-node').html($('#slider-nodes').slider('values', 0)).position({
+    my: 'center top',
+    at: 'center bottom',
+    of: $('#slider-nodes span:eq(0)'),
+    offset: "0, 0"
+  });
 
-//   $('#max-weight-node').html($('#slider-nodes').slider('values', 1)).position({
-//     my: 'center top',
-//     at: 'center bottom',
-//     of: $('#slider-nodes span:eq(1)'),
-//     offset: "0, 10"
-//   });
+  $('#max-weight-node').html($('#slider-nodes').slider('values', 1)).position({
+    my: 'center top',
+    at: 'center bottom',
+    of: $('#slider-nodes span:eq(1)'),
+    offset: "0, 10"
+  });
 
-//   $("#slider-edges").slider({
-//     range: true,
-//     min: 0,
-//     max: 100,
-//     step: 1,
-//     values: [0, 100],
-//     slide: function (event, ui) {
-//       let delay = function () {
-//         let handleIndex = ui.handleIndex;
-//         let label = handleIndex == 0 ? '#min-weight-edge' : '#max-weight-edge';
-//         $(label).html(ui.value).position({
-//           my: 'center top',
-//           at: 'center bottom',
-//           of: ui.handle,
-//           offset: "0, 10"
-//         });
-//       };
-//       // wait for the ui.handle to set its position
-//       setTimeout(delay, 5);
-//     },
-//     change: function () {
-//       instance.updateFilterRule((ele) => {
-//         if (ele.isNode() && (ele.data('weight') < parseInt($('#min-weight-node').html()) || ele.data('weight') > parseInt($('#max-weight-node').html()))) {
-//           return true;
-//         }
-//         else if (ele.isEdge() && (ele.data('weight') < parseInt($('#min-weight-edge').html()) || ele.data('weight') > parseInt($('#max-weight-edge').html()))) {
-//           return true;
-//         }
-//         else {
-//           return false;
-//         }
-//       });
-//       if (document.getElementById("cbk-run-layout3").checked) {
-//         cy.layout(layoutOptions).run();
-//       }
-//       else {
-//         initializer(cy);
-//       }
-//     }
-//   });
+  $("#slider-edges").slider({
+    range: true,
+    min: 0,
+    max: 100,
+    step: 1,
+    values: [0, 100],
+    slide: function (event, ui) {
+      let delay = function () {
+        let handleIndex = ui.handleIndex;
+        let label = handleIndex == 0 ? '#min-weight-edge' : '#max-weight-edge';
+        $(label).html(ui.value).position({
+          my: 'center top',
+          at: 'center bottom',
+          of: ui.handle,
+          offset: "0, 10"
+        });
+      };
+      // wait for the ui.handle to set its position
+      setTimeout(delay, 5);
+    },
+    change: function () {
+      instance.updateFilterRule((ele) => {
+        if (ele.isNode() && (ele.data('weight') < parseInt($('#min-weight-node').html()) || ele.data('weight') > parseInt($('#max-weight-node').html()))) {
+          return true;
+        }
+        else if (ele.isEdge() && (ele.data('weight') < parseInt($('#min-weight-edge').html()) || ele.data('weight') > parseInt($('#max-weight-edge').html()))) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      });
+      if (document.getElementById("cbk-run-layout3").checked) {
+        cy.layout(layoutOptions).run();
+      }
+      else {
+        initializer(cy);
+      }
+    }
+  });
 
-//   $('#min-weight-edge').html($('#slider-edges').slider('values', 0)).position({
-//     my: 'center top',
-//     at: 'center bottom',
-//     of: $('#slider-edges span:eq(0)'),
-//     offset: "0, 0"
-//   });
+  $('#min-weight-edge').html($('#slider-edges').slider('values', 0)).position({
+    my: 'center top',
+    at: 'center bottom',
+    of: $('#slider-edges span:eq(0)'),
+    offset: "0, 0"
+  });
 
-//   $('#max-weight-edge').html($('#slider-edges').slider('values', 1)).position({
-//     my: 'center top',
-//     at: 'center bottom',
-//     of: $('#slider-edges span:eq(1)'),
-//     offset: "0, 10"
-//   });
+  $('#max-weight-edge').html($('#slider-edges').slider('values', 1)).position({
+    my: 'center top',
+    at: 'center bottom',
+    of: $('#slider-edges span:eq(1)'),
+    offset: "0, 10"
+  });
 
-//   document.getElementById("hideSelected").addEventListener("click", () => {
-//     instance.hide(cy.elements(":selected"));
+  document.getElementById("hideSelected").addEventListener("click", () => {
+    instance.hide(cy.elements(":selected"));
 
-//     if (document.getElementById("cbk-run-layout3").checked) {
-//       cy.layout(layoutOptions).run();
-//     }
-//     else {
-//       initializer(cy);
-//     }
-//   });
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-//   document.getElementById("showHiddenNeighbors").addEventListener("click", () => {
-//     let selectedNodes = cy.nodes(':selected');
-//     let neighbors = instance.getHiddenNeighbors(selectedNodes);
-//     instance.show(neighbors);
+  document.getElementById("showHiddenNeighbors").addEventListener("click", () => {
+    let selectedNodes = cy.nodes(':selected');
+    let neighbors = instance.getHiddenNeighbors(selectedNodes);
+    instance.show(neighbors);
 
-//     if (document.getElementById("cbk-run-layout3").checked) {
-//       cy.layout(layoutOptions).run();
-//     }
-//     else {
-//       initializer(cy);
-//     }
-//   });
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-//   document.getElementById("showAll").addEventListener("click", () => {
-//     instance.showAll();
+  document.getElementById("showAll").addEventListener("click", () => {
+    instance.showAll();
 
-//     if (document.getElementById("cbk-run-layout3").checked) {
-//       cy.layout(layoutOptions).run();
-//     }
-//     else {
-//       initializer(cy);
-//     }
-//   });
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-//   document.getElementById("collapseSelectedNodes").addEventListener("click", () => {
+  document.getElementById("collapseSelectedNodes").addEventListener("click", () => {
 
-//     if (document.getElementById("cbk-flag-recursive").checked) {
-//       instance.collapseNodes(cy.nodes(':selected'), true);
-//     }else{
-//       instance.collapseNodes(cy.nodes(':selected'));
-//     }
+    if (document.getElementById("cbk-flag-recursive").checked) {
+      instance.collapseNodes(cy.nodes(':selected'), true);
+    }else{
+      instance.collapseNodes(cy.nodes(':selected'));
+    }
 
-//     if (document.getElementById("cbk-run-layout3").checked) {
-//       cy.layout(layoutOptions).run();
-//     }
-//     else {
-//       initializer(cy);
-//     }
-//   });
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-//   document.getElementById("expandSelectedNodes").addEventListener("click", async () => {
-//     if (document.getElementById("cbk-flag-recursive").checked) {
-//       cy.$(':selected').forEach(node => {
-//         if (document.getElementById("cbk-run-layout3").checked) {
+  document.getElementById("expandSelectedNodes").addEventListener("click", async () => {
+    if (document.getElementById("cbk-flag-recursive").checked) {
+      cy.$(':selected').forEach(node => {
+        if (document.getElementById("cbk-run-layout3").checked) {
           
-//           // For DEMO purposes only we are using expandGraph function from main.js file with additional demo functionalities
-//           // Label positioning, Label Display functions, Saving transition graphs to png files
-//           // expandGraph(node.data().id, cy)
-//           // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
-//           // instance.expandGraph(node.data().id, cy)
+          // For DEMO purposes only we are using expandGraph function from main.js file with additional demo functionalities
+          // Label positioning, Label Display functions, Saving transition graphs to png files
+          // expandGraph(node.data().id, cy)
+          // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
+          // instance.expandGraph(node.data().id, cy)
             
-//             instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
+            instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
             
-//             setTimeout(() => {
-//               pngBeforeFinalGraph = cy.png({
-//                 scale:2,
-//                 full:true
-//               }); ;
-//               if (document.getElementById("cbk-run-layout3").checked) {
-//                 cy.layout(layoutOptions).run();
-//               }
-//               else {
-//                 initializer(cy);
-//               }
-//             }, document.getElementById("cbk-run-layout3").checked?700:0);
+            setTimeout(() => {
+              pngBeforeFinalGraph = cy.png({
+                scale:2,
+                full:true
+              }); ;
+              if (document.getElementById("cbk-run-layout3").checked) {
+                cy.layout(layoutOptions).run();
+              }
+              else {
+                initializer(cy);
+              }
+            }, document.getElementById("cbk-run-layout3").checked?700:0);
             
-//         }else{
-//           instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
-//           cy.fit();
-//           initializer(cy);
-//         }
+        }else{
+          instance.expandNodes(cy.nodes(':selected'), true, runLayout = document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
+          cy.fit();
+          initializer(cy);
+        }
         
-//       })
-//     }else{
-//       cy.$(':selected').forEach(node => {
+      })
+    }else{
+      cy.$(':selected').forEach(node => {
 
-//         if (document.getElementById("cbk-run-layout3").checked) {
-//           // For DEMO purposes only we are using expandGraph function from main.js file with additional demo functionalities
-//           // Label positioning, Label Display functions, Saving transition graphs to png files
-//           // expandGraph(node.data().id, cy)
-//           // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
-//           // instance.expandGraph(node.data().id, cy)
-//             pngExpandGraph = cy.png({
-//               scale:2,
-//               full:true
-//             });
-//             instance.expandNodes(cy.nodes(':selected'), false, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
+        if (document.getElementById("cbk-run-layout3").checked) {
+          // For DEMO purposes only we are using expandGraph function from main.js file with additional demo functionalities
+          // Label positioning, Label Display functions, Saving transition graphs to png files
+          // expandGraph(node.data().id, cy)
+          // FOR GENERAL USE from API FOllowing line is to be used instead of above one.
+          // instance.expandGraph(node.data().id, cy)
+            pngExpandGraph = cy.png({
+              scale:2,
+              full:true
+            });
+            instance.expandNodes(cy.nodes(':selected'), false, document.getElementById("cbk-run-layout3").checked, pngImage, setLabelPosition);
             
-//             setTimeout(() => {
-//               pngBeforeFinalGraph = cy.png({
-//                 scale:2,
-//                 full:true
-//               }); 
-//               if (document.getElementById("cbk-run-layout3").checked) {
-//                 cy.layout(layoutOptions).run();
-//               }
-//               else {
-//                 initializer(cy);
-//               }
-//             }, document.getElementById("cbk-run-layout3").checked?700:0);
+            setTimeout(() => {
+              pngBeforeFinalGraph = cy.png({
+                scale:2,
+                full:true
+              }); 
+              if (document.getElementById("cbk-run-layout3").checked) {
+                cy.layout(layoutOptions).run();
+              }
+              else {
+                initializer(cy);
+              }
+            }, document.getElementById("cbk-run-layout3").checked?700:0);
           
-//         }else{
-//           instance.expandNodes(cy.nodes(':selected'),false,document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
-//           cy.fit();
-//           initializer(cy);
-//         }
+        }else{
+          instance.expandNodes(cy.nodes(':selected'),false,document.getElementById("cbk-run-layout3").checked, pngImage,setLabelPosition);
+          cy.fit();
+          initializer(cy);
+        }
 
         
-//       })
-//     }
-//   });
+      })
+    }
+  });
 
-//   document.getElementById("collapseAllNodes").addEventListener("click", () => {
-//     instance.collapseAllNodes();
+  document.getElementById("collapseAllNodes").addEventListener("click", () => {
+    instance.collapseAllNodes();
 
-//     if (document.getElementById("cbk-run-layout3").checked) {
-//       cy.layout(layoutOptions).run();
-//     }
-//     else {
-//       initializer(cy);
-//     }
-//   });
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-//   document.getElementById("expandAllNodes").addEventListener("click", () => {
-//     instance.expandAllNodes();
+  document.getElementById("expandAllNodes").addEventListener("click", () => {
+    instance.expandAllNodes();
 
-//     if (document.getElementById("cbk-run-layout3").checked) {
-//       cy.layout(layoutOptions).run();
-//     }
-//     else {
-//       initializer(cy);
-//     }
-//   });  
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });  
 
-//   document.getElementById("collapseSelectedEdges").addEventListener("click", () => {
-//     instance.collapseEdges(cy.edges(':selected'));
+  document.getElementById("collapseSelectedEdges").addEventListener("click", () => {
+    instance.collapseEdges(cy.edges(':selected'));
 
-//     if (document.getElementById("cbk-run-layout3").checked) {
-//       cy.layout(layoutOptions).run();
-//     }
-//     else {
-//       initializer(cy);
-//     }
-//   });
+    if (document.getElementById("cbk-run-layout3").checked) {
+      cy.layout(layoutOptions).run();
+    }
+    else {
+      initializer(cy);
+    }
+  });
 
-// document.getElementById("expandSelectedEdges").addEventListener("click", () => {
-//   if (document.getElementById("cbk-flag-recursive").checked) {
-//     instance.expandEdges(cy.edges(':selected'), true);
-//   }else{
-//     instance.expandEdges(cy.edges(':selected'));
-//   }
-//   if (document.getElementById("cbk-run-layout3").checked) {
-//     cy.layout(layoutOptions).run();
-//   }
-//   else {
-//     initializer(cy);
-//   }
-// });
+document.getElementById("expandSelectedEdges").addEventListener("click", () => {
+  if (document.getElementById("cbk-flag-recursive").checked) {
+    instance.expandEdges(cy.edges(':selected'), true);
+  }else{
+    instance.expandEdges(cy.edges(':selected'));
+  }
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout(layoutOptions).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
 
-// document.getElementById("collapseEdgesBetweenNodes").addEventListener("click", () => {
-//   instance.collapseEdgesBetweenNodes(cy.nodes(':selected'));
+document.getElementById("collapseEdgesBetweenNodes").addEventListener("click", () => {
+  instance.collapseEdgesBetweenNodes(cy.nodes(':selected'));
 
-//   if (document.getElementById("cbk-run-layout3").checked) {
-//     cy.layout(layoutOptions).run();
-//   }
-//   else {
-//     initializer(cy);
-//   }
-// });
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout(layoutOptions).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
 
-// document.getElementById("expandEdgesBetweenNodes").addEventListener("click", () => {
+document.getElementById("expandEdgesBetweenNodes").addEventListener("click", () => {
 
-//   if (document.getElementById("cbk-flag-recursive").checked) {
-//     instance.expandEdgesBetweenNodes(cy.nodes(':selected') , true);
-//   }else{
-//     instance.expandEdgesBetweenNodes(cy.nodes(':selected'));
-//   }
+  if (document.getElementById("cbk-flag-recursive").checked) {
+    instance.expandEdgesBetweenNodes(cy.nodes(':selected') , true);
+  }else{
+    instance.expandEdgesBetweenNodes(cy.nodes(':selected'));
+  }
 
   
 
-//   if (document.getElementById("cbk-run-layout3").checked) {
-//     cy.layout(layoutOptions).run();
-//   }
-//   else {
-//     initializer(cy);
-//   }
-// });
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout(layoutOptions).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
 
-// document.getElementById("collapseAllEdges").addEventListener("click", () => {
-//   instance.collapseAllEdges();
+document.getElementById("collapseAllEdges").addEventListener("click", () => {
+  instance.collapseAllEdges();
 
-//   if (document.getElementById("cbk-run-layout3").checked) {
-//     cy.layout(layoutOptions).run();
-//   }
-//   else {
-//     initializer(cy);
-//   }
-// });
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout(layoutOptions).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
 
-// document.getElementById("expandAllEdges").addEventListener("click", () => {
-//   instance.expandAllEdges();
+document.getElementById("expandAllEdges").addEventListener("click", () => {
+  instance.expandAllEdges();
 
-//   if (document.getElementById("cbk-run-layout3").checked) {
-//     cy.layout(layoutOptions).run();
-//   }
-//   else {
-//     initializer(cy);
-//   }
-// });
+  if (document.getElementById("cbk-run-layout3").checked) {
+    cy.layout(layoutOptions).run();
+  }
+  else {
+    initializer(cy);
+  }
+});
 
 }
 function getRandomNodes() {
