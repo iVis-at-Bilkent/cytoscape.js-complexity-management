@@ -80,47 +80,12 @@ export default function register(cytoscape) {	// register with cytoscape.js
     styleEnabled:true
   });
   const cyVisible = window.cyVisible = cytoscape({
-    headless:true,
-    styleEnabled:true,
-    wheelSensitivity: 0.1,
-    style: [
-      {
-        selector: 'node',
-        style: {
-          'label': 'data(id)',
-          "color" : "black",
-          'font-size': '20px',
-          'compound-sizing-wrt-labels': 'include',
-          'height': 40,
-          'width': 40,
-          'padding': "5px",
-          "background-fit": "cover",
-          "border-color": "black",
-          "border-width": 1.5,
-          "border-opacity": 1,
-        }
-      },
-      {
-        selector: 'edge',
-        style: {
-          'label': (x) => {
-            if (x.data('edgeType')) {
-              return x.data('edgeType');
-            }
-            return '';
-          },
-          'curve-style': 'bezier',
-          'target-arrow-shape': 'triangle',
-          'text-rotation': 'autorotate',
-          'font-size': '14px',
-          'width': "1.5px",
-          'text-margin-y': '10px',
-          'line-color' : 'black',
-          'target-arrow-color': 'black',
-          
-        }
-      }
-    ]
+    headless: true,
+    styleEnabled: true
+  });
+  const cyInvisible = window.cyInvisible = cytoscape({
+    headless: true,
+    styleEnabled: true
   });
   // Get the whole scratchpad reserved for this extension (on an element or core) or get a single property of it
   function getScratch(cyOrEle, name) {

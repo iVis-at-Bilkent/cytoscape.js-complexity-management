@@ -539,7 +539,7 @@ export function complexityManagement(cy) {
     actOnVisibleForMetaEdge(IDsToAdd, cy);
   };
 
-  api.expandNodes = (nodes, isRecursive = false, runLayout = true, setLabelPosition = null) => {
+  api.expandNodes = (nodes, isRecursive = false, runLayout = true) => {
 
     let nodeIDList = [];
 
@@ -547,7 +547,7 @@ export function complexityManagement(cy) {
       if (compMgrInstance.isExpandable(node.id())) {
         nodeIDList.push(node.id());
         if(runLayout){
-          expandGraph(node.data().id, cy, setLabelPosition)
+          expandGraph(node.data().id, cy)
         }
         node.removeClass("cy-expand-collapse-collapsed-node");
         node.removeData("position-before-collapse");
@@ -783,11 +783,9 @@ export function complexityManagement(cy) {
 
   // cbkFlagDisplayLabels is flag to set if node/edge label is to be item.ID or empty string.  Default = true
   // cbkFlagLabelsPos is flag to set if node/edge label position which can be bottom, top and center passed as string. Default = 'bottom'.
-  let expandGraph = (focusID,cy,setLabelPosition, cbkFlagDisplayLabels = true, cbkFlagLabelsPos = 'bottom') => {
+  let expandGraph = (focusID,cy, cbkFlagDisplayLabels = true) => {
     
-    let descendants = getDescendantsInorder(cy.complexityManagement().getCompMgrInstance('get').mainGraphManager.nodesMap.get(focusID));
-
-   
+    let descendants = getDescendantsInorder(compMgrInstance.mainGraphManager.nodesMap.get(focusID));
 
     cyLayout.remove(cyLayout.elements());
 
@@ -892,9 +890,7 @@ export function complexityManagement(cy) {
     var focusNodeWidth = boundingBox.w;
     var fcousNodeHeight = boundingBox.h;
 
-    cyLayout.nodes().forEach(node => {node.style('label', node.id());})
-    setLabelPosition(cbkFlagLabelsPos);
-    
+    cyLayout.nodes().forEach(node => {node.style('label', node.id());})    
     
     cyLayout.remove(cyLayout.elements());
     

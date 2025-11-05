@@ -3,27 +3,6 @@ import debounce2 from './debounce2';
 
 let layoutOptions = { name: "fcose", animate: true, randomize: false}
 
-
-// Function to set the label position based on the selected radio button
-function setLabelPosition(position) {
-  var cyChildlessNodes = cy.nodes().filter(function(element) {
-    return element.isChildless();
-  });
-  var cyVisibleChildlessNodes = cyVisible.nodes().filter(function(element) {
-    return element.isChildless();
-  });
-  var cyInVisibleChildlessNodes = cyInvisible.nodes().filter(function(element) {
-    return element.isChildless();
-  });
-  var cyLayoutChildlessNodes = cyLayout.nodes().filter(function(element) {
-    return element.isChildless();
-  });
-  cyChildlessNodes.style('text-valign', position);
-  cyVisibleChildlessNodes.style('text-valign', position);
-  cyInVisibleChildlessNodes.style('text-valign', position);
-  cyLayoutChildlessNodes.style('text-valign', position);
-}
-
 function getDescendantsInorder(node) {
   let descendants = {
     edges: new Set(),
@@ -159,11 +138,6 @@ function expandGraph(focusID,cy, cbkFlagDisplayLabels = true, cbkFlagLabelsPos =
   var fcousNodeHeight = boundingBox.h;
 
   cyLayout.nodes().forEach(node => {node.style('label', node.id());})
-  setLabelPosition(cbkFlagLabelsPos);
-  pngSizeProxyGraph = cyLayout.png({
-    scale:2,
-    full:true
-  });
   
   cyLayout.remove(cyLayout.elements());
   
@@ -335,8 +309,6 @@ function expandGraph(focusID,cy, cbkFlagDisplayLabels = true, cbkFlagLabelsPos =
   cy.fit();
 
   cy.getElementById(focusID).select();
-  setLabelPosition(cbkFlagLabelsPos);
-  
 }
 
 function translateNode(a,a1) {
@@ -738,9 +710,8 @@ export function cueUtilities(params, cy, api) {
               
             // }
 
-            api.expandNodes([node], false, true,setLabelPosition);
+            api.expandNodes([node], false, true);
                 setTimeout(() => {
-                  
                     if(layoutOptions!=null){
                       cy.layout(layoutOptions).run();
                     }
