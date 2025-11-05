@@ -104,6 +104,7 @@
                   <li><a class="dropdown-item" href="#" onclick="loadSample('sampleGraphCompound3')">Compound 3</a>
                   </li>
                   <li><a class="dropdown-item" href="#" onclick="loadSample('sampleGraphCompound4')">Compound 4</a>
+                    <li><a class="dropdown-item" href="#" onclick="loadSample('Pathway1')">Pathway 1</a>
                   </li>
                 </ul>
               </div>
@@ -292,8 +293,8 @@
           <div class="accordion-body d-flex flex-wrap justify-content-center">  
             <p id="smallTag">Display node labels:</p>
             <form>
-              <input type="radio" name="cbk-flag-display-node-label-pos" value="top" checked> Top
-              <input type="radio" name="cbk-flag-display-node-label-pos" value="center"> Middle
+              <input type="radio" name="cbk-flag-display-node-label-pos" value="top"> Top
+              <input type="radio" name="cbk-flag-display-node-label-pos" value="center" checked> Middle
               <input type="radio" name="cbk-flag-display-node-label-pos" value="bottom"> Bottom
             </form>  
             
@@ -308,13 +309,13 @@
       <div class="cy-container">
         <div id="cy"></div>
       </div>
-      <div class="cy-container-header">
+      <div class="cy-container-header" style="display: none;"
         <h1>Visible Graph</h1>
         <h1>Main Graph</h1>
         <h1>Proxy Graph</h1>
       </div>
-      <div class="cy-extension-container">
-        <div id="cyVisible"></div>
+      <div class="cy-extension-container" style="display: none;">
+        <div id="cyVisible" ></div>
         <div id="cyInvisible"></div>
         <div id="cyHeadless"></div>
       </div>
